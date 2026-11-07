@@ -194,6 +194,24 @@ class WorkspaceTests(HttpHarness):
         _, user, _ = self.json("/api/auth/me")
         self.assertNotIn("password", user)
 
+        # Verify sliding session renewal
+        import sqlite3
+        db_file = Path(self.directory.name) / "workspace.sqlite3"
+        with sqlite3.connect(db_file) as db:
+            row = db.execute("SELECT hash, expires_at FROM sessions WHERE user_id=?", (user["id"],)).fetchone()
+            self.assertIsNotNone(row)
+            # Set expires_at to 1 hour from now (well under half of 30 days)
+            db.execute("UPDATE sessions SET expires_at=? WHERE hash=?", (time.time() + 3600, row[0]))
+            db.commit()
+        # Call /api/auth/me again to trigger sliding renewal
+        code, renewed_user, _ = self.json("/api/auth/me")
+        self.assertEqual(code, 200)
+        self.assertEqual(renewed_user["id"], user["id"])
+        with sqlite3.connect(db_file) as db:
+            row2 = db.execute("SELECT expires_at FROM sessions WHERE user_id=?", (user["id"],)).fetchone()
+            # Must be extended to approx 30 days
+            self.assertGreater(row2[0] - time.time(), 20 * 86400)
+
     def test_private_audio_and_stems(self):
         track = self.track(2.1)
         self.assertNotIn("object_key", track)

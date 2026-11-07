@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 
 router = APIRouter(prefix="/api/auth")
 COOKIE = "stemora_session"
-SESSION_SECONDS = 7 * 86400
+SESSION_SECONDS = 30 * 86400
 
 
 def now():
@@ -54,10 +54,17 @@ def current_user(request: Request):
     digest = hashlib.sha256(token.encode()).hexdigest()
     with connect() as db:
         user = db.execute(
-            "SELECT u.* FROM users u JOIN sessions s ON u.id=s.user_id WHERE s.hash=? AND s.expires_at>?",
+            "SELECT u.*, s.expires_at AS session_expires_at FROM users u JOIN sessions s ON u.id=s.user_id WHERE s.hash=? AND s.expires_at>?",
             (digest, time.time()),
         ).fetchone()
-        if not user:
+        if user:
+            # Sliding session: If session has less than half duration left, automatically renew!
+            if user["session_expires_at"] - time.time() < (SESSION_SECONDS / 2):
+                db.execute(
+                    "UPDATE sessions SET expires_at=? WHERE hash=?",
+                    (time.time() + SESSION_SECONDS, digest),
+                )
+        else:
             user = db.execute(
                 "SELECT u.* FROM users u JOIN sync_tokens st ON u.id=st.user_id WHERE st.token_hash=?",
                 (digest,),
@@ -99,7 +106,7 @@ def rate_limit(key, maximum=15):
         )
 
 
-def establish(response, user_id):
+def establish(response, user_id, request: Request = None):
     token = secrets.token_urlsafe(48)
     with connect() as db:
         db.execute("DELETE FROM sessions WHERE expires_at<?", (time.time(),))
@@ -111,12 +118,17 @@ def establish(response, user_id):
                 time.time() + SESSION_SECONDS,
             ),
         )
+    is_secure = os.environ.get("COOKIE_SECURE", "0") == "1"
+    if request is not None:
+        proto = request.headers.get("x-forwarded-proto", "").lower()
+        if proto == "https" or request.url.scheme == "https":
+            is_secure = True
     response.set_cookie(
         COOKIE,
         token,
         max_age=SESSION_SECONDS,
         httponly=True,
-        secure=os.environ.get("COOKIE_SECURE", "0") == "1",
+        secure=is_secure,
         samesite="lax",
         path="/",
     )
@@ -161,12 +173,12 @@ def register(body: Credentials, request: Request, response: Response):
             )
     except INTEGRITY_ERRORS as error:
         raise HTTPException(409, "อีเมลนี้มีบัญชีแล้ว กรุณาเข้าสู่ระบบ") from error
-    establish(response, user["id"])
+    establish(response, user["id"], request)
     return user
 
 
 @router.post("/login", dependencies=[Depends(mutation_guard)])
-def login(body: Credentials, response: Response):
+def login(body: Credentials, request: Request, response: Response):
     email = email_address(body.email)
     rate_limit("login:" + email)
     with connect() as db:
@@ -177,7 +189,7 @@ def login(body: Credentials, response: Response):
     )
     if not user or not valid:
         raise HTTPException(401, "อีเมลหรือรหัสผ่านไม่ถูกต้อง")
-    establish(response, user["id"])
+    establish(response, user["id"], request)
     return safe_user(user)
 
 
@@ -205,7 +217,7 @@ class PasswordChange(BaseModel):
 
 @router.post("/password", dependencies=[Depends(mutation_guard)])
 def password_change(
-    body: PasswordChange, response: Response, user=Depends(current_user)
+    body: PasswordChange, request: Request, response: Response, user=Depends(current_user)
 ):
     with connect() as db:
         stored = db.execute(
@@ -218,5 +230,5 @@ def password_change(
             (hash_password(body.new_password), user["id"]),
         )
         db.execute("DELETE FROM sessions WHERE user_id=?", (user["id"],))
-    establish(response, user["id"])
+    establish(response, user["id"], request)
     return {"ok": True}

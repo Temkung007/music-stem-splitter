@@ -49,6 +49,9 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
         `/api/auth/${mode}`,
         jsonRequest("POST", { email, password, name: name || "DJ" })
       );
+      if (typeof window !== "undefined") {
+        localStorage.setItem("stemora_active_session", "1");
+      }
       onSuccess(result);
       setModalOpen(false);
     } catch (err) {
