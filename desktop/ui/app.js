@@ -80,7 +80,7 @@
       statusBadge.textContent = "SYNC ERROR";
       statusBadge.style.color = "var(--danger)";
     } else if (!status.has_token) {
-      msgBanner.textContent = "เชื่อมต่อบัญชีของคุณเพื่อเริ่มซิงก์เพลงลง rekordbox";
+      msgBanner.textContent = "เชื่อมต่อบัญชีของคุณเพื่อเริ่มซิงก์เพลงลง rekordbox & Serato";
       msgBanner.classList.remove("hidden");
       msgBanner.style.display = "block";
       pulseDot.className = "pulse-dot";
@@ -102,7 +102,7 @@
       statusBadge.textContent = "LIVE SYNC ACTIVE";
       statusBadge.style.color = "var(--lime)";
       spinIcon.classList.remove("spinning");
-      syncBtnText.textContent = "ซิงก์กับ rekordbox ทันที";
+      syncBtnText.textContent = "ซิงก์ rekordbox & Serato ทันที";
       syncNowBtn.disabled = false;
     }
 

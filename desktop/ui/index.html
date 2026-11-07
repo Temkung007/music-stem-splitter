@@ -11,10 +11,7 @@
     <!-- Header -->
     <header class="app-header">
       <div class="brand">
-        <svg class="logo-icon" viewBox="88 374.5 275 275" fill="none">
-          <circle cx="225.5" cy="512" r="100" stroke="#a3e635" stroke-width="18"/>
-          <path d="M175 512 C 175 480, 275 480, 275 512 C 275 544, 175 544, 175 512" stroke="#a3e635" stroke-width="14" stroke-linecap="round"/>
-        </svg>
+        <img src="brand/stemora-symbol.png" class="logo-icon" alt="STEMORA" />
         <div class="brand-text">
           <div class="brand-title-row">
             <h1>STEMORA</h1>
@@ -28,7 +25,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span id="update-notify-dot" class="update-pulse-dot hidden"></span>
         </button>
-        <button id="guide-btn" class="icon-btn" title="วิธีเชื่อมต่อ rekordbox">
+        <button id="guide-btn" class="icon-btn" title="คู่มือ rekordbox & Serato DJ">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </button>
         <button id="settings-btn" class="icon-btn" title="การตั้งค่า">
@@ -149,10 +146,31 @@
     <div id="guide-modal" class="modal-overlay hidden">
       <div class="modal-sheet">
         <div class="modal-header">
-          <h2>วิธีตั้งค่าใน rekordbox</h2>
+          <h2>คู่มือ rekordbox & Serato DJ</h2>
           <button class="close-btn" id="close-guide-btn">&times;</button>
         </div>
         <div class="modal-body">
+          <div class="guide-section-header">
+            <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border-color:rgba(56,189,248,0.3);">Serato DJ Pro & Lite (Auto Crate)</span>
+          </div>
+          <div class="guide-step">
+            <span class="step-num" style="border-color:#38bdf8;color:#38bdf8;">1</span>
+            <div>
+              <strong>ซิงก์ Crates เข้า Serato อัตโนมัติ 100%</strong>
+              <p>STEMORA จะสร้างไฟล์ Binary Crate ลงใน <code>~/Music/_Serato_/Subcrates/</code> ให้โดยตรงโดยไม่ต้องตั้งค่าใดๆ</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num" style="border-color:#38bdf8;color:#38bdf8;">2</span>
+            <div>
+              <strong>เปิด Serato DJ แล้วเล่นได้ทันที</strong>
+              <p>กดปุ่ม <code>⚡ เปิด Serato DJ</code> ในแอป Crates ของ STEMORA และเพลย์ลิสต์ทั้งหมดจะปรากฏในแผง Crates ด้านซ้ายพร้อมเล่นทันที!</p>
+            </div>
+          </div>
+
+          <div class="guide-section-header" style="margin-top:14px;">
+            <span class="badge" style="background:rgba(163,230,53,0.15);color:#a3e635;border-color:rgba(163,230,53,0.3);">Pioneer DJ rekordbox</span>
+          </div>
           <div class="guide-step">
             <span class="step-num">1</span>
             <div>
