@@ -49,7 +49,7 @@
 /* ---------------------------------------------------------------- the inset panel */
 /* Default (x.ai): aligned with the text column and running off the card's bottom edge.
    The effect canvas mounts on the panel (data-fx) and sits under everything in it. */
-.panel {
+.card > .panel {
   --p-r: 12px;
   display: block; padding: 0;
   --p-h: clamp(264px, 22vw + 8px, 340px);
