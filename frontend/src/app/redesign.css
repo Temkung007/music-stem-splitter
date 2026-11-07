@@ -1962,3 +1962,259 @@ div.panel {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #e2e8f0 !important;
 }
+
+/* ==========================================================================
+   DJ SYNC HUB & PLAYLISTS REFINED LAYOUT (?tab=playlists&connect=desktop#stems)
+   ========================================================================== */
+
+.modal-sync-hub {
+  width: min(880px, calc(100vw - 32px)) !important;
+  max-width: 880px !important;
+  max-height: 90vh;
+  background: radial-gradient(circle at 50% 0%, #171c26 0%, #0d1016 75%, #08090d 100%) !important;
+  border: 1px solid rgba(215, 249, 139, 0.25) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 30px 100px -20px rgba(0, 0, 0, 0.85), 0 0 60px rgba(215, 249, 139, 0.08) !important;
+  padding: 26px 30px !important;
+  color: #f8fafc;
+}
+
+.modal-sync-hub .modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-sync-hub .modal-title h2 {
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: #f8fafc !important;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dj-software-pill.stems {
+  background: rgba(34, 211, 238, 0.14) !important;
+  color: #22d3ee !important;
+  border-color: rgba(34, 211, 238, 0.35) !important;
+}
+
+.dj-hub-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 16px;
+  scrollbar-width: none;
+}
+
+.dj-hub-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.dj-hub-tab-btn {
+  padding: 9px 15px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.18s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  background: transparent;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dj-hub-tab-btn:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dj-hub-tab-btn.active {
+  background: #1e2432;
+  color: #f8fafc;
+  border-color: rgba(215, 249, 139, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Track list enhancements */
+.harmonic-bridge-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 3px 14px;
+  margin: 6px auto;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 999px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.harmonic-bridge-pill.perfect {
+  background: rgba(215, 249, 139, 0.12);
+  color: #d7f98b;
+  border: 1px solid rgba(215, 249, 139, 0.32);
+}
+
+.harmonic-bridge-pill.relative {
+  background: rgba(168, 85, 247, 0.12);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.32);
+}
+
+.harmonic-bridge-pill.energy {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.32);
+}
+
+.harmonic-sparkle {
+  font-size: 11px;
+}
+
+.harmonic-keys {
+  font-family: var(--font-mono-stem);
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+.set-track-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.set-track-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.camelot-badge {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono-stem);
+  background: rgba(56, 189, 248, 0.14);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+.bpm-badge {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono-stem);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+.stems-ready-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  background: rgba(34, 211, 238, 0.08);
+  color: #22d3ee;
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+.stems-ready-pill small {
+  font-size: 9px;
+  letter-spacing: 0.02em;
+}
+
+.stem-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.stem-dot.stem-vocal { background: #f43f5e; }
+.stem-dot.stem-drums { background: #f59e0b; }
+.stem-dot.stem-bass { background: #3b82f6; }
+.stem-dot.stem-inst { background: #10b981; }
+
+.set-track-artist {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+/* Playlist workspace layout tuning */
+.playlist-workspace .set-layout {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr) !important;
+  gap: 24px !important;
+  align-items: start;
+}
+
+.playlist-workspace .set-list {
+  background: #11141c !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  padding: 20px 18px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.playlist-workspace .set-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.playlist-workspace .set-editor,
+.playlist-workspace .set-builder {
+  background: #11141c !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.playlist-workspace .set-track {
+  background: #141822 !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  transition: all 0.18s ease;
+}
+
+.playlist-workspace .set-track:hover {
+  background: #191e2b !important;
+  border-color: rgba(215, 249, 139, 0.25) !important;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .playlist-workspace .set-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .modal-sync-hub {
+    padding: 20px 16px !important;
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "@/components/locale-provider";
-import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { Fragment, useCallback, useEffect, useState, type FormEvent } from "react";
 import {
   ChevronDown,
   ArrowDown,
@@ -16,6 +16,7 @@ import {
   HelpCircle,
   History,
   Laptop,
+  Layers,
   ListMusic,
   LoaderCircle,
   LockKeyhole,
@@ -40,6 +41,36 @@ import {
 } from "@/lib/api";
 import { formatTime } from "@/components/stem-mixer";
 import { Modal, Notice } from "@/components/workspace-ui";
+
+function getHarmonicRelation(
+  key1?: string | null,
+  key2?: string | null,
+): { match: boolean; type?: "perfect" | "relative" | "energy" } {
+  if (!key1 || !key2) return { match: false };
+  const k1 = key1.trim().toUpperCase();
+  const k2 = key2.trim().toUpperCase();
+  if (k1 === k2) {
+    return { match: true, type: "perfect" };
+  }
+  const match1 = k1.match(/^(\d{1,2})([AB])$/);
+  const match2 = k2.match(/^(\d{1,2})([AB])$/);
+  if (!match1 || !match2) return { match: false };
+  const num1 = parseInt(match1[1], 10);
+  const letter1 = match1[2];
+  const num2 = parseInt(match2[1], 10);
+  const letter2 = match2[2];
+
+  if (num1 === num2 && letter1 !== letter2) {
+    return { match: true, type: "relative" };
+  }
+  if (letter1 === letter2) {
+    const diff = (num2 - num1 + 12) % 12;
+    if (diff === 1 || diff === 11) {
+      return { match: true, type: "energy" };
+    }
+  }
+  return { match: false };
+}
 
 export function DjPlaylists({
   seed = [],
@@ -75,7 +106,7 @@ export function DjPlaylists({
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [showSyncModal, setShowSyncModal] = useState(false);
   const [djGuideTab, setDjGuideTab] = useState<
-    "serato" | "rekordbox" | "traktor" | "cli"
+    "serato" | "rekordbox" | "stems" | "traktor" | "cli"
   >("serato");
   const [syncToken, setSyncToken] = useState<string>("");
   const [tokenLoading, setTokenLoading] = useState(false);
@@ -94,7 +125,7 @@ export function DjPlaylists({
   };
 
   const openDjHub = (
-    tab: "serato" | "rekordbox" | "traktor" | "cli" = "serato",
+    tab: "serato" | "rekordbox" | "stems" | "traktor" | "cli" = "serato",
   ) => {
     setDjGuideTab(tab);
     void openSyncModal();
@@ -176,13 +207,20 @@ export function DjPlaylists({
     }
   };
 
-  // Auto-connect when opened from desktop browser login button (?connect=desktop)
+  // Auto-connect when opened from desktop browser login button (?connect=desktop or #stems)
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const isStemsHash = window.location.hash === "#stems";
+      if (isStemsHash) {
+        setDjGuideTab("stems");
+      }
       const params = new URLSearchParams(window.location.search);
       if (params.get("connect") === "desktop") {
+        setShowSyncModal(true);
+        if (isStemsHash) {
+          setDjGuideTab("stems");
+        }
         void (async () => {
-          setShowSyncModal(true);
           setTokenLoading(true);
           try {
             const res = await api<{ token: string }>("/api/sync/token");
@@ -859,60 +897,99 @@ export function DjPlaylists({
                     )}
                     {draft.items.map((item, index) => {
                       const track = lookup[item.track_id];
+                      const prevItem = index > 0 ? draft.items[index - 1] : null;
+                      const prevTrack = prevItem ? lookup[prevItem.track_id] : null;
+                      const harmonic = prevTrack
+                        ? getHarmonicRelation(prevTrack?.camelot, track?.camelot)
+                        : null;
+
                       return (
-                        <article
-                          key={item.track_id}
-                          className={`set-track ${item.locked ? "locked" : ""}`}
-                          draggable
-                          onDragStart={() => setDragIndex(index)}
-                          onDragOver={(e) => e.preventDefault()}
-                          onDrop={(e) => {
-                            e.preventDefault();
-                            if (dragIndex !== null) move(dragIndex, index);
-                            setDragIndex(null);
-                          }}
-                        >
-                          <GripVertical className="drag-handle" size={16} />
-                          <span className="track-order">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                          <button
-                            className="song-play"
-                            disabled={!track}
-                            aria-label={tr("ฟังเพลงลำดับ {0}", {
-                              0: index + 1,
-                            })}
-                            onClick={() => setPreview(track)}
+                        <Fragment key={item.track_id}>
+                          {harmonic?.match && (
+                            <div className={`harmonic-bridge-pill ${harmonic.type}`}>
+                              <span className="harmonic-sparkle">✨</span>
+                              <span className="harmonic-text">
+                                {harmonic.type === "perfect" && tr("คีย์ตรงกันสมบูรณ์")}
+                                {harmonic.type === "relative" && tr("สลับอารมณ์ Major/Minor")}
+                                {harmonic.type === "energy" && tr("คีย์ฮาร์โมนิกสมูท")}
+                              </span>
+                              <span className="harmonic-keys">
+                                {prevTrack?.camelot} → {track?.camelot}
+                              </span>
+                            </div>
+                          )}
+                          <article
+                            className={`set-track ${item.locked ? "locked" : ""}`}
+                            draggable
+                            onDragStart={() => setDragIndex(index)}
+                            onDragOver={(e) => e.preventDefault()}
+                            onDrop={(e) => {
+                              e.preventDefault();
+                              if (dragIndex !== null) move(dragIndex, index);
+                              setDragIndex(null);
+                            }}
                           >
-                            <Play size={13} />
-                          </button>
-                          <div className="set-track-name">
-                            <strong>
-                              {track?.title || tr("เพลงถูกย้ายไปถังขยะ")}
-                            </strong>
-                            <small>
-                              {track?.artist || "—"} · {track?.bpm || "—"}{" "}
-                              {tr("BPM ·")} {track?.camelot || "—"}
-                            </small>
-                            <input
-                              aria-label={tr("โน้ตเพลงลำดับ {0}", {
+                            <GripVertical className="drag-handle" size={16} />
+                            <span className="track-order">
+                              {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <button
+                              className="song-play"
+                              disabled={!track}
+                              aria-label={tr("ฟังเพลงลำดับ {0}", {
                                 0: index + 1,
                               })}
-                              value={item.note}
-                              maxLength={500}
-                              onChange={(e) =>
-                                patchItems(
-                                  draft.items.map((v, i) =>
-                                    i === index
-                                      ? { ...v, note: e.target.value }
-                                      : v,
-                                  ),
-                                )
-                              }
-                              placeholder={tr("จดโน้ตช่วงเปลี่ยนเพลง…")}
-                            />
-                          </div>
-                          <div className="set-track-actions">
+                              onClick={() => setPreview(track)}
+                            >
+                              <Play size={13} />
+                            </button>
+                            <div className="set-track-name">
+                              <div className="set-track-header">
+                                <strong>
+                                  {track?.title || tr("เพลงถูกย้ายไปถังขยะ")}
+                                </strong>
+                                <div className="set-track-badges">
+                                  {track?.camelot && (
+                                    <span className="camelot-badge" title="Camelot Harmonic Key">
+                                      {track.camelot}
+                                    </span>
+                                  )}
+                                  {track?.bpm && (
+                                    <span className="bpm-badge" title="Beats Per Minute">
+                                      {Math.round(track.bpm)} BPM
+                                    </span>
+                                  )}
+                                  <span className="stems-ready-pill" title={tr("4-Stems พร้อมเล่น")}>
+                                    <span className="stem-dot stem-vocal" />
+                                    <span className="stem-dot stem-drums" />
+                                    <span className="stem-dot stem-bass" />
+                                    <span className="stem-dot stem-inst" />
+                                    <small>{tr("4-Stems พร้อมเล่น")}</small>
+                                  </span>
+                                </div>
+                              </div>
+                              <small className="set-track-artist">
+                                {track?.artist || "—"}
+                              </small>
+                              <input
+                                aria-label={tr("โน้ตเพลงลำดับ {0}", {
+                                  0: index + 1,
+                                })}
+                                value={item.note}
+                                maxLength={500}
+                                onChange={(e) =>
+                                  patchItems(
+                                    draft.items.map((v, i) =>
+                                      i === index
+                                        ? { ...v, note: e.target.value }
+                                        : v,
+                                    ),
+                                  )
+                                }
+                                placeholder={tr("จดโน้ตช่วงเปลี่ยนเพลง…")}
+                              />
+                            </div>
+                            <div className="set-track-actions">
                             <button
                               className="icon-button"
                               aria-label={tr("แนะนำเพลงแทนลำดับ {0}", {
@@ -982,8 +1059,9 @@ export function DjPlaylists({
                             </button>
                           </div>
                         </article>
-                      );
-                    })}
+                      </Fragment>
+                    );
+                  })}
                   </div>
                   <div className="set-add-track">
                     <button
@@ -1145,8 +1223,9 @@ export function DjPlaylists({
         <Modal
           title={tr("ศูนย์เชื่อมต่อโปรแกรม DJ (rekordbox, Serato, Traktor, Engine)")}
           close={() => setShowSyncModal(false)}
+          className="modal-sync-hub"
         >
-          <div className="rekordbox-guide">
+          <div className="rekordbox-guide" id="stems">
             {/* Spotlight App Download Card */}
             <div className="desktop-app-spotlight">
               <div className="spotlight-header">
@@ -1168,11 +1247,14 @@ export function DjPlaylists({
               </p>
 
               <div className="dj-supported-pills">
+                <span className="dj-software-pill serato">
+                  ⚡ Serato DJ Pro & Lite
+                </span>
                 <span className="dj-software-pill pioneer">
                   ⚡ Pioneer DJ rekordbox 6 & 7
                 </span>
-                <span className="dj-software-pill serato">
-                  ⚡ Serato DJ Pro & Lite
+                <span className="dj-software-pill stems">
+                  ⚡ 4-Stems Performance
                 </span>
                 <span className="dj-software-pill traktor">
                   ⚡ Traktor / Engine / Virtual DJ
@@ -1306,6 +1388,13 @@ export function DjPlaylists({
                 </button>
                 <button
                   type="button"
+                  className={`dj-hub-tab-btn ${djGuideTab === "stems" ? "active" : ""}`}
+                  onClick={() => setDjGuideTab("stems")}
+                >
+                  🎚️ Stems & Decks
+                </button>
+                <button
+                  type="button"
                   className={`dj-hub-tab-btn ${djGuideTab === "traktor" ? "active" : ""}`}
                   onClick={() => setDjGuideTab("traktor")}
                 >
@@ -1419,6 +1508,56 @@ export function DjPlaylists({
                       <p>
                         {tr(
                           "ในแถบซ้ายมือของ rekordbox หมวด rekordbox xml > STEMORA จะแสดงเพลย์ลิสต์พร้อมค่า BPM, Camelot Key สามารถลากลง Deck หรือกด Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Tab: 4-Stems Performance */}
+              {djGuideTab === "stems" && (
+                <div className="guide-steps-list">
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#22d3ee", color: "#082f49" }}>1</span>
+                    <div>
+                      <strong>{tr("การควบคุม 4-Stems สดบน Deck (Live Stems Mixing)")}</strong>
+                      <p>
+                        {tr(
+                          "เพลงที่ประมวลผลผ่าน STEMORA พร้อมแยกชิ้นดนตรี Vocals, Drums, Bass, Melodic บน Deck ใน Serato DJ Pro และ rekordbox ได้อย่างคมชัด ไร้เสียงรบกวน",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#22d3ee", color: "#082f49" }}>2</span>
+                    <div>
+                      <strong>{tr("Serato DJ Pro Stems Pad Mapping")}</strong>
+                      <p>
+                        {tr(
+                          "รองรับปุ่มกด Performance Pad หมวด Stems 4 ปุ่ม (Vocal, Melody, Bass, Drums) 100% พร้อมแยก Crates ย่อยสำหรับ Acapella และ Instrumental อัตโนมัติ",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#22d3ee", color: "#082f49" }}>3</span>
+                    <div>
+                      <strong>{tr("Pioneer DJ Track Separation & Camelot Key")}</strong>
+                      <p>
+                        {tr(
+                          "รองรับปุ่ม Track Separation บนคอนโทรลเลอร์ Pioneer DDJ/FLX พร้อมค่า Camelot Key และ BPM ที่วิเคราะห์แม่นยำ ช่วยให้การมิกซ์ข้ามคีย์และการสลับเสียงร้องเข้ากับบีตอื่นสมบูรณ์แบบ",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#22d3ee", color: "#082f49" }}>4</span>
+                    <div>
+                      <strong>{tr("ส่งออกไฟล์แยก 4 Stems (WAV Lossless 24-bit)")}</strong>
+                      <p>
+                        {tr(
+                          "ดาวน์โหลดชุดไฟล์แยกแทร็ก Vocals, Drums, Bass, Other คุณภาพสตูดิโอ นำไปโหลดใส่ 4 แชนเนลเพื่อสลับชิ้นดนตรีสด หรือใช้ทำ Mashup / Edit ใน DAW ได้ทันที",
                         )}
                       </p>
                     </div>

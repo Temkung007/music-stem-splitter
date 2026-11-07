@@ -3250,5 +3250,149 @@
   "เปิดหน้าเพลย์ลิสต์และซิงก์": {
     "th": "เปิดหน้าเพลย์ลิสต์และซิงก์",
     "en": "Open Playlists & Sync"
+  },
+  "ส่งออกทุกเพลย์ลิสต์ไปยัง Serato Crates": {
+    "th": "ส่งออกทุกเพลย์ลิสต์ไปยัง Serato Crates",
+    "en": "Export all playlists to Serato Crates"
+  },
+  "Stems & ดีเจเพอร์ฟอร์แมนซ์": {
+    "th": "Stems & ดีเจเพอร์ฟอร์แมนซ์",
+    "en": "Stems & Live DJ Performance"
+  },
+  "การควบคุม 4-Stems สดบน Deck (Live Stems Mixing)": {
+    "th": "การควบคุม 4-Stems สดบน Deck (Live Stems Mixing)",
+    "en": "Live 4-Stems Performance on Decks"
+  },
+  "เพลงที่ประมวลผลผ่าน STEMORA พร้อมแยกชิ้นดนตรี Vocals, Drums, Bass, Melodic บน Deck ใน Serato DJ Pro และ rekordbox ได้อย่างคมชัด ไร้เสียงรบกวน": {
+    "th": "เพลงที่ประมวลผลผ่าน STEMORA พร้อมแยกชิ้นดนตรี Vocals, Drums, Bass, Melodic บน Deck ใน Serato DJ Pro และ rekordbox ได้อย่างคมชัด ไร้เสียงรบกวน",
+    "en": "Tracks processed with STEMORA are ready for pristine vocal, drum, bass, and melody isolation directly on Serato DJ Pro and rekordbox live decks."
+  },
+  "Serato DJ Pro Stems Pad Mapping": {
+    "th": "Serato DJ Pro Stems Pad Mapping",
+    "en": "Serato DJ Pro Stems Pad Mapping"
+  },
+  "รองรับปุ่มกด Performance Pad หมวด Stems 4 ปุ่ม (Vocal, Melody, Bass, Drums) 100% พร้อมแยก Crates ย่อยสำหรับ Acapella และ Instrumental อัตโนมัติ": {
+    "th": "รองรับปุ่มกด Performance Pad หมวด Stems 4 ปุ่ม (Vocal, Melody, Bass, Drums) 100% พร้อมแยก Crates ย่อยสำหรับ Acapella และ Instrumental อัตโนมัติ",
+    "en": "100% compatible with Serato 4-pad Stems mode (Vocal, Melody, Bass, Drums) plus dedicated auto-crates for Acapella and Instrumental stems."
+  },
+  "Pioneer DJ Track Separation & Camelot Key": {
+    "th": "Pioneer DJ Track Separation & Camelot Key",
+    "en": "Pioneer DJ Track Separation & Camelot Key"
+  },
+  "รองรับปุ่ม Track Separation บนคอนโทรลเลอร์ Pioneer DDJ/FLX พร้อมค่า Camelot Key และ BPM ที่วิเคราะห์แม่นยำ ช่วยให้การมิกซ์ข้ามคีย์และการสลับเสียงร้องเข้ากับบีตอื่นสมบูรณ์แบบ": {
+    "th": "รองรับปุ่ม Track Separation บนคอนโทรลเลอร์ Pioneer DDJ/FLX พร้อมค่า Camelot Key และ BPM ที่วิเคราะห์แม่นยำ ช่วยให้การมิกซ์ข้ามคีย์และการสลับเสียงร้องเข้ากับบีตอื่นสมบูรณ์แบบ",
+    "en": "Fully compatible with Pioneer DDJ/FLX Track Separation controls with precision Camelot Key and BPM analysis for harmonic vocal-over-beat transitions."
+  },
+  "ส่งออกไฟล์แยก 4 Stems (WAV Lossless 24-bit)": {
+    "th": "ส่งออกไฟล์แยก 4 Stems (WAV Lossless 24-bit)",
+    "en": "Export 4-Stems Audio (24-bit Lossless WAV)"
+  },
+  "ดาวน์โหลดชุดไฟล์แยกแทร็ก Vocals, Drums, Bass, Other คุณภาพสตูดิโอ นำไปโหลดใส่ 4 แชนเนลเพื่อสลับชิ้นดนตรีสด หรือใช้ทำ Mashup / Edit ใน DAW ได้ทันที": {
+    "th": "ดาวน์โหลดชุดไฟล์แยกแทร็ก Vocals, Drums, Bass, Other คุณภาพสตูดิโอ นำไปโหลดใส่ 4 แชนเนลเพื่อสลับชิ้นดนตรีสด หรือใช้ทำ Mashup / Edit ใน DAW ได้ทันที",
+    "en": "Download studio-quality isolated stems (Vocals, Drums, Bass, Other) to perform live multi-channel mashups on 4 decks or edit inside your DAW."
+  },
+  "ส่งออกเพลย์ลิสต์ ไฟล์แยก Stems หรือซิงก์ตรงเข้าซอฟต์แวร์ DJ": {
+    "th": "ส่งออกเพลย์ลิสต์ ไฟล์แยก Stems หรือซิงก์ตรงเข้าซอฟต์แวร์ DJ",
+    "en": "Export playlists, isolated stems, or sync directly into professional DJ software"
+  },
+  "คีย์ตรงกันสมบูรณ์": {
+    "th": "คีย์ตรงกันสมบูรณ์",
+    "en": "Perfect Key Match"
+  },
+  "คีย์ฮาร์โมนิกสมูท": {
+    "th": "คีย์ฮาร์โมนิกสมูท",
+    "en": "Harmonic Transition"
+  },
+  "สลับอารมณ์ Major/Minor": {
+    "th": "สลับอารมณ์ Major/Minor",
+    "en": "Relative Mood Shift"
+  },
+  "4-Stems พร้อมเล่น": {
+    "th": "4-Stems พร้อมเล่น",
+    "en": "4-Stems Ready"
+  },
+  "ระบบจัดการเซ็ตและเพลย์ลิสต์สำหรับดีเจมืออาชีพ พร้อมคำนวณคีย์ Camelot และค่า BPM อัตโนมัติ": {
+    "th": "ระบบจัดการเซ็ตและเพลย์ลิสต์สำหรับดีเจมืออาชีพ พร้อมคำนวณคีย์ Camelot และค่า BPM อัตโนมัติ",
+    "en": "Professional DJ crate and set management system with automated Camelot key and BPM harmonic matching."
+  },
+  "กำลังเชื่อมต่อ…": {
+    "th": "กำลังเชื่อมต่อ…",
+    "en": "Connecting…"
+  },
+  "คุณภาพเสียงระดับ Lossless WAV": {
+    "th": "คุณภาพเสียงระดับ Lossless WAV",
+    "en": "Lossless Studio Quality WAV"
+  },
+  "ดาวน์โหลด STEMORA Connect (.dmg สำหรับ Mac)": {
+    "th": "ดาวน์โหลด STEMORA Connect (.dmg สำหรับ Mac)",
+    "en": "Download STEMORA Connect (.dmg for Mac)"
+  },
+  "ตรวจพบแอป STEMORA Connect บนเครื่องของคุณแล้ว": {
+    "th": "ตรวจพบแอป STEMORA Connect บนเครื่องของคุณแล้ว",
+    "en": "STEMORA Connect desktop app detected"
+  },
+  "พร้อมเล่นบน Controller และ Sync ลง USB สำหรับ CDJ": {
+    "th": "พร้อมเล่นบน Controller และ Sync ลง USB สำหรับ CDJ",
+    "en": "Ready for DJ controllers and USB sync for CDJ/XDJ"
+  },
+  "สำหรับนำไปใส่ในเมนูตั้งค่า ⚙️ ของแอป STEMORA Connect": {
+    "th": "สำหรับนำไปใส่ในเมนูตั้งค่า ⚙️ ของแอป STEMORA Connect",
+    "en": "Paste into ⚙️ Settings inside STEMORA Connect"
+  },
+  "หรือตั้งค่าเปิด rekordbox XML ใน Preferences": {
+    "th": "หรือตั้งค่าเปิด rekordbox XML ใน Preferences",
+    "en": "Or enable rekordbox XML in Preferences"
+  },
+  "โปรแกรมเดสก์ท็อป · แนะนำ": {
+    "th": "โปรแกรมเดสก์ท็อป · แนะนำ",
+    "en": "Desktop App · Recommended"
+  },
+  "STEMORA Connect จะเปิดใช้งานระบบ rekordbox XML และเชื่อมต่อไฟล์ฐานข้อมูล rekordbox.xml ให้อัตโนมัติ 100% โดยไม่ต้องเปิด Preferences เอง": {
+    "th": "STEMORA Connect จะเปิดใช้งานระบบ rekordbox XML และเชื่อมต่อไฟล์ฐานข้อมูล rekordbox.xml ให้อัตโนมัติ 100% โดยไม่ต้องเปิด Preferences เอง",
+    "en": "STEMORA Connect will automatically enable the rekordbox XML bridge and link ~/Music/STEMORA/rekordbox.xml without manual Preferences configuration."
+  },
+  "กดปุ่มส่งออก M3U8 หรือ ZIP รวมเพลง ที่แถบส่งออกด้านล่าง เพลงทั้งหมดจะถูกจัดเรียงตามลำดับ คีย์ Camelot และค่า BPM ที่คุณจัดไว้": {
+    "th": "กดปุ่มส่งออก M3U8 หรือ ZIP รวมเพลง ที่แถบส่งออกด้านล่าง เพลงทั้งหมดจะถูกจัดเรียงตามลำดับ คีย์ Camelot และค่า BPM ที่คุณจัดไว้",
+    "en": "Click export M3U8 or ZIP below. All tracks will be ordered according to your set structure with Camelot keys and BPM."
+  },
+  "กดปุ่มส่งออก Serato Crate หรือ Serato ZIP ด้านล่างเพลย์ลิสต์ แล้วนำไฟล์ .crate ไปวางในโฟลเดอร์ _Serato_/Subcrates/ บนคอมพิวเตอร์ของคุณ": {
+    "th": "กดปุ่มส่งออก Serato Crate หรือ Serato ZIP ด้านล่างเพลย์ลิสต์ แล้วนำไฟล์ .crate ไปวางในโฟลเดอร์ _Serato_/Subcrates/ บนคอมพิวเตอร์ของคุณ",
+    "en": "Click export Serato Crate or Serato ZIP below, then place the .crate file into your _Serato_/Subcrates/ folder."
+  },
+  "คัดลอกคำสั่งด้านล่างไปวางใน Terminal เพื่อให้ Python script ซิงก์เพลงและอัปเดตโฟลเดอร์ ~/Music/STEMORA อัตโนมัติแบบ Background": {
+    "th": "คัดลอกคำสั่งด้านล่างไปวางใน Terminal เพื่อให้ Python script ซิงก์เพลงและอัปเดตโฟลเดอร์ ~/Music/STEMORA อัตโนมัติแบบ Background",
+    "en": "Copy the command below into your Terminal to run the background sync agent and keep ~/Music/STEMORA up to date automatically."
+  },
+  "ซิงก์เพลง คีย์ Camelot, ค่า BPM และเพลย์ลิสต์ลงทั้ง rekordbox และ Serato DJ Pro บนเครื่องของคุณแบบอัตโนมัติ Real-Time จัดเซ็ตบนเว็บแล้วพร้อมเล่นบน Deck ทันที ไม่ต้องเปิด Terminal": {
+    "th": "ซิงก์เพลง คีย์ Camelot, ค่า BPM และเพลย์ลิสต์ลงทั้ง rekordbox และ Serato DJ Pro บนเครื่องของคุณแบบอัตโนมัติ Real-Time จัดเซ็ตบนเว็บแล้วพร้อมเล่นบน Deck ทันที ไม่ต้องเปิด Terminal",
+    "en": "Real-time auto-sync for Camelot keys, BPM, and crates directly into both rekordbox and Serato DJ Pro on your computer. Curate on the web, mix on deck instantly."
+  },
+  "ลากเพลงลง Deck 1-4 ใน Serato DJ Pro หรือ Lite เล่นได้ทันที รองรับทั้งคีย์เพลง, BPM และแยก Stems ตามปกติ": {
+    "th": "ลากเพลงลง Deck 1-4 ใน Serato DJ Pro หรือ Lite เล่นได้ทันที รองรับทั้งคีย์เพลง, BPM และแยก Stems ตามปกติ",
+    "en": "Drag tracks onto Decks 1-4 in Serato DJ Pro or Lite. Fully supports musical keys, BPM, and live stems performance."
+  },
+  "เชื่อมต่ออัตโนมัติสำเร็จแล้ว! STEMORA Connect กำลังซิงก์เพลงลงโปรแกรม DJ": {
+    "th": "เชื่อมต่ออัตโนมัติสำเร็จแล้ว! STEMORA Connect กำลังซิงก์เพลงลงโปรแกรม DJ",
+    "en": "Auto-pairing successful! STEMORA Connect is now syncing your tracks to your DJ software."
+  },
+  "เปิดโปรแกรม DJ ของคุณ แล้วลากไฟล์ .m3u8 หรือโฟลเดอร์เพลงเข้าไปยังแถบ Playlists / Crates โปรแกรมจะนำเข้าเพลงพร้อมเล่นทันที": {
+    "th": "เปิดโปรแกรม DJ ของคุณ แล้วลากไฟล์ .m3u8 หรือโฟลเดอร์เพลงเข้าไปยังแถบ Playlists / Crates โปรแกรมจะนำเข้าเพลงพร้อมเล่นทันที",
+    "en": "Open your DJ software, then drag the .m3u8 file or tracks folder into your Playlists/Crates panel to mix immediately."
+  },
+  "แอปจะสร้างไฟล์ Binary Crate ลงใน ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ เมื่อเปิด Serato DJ จะพบลังเพลง STEMORA และเพลย์ลิสต์ทันที": {
+    "th": "แอปจะสร้างไฟล์ Binary Crate ลงใน ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ เมื่อเปิด Serato DJ จะพบลังเพลง STEMORA และเพลย์ลิสต์ทันที",
+    "en": "The app writes binary crates into ~/Music/_Serato_/Subcrates/ automatically. Open Serato DJ to find STEMORA crates ready to play."
+  },
+  "ในแถบซ้ายมือของ rekordbox หมวด rekordbox xml > STEMORA จะแสดงเพลย์ลิสต์พร้อมค่า BPM, Camelot Key สามารถลากลง Deck หรือกด Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที": {
+    "th": "ในแถบซ้ายมือของ rekordbox หมวด rekordbox xml > STEMORA จะแสดงเพลย์ลิสต์พร้อมค่า BPM, Camelot Key สามารถลากลง Deck หรือกด Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที",
+    "en": "In rekordbox under rekordbox xml > STEMORA, your crates appear with BPM and Camelot keys. Drag to decks or sync to USB for CDJ/XDJ."
+  },
+  "ไปที่ Preferences > View > Layout ติ๊กถูกที่ช่อง rekordbox xml แล้วไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์ ~/Music/STEMORA/rekordbox.xml": {
+    "th": "ไปที่ Preferences > View > Layout ติ๊กถูกที่ช่อง rekordbox xml แล้วไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์ ~/Music/STEMORA/rekordbox.xml",
+    "en": "Go to Preferences > View > Layout, check rekordbox xml, then go to Preferences > Advanced > Database and select ~/Music/STEMORA/rekordbox.xml."
+  },
+  "ไฟล์เสียงที่ดาวน์โหลดเป็นไฟล์ Lossless 16/24-bit คุณภาพสูงระดับสตูดิโอ ไร้การบีบอัดสัญญาณ เหมาะสำหรับการเล่นสดในคลับหรือเฟสติวัล": {
+    "th": "ไฟล์เสียงที่ดาวน์โหลดเป็นไฟล์ Lossless 16/24-bit คุณภาพสูงระดับสตูดิโอ ไร้การบีบอัดสัญญาณ เหมาะสำหรับการเล่นสดในคลับหรือเฟสติวัล",
+    "en": "Audio files are studio-grade 16/24-bit lossless without compression artifacts, ideal for festival sound systems and club sound systems."
   }
 }

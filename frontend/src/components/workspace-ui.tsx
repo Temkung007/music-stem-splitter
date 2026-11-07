@@ -7,10 +7,12 @@ export function Modal({
   title,
   children,
   close,
+  className,
 }: {
   title: string;
   children: ReactNode;
   close: () => void;
+  className?: string;
 }) {
   const { t: tr } = useLocale();
 
@@ -19,7 +21,11 @@ export function Modal({
     ref.current?.showModal();
   }, []);
   return (
-    <dialog ref={ref} className="workspace-modal" onCancel={close}>
+    <dialog
+      ref={ref}
+      className={`workspace-modal ${className || ""}`.trim()}
+      onCancel={close}
+    >
       <div className="modal-title">
         <h2>{title}</h2>
         <button
