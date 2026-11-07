@@ -245,6 +245,15 @@ def download_agent():
     )
 
 
+@router.get("/download")
+def download_app():
+    """Redirect to the native desktop companion app installer."""
+    return Response(
+        status_code=307,
+        headers={"Location": "/download/STEMORA-Connect-macOS.dmg"},
+    )
+
+
 @router.get("/token")
 def get_or_create_token(user=Depends(current_user)):
     """Retrieves or creates the user's persistent sync token."""

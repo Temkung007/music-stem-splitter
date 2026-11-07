@@ -2647,6 +2647,74 @@
     "th": "ซิงก์อัตโนมัติกับ Pioneer DJ rekordbox",
     "en": "Live Sync with Pioneer DJ rekordbox"
   },
+  "ดาวน์โหลดแอป Connect": {
+    "th": "ดาวน์โหลดแอป Connect",
+    "en": "Download Connect App"
+  },
+  "ดาวน์โหลดแอปสำหรับ Mac": {
+    "th": "ดาวน์โหลดแอปสำหรับ Mac",
+    "en": "Download App for Mac"
+  },
+  "โปรแกรมเดสก์ท็อป": {
+    "th": "โปรแกรมเดสก์ท็อป",
+    "en": "Desktop App"
+  },
+  "ซิงก์เพลง คีย์ Camelot และเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติ Real-Time ใช้งานง่ายด้วยแอปพลิเคชัน ไม่ต้องเปิด Terminal": {
+    "th": "ซิงก์เพลง คีย์ Camelot และเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติ Real-Time ใช้งานง่ายด้วยแอปพลิเคชัน ไม่ต้องเปิด Terminal",
+    "en": "Automatically sync songs, Camelot keys, and playlists into rekordbox on your computer in real-time with a dedicated app — no Terminal required."
+  },
+  "ดาวน์โหลด STEMORA Connect (.dmg)": {
+    "th": "ดาวน์โหลด STEMORA Connect (.dmg)",
+    "en": "Download STEMORA Connect (.dmg)"
+  },
+  "ดาวน์โหลด .zip": {
+    "th": "ดาวน์โหลด .zip",
+    "en": "Download .zip"
+  },
+  "Sync Token ประจำตัวของคุณ": {
+    "th": "Sync Token ประจำตัวของคุณ",
+    "en": "Your Personal Sync Token"
+  },
+  "นำไปใส่ในเมนูตั้งค่า ⚙️ ของแอป STEMORA Connect": {
+    "th": "นำไปใส่ในเมนูตั้งค่า ⚙️ ของแอป STEMORA Connect",
+    "en": "Paste into the Settings ⚙️ menu of STEMORA Connect"
+  },
+  "Sync Token": {
+    "th": "Sync Token",
+    "en": "Sync Token"
+  },
+  "คัดลอกโทเค็น": {
+    "th": "คัดลอกโทเค็น",
+    "en": "Copy Token"
+  },
+  "ติดตั้งและเปิดแอป STEMORA Connect": {
+    "th": "ติดตั้งและเปิดแอป STEMORA Connect",
+    "en": "Install & Launch STEMORA Connect"
+  },
+  "เปิดไฟล์ .dmg ลาก STEMORA Connect เข้าโฟลเดอร์ Applications จากนั้นเปิดแอปและนำ Sync Token ด้านบนไปใส่ในการตั้งค่า (⚙️)": {
+    "th": "เปิดไฟล์ .dmg ลาก STEMORA Connect เข้าโฟลเดอร์ Applications จากนั้นเปิดแอปและนำ Sync Token ด้านบนไปใส่ในการตั้งค่า (⚙️)",
+    "en": "Open the .dmg, drag STEMORA Connect to Applications, launch the app, and paste your Sync Token in Settings (⚙️)."
+  },
+  "เลือกไฟล์ rekordbox.xml (ทำครั้งแรกครั้งเดียว)": {
+    "th": "เลือกไฟล์ rekordbox.xml (ทำครั้งแรกครั้งเดียว)",
+    "en": "Select rekordbox.xml (one-time setup)"
+  },
+  "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้กด Browse แล้วเลือก: ~/Music/STEMORA/rekordbox.xml": {
+    "th": "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้กด Browse แล้วเลือก: ~/Music/STEMORA/rekordbox.xml",
+    "en": "In rekordbox, go to Preferences > Advanced > Database. In the rekordbox xml field, click Browse and select: ~/Music/STEMORA/rekordbox.xml"
+  },
+  "เปิดแท็บ XML พร้อมเล่นทันที": {
+    "th": "เปิดแท็บ XML พร้อมเล่นทันที",
+    "en": "Enable XML Tab & Start Mixing"
+  },
+  "ใน rekordbox ไปที่ Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA พร้อมคีย์ Camelot และค่า BPM เมื่อจัดเพลงบนเว็บ rekordbox จะซิงก์ให้อัตโนมัติ!": {
+    "th": "ใน rekordbox ไปที่ Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA พร้อมคีย์ Camelot และค่า BPM เมื่อจัดเพลงบนเว็บ rekordbox จะซิงก์ให้อัตโนมัติ!",
+    "en": "In rekordbox, go to Preferences > View > Layout and check rekordbox xml. You'll see the STEMORA folder with Camelot keys and BPM ready to mix — every playlist change on the web syncs automatically!"
+  },
+  "หรือรันผ่าน Terminal / CLI (สำหรับ Linux หรือ Server)": {
+    "th": "หรือรันผ่าน Terminal / CLI (สำหรับ Linux หรือ Server)",
+    "en": "Or run via Terminal / CLI (for Linux or headless servers)"
+  },
   "⚡ ระบบ Live Sync จะคอยดึงเพลงใหม่และอัปเดตเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติทันทีที่จัดเซ็ตบนเว็บ": {
     "th": "⚡ ระบบ Live Sync จะคอยดึงเพลงใหม่และอัปเดตเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติทันทีที่จัดเซ็ตบนเว็บ",
     "en": "⚡ Live Sync automatically downloads new tracks and updates playlists in rekordbox on your computer as you edit on the web."

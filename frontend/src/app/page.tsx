@@ -23,6 +23,7 @@ import {
   LogOut,
   FileAudio,
   FolderOpen,
+  Laptop,
   Layers3,
   LoaderCircle,
   Mic2,
@@ -460,6 +461,14 @@ function Workspace() {
           >
             <LogOut size={18} /> {tr("ออกจากระบบ")}
           </button>
+          <a
+            href="/download/STEMORA-Connect-macOS.dmg"
+            download="STEMORA-Connect-macOS.dmg"
+            className="nav-item"
+            title={tr("ดาวน์โหลดแอปสำหรับ Mac")}
+          >
+            <Laptop size={18} /> {tr("ดาวน์โหลดแอป Connect")}
+          </a>
           <button
             className={`nav-item ${view === "guide" ? "nav-active" : ""}`}
             onClick={() => setView("guide")}

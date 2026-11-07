@@ -8,11 +8,14 @@ import {
   ArrowDownToLine,
   ArrowRight,
   ArrowUp,
+  Check,
   Clock3,
   Copy,
+  Download,
   GripVertical,
   HelpCircle,
   History,
+  Laptop,
   ListMusic,
   LoaderCircle,
   LockKeyhole,
@@ -1039,16 +1042,134 @@ export function DjPlaylists({
           close={() => setShowSyncModal(false)}
         >
           <div className="rekordbox-guide">
-            <div className="guide-note">
-              <small>
+            {/* Spotlight App Download Card */}
+            <div className="desktop-app-spotlight">
+              <div className="spotlight-header">
+                <div className="spotlight-brand">
+                  <div className="spotlight-logo">
+                    <Laptop size={22} />
+                  </div>
+                  <div>
+                    <div className="spotlight-tag">{tr("โปรแกรมเดสก์ท็อป")}</div>
+                    <h3>STEMORA Connect</h3>
+                  </div>
+                </div>
+                <span className="spotlight-badge">v1.0.0 · macOS & Windows</span>
+              </div>
+              <p className="spotlight-desc">
                 {tr(
-                  "⚡ ระบบ Live Sync จะคอยดึงเพลงใหม่และอัปเดตเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติทันทีที่จัดเซ็ตบนเว็บ",
+                  "ซิงก์เพลง คีย์ Camelot และเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติ Real-Time ใช้งานง่ายด้วยแอปพลิเคชัน ไม่ต้องเปิด Terminal",
                 )}
-              </small>
+              </p>
+              <div className="spotlight-actions">
+                <a
+                  href="/download/STEMORA-Connect-macOS.dmg"
+                  download="STEMORA-Connect-macOS.dmg"
+                  className="primary-button spotlight-dl-btn"
+                >
+                  <Download size={16} />
+                  <span>{tr("ดาวน์โหลด STEMORA Connect (.dmg)")}</span>
+                </a>
+                <a
+                  href="/download/STEMORA-Connect-macOS.zip"
+                  download="STEMORA-Connect-macOS.zip"
+                  className="secondary-button"
+                >
+                  {tr("ดาวน์โหลด .zip")}
+                </a>
+              </div>
+              <div className="spotlight-meta">
+                <span>Apple Silicon & Intel</span>
+                <span>•</span>
+                <span>ขนาด 6.8 MB</span>
+                <span>•</span>
+                <span>Rust & Tauri Native</span>
+              </div>
             </div>
-            <div className="sync-command-box">
-              <label>
-                <strong>{tr("คำสั่งเริ่ม Auto-Sync บน Mac / PC:")}</strong>
+
+            {/* Sync Token Pairing Card */}
+            <div className="sync-token-card">
+              <div className="token-card-header">
+                <strong>{tr("Sync Token ประจำตัวของคุณ")}</strong>
+                <small>{tr("นำไปใส่ในเมนูตั้งค่า ⚙️ ของแอป STEMORA Connect")}</small>
+              </div>
+              <div className="token-input-row">
+                <input
+                  type="text"
+                  readOnly
+                  value={tokenLoading ? tr("กำลังโหลดโทเค็น…") : syncToken}
+                  className="token-field"
+                  aria-label={tr("Sync Token")}
+                />
+                <button
+                  type="button"
+                  className="secondary-button token-copy-btn"
+                  onClick={() => {
+                    if (syncToken && navigator.clipboard) {
+                      navigator.clipboard.writeText(syncToken);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }
+                  }}
+                  disabled={tokenLoading || !syncToken}
+                >
+                  {copied ? <Check size={14} /> : <Copy size={14} />}
+                  {copied ? tr("คัดลอกแล้ว") : tr("คัดลอกโทเค็น")}
+                </button>
+              </div>
+              <div className="token-card-footer">
+                <button
+                  type="button"
+                  className="text-button"
+                  onClick={() => void rotateSyncToken()}
+                  disabled={tokenLoading}
+                >
+                  <RotateCcw size={12} /> {tr("สร้างโทเค็นใหม่")}
+                </button>
+              </div>
+            </div>
+
+            {/* Quick 3-Step Setup */}
+            <div className="guide-steps-list">
+              <div className="guide-step">
+                <span className="step-num">1</span>
+                <div>
+                  <strong>{tr("ติดตั้งและเปิดแอป STEMORA Connect")}</strong>
+                  <p>
+                    {tr(
+                      "เปิดไฟล์ .dmg ลาก STEMORA Connect เข้าโฟลเดอร์ Applications จากนั้นเปิดแอปและนำ Sync Token ด้านบนไปใส่ในการตั้งค่า (⚙️)",
+                    )}
+                  </p>
+                </div>
+              </div>
+              <div className="guide-step">
+                <span className="step-num">2</span>
+                <div>
+                  <strong>{tr("เลือกไฟล์ rekordbox.xml (ทำครั้งแรกครั้งเดียว)")}</strong>
+                  <p>
+                    {tr(
+                      "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้กด Browse แล้วเลือก: ~/Music/STEMORA/rekordbox.xml",
+                    )}
+                  </p>
+                </div>
+              </div>
+              <div className="guide-step">
+                <span className="step-num">3</span>
+                <div>
+                  <strong>{tr("เปิดแท็บ XML พร้อมเล่นทันที")}</strong>
+                  <p>
+                    {tr(
+                      "ใน rekordbox ไปที่ Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA พร้อมคีย์ Camelot และค่า BPM เมื่อจัดเพลงบนเว็บ rekordbox จะซิงก์ให้อัตโนมัติ!",
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Alternative CLI for Linux/Server users */}
+            <details className="cli-sync-details">
+              <summary>{tr("หรือรันผ่าน Terminal / CLI (สำหรับ Linux หรือ Server)")}</summary>
+              <div className="sync-command-box">
                 <div className="command-row">
                   <code>
                     {tokenLoading
@@ -1068,55 +1189,12 @@ export function DjPlaylists({
                     }}
                     disabled={tokenLoading || !syncToken}
                   >
-                    {copied ? <Sparkles size={14} /> : <Copy size={14} />}
+                    {copied ? <Check size={14} /> : <Copy size={14} />}
                     {copied ? tr("คัดลอกแล้ว") : tr("คัดลอกคำสั่ง")}
                   </button>
                 </div>
-              </label>
-            </div>
-            <div className="guide-step">
-              <span className="step-num">1</span>
-              <div>
-                <strong>{tr("รันคำสั่งใน Terminal บนเครื่องของคุณ")}</strong>
-                <p>
-                  {tr(
-                    "เปิดโปรแกรม Terminal บน Mac (หรือ PowerShell บน Windows) วางคำสั่งด้านบนแล้วกด Enter ตัว Agent จะสร้างโฟลเดอร์ ~/Music/STEMORA และดึงเพลงมาเตรียมพร้อมให้ทันที",
-                  )}
-                </p>
               </div>
-            </div>
-            <div className="guide-step">
-              <span className="step-num">2</span>
-              <div>
-                <strong>{tr("เชื่อมต่อกับ rekordbox (ตั้งค่าครั้งเดียว)")}</strong>
-                <p>
-                  {tr(
-                    "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์: ~/Music/STEMORA/rekordbox.xml",
-                  )}
-                </p>
-              </div>
-            </div>
-            <div className="guide-step">
-              <span className="step-num">3</span>
-              <div>
-                <strong>{tr("เปิดใช้งานและเล่นได้เลย")}</strong>
-                <p>
-                  {tr(
-                    "เปิด Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA ในแถบซ้ายของ rekordbox พร้อมเล่นเพลงและคีย์ Camelot ทันที เมื่อคุณจัดเซ็ตบนเว็บ rekordbox จะซิงก์ตามตลอดเวลา!",
-                  )}
-                </p>
-              </div>
-            </div>
-            <div className="modal-actions">
-              <button
-                type="button"
-                className="text-button"
-                onClick={() => void rotateSyncToken()}
-                disabled={tokenLoading}
-              >
-                <RotateCcw size={13} /> {tr("สร้างโทเค็นใหม่")}
-              </button>
-            </div>
+            </details>
           </div>
         </Modal>
       )}

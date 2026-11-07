@@ -1602,3 +1602,213 @@ div.panel {
   }
 }
 
+
+
+/* Rekordbox Live Sync & Desktop App Modal */
+.rekordbox-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 4px 0 10px;
+}
+.desktop-app-spotlight {
+  background: linear-gradient(135deg, rgba(215, 249, 139, 0.08) 0%, #151821 55%, #10121a 100%) !important;
+  border: 1px solid rgba(215, 249, 139, 0.28) !important;
+  border-radius: 14px !important;
+  padding: 20px 22px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+.spotlight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.spotlight-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.spotlight-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(215, 249, 139, 0.12);
+  border: 1px solid rgba(215, 249, 139, 0.3);
+  color: var(--lime);
+  display: grid;
+  place-items: center;
+}
+.spotlight-tag {
+  font-size: 10px;
+  font-family: var(--font-mono-stem);
+  font-weight: 700;
+  color: var(--lime);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.spotlight-brand h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 2px 0 0;
+  letter-spacing: -0.01em;
+}
+.spotlight-badge {
+  font-size: 11px;
+  font-family: var(--font-mono-stem);
+  font-weight: 600;
+  background: rgba(215, 249, 139, 0.12);
+  color: var(--lime);
+  border: 1px solid rgba(215, 249, 139, 0.3);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.spotlight-desc {
+  font-size: 13px;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.spotlight-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.spotlight-dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  padding: 0 18px;
+  text-decoration: none;
+}
+.spotlight-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--font-mono-stem);
+}
+
+.sync-token-card {
+  background: #141720 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 16px 18px !important;
+}
+.token-card-header {
+  margin-bottom: 10px;
+}
+.token-card-header strong {
+  display: block;
+  font-size: 13px;
+  color: #f8fafc;
+  font-weight: 600;
+}
+.token-card-header small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.token-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.token-field {
+  flex: 1;
+  background: #0d0f14 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+  font-family: var(--font-mono-stem) !important;
+  font-size: 12px !important;
+  padding: 9px 12px !important;
+  border-radius: 8px !important;
+  letter-spacing: 0.04em;
+}
+.token-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.token-card-footer {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.guide-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.guide-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px !important;
+  background: #141720 !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 10px !important;
+}
+.guide-step .step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: #0c120a;
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.guide-step strong {
+  display: block;
+  font-size: 13px;
+  color: #f8fafc !important;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.guide-step p {
+  font-size: 12px !important;
+  color: #94a3b8 !important;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.cli-sync-details {
+  background: #11141c;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.cli-sync-details summary {
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+.cli-sync-details[open] summary {
+  margin-bottom: 10px;
+}
+.sync-command-box {
+  background: #0c0e13 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+}
+.command-row code {
+  background: #090a0d !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #e2e8f0 !important;
+}
