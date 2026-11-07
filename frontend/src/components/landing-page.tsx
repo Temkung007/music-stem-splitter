@@ -12,7 +12,6 @@ import {
   Layers,
   ArrowRight,
   ShieldCheck,
-  Zap,
   Sliders,
   CheckCircle2,
   X,
@@ -40,35 +39,6 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-
-  // Quick Demo Login
-  const instantDemoLogin = async () => {
-    setBusy(true);
-    setError("");
-    const demoEmail = "demo@stemora.io";
-    const demoPassword = "demopassword123";
-    try {
-      const result = await api<User>(
-        "/api/auth/login",
-        jsonRequest("POST", { email: demoEmail, password: demoPassword })
-      );
-      onSuccess(result);
-      setModalOpen(false);
-    } catch {
-      try {
-        const result = await api<User>(
-          "/api/auth/register",
-          jsonRequest("POST", { email: demoEmail, password: demoPassword, name: "Demo DJ" })
-        );
-        onSuccess(result);
-        setModalOpen(false);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : tr("เข้าสู่ระบบไม่สำเร็จ"));
-      }
-    } finally {
-      setBusy(false);
-    }
-  };
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -746,28 +716,6 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
                   ? tr("เข้าสู่ระบบเพื่อเข้าถึงคลังเพลงและมิกเซอร์ส่วนตัว")
                   : tr("รับพื้นที่จัดเก็บฟรี 200 MB และประมวลผล 4 แทร็กทันที")}
               </p>
-            </div>
-
-            {/* Quick Demo Login Option */}
-            <div style={{ marginBottom: "var(--s-4)" }}>
-              <button
-                type="button"
-                className="btn btn--secondary"
-                style={{ width: "100%", justifyContent: "center", height: 42 }}
-                onClick={instantDemoLogin}
-                disabled={busy}
-              >
-                <Zap size={16} style={{ color: "var(--p-accent)" }} />
-                <span>{tr("เข้าใช้งานด้วย Demo Account (คลิกเดียว)")}</span>
-              </button>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "16px 0" }}>
-              <div style={{ flex: 1, height: 1, background: "var(--line)" }} />
-              <span className="muted" style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: "#9fa697" }}>
-                {tr("หรือใช้อีเมล")}
-              </span>
-              <div style={{ flex: 1, height: 1, background: "var(--line)" }} />
             </div>
 
             {/* Form */}
