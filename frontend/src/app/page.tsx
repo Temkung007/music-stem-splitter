@@ -105,9 +105,9 @@ function Workspace() {
   const [connected, setConnected] = useState<boolean | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [mode, setMode] = useState("4stems");
-  const [engine, setEngine] = useState("webgpu");
+  const [engine, setEngine] = useState("demucs");
   const [storageMode, setStorageMode] = useState("download");
-  const [model, setModel] = useState("htdemucs");
+  const [model, setModel] = useState("htdemucs_ft");
   const [dragging, setDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -153,10 +153,9 @@ function Workspace() {
         await apiFetch("/api/health", { signal: AbortSignal.timeout(8000) }),
       );
       setHealth(result);
-      if (!engineSelected.current) {
-        setEngine(result.default_engine || "webgpu");
-        engineSelected.current = true;
-      }
+      setEngine("demucs");
+      setModel("htdemucs_ft");
+      engineSelected.current = true;
       setConnected(true);
     } catch {
       setConnected(false);
@@ -953,98 +952,34 @@ function Workspace() {
                         </button>
                       ))}
                     </div>
-                    <details className="processing-options" open>
-                    <summary>{tr("ตัวเลือกการประมวลผล AI & คุณภาพ")}</summary>
-                    <div className="engine-setting">
-                      <div>
-                        <SlidersHorizontal size={16} />
-                        <label htmlFor="engine">{tr("การประมวลผล")}</label>
-                      </div>
-                      <select
-                        id="engine"
-                        value={engine}
-                        onChange={(e) => { engineSelected.current = true; setEngine(e.target.value); }}
-                      >
-                        {health?.worker_enabled && <option value="worker">{tr("แยกเสียงให้ฉัน (Cloud Worker AI)")}</option>}
-                        <option value="webgpu">
-                          {tr("บนอุปกรณ์ของฉัน · WebGPU (ฟรี & ความลับ 100%)")}
-                        </option>
-                        <option value="demucs">
+                    <div className="engine-preset-card">
+                      <div className="engine-preset-row">
+                        <div className="engine-preset-label">
+                          <SlidersHorizontal size={14} />
+                          <span>{tr("การประมวลผล")}</span>
+                        </div>
+                        <span className="engine-preset-pill">
+                          <span className="engine-preset-indicator" />
                           {tr("บนเซิร์ฟเวอร์ · Demucs v4 AI")}
-                          {health && !health.demucs_available
-                            ? tr(" · ยังไม่ติดตั้ง")
-                            : ""}
-                        </option>
-                        <option value="dsp">{tr("DSP · กรองย่านเสียง")}</option>
-                      </select>
-                    </div>
-                    {engine === "demucs" && health?.demucs_available && (
-                      <div className="engine-setting">
-                        <label htmlFor="model">{tr("ระดับความละเอียด")}</label>
-                        <select
-                          id="model"
-                          value={model}
-                          onChange={(e) => setModel(e.target.value)}
-                        >
-                          <option value="htdemucs">
-                            {tr("มาตรฐาน · เร็วกว่า")}
-                          </option>
-                          <option value="htdemucs_ft">
-                            {tr("ละเอียด · ใช้เวลามากขึ้น")}
-                          </option>
-                        </select>
-                      </div>
-                    )}
-                    </details>
-                    {engine === "worker" && <StemStorageChoice value={storageMode} onChange={setStorageMode} disabled={uploading} />}
-                    {engine === "worker" ? (
-                      <p className="engine-hint gpu-device-hint" role="status">
-                        <strong>{tr(health?.worker_online ? "พร้อมรับเพลงของคุณ" : "รับเพลงเข้าคิวไว้ก่อนได้")}</strong>
-                        <span>{tr(health?.worker_online ? "ปิดหน้าเว็บแล้วกลับมาดูผลได้" : "เพลงจะเริ่มอัตโนมัติเมื่อระบบพร้อม")}</span>
-                      </p>
-                    ) : engine === "webgpu" ? (
-                      <p
-                        className={`engine-hint gpu-device-hint ${local.support === "unsupported" ? "gpu-unavailable" : ""}`}
-                        role="status"
-                      >
-                        <strong>
-                          {tr(
-                            local.support === "checking"
-                              ? "กำลังตรวจสอบ GPU ของอุปกรณ์…"
-                              : local.support === "ready"
-                                ? "GPU พร้อมใช้งาน · ประมวลผลบนอุปกรณ์"
-                                : "อุปกรณ์นี้ยังใช้ WebGPU ไม่ได้",
-                          )}
-                        </strong>
-                        <span>
-                          {tr(
-                            local.support === "unsupported"
-                              ? "ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์"
-                              : "ครั้งแรกดาวน์โหลดไฟล์ AI ประมาณ 96 MB และเก็บบนอุปกรณ์ เพลงจะไม่ถูกอัปโหลดจนกว่าจะกดบันทึกเข้า cloud",
-                          )}
                         </span>
-                      </p>
-                    ) : engine === "demucs" &&
-                      health &&
-                      !health.demucs_available ? (
-                      <p className="engine-hint">
-                        {tr("ยังไม่ติดตั้ง AI บนเครื่องนี้")}{" "}
-                        <button onClick={() => setView("guide")}>
-                          {tr("ดูวิธีติดตั้ง")}
-                        </button>{" "}
-                        {tr("หรือเลือก DSP เพื่อทดลองกรองย่านเสียง")}
-                      </p>
-                    ) : engine === "dsp" ? (
-                      <p className="engine-hint">
-                        {tr(
-                          "DSP กรองความถี่และตำแหน่งเสียง อาจมีเสียงอื่นปะปน ไม่ใช่การแยกเครื่องดนตรีด้วย AI",
-                        )}
+                      </div>
+                      <div className="engine-preset-row">
+                        <div className="engine-preset-label">
+                          <Sparkles size={14} />
+                          <span>{tr("ระดับความละเอียด")}</span>
+                        </div>
+                        <span className="engine-preset-pill">
+                          {tr("ละเอียด · ใช้เวลามากขึ้น")}
+                        </span>
+                      </div>
+                    </div>
+                    {health && !health.demucs_available ? (
+                      <p className="engine-hint" role="status">
+                        {tr("ยังไม่ติดตั้ง AI บนเครื่องนี้")}
                       </p>
                     ) : (
-                      <p className="engine-hint">
-                        {tr(
-                          "ประมวลผลในพื้นที่ส่วนตัวของคุณ การใช้ครั้งแรกอาจต้องดาวน์โหลดไฟล์ที่จำเป็น",
-                        )}
+                      <p className="engine-hint" role="status">
+                        {tr("ประมวลผลในพื้นที่ส่วนตัวของคุณ การใช้ครั้งแรกอาจต้องดาวน์โหลดไฟล์ที่จำเป็น")}
                       </p>
                     )}
                     {(task?.status === "failed" || task?.status === "cancelled" || task?.status === "expired" || task?.status === "expiring") && (
@@ -1057,10 +992,8 @@ function Workspace() {
                       disabled={
                         !file ||
                         checkingFile ||
-                        (engine === "webgpu"
-                          ? local.support !== "ready"
-                          : !available) ||
-                        (engine === "demucs" && !health?.demucs_available)
+                        !available ||
+                        Boolean(health && !health.demucs_available)
                       }
                       onClick={() => void start()}
                     >
@@ -1288,56 +1221,33 @@ function Workspace() {
                     </option>
                   </select>
                 </label>
-                <details className="processing-options">
-                <summary>{tr("ตัวเลือกการประมวลผล")}</summary>
-                <label>
-                  {tr("การประมวลผล")}
-                  <select
-                    value={engine}
-                    onChange={(e) => { engineSelected.current = true; setEngine(e.target.value); }}
-                  >
-                    {health?.worker_enabled && <option value="worker">{tr("แยกเสียงให้ฉัน")}</option>}
-                    <option value="webgpu">
-                      {tr("บนอุปกรณ์ของฉัน · WebGPU")}
-                    </option>
-                    <option value="demucs">
-                      {tr("บนเซิร์ฟเวอร์ · AI")}
-                      {health && !health.demucs_available
-                        ? tr(" · ยังไม่พร้อม")
-                        : ""}
-                    </option>
-                    <option value="dsp">{tr("กรองย่านเสียง")}</option>
-                  </select>
-                </label>
-                </details>
-                {engine === "worker" && <StemStorageChoice value={storageMode} onChange={setStorageMode} disabled={uploading} />}
+                <div className="engine-preset-card" style={{ margin: "16px 0" }}>
+                  <div className="engine-preset-row">
+                    <div className="engine-preset-label">
+                      <SlidersHorizontal size={14} />
+                      <span>{tr("การประมวลผล")}</span>
+                    </div>
+                    <span className="engine-preset-pill">
+                      <span className="engine-preset-indicator" />
+                      {tr("บนเซิร์ฟเวอร์ · Demucs v4 AI")}
+                    </span>
+                  </div>
+                  <div className="engine-preset-row">
+                    <div className="engine-preset-label">
+                      <Sparkles size={14} />
+                      <span>{tr("ระดับความละเอียด")}</span>
+                    </div>
+                    <span className="engine-preset-pill">
+                      {tr("ละเอียด · ใช้เวลามากขึ้น")}
+                    </span>
+                  </div>
+                </div>
                 <p className="subtle-copy">
-                  {engine === "webgpu"
-                    ? tr(
-                        "ดาวน์โหลดเพลงจากคลังมาแยกบนอุปกรณ์ ผลลัพธ์จะเก็บในเครื่องก่อน จนกว่าจะกดบันทึกเข้า cloud",
-                      )
-                    : engine === "worker"
-                      ? tr("แยกเสียงให้อัตโนมัติ ปิดหน้าเว็บแล้วกลับมาดูผลได้")
-                    : engine === "dsp"
-                      ? tr("การกรองย่านเสียงอาจมีเสียงอื่นปะปน")
-                      : tr("ผลลัพธ์จะบันทึกในงานแยกเสียงของบัญชีคุณ")}
+                  {tr("ผลลัพธ์จะบันทึกในงานแยกเสียงของบัญชีคุณ")}
                 </p>
-                {engine === "webgpu" && local.support !== "ready" && (
-                  <p className="engine-hint" role="status">
-                    {tr(
-                      local.support === "checking"
-                        ? "กำลังตรวจสอบ GPU ของอุปกรณ์…"
-                        : "ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์",
-                    )}
-                  </p>
-                )}
                 <button
                   className="primary-button"
-                  disabled={
-                    uploading ||
-                    (engine === "webgpu" && local.support !== "ready") ||
-                    (engine === "demucs" && !health?.demucs_available)
-                  }
+                  disabled={uploading || Boolean(health && !health.demucs_available)}
                   onClick={async () => {
                     setUploading(true);
                     setError("");
@@ -1381,8 +1291,9 @@ function Workspace() {
                       local.clear();
                       const form = new FormData();
                       form.append("stems_mode", mode);
-    form.append("storage_mode", storageMode);
-                      form.append("engine", engine);
+                      form.append("storage_mode", storageMode);
+                      form.append("engine", "demucs");
+                      form.append("model_name", "htdemucs_ft");
                       const path = `/api/cloud/tracks/${libraryTrackId}/separate`;
                       const result = engine === "worker"
                         ? await queueSeparation(form, uploadId(JSON.stringify([libraryTrackId, mode, engine, storageMode])), setUploadProgress, path)

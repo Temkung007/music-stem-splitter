@@ -911,6 +911,52 @@ div.panel {
 .mode-stem-bass { background: rgba(163, 230, 53, 0.18); color: #a3e635; border: 1px solid rgba(163, 230, 53, 0.3); }
 .mode-stem-other, .mode-stem-inst { background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
 
+/* Engine Fixed Preset Card (Locked Pro Demucs AI Settings) */
+.engine-preset-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 18px;
+  background: #141720 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  margin-bottom: 20px;
+}
+.engine-preset-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.engine-preset-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.engine-preset-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: -0.01em;
+}
+.engine-preset-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d7f98b;
+  box-shadow: 0 0 8px #d7f98b;
+}
+
 /* Processing Options Details */
 .processing-options {
   background: #14171e !important;

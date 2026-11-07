@@ -350,7 +350,7 @@ def make_demo(folder: Path, mode: str):
             output.writeframes(parts[name])
 
 
-def new_task(filename, mode, engine, model="htdemucs", owner_id=None):
+def new_task(filename, mode, engine, model="htdemucs_ft", owner_id=None):
     if (
         owner_id
         and sum(
@@ -551,7 +551,7 @@ async def separate(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     stems_mode: str = Form("4stems"),
-    model_name: str = Form("htdemucs"),
+    model_name: str = Form("htdemucs_ft"),
     engine: str = Form("demucs"),
     user=Depends(current_user),
     storage_mode: str = Form("cloud"),
@@ -1018,5 +1018,5 @@ async def separate_library_track(
         raise HTTPException(503, "ไฟล์ยังไม่พร้อม กรุณาลองใหม่") from error
     upload = UploadFile(filename=track["filename"], file=path.open("rb"))
     return await separate(
-        background_tasks, upload, stems_mode, "htdemucs", engine, user, storage_mode, request_id
+        background_tasks, upload, stems_mode, "htdemucs_ft", engine, user, storage_mode, request_id
     )
