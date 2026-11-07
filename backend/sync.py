@@ -354,3 +354,18 @@ def sync_manifest(user=Depends(current_user)):
         "playlists": playlists_data,
         "tracks": tracks_data,
     }
+
+
+@router.get("/desktop/version")
+def desktop_version():
+    """Return latest STEMORA Connect version metadata for in-app update checks."""
+    return {
+        "latest_version": "1.0.1",
+        "current_stable": "1.0.1",
+        "min_version": "1.0.0",
+        "title": "STEMORA Connect v1.0.1",
+        "release_notes": "ซ่อนการ์ดล็อกอินอัตโนมัติเมื่อเชื่อมต่อบัญชีสำเร็จ และเพิ่มระบบตรวจสอบและแจ้งเตือนอัปเดตโปรแกรมในตัว",
+        "download_url": "/download/STEMORA-Connect-macOS.dmg",
+        "zip_url": "/download/STEMORA-Connect-macOS.zip",
+        "released_at": datetime.now(timezone.utc).isoformat(),
+    }

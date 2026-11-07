@@ -16,11 +16,18 @@
           <path d="M175 512 C 175 480, 275 480, 275 512 C 275 544, 175 544, 175 512" stroke="#a3e635" stroke-width="14" stroke-linecap="round"/>
         </svg>
         <div class="brand-text">
-          <h1>STEMORA</h1>
+          <div class="brand-title-row">
+            <h1>STEMORA</h1>
+            <span class="version-badge" id="app-ver-pill">v1.0.1</span>
+          </div>
           <span class="sub-brand">CONNECT</span>
         </div>
       </div>
       <div class="header-actions">
+        <button id="check-update-btn" class="icon-btn" title="ตรวจสอบการอัปเดต">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="update-notify-dot" class="update-pulse-dot hidden"></span>
+        </button>
         <button id="guide-btn" class="icon-btn" title="วิธีเชื่อมต่อ rekordbox">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </button>
@@ -42,7 +49,10 @@
 
         <div class="user-row">
           <span class="user-label">บัญชีที่เชื่อมต่อ:</span>
-          <strong id="user-name">—</strong>
+          <div class="user-name-wrapper">
+            <strong id="user-name">—</strong>
+            <button id="disconnect-btn" class="text-link-btn hidden" title="ออกจากระบบเพื่อสลับบัญชีใหม่">สลับบัญชี</button>
+          </div>
         </div>
 
         <div class="stats-grid">
@@ -54,6 +64,28 @@
             <span class="stat-number" id="total-tracks">0</span>
             <span class="stat-label">เพลงพร้อมเล่น</span>
           </div>
+        </div>
+      </section>
+
+      <!-- Update Available Card -->
+      <section id="update-card" class="card update-card hidden">
+        <div class="update-card-header">
+          <div class="update-icon-circle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div class="update-card-title">
+            <strong>มีเวอร์ชันใหม่ให้อัปเดต!</strong>
+            <span id="update-card-ver" class="badge">v1.0.1</span>
+          </div>
+        </div>
+        <p id="update-card-notes" class="update-notes-text"></p>
+        <div class="update-btn-row">
+          <button id="download-update-btn" class="btn btn-primary update-action-btn">
+            <span>📥 ดาวน์โหลดอัปเดต</span>
+          </button>
+          <button id="dismiss-update-btn" class="btn-micro-ghost">
+            <span>ปิด</span>
+          </button>
         </div>
       </section>
 
@@ -163,7 +195,52 @@
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">บันทึกการตั้งค่า</button>
           </div>
+
+          <div class="settings-divider"></div>
+
+          <div class="settings-update-box">
+            <div class="settings-update-info">
+              <strong>เวอร์ชันโปรแกรม:</strong>
+              <span id="settings-ver-text">v1.0.1</span>
+            </div>
+            <button type="button" id="settings-check-update-btn" class="btn btn-secondary btn-sm">
+              <span>ตรวจสอบอัปเดต</span>
+            </button>
+          </div>
+          <div id="settings-update-msg" class="subtle-note hidden"></div>
         </form>
+      </div>
+    </div>
+
+    <!-- Update Modal -->
+    <div id="update-modal" class="modal-overlay hidden">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <div class="update-header-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a3e635" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <h2>อัปเดตเวอร์ชันใหม่</h2>
+          </div>
+          <button class="close-btn" id="close-update-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="update-detail-row">
+            <span class="badge" id="modal-update-ver-badge">v1.0.1</span>
+            <span class="subtle-text">พร้อมให้ดาวน์โหลดติดตั้งแล้ว</span>
+          </div>
+          <div class="update-notes-card">
+            <strong>บันทึกการปรับปรุง:</strong>
+            <p id="modal-update-notes-text"></p>
+          </div>
+          <div class="modal-actions-stacked">
+            <button id="modal-update-dl-btn" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>ดาวน์โหลดและติดตั้งอัปเดต (.dmg)</span>
+            </button>
+            <button id="modal-update-dismiss-btn" class="btn btn-secondary">
+              <span>ไว้คราวหน้า</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

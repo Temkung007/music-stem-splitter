@@ -333,24 +333,19 @@ input:checked + .slider:before {
 }
 
 .msg-banner.hidden {
-  display: none;
-}
-
-/* Modals */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px;
-  z-index: 100;
+  display: none !important;
 }
 
 .modal-overlay.hidden {
-  display: none;
+  display: none !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.login-cta-card.hidden {
+  display: none !important;
 }
 
 .modal-sheet {
@@ -546,4 +541,184 @@ input:checked + .slider:before {
   margin-top: 12px;
   width: 100%;
   font-weight: 600;
+}
+
+/* Version Badge */
+.brand-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.version-badge {
+  font-size: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 700;
+  color: var(--lime);
+  background: rgba(163, 230, 53, 0.12);
+  border: 1px solid rgba(163, 230, 53, 0.28);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Update Pulse Dot on Button */
+.icon-btn {
+  position: relative;
+}
+.update-pulse-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  background: var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--lime);
+  animation: pulse-dot 1.5s infinite;
+}
+
+/* User Row & Switch Account */
+.user-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.text-link-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+}
+.text-link-btn:hover {
+  color: var(--lime);
+}
+
+/* Update Available Card */
+.update-card {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, #101826 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  margin-bottom: 14px;
+}
+.update-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.update-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.update-card-title strong {
+  display: block;
+  font-size: 13px;
+  color: #f8fafc;
+}
+.update-notes-text {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+.update-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.update-action-btn {
+  flex: 1;
+  background: #38bdf8 !important;
+  color: #05131f !important;
+  font-weight: 700 !important;
+}
+.btn-micro-ghost {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+}
+.btn-micro-ghost:hover {
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Settings Update Box */
+.settings-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0 12px;
+}
+.settings-update-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #0d120a;
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+.settings-update-info strong {
+  display: block;
+  font-size: 12px;
+  color: var(--text-main);
+}
+.settings-update-info span {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.subtle-note {
+  font-size: 11px;
+  color: var(--lime);
+  margin-top: 6px;
+}
+
+/* Modal Updates */
+.update-header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.update-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.update-notes-card {
+  background: #0c1009;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.update-notes-card strong {
+  display: block;
+  font-size: 12px;
+  color: var(--lime);
+  margin-bottom: 6px;
+}
+.update-notes-card p {
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+.modal-actions-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

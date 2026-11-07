@@ -56,7 +56,7 @@ pub fn start_local_handshake_server(app_handle: AppHandle, manager: Arc<SyncMana
                     let body = serde_json::json!({
                         "status": "ok",
                         "app": "STEMORA Connect",
-                        "version": "1.0.0",
+                        "version": env!("CARGO_PKG_VERSION"),
                         "has_token": st.has_token,
                         "user_name": st.user_name,
                         "server_url": st.server_url

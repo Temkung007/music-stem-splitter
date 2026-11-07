@@ -1,6 +1,6 @@
 [package]
 name = "stemora-connect"
-version = "1.0.0"
+version = "1.0.1"
 description = "STEMORA Live Sync Companion for Pioneer DJ rekordbox"
 authors = ["STEMORA Team"]
 edition = "2021"

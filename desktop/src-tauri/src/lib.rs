@@ -2,6 +2,7 @@ pub mod local_server;
 pub mod rekordbox;
 pub mod sync;
 
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use sync::{SyncManager, SyncStatus};
 use tauri::{
@@ -73,6 +74,90 @@ async fn get_xml_path(state: State<'_, AppState>) -> Result<String, String> {
     let cfg = state.manager.config.lock().await;
     let path = std::path::PathBuf::from(&cfg.sync_dir).join("rekordbox.xml");
     Ok(path.to_string_lossy().to_string())
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UpdateInfo {
+    pub has_update: bool,
+    pub current_version: String,
+    pub latest_version: String,
+    pub release_notes: String,
+    pub download_url: String,
+}
+
+fn is_version_newer(latest: &str, current: &str) -> bool {
+    let parse = |v: &str| -> Vec<u32> {
+        v.trim_start_matches('v')
+            .split('.')
+            .filter_map(|s| s.parse::<u32>().ok())
+            .collect()
+    };
+    let l_parts = parse(latest);
+    let c_parts = parse(current);
+    l_parts > c_parts
+}
+
+#[tauri::command]
+async fn check_desktop_update(state: State<'_, AppState>) -> Result<UpdateInfo, String> {
+    let cfg = state.manager.config.lock().await;
+    let url = format!("{}/api/sync/desktop/version", cfg.server_url.trim_end_matches('/'));
+    let current_ver = env!("CARGO_PKG_VERSION").to_string();
+
+    let client = reqwest::Client::builder()
+        .timeout(std::time::Duration::from_secs(6))
+        .build()
+        .map_err(|e| e.to_string())?;
+
+    let res = client.get(&url).send().await.map_err(|e| e.to_string())?;
+    if !res.status().is_success() {
+        return Err(format!("Server returned HTTP {}", res.status()));
+    }
+
+    let val: serde_json::Value = res.json().await.map_err(|e| e.to_string())?;
+    let latest_ver = val.get("latest_version").and_then(|v| v.as_str()).unwrap_or("1.0.1").to_string();
+    let release_notes = val.get("release_notes").and_then(|v| v.as_str()).unwrap_or("").to_string();
+    let mut dl_url = val.get("download_url").and_then(|v| v.as_str()).unwrap_or("").to_string();
+    if dl_url.starts_with('/') {
+        dl_url = format!("{}{}", cfg.server_url.trim_end_matches('/'), dl_url);
+    }
+
+    let has_update = is_version_newer(&latest_ver, &current_ver);
+
+    Ok(UpdateInfo {
+        has_update,
+        current_version: current_ver,
+        latest_version: latest_ver,
+        release_notes,
+        download_url: dl_url,
+    })
+}
+
+#[tauri::command]
+async fn open_download_page(download_url: Option<String>, state: State<'_, AppState>) -> Result<(), String> {
+    let url = match download_url {
+        Some(u) if !u.trim().is_empty() => u,
+        _ => {
+            let cfg = state.manager.config.lock().await;
+            format!("{}/download/STEMORA-Connect-macOS.dmg", cfg.server_url.trim_end_matches('/'))
+        }
+    };
+    open::that(&url).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+async fn disconnect_account(state: State<'_, AppState>) -> Result<(), String> {
+    let mut cfg = state.manager.config.lock().await;
+    cfg.token = String::new();
+    let _ = SyncManager::save_config_to_disk(&cfg);
+
+    let mut st = state.manager.status.lock().await;
+    st.has_token = false;
+    st.user_name = None;
+    st.total_tracks = 0;
+    st.total_playlists = 0;
+    st.error_message = None;
+
+    Ok(())
 }
 
 #[tauri::command]
@@ -173,7 +258,10 @@ pub fn run() {
             toggle_auto_sync,
             open_sync_folder,
             get_xml_path,
-            open_browser_login
+            open_browser_login,
+            check_desktop_update,
+            open_download_page,
+            disconnect_account
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
