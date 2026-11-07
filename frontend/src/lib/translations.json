@@ -3086,5 +3086,53 @@
   "หรือหากต้องการนำเข้าไฟล์ .xml ด้วยตนเองโดยไม่ใช้โปรแกรม:": {
     "th": "หรือหากต้องการนำเข้าไฟล์ .xml ด้วยตนเองโดยไม่ใช้โปรแกรม:",
     "en": "Or to manually import the .xml file without the desktop app:"
+  },
+  "ศูนย์เชื่อมต่อโปรแกรม DJ (rekordbox, Serato, Traktor, Engine)": {
+    "th": "ศูนย์เชื่อมต่อโปรแกรม DJ (rekordbox, Serato, Traktor, Engine)",
+    "en": "DJ Integration Hub (rekordbox, Serato, Traktor, Engine)"
+  },
+  "ซิงก์โปรแกรม DJ (Live Sync)": {
+    "th": "ซิงก์โปรแกรม DJ (Live Sync)",
+    "en": "DJ Live Sync"
+  },
+  "ซิงก์อัตโนมัติ (Live Sync กับโปรแกรม DJ)": {
+    "th": "ซิงก์อัตโนมัติ (Live Sync กับโปรแกรม DJ)",
+    "en": "Auto Sync (DJ Live Sync)"
+  },
+  "คู่มือเชื่อมต่อโปรแกรม DJ (Serato, rekordbox, Traktor, Engine)": {
+    "th": "คู่มือเชื่อมต่อโปรแกรม DJ (Serato, rekordbox, Traktor, Engine)",
+    "en": "DJ Integration Guide (Serato, rekordbox, Traktor, Engine)"
+  },
+  "คู่มือวิธีนำเข้าเพลงและตั้งค่าแยกตามโปรแกรม DJ:": {
+    "th": "คู่มือวิธีนำเข้าเพลงและตั้งค่าแยกตามโปรแกรม DJ:",
+    "en": "Import & Setup Guides by DJ Software:"
+  },
+  "ซิงก์ Crates อัตโนมัติด้วย STEMORA Connect (สะดวกที่สุด)": {
+    "th": "ซิงก์ Crates อัตโนมัติด้วย STEMORA Connect (สะดวกที่สุด)",
+    "en": "Auto-sync Crates via STEMORA Connect (Recommended)"
+  },
+  "หรือส่งออกไฟล์ .crate ด้วยตนเอง (Manual Crate Export)": {
+    "th": "หรือส่งออกไฟล์ .crate ด้วยตนเอง (Manual Crate Export)",
+    "en": "Or export .crate files manually (Manual Crate Export)"
+  },
+  "พร้อมเล่นสดและแยก Stems บน Deck": {
+    "th": "พร้อมเล่นสดและแยก Stems บน Deck",
+    "en": "Ready to perform and isolate stems on deck"
+  },
+  "ซิงก์ XML อัตโนมัติด้วย STEMORA Connect": {
+    "th": "ซิงก์ XML อัตโนมัติด้วย STEMORA Connect",
+    "en": "Auto-sync XML via STEMORA Connect"
+  },
+  "ส่งออกเพลย์ลิสต์มาตรฐานสากล M3U8 หรือ ZIP": {
+    "th": "ส่งออกเพลย์ลิสต์มาตรฐานสากล M3U8 หรือ ZIP",
+    "en": "Export universal M3U8 playlist or ZIP"
+  },
+  "ลากไฟล์เข้า Traktor, Denon Engine DJ หรือ Virtual DJ": {
+    "th": "ลากไฟล์เข้า Traktor, Denon Engine DJ หรือ Virtual DJ",
+    "en": "Drop files into Traktor, Denon Engine DJ, or Virtual DJ"
+  },
+  "รัน Live Sync Agent ผ่าน Terminal (Linux / Server)": {
+    "th": "รัน Live Sync Agent ผ่าน Terminal (Linux / Server)",
+    "en": "Run Live Sync Agent via Terminal (Linux / Server)"
   }
 }

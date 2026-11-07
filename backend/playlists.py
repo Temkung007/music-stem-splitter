@@ -645,6 +645,34 @@ def export(playlist_id: str, format: str = "m3u", user=Depends(current_user)):
             media_type="application/octet-stream",
             headers={"Content-Disposition": f"attachment; filename*=UTF-8''{quoted}"},
         )
+    if format == "serato_zip":
+        if sum(t["size_bytes"] for t in entries) > 1024**3:
+            raise HTTPException(
+                413, "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์"
+            )
+        track_paths = [t.get("export_filename") or f"{t['id']}.wav" for t in entries]
+        crate_bytes = generate_serato_crate(track_paths)
+        descriptor, name = tempfile.mkstemp(suffix=".zip", dir=DATA)
+        os.close(descriptor)
+        temporary = Path(name)
+        try:
+            with zipfile.ZipFile(temporary, "w", zipfile.ZIP_STORED) as archive:
+                archive.writestr(f"{filename}.crate", crate_bytes)
+                archive.writestr("playlist.m3u8", m3u)
+                for track in entries:
+                    archive.write(
+                        storage.materialize(track["object_key"]),
+                        track["export_filename"],
+                    )
+        except Exception:
+            temporary.unlink(missing_ok=True)
+            raise HTTPException(503, "เตรียมไฟล์ไม่สำเร็จ กรุณาลองใหม่")
+        return FileResponse(
+            temporary,
+            filename=f"{filename}_serato.zip",
+            media_type="application/zip",
+            background=BackgroundTask(temporary.unlink, missing_ok=True),
+        )
     if format == "rekordbox_zip":
         if sum(t["size_bytes"] for t in entries) > 1024**3:
             raise HTTPException(
@@ -673,7 +701,7 @@ def export(playlist_id: str, format: str = "m3u", user=Depends(current_user)):
             background=BackgroundTask(temporary.unlink, missing_ok=True),
         )
     if format != "zip":
-        raise HTTPException(422, "รองรับ m3u, csv, zip หรือ rekordbox")
+        raise HTTPException(422, "รองรับ m3u, csv, zip, crate, serato_zip หรือ rekordbox")
     if sum(t["size_bytes"] for t in entries) > 1024**3:
         raise HTTPException(413, "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์")
     descriptor, name = tempfile.mkstemp(suffix=".zip", dir=DATA)

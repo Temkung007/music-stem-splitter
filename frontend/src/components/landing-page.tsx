@@ -494,7 +494,7 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
                 {
                   step: "04",
                   title: tr("มิกเซอร์ WebAudio"),
-                  desc: tr("มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมส่งออก Lossless WAV/ZIP และเพลย์ลิสต์ Rekordbox M3U8"),
+                  desc: tr("มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมส่งออก Lossless WAV/ZIP, Serato Crates, Rekordbox XML และเพลย์ลิสต์ M3U8 สำหรับทุกโปรแกรม DJ"),
                   badge: "0ms Real-Time Engine",
                   icon: Disc3,
                   tag: "DJ Ready Export"
@@ -577,7 +577,7 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
               <div className="faq__item">
                 <h3>{tr("สามารถส่งออกเพลย์ลิสต์ไปใช้งานกับอุปกรณ์และโปรแกรม DJ ชั้นนำได้หรือไม่?")}</h3>
                 <p>
-                  {tr("รองรับการส่งออก M3U8 Playlist เข้ากันได้กับ Rekordbox, Traktor, Serato และ Engine DJ พร้อมดาวน์โหลด Lossless ZIP")}
+                  {tr("รองรับทั้งการ Live Sync อัตโนมัติ และส่งออกไฟล์เข้ากันได้กับ Serato DJ Pro, Pioneer DJ rekordbox, Traktor, Engine DJ และ Virtual DJ ครบทุกมาตรฐานสากล")}
                 </p>
               </div>
             </div>

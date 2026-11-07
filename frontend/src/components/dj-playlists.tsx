@@ -73,14 +73,23 @@ export function DjPlaylists({
     { revision: number; created_at: string }[] | null
   >(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [showRekordboxGuide, setShowRekordboxGuide] = useState(false);
   const [showSyncModal, setShowSyncModal] = useState(false);
+  const [djGuideTab, setDjGuideTab] = useState<
+    "serato" | "rekordbox" | "traktor" | "cli"
+  >("serato");
   const [syncToken, setSyncToken] = useState<string>("");
   const [tokenLoading, setTokenLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [desktopDetected, setDesktopDetected] = useState<boolean>(false);
   const [pairingSuccess, setPairingSuccess] = useState<boolean>(false);
   const [isPairing, setIsPairing] = useState<boolean>(false);
+
+  const openDjHub = (
+    tab: "serato" | "rekordbox" | "traktor" | "cli" = "serato",
+  ) => {
+    setDjGuideTab(tab);
+    void openSyncModal();
+  };
 
   const checkDesktopApp = useCallback(async () => {
     try {
@@ -491,10 +500,10 @@ export function DjPlaylists({
           <div className="set-list-actions">
             <button
               className="primary-button small"
-              onClick={() => void openSyncModal()}
+              onClick={() => openDjHub("serato")}
               type="button"
             >
-              <RefreshCw size={13} /> {tr("ซิงก์กับ rekordbox")}
+              <RefreshCw size={13} /> {tr("ซิงก์โปรแกรม DJ (Live Sync)")}
             </button>
             <div className="set-list-action-row">
               <button
@@ -1020,15 +1029,16 @@ export function DjPlaylists({
                     {[
                       { key: "csv", label: "CSV" },
                       { key: "m3u", label: "M3U8" },
-                      { key: "zip", label: "ZIP" },
-                      { key: "rekordbox", label: "rekordbox XML" },
                       { key: "crate", label: "Serato Crate" },
+                      { key: "serato_zip", label: "Serato ZIP" },
+                      { key: "rekordbox", label: "rekordbox XML" },
                       { key: "rekordbox_zip", label: "rekordbox ZIP" },
+                      { key: "zip", label: "ZIP รวมเพลง" },
                     ].map(({ key, label }) => (
                       <a
                         key={key}
                         className={
-                          key === "rekordbox_zip" || key === "zip"
+                          key === "rekordbox_zip" || key === "serato_zip" || key === "zip"
                             ? "primary-button small"
                             : "secondary-button"
                         }
@@ -1049,18 +1059,18 @@ export function DjPlaylists({
                     <button
                       type="button"
                       className="icon-button"
-                      title={tr("ซิงก์กับ rekordbox")}
-                      aria-label={tr("ซิงก์กับ rekordbox")}
-                      onClick={() => void openSyncModal()}
+                      title={tr("ซิงก์อัตโนมัติ (Live Sync กับโปรแกรม DJ)")}
+                      aria-label={tr("ซิงก์อัตโนมัติ (Live Sync กับโปรแกรม DJ)")}
+                      onClick={() => openDjHub("serato")}
                     >
                       <RefreshCw size={15} />
                     </button>
                     <button
                       type="button"
                       className="icon-button"
-                      title={tr("วิธีเชื่อมต่อกับ rekordbox")}
-                      aria-label={tr("วิธีเชื่อมต่อกับ rekordbox")}
-                      onClick={() => setShowRekordboxGuide(true)}
+                      title={tr("คู่มือเชื่อมต่อโปรแกรม DJ (Serato, rekordbox, Traktor, Engine)")}
+                      aria-label={tr("คู่มือเชื่อมต่อโปรแกรม DJ (Serato, rekordbox, Traktor, Engine)")}
+                      onClick={() => openDjHub("serato")}
                     >
                       <HelpCircle size={15} />
                     </button>
@@ -1124,7 +1134,7 @@ export function DjPlaylists({
       )}
       {showSyncModal && (
         <Modal
-          title={tr("ซิงก์อัตโนมัติกับ Pioneer DJ rekordbox & Serato DJ Pro")}
+          title={tr("ศูนย์เชื่อมต่อโปรแกรม DJ (rekordbox, Serato, Traktor, Engine)")}
           close={() => setShowSyncModal(false)}
         >
           <div className="rekordbox-guide">
@@ -1136,7 +1146,7 @@ export function DjPlaylists({
                     <Laptop size={22} />
                   </div>
                   <div>
-                    <div className="spotlight-tag">{tr("โปรแกรมเดสก์ท็อป")}</div>
+                    <div className="spotlight-tag">{tr("โปรแกรมเดสก์ท็อป · แนะนำ")}</div>
                     <h3>STEMORA Connect</h3>
                   </div>
                 </div>
@@ -1144,9 +1154,22 @@ export function DjPlaylists({
               </div>
               <p className="spotlight-desc">
                 {tr(
-                  "ซิงก์เพลง คีย์ Camelot และเพลย์ลิสต์ลง rekordbox และ Serato DJ Pro บนเครื่องของคุณแบบอัตโนมัติ Real-Time ใช้งานง่ายด้วยแอปพลิเคชัน ไม่ต้องเปิด Terminal",
+                  "ซิงก์เพลง คีย์ Camelot, ค่า BPM และเพลย์ลิสต์ลงทั้ง rekordbox และ Serato DJ Pro บนเครื่องของคุณแบบอัตโนมัติ Real-Time จัดเซ็ตบนเว็บแล้วพร้อมเล่นบน Deck ทันที ไม่ต้องเปิด Terminal",
                 )}
               </p>
+
+              <div className="dj-supported-pills">
+                <span className="dj-software-pill pioneer">
+                  ⚡ Pioneer DJ rekordbox 6 & 7
+                </span>
+                <span className="dj-software-pill serato">
+                  ⚡ Serato DJ Pro & Lite
+                </span>
+                <span className="dj-software-pill traktor">
+                  ⚡ Traktor / Engine / Virtual DJ
+                </span>
+              </div>
+
               <div className="spotlight-actions">
                 <a
                   href="/download/STEMORA-Connect-macOS.dmg"
@@ -1154,7 +1177,7 @@ export function DjPlaylists({
                   className="primary-button spotlight-dl-btn"
                 >
                   <Download size={16} />
-                  <span>{tr("ดาวน์โหลด STEMORA Connect (.dmg)")}</span>
+                  <span>{tr("ดาวน์โหลด STEMORA Connect (.dmg สำหรับ Mac)")}</span>
                 </a>
                 <a
                   href="/download/STEMORA-Connect-macOS.zip"
@@ -1167,7 +1190,7 @@ export function DjPlaylists({
               <div className="spotlight-meta">
                 <span>Apple Silicon & Intel</span>
                 <span>•</span>
-                <span>ขนาด 6.8 MB</span>
+                <span>ขนาด 6.9 MB</span>
                 <span>•</span>
                 <span>Rust & Tauri Native</span>
               </div>
@@ -1179,7 +1202,7 @@ export function DjPlaylists({
                 <Check size={18} />
                 <span>
                   {tr(
-                    "เชื่อมต่ออัตโนมัติสำเร็จแล้ว! STEMORA Connect กำลังซิงก์เพลง",
+                    "เชื่อมต่ออัตโนมัติสำเร็จแล้ว! STEMORA Connect กำลังซิงก์เพลงลงโปรแกรม DJ",
                   )}
                 </span>
               </div>
@@ -1190,7 +1213,7 @@ export function DjPlaylists({
                 <div className="pair-info">
                   <div className="pair-indicator-dot" />
                   <div>
-                    <strong>{tr("ตรวจพบแอป STEMORA Connect บนเครื่องของคุณ")}</strong>
+                    <strong>{tr("ตรวจพบแอป STEMORA Connect บนเครื่องของคุณแล้ว")}</strong>
                     <small>
                       {tr(
                         "คลิกปุ่มเดียวเพื่อเชื่อมต่อบัญชีทันที ไม่ต้องคัดลอกโทเค็น",
@@ -1210,11 +1233,11 @@ export function DjPlaylists({
               </div>
             )}
 
-            {/* Sync Token Pairing Card */}
+            {/* Sync Token Card */}
             <div className="sync-token-card">
               <div className="token-card-header">
                 <strong>{tr("Sync Token ประจำตัวของคุณ")}</strong>
-                <small>{tr("นำไปใส่ในเมนูตั้งค่า ⚙️ ของแอป STEMORA Connect")}</small>
+                <small>{tr("สำหรับนำไปใส่ในเมนูตั้งค่า ⚙️ ของแอป STEMORA Connect")}</small>
               </div>
               <div className="token-input-row">
                 <input
@@ -1252,156 +1275,200 @@ export function DjPlaylists({
               </div>
             </div>
 
-            {/* Quick 3-Step Setup */}
-            <div className="guide-steps-list">
-              <div className="guide-step">
-                <span className="step-num">1</span>
-                <div>
-                  <strong>{tr("ติดตั้งและเปิดแอป STEMORA Connect")}</strong>
-                  <p>
-                    {tr(
-                      "เปิดไฟล์ติดตั้ง .dmg หรือ .zip แล้วกดปุ่มล็อกอินผ่านเว็บในแอป บัญชีจะเชื่อมต่อทันทีไม่ต้องคัดลอกโทเค็น",
-                    )}
-                  </p>
-                </div>
+            {/* Software Guide Tabs */}
+            <div style={{ marginTop: 8 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "#f8fafc", marginBottom: 6 }}>
+                {tr("คู่มือวิธีนำเข้าเพลงและตั้งค่าแยกตามโปรแกรม DJ:")}
               </div>
-              <div className="guide-step">
-                <span className="step-num">2</span>
-                <div>
-                  <strong>{tr("แอปจะตั้งค่า rekordbox & Serato ให้อัตโนมัติ 100%")}</strong>
-                  <p>
-                    {tr(
-                      "STEMORA Connect จะเปิดใช้ระบบ rekordbox XML และสร้าง Serato Crates ใน ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ ไม่ต้องตั้งค่าเอง",
-                    )}
-                  </p>
-                </div>
-              </div>
-              <div className="guide-step">
-                <span className="step-num">3</span>
-                <div>
-                  <strong>{tr("กดปุ่มเปิดเล่นใน rekordbox หรือ Serato DJ ทันที")}</strong>
-                  <p>
-                    {tr(
-                      "กดปุ่ม ⚡ ในแอป เพื่อเปิด rekordbox หรือ Serato DJ Pro โฟลเดอร์และ Crates ของ STEMORA จะปรากฏพร้อมเล่นบน Deck ทันที",
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Alternative CLI for Linux/Server users */}
-            <details className="cli-sync-details">
-              <summary>{tr("หรือรันผ่าน Terminal / CLI (สำหรับ Linux หรือ Server)")}</summary>
-              <div className="sync-command-box">
-                <div className="command-row">
-                  <code>
-                    {tokenLoading
-                      ? tr("กำลังโหลดโทเค็น…")
-                      : `curl -fsSL ${typeof window !== "undefined" ? window.location.origin : "https://stemora.mydjplus.com"}/api/sync/agent.py | python3 - --token=${syncToken || "..."} --watch`}
-                  </code>
-                  <button
-                    type="button"
-                    className="secondary-button"
-                    onClick={() => {
-                      const cmd = `curl -fsSL ${typeof window !== "undefined" ? window.location.origin : "https://stemora.mydjplus.com"}/api/sync/agent.py | python3 - --token=${syncToken} --watch`;
-                      if (navigator.clipboard) {
-                        navigator.clipboard.writeText(cmd);
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 2000);
-                      }
-                    }}
-                    disabled={tokenLoading || !syncToken}
-                  >
-                    {copied ? <Check size={14} /> : <Copy size={14} />}
-                    {copied ? tr("คัดลอกแล้ว") : tr("คัดลอกคำสั่ง")}
-                  </button>
-                </div>
-              </div>
-            </details>
-          </div>
-        </Modal>
-      )}
-      {showRekordboxGuide && (
-        <Modal
-          title={tr("วิธีเชื่อมต่อเพลย์ลิสต์กับ Pioneer DJ rekordbox")}
-          close={() => setShowRekordboxGuide(false)}
-        >
-          <div className="rekordbox-guide">
-            <div className="desktop-app-spotlight" style={{ marginBottom: 16 }}>
-              <div className="spotlight-header">
-                <div className="spotlight-brand">
-                  <div className="spotlight-logo">
-                    <Laptop size={20} />
-                  </div>
-                  <div>
-                    <div className="spotlight-tag">{tr("แนะนำ · สะดวกที่สุด")}</div>
-                    <h3 style={{ fontSize: 15 }}>STEMORA Connect (ตั้งค่าให้อัตโนมัติ)</h3>
-                  </div>
-                </div>
-              </div>
-              <p className="spotlight-desc" style={{ fontSize: 12 }}>
-                {tr(
-                  "ไม่ต้องเปิด Preferences หรือเลือกพาธเอง โปรแกรม STEMORA Connect จะค้นหาและเชื่อมต่อกับ rekordbox บนเครื่องของคุณให้อัตโนมัติ 100%",
-                )}
-              </p>
-              <div className="spotlight-actions">
-                <a
-                  href="/download/STEMORA-Connect-macOS.dmg"
-                  download="STEMORA-Connect-macOS.dmg"
-                  className="primary-button spotlight-dl-btn"
-                  style={{ fontSize: 12, padding: "8px 14px" }}
+              <div className="dj-hub-tabs">
+                <button
+                  type="button"
+                  className={`dj-hub-tab-btn ${djGuideTab === "serato" ? "active" : ""}`}
+                  onClick={() => setDjGuideTab("serato")}
                 >
-                  <Download size={14} />
-                  <span>{tr("ดาวน์โหลด STEMORA Connect (.dmg)")}</span>
-                </a>
+                  🎧 Serato DJ
+                </button>
+                <button
+                  type="button"
+                  className={`dj-hub-tab-btn ${djGuideTab === "rekordbox" ? "active" : ""}`}
+                  onClick={() => setDjGuideTab("rekordbox")}
+                >
+                  🎛️ Pioneer rekordbox
+                </button>
+                <button
+                  type="button"
+                  className={`dj-hub-tab-btn ${djGuideTab === "traktor" ? "active" : ""}`}
+                  onClick={() => setDjGuideTab("traktor")}
+                >
+                  💿 Traktor & Engine
+                </button>
+                <button
+                  type="button"
+                  className={`dj-hub-tab-btn ${djGuideTab === "cli" ? "active" : ""}`}
+                  onClick={() => setDjGuideTab("cli")}
+                >
+                  💻 Terminal / CLI
+                </button>
               </div>
-            </div>
 
-            <div style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 12, fontWeight: 600 }}>
-              {tr("หรือหากต้องการนำเข้าไฟล์ .xml ด้วยตนเองโดยไม่ใช้โปรแกรม:")}
-            </div>
+              {/* Tab: Serato DJ */}
+              {djGuideTab === "serato" && (
+                <div className="guide-steps-list">
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#38bdf8", color: "#06131c" }}>1</span>
+                    <div>
+                      <strong>{tr("ซิงก์ Crates อัตโนมัติด้วย STEMORA Connect (สะดวกที่สุด)")}</strong>
+                      <p>
+                        {tr(
+                          "แอปจะสร้างไฟล์ Binary Crate ลงใน ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ เมื่อเปิด Serato DJ จะพบลังเพลง STEMORA และเพลย์ลิสต์ทันที",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#38bdf8", color: "#06131c" }}>2</span>
+                    <div>
+                      <strong>{tr("หรือส่งออกไฟล์ .crate ด้วยตนเอง (Manual Crate Export)")}</strong>
+                      <p>
+                        {tr(
+                          "กดปุ่มส่งออก Serato Crate หรือ Serato ZIP ด้านล่างเพลย์ลิสต์ แล้วนำไฟล์ .crate ไปวางในโฟลเดอร์ _Serato_/Subcrates/ บนคอมพิวเตอร์ของคุณ",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#38bdf8", color: "#06131c" }}>3</span>
+                    <div>
+                      <strong>{tr("พร้อมเล่นสดและแยก Stems บน Deck")}</strong>
+                      <p>
+                        {tr(
+                          "ลากเพลงลง Deck 1-4 ใน Serato DJ Pro หรือ Lite เล่นได้ทันที รองรับทั้งคีย์เพลง, BPM และแยก Stems ตามปกติ",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
 
-            <div className="guide-step">
-              <span className="step-num">1</span>
-              <div>
-                <strong>{tr("เปิดเมนู rekordbox XML ในการตั้งค่า")}</strong>
-                <p>
-                  {tr(
-                    "เปิด rekordbox เข้าไปที่ Preferences (การตั้งค่า) > View (มุมมอง) > Layout แล้วติ๊กถูกที่ช่อง rekordbox xml",
-                  )}
-                </p>
-              </div>
-            </div>
-            <div className="guide-step">
-              <span className="step-num">2</span>
-              <div>
-                <strong>{tr("เลือกไฟล์ XML จาก STEMORA")}</strong>
-                <p>
-                  {tr(
-                    "ไปที่ Preferences > Advanced (ขั้นสูง) > Database (ฐานข้อมูล) ในหัวข้อ rekordbox xml ให้กด Browse แล้วเลือกไฟล์ .xml ที่ดาวน์โหลดจาก STEMORA",
-                  )}
-                </p>
-              </div>
-            </div>
-            <div className="guide-step">
-              <span className="step-num">3</span>
-              <div>
-                <strong>
-                  {tr("นำเข้าเพลงพร้อมเล่นบน CDJ / Controller")}
-                </strong>
-                <p>
-                  {tr(
-                    "ในแถบซ้ายของ rekordbox ให้เปิดหมวด rekordbox xml > STEMORA จะพบเพลย์ลิสต์พร้อมค่า BPM, Camelot Key, และ Cue Marker สามารถลากลง Deck หรือกด Import to Collection / Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที",
-                  )}
-                </p>
-              </div>
-            </div>
-            <div className="guide-note">
-              <small>
-                {tr(
-                  "💡 หมายเหตุ: CloudDirectPlay ของ AlphaTheta เป็นระบบคลาวด์ปิดของ Pioneer DJ โดยเฉพาะ แต่การใช้ rekordbox XML Bridge เป็นวิธีมาตรฐานของ DJ สากลที่นำเข้าเพลง คีย์ และ Beatgrid ได้สมบูรณ์ที่สุด",
-                )}
-              </small>
+              {/* Tab: Pioneer rekordbox */}
+              {djGuideTab === "rekordbox" && (
+                <div className="guide-steps-list">
+                  <div className="guide-step">
+                    <span className="step-num">1</span>
+                    <div>
+                      <strong>{tr("ซิงก์ XML อัตโนมัติด้วย STEMORA Connect")}</strong>
+                      <p>
+                        {tr(
+                          "STEMORA Connect จะเปิดใช้งานระบบ rekordbox XML และเชื่อมต่อไฟล์ฐานข้อมูล rekordbox.xml ให้อัตโนมัติ 100% โดยไม่ต้องเปิด Preferences เอง",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num">2</span>
+                    <div>
+                      <strong>{tr("หรือตั้งค่าเปิด rekordbox XML ใน Preferences")}</strong>
+                      <p>
+                        {tr(
+                          "ไปที่ Preferences > View > Layout ติ๊กถูกที่ช่อง rekordbox xml แล้วไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์ ~/Music/STEMORA/rekordbox.xml",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num">3</span>
+                    <div>
+                      <strong>{tr("พร้อมเล่นบน Controller และ Sync ลง USB สำหรับ CDJ")}</strong>
+                      <p>
+                        {tr(
+                          "ในแถบซ้ายมือของ rekordbox หมวด rekordbox xml > STEMORA จะแสดงเพลย์ลิสต์พร้อมค่า BPM, Camelot Key สามารถลากลง Deck หรือกด Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Tab: Traktor & Engine */}
+              {djGuideTab === "traktor" && (
+                <div className="guide-steps-list">
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#fb923c", color: "#1c0d02" }}>1</span>
+                    <div>
+                      <strong>{tr("ส่งออกเพลย์ลิสต์มาตรฐานสากล M3U8 หรือ ZIP")}</strong>
+                      <p>
+                        {tr(
+                          "กดปุ่มส่งออก M3U8 หรือ ZIP รวมเพลง ที่แถบส่งออกด้านล่าง เพลงทั้งหมดจะถูกจัดเรียงตามลำดับ คีย์ Camelot และค่า BPM ที่คุณจัดไว้",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#fb923c", color: "#1c0d02" }}>2</span>
+                    <div>
+                      <strong>{tr("ลากไฟล์เข้า Traktor, Denon Engine DJ หรือ Virtual DJ")}</strong>
+                      <p>
+                        {tr(
+                          "เปิดโปรแกรม DJ ของคุณ แล้วลากไฟล์ .m3u8 หรือโฟลเดอร์เพลงเข้าไปยังแถบ Playlists / Crates โปรแกรมจะนำเข้าเพลงพร้อมเล่นทันที",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#fb923c", color: "#1c0d02" }}>3</span>
+                    <div>
+                      <strong>{tr("คุณภาพเสียงระดับ Lossless WAV")}</strong>
+                      <p>
+                        {tr(
+                          "ไฟล์เสียงที่ดาวน์โหลดเป็นไฟล์ Lossless 16/24-bit คุณภาพสูงระดับสตูดิโอ ไร้การบีบอัดสัญญาณ เหมาะสำหรับการเล่นสดในคลับหรือเฟสติวัล",
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Tab: Terminal / CLI */}
+              {djGuideTab === "cli" && (
+                <div className="guide-steps-list">
+                  <div className="guide-step">
+                    <span className="step-num" style={{ background: "#a855f7", color: "#170426" }}>1</span>
+                    <div>
+                      <strong>{tr("รัน Live Sync Agent ผ่าน Terminal (Linux / Server)")}</strong>
+                      <p>
+                        {tr(
+                          "คัดลอกคำสั่งด้านล่างไปวางใน Terminal เพื่อให้ Python script ซิงก์เพลงและอัปเดตโฟลเดอร์ ~/Music/STEMORA อัตโนมัติแบบ Background",
+                        )}
+                      </p>
+                      <div className="sync-command-box" style={{ marginTop: 8 }}>
+                        <div className="command-row">
+                          <code>
+                            {tokenLoading
+                              ? tr("กำลังโหลดโทเค็น…")
+                              : `curl -fsSL ${typeof window !== "undefined" ? window.location.origin : "https://stemora.mydjplus.com"}/api/sync/agent.py | python3 - --token=${syncToken || "..."} --watch`}
+                          </code>
+                          <button
+                            type="button"
+                            className="secondary-button"
+                            onClick={() => {
+                              const cmd = `curl -fsSL ${typeof window !== "undefined" ? window.location.origin : "https://stemora.mydjplus.com"}/api/sync/agent.py | python3 - --token=${syncToken} --watch`;
+                              if (navigator.clipboard) {
+                                navigator.clipboard.writeText(cmd);
+                                setCopied(true);
+                                setTimeout(() => setCopied(false), 2000);
+                              }
+                            }}
+                            disabled={tokenLoading || !syncToken}
+                          >
+                            {copied ? <Check size={14} /> : <Copy size={14} />}
+                            {copied ? tr("คัดลอกแล้ว") : tr("คัดลอกคำสั่ง")}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </Modal>

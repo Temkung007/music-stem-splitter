@@ -1604,12 +1604,83 @@ div.panel {
 
 
 
-/* Rekordbox Live Sync & Desktop App Modal */
+/* DJ Integration Hub & Desktop Companion Modal */
 .rekordbox-guide {
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 4px 0 10px;
+}
+.dj-supported-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0 14px;
+}
+.dj-software-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-family: var(--font-mono-stem);
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+.dj-software-pill.pioneer {
+  border-color: rgba(163, 230, 53, 0.35);
+  color: var(--lime);
+  background: rgba(163, 230, 53, 0.08);
+}
+.dj-software-pill.serato {
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+}
+.dj-software-pill.traktor {
+  border-color: rgba(249, 115, 22, 0.35);
+  color: #fb923c;
+  background: rgba(249, 115, 22, 0.08);
+}
+.dj-hub-tabs {
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 4px 0 10px;
+  overflow-x: auto;
+}
+.dj-hub-tab-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.dj-hub-tab-btn:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
+}
+.dj-hub-tab-btn.active {
+  color: #0c120a;
+  background: var(--lime);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(215, 249, 139, 0.25);
 }
 .desktop-app-spotlight {
   background: linear-gradient(135deg, rgba(215, 249, 139, 0.08) 0%, #151821 55%, #10121a 100%) !important;
