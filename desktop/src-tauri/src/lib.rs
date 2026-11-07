@@ -161,6 +161,36 @@ async fn disconnect_account(state: State<'_, AppState>) -> Result<(), String> {
 }
 
 #[tauri::command]
+async fn auto_setup_rekordbox(state: State<'_, AppState>) -> Result<String, String> {
+    let cfg = state.manager.config.lock().await;
+    let xml_path = std::path::PathBuf::from(&cfg.sync_dir).join("rekordbox.xml");
+    
+    // Auto configure settings & symlink
+    let res = rekordbox::auto_configure_rekordbox(&xml_path)?;
+
+    // Open/activate Pioneer rekordbox
+    #[cfg(target_os = "macos")]
+    {
+        let status = std::process::Command::new("open")
+            .arg("-b")
+            .arg("com.pioneerdj.rekordboxdj")
+            .output();
+        if status.is_err() || !status.as_ref().unwrap().status.success() {
+            let _ = std::process::Command::new("open")
+                .arg("-a")
+                .arg("rekordbox")
+                .output();
+        }
+    }
+    #[cfg(not(target_os = "macos"))]
+    {
+        let _ = open::that(&xml_path);
+    }
+
+    Ok(format!("{} และเปิด rekordbox สำเร็จ", res))
+}
+
+#[tauri::command]
 async fn open_browser_login(state: State<'_, AppState>) -> Result<(), String> {
     let cfg = state.manager.config.lock().await;
     let url = format!("{}/?tab=playlists&connect=desktop", cfg.server_url.trim_end_matches('/'));
@@ -178,6 +208,13 @@ pub fn run() {
             manager: sync_manager,
         })
         .setup(move |app| {
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.set_size(tauri::Size::Logical(tauri::LogicalSize {
+                    width: 380.0,
+                    height: 590.0,
+                }));
+            }
+
             // Start local HTTP handshake server for 1-click web pairing
             local_server::start_local_handshake_server(app.handle().clone(), local_srv_manager);
 
@@ -236,6 +273,15 @@ pub fn run() {
 
             // Background watch loop
             tauri::async_runtime::spawn(async move {
+                // Immediate sync on launch if configured
+                let has_token = {
+                    let cfg = bg_manager.config.lock().await;
+                    !cfg.token.trim().is_empty()
+                };
+                if has_token {
+                    let _ = bg_manager.execute_sync().await;
+                }
+
                 loop {
                     tokio::time::sleep(tokio::time::Duration::from_secs(15)).await;
                     let (auto_sync, has_token) = {
@@ -261,7 +307,8 @@ pub fn run() {
             open_browser_login,
             check_desktop_update,
             open_download_page,
-            disconnect_account
+            disconnect_account,
+            auto_setup_rekordbox
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

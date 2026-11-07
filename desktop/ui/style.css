@@ -29,17 +29,33 @@
 body {
   background-color: var(--bg-base);
   color: var(--text-main);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-size: 13px;
   line-height: 1.4;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--lime-dim);
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   padding: 16px;
-  gap: 14px;
+  gap: 12px;
 }
 
 /* Header */
@@ -235,6 +251,23 @@ body {
 }
 
 .btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, rgba(215, 249, 139, 0.15) 0%, rgba(26, 36, 18, 0.9) 100%);
+  color: var(--lime);
+  border: 1px solid rgba(215, 249, 139, 0.4);
+  box-shadow: 0 0 15px rgba(215, 249, 139, 0.12);
+}
+
+.btn-accent:hover {
+  background: rgba(215, 249, 139, 0.25);
+  border-color: var(--lime);
+  color: #fff;
+}
+
+.btn-accent:active {
   transform: translateY(1px);
 }
 

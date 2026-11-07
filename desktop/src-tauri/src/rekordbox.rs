@@ -66,7 +66,11 @@ pub fn generate_rekordbox_xml(
 
         let local_path = tracks_dir.join(&t.export_filename);
         let path_str = local_path.to_string_lossy().to_string();
-        let encoded_path = urlencoding::encode(&path_str);
+        let encoded_path = path_str
+            .split('/')
+            .map(|segment| urlencoding::encode(segment).to_string())
+            .collect::<Vec<_>>()
+            .join("/");
         let location = if encoded_path.starts_with('/') {
             format!("file://localhost{}", encoded_path)
         } else {
@@ -130,4 +134,126 @@ pub fn generate_rekordbox_xml(
     lines.push(r#"</DJ_PLAYLISTS>"#.to_string());
 
     lines.join("\n")
+}
+
+pub fn generate_m3u8_playlists(
+    playlists: &[ManifestPlaylist],
+    tracks: &[ManifestTrack],
+    tracks_dir: &Path,
+    playlists_dir: &Path,
+) {
+    use std::fs;
+    let _ = fs::create_dir_all(playlists_dir);
+
+    let track_map: std::collections::HashMap<&str, &ManifestTrack> =
+        tracks.iter().map(|t| (t.id.as_str(), t)).collect();
+
+    for p in playlists {
+        let mut lines = Vec::new();
+        lines.push("#EXTM3U".to_string());
+        for item in &p.items {
+            if let Some(t) = track_map.get(item.track_id.as_str()) {
+                let duration = t.duration.round() as i64;
+                lines.push(format!("#EXTINF:{},{} - {}", duration, t.artist, t.title));
+                let track_path = tracks_dir.join(&t.export_filename);
+                lines.push(track_path.to_string_lossy().to_string());
+            }
+        }
+        let safe_name: String = p
+            .name
+            .chars()
+            .map(|c| if c.is_alphanumeric() || c == ' ' || c == '-' || c == '_' { c } else { '_' })
+            .collect();
+        let filename = format!("{}.m3u8", safe_name.trim());
+        let _ = fs::write(playlists_dir.join(filename), lines.join("\n"));
+    }
+}
+
+pub fn auto_configure_rekordbox(xml_path: &Path) -> Result<String, String> {
+    use std::fs;
+    let xml_path_str = xml_path.to_string_lossy().to_string();
+
+    // 1. Setup fallback symlink on macOS
+    #[cfg(target_os = "macos")]
+    if let Some(home) = dirs::home_dir() {
+        let default_rb_dir = home.join("Library/rekordbox/rekordbox");
+        let _ = fs::create_dir_all(&default_rb_dir);
+        let link_target = default_rb_dir.join("rekordbox.xml");
+        let _ = fs::remove_file(&link_target);
+        #[cfg(unix)]
+        let _ = std::os::unix::fs::symlink(xml_path, &link_target);
+    }
+
+    // 2. Discover Rekordbox settings file
+    let candidate_dirs = [
+        dirs::home_dir().map(|h| h.join("Library/Application Support/Pioneer/rekordbox6")),
+        dirs::home_dir().map(|h| h.join("Library/Application Support/Pioneer/rekordbox7")),
+        dirs::home_dir().map(|h| h.join("Library/Application Support/Pioneer/rekordbox")),
+        dirs::config_dir().map(|c| c.join("Pioneer/rekordbox6")),
+        dirs::config_dir().map(|c| c.join("Pioneer/rekordbox7")),
+        dirs::config_dir().map(|c| c.join("Pioneer/rekordbox")),
+    ];
+
+    let mut configured_count = 0;
+
+    for dir_opt in candidate_dirs.into_iter().flatten() {
+        let settings_file = dir_opt.join("rekordbox3.settings");
+        if settings_file.exists() {
+            if let Ok(content) = fs::read_to_string(&settings_file) {
+                let mut updated = content;
+
+                // Set showRbXml = 1
+                if updated.contains(r#"name="showRbXml""#) {
+                    let re = regex_lite_replace_val(&updated, "showRbXml", "1");
+                    updated = re;
+                } else if updated.contains("</PIONEER>") {
+                    updated = updated.replace("</PIONEER>", "  <VALUE name=\"showRbXml\" val=\"1\"/>\n</PIONEER>");
+                }
+
+                // Set RekordboxXmlChecked = 1
+                if updated.contains(r#"name="RekordboxXmlChecked""#) {
+                    let re = regex_lite_replace_val(&updated, "RekordboxXmlChecked", "1");
+                    updated = re;
+                } else if updated.contains("</PIONEER>") {
+                    updated = updated.replace("</PIONEER>", "  <VALUE name=\"RekordboxXmlChecked\" val=\"1\"/>\n</PIONEER>");
+                }
+
+                // Set bridgeImportedLibraryFile = xml_path
+                if updated.contains(r#"name="bridgeImportedLibraryFile""#) {
+                    let re = regex_lite_replace_val(&updated, "bridgeImportedLibraryFile", &xml_path_str);
+                    updated = re;
+                } else if updated.contains("</PIONEER>") {
+                    let tag = format!("  <VALUE name=\"bridgeImportedLibraryFile\" val=\"{}\"/>\n</PIONEER>", xml_path_str);
+                    updated = updated.replace("</PIONEER>", &tag);
+                }
+
+                if fs::write(&settings_file, updated).is_ok() {
+                    configured_count += 1;
+                }
+            }
+        }
+    }
+
+    if configured_count > 0 {
+        Ok(format!("ตั้งค่า rekordbox {} รายการสำเร็จ", configured_count))
+    } else {
+        Ok("เตรียมไฟล์ฐานข้อมูล rekordbox.xml สำเร็จ".to_string())
+    }
+}
+
+fn regex_lite_replace_val(source: &str, key: &str, new_val: &str) -> String {
+    let pattern = format!(r#"name="{key}""#);
+    if let Some(pos) = source.find(&pattern) {
+        if let Some(val_pos) = source[pos..].find("val=\"") {
+            let start = pos + val_pos + 5;
+            if let Some(end_quote) = source[start..].find('"') {
+                let mut result = String::with_capacity(source.len() + new_val.len());
+                result.push_str(&source[..start]);
+                result.push_str(new_val);
+                result.push_str(&source[start + end_quote..]);
+                return result;
+            }
+        }
+    }
+    source.to_string()
 }

@@ -11,6 +11,7 @@
   const totalPlaylists = document.getElementById("total-playlists");
   const totalTracks = document.getElementById("total-tracks");
   const syncNowBtn = document.getElementById("sync-now-btn");
+  const autoRekordboxBtn = document.getElementById("auto-rekordbox-btn");
   const syncBtnText = document.getElementById("sync-btn-text");
   const spinIcon = document.querySelector(".spin-icon");
   const openFolderBtn = document.getElementById("open-folder-btn");
@@ -116,6 +117,7 @@
         loginCtaCard.classList.add("hidden");
         loginCtaCard.style.display = "none";
         syncNowBtn.style.display = "";
+        if (autoRekordboxBtn) autoRekordboxBtn.style.display = "";
         if (disconnectBtn) {
           disconnectBtn.classList.remove("hidden");
           disconnectBtn.style.display = "inline";
@@ -125,6 +127,7 @@
         loginCtaCard.classList.remove("hidden");
         loginCtaCard.style.display = "flex";
         syncNowBtn.style.display = "none";
+        if (autoRekordboxBtn) autoRekordboxBtn.style.display = "none";
         if (disconnectBtn) {
           disconnectBtn.classList.add("hidden");
           disconnectBtn.style.display = "none";
@@ -238,6 +241,37 @@
 
   // Event Listeners
   syncNowBtn.addEventListener("click", syncNow);
+
+  if (autoRekordboxBtn) {
+    autoRekordboxBtn.addEventListener("click", async () => {
+      if (!invoke) return;
+      autoRekordboxBtn.disabled = true;
+      const originalHtml = autoRekordboxBtn.innerHTML;
+      autoRekordboxBtn.innerHTML = `<span>กำลังตั้งค่า rekordbox ให้อัตโนมัติ…</span>`;
+      try {
+        const msg = await invoke("auto_setup_rekordbox");
+        msgBanner.textContent = "✓ " + msg;
+        msgBanner.className = "msg-banner";
+        msgBanner.style.background = "#142211";
+        msgBanner.style.borderColor = "#2f5c22";
+        msgBanner.style.color = "#a3e635";
+        msgBanner.classList.remove("hidden");
+        msgBanner.style.display = "block";
+        setTimeout(() => {
+          msgBanner.classList.add("hidden");
+          msgBanner.style.display = "none";
+        }, 6000);
+      } catch (err) {
+        msgBanner.textContent = "ตั้งค่าไม่สำเร็จ: " + err;
+        msgBanner.className = "msg-banner error";
+        msgBanner.classList.remove("hidden");
+        msgBanner.style.display = "block";
+      } finally {
+        autoRekordboxBtn.disabled = false;
+        autoRekordboxBtn.innerHTML = originalHtml;
+      }
+    });
+  }
 
   if (browserLoginBtn) {
     browserLoginBtn.addEventListener("click", async () => {
@@ -368,7 +402,11 @@
   });
 
   // Initial load & Polling
-  refresh();
+  refresh().then((st) => {
+    if (st && st.has_token && (!st.total_tracks || st.total_tracks === 0)) {
+      syncNow();
+    }
+  });
   setInterval(refresh, 5000);
 
   // Background check for updates on startup

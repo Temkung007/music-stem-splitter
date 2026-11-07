@@ -54,16 +54,28 @@ pub struct SyncManager {
 impl SyncManager {
     pub fn new() -> Self {
         let config = Self::load_config();
+        let mut user_name = None;
+        let mut total_tracks = 0;
+        let mut total_playlists = 0;
+        let manifest_file = PathBuf::from(&config.sync_dir).join("manifest.json");
+        if let Ok(data) = fs::read_to_string(&manifest_file) {
+            if let Ok(cached) = serde_json::from_str::<SyncManifest>(&data) {
+                user_name = Some(cached.user_name);
+                total_tracks = cached.tracks.len();
+                total_playlists = cached.playlists.len();
+            }
+        }
+
         let status = SyncStatus {
             is_syncing: false,
             auto_sync: config.auto_sync,
             has_token: !config.token.trim().is_empty(),
             server_url: config.server_url.clone(),
             sync_dir: config.sync_dir.clone(),
-            user_name: None,
+            user_name,
             last_synced: None,
-            total_tracks: 0,
-            total_playlists: 0,
+            total_tracks,
+            total_playlists,
             last_downloaded: 0,
             error_message: None,
         };
@@ -205,6 +217,23 @@ impl SyncManager {
             st.is_syncing = false;
             st.error_message = Some(format!("ไม่สามารถเขียนไฟล์ rekordbox.xml: {}", e));
             return Err(e.to_string());
+        }
+
+        // 3.1 Generate .m3u8 Playlists
+        let playlists_dir = base_path.join("playlists");
+        crate::rekordbox::generate_m3u8_playlists(
+            &manifest.playlists,
+            &manifest.tracks,
+            &tracks_dir,
+            &playlists_dir,
+        );
+
+        // 3.2 Auto configure Pioneer rekordbox
+        let _ = crate::rekordbox::auto_configure_rekordbox(&xml_path);
+
+        // 3.3 Cache local manifest
+        if let Ok(manifest_json) = serde_json::to_string_pretty(&manifest) {
+            let _ = fs::write(base_path.join("manifest.json"), manifest_json);
         }
 
         // 4. Update status

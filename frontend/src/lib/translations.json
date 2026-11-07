@@ -3054,5 +3054,37 @@
   "ไฟล์เสียงทุกไฟล์ถูกจัดเก็บใน S3 Bucket ส่วนตัวที่มีการตรวจสิทธิ์เซสชันเข้มงวด ไม่เปิดเผยสู่สาธารณะ และไม่มีการส่งต่อให้ภายนอก": {
     "th": "ไฟล์เสียงทุกไฟล์ถูกจัดเก็บใน S3 Bucket ส่วนตัวที่มีการตรวจสิทธิ์เซสชันเข้มงวด ไม่เปิดเผยสู่สาธารณะ และไม่มีการส่งต่อให้ภายนอก",
     "en": "All audio files reside in private S3 buckets with strict session validation. Never public, never forwarded."
+  },
+  "เปิดไฟล์ติดตั้ง .dmg หรือ .zip แล้วกดปุ่มล็อกอินผ่านเว็บในแอป บัญชีจะเชื่อมต่อทันทีไม่ต้องคัดลอกโทเค็น": {
+    "th": "เปิดไฟล์ติดตั้ง .dmg หรือ .zip แล้วกดปุ่มล็อกอินผ่านเว็บในแอป บัญชีจะเชื่อมต่อทันทีไม่ต้องคัดลอกโทเค็น",
+    "en": "Open the .dmg or .zip installer and click login via web in the app. Your account pairs in 1 click without copying tokens."
+  },
+  "แอปจะตั้งค่า rekordbox ให้อัตโนมัติ 100%": {
+    "th": "แอปจะตั้งค่า rekordbox ให้อัตโนมัติ 100%",
+    "en": "The app configures rekordbox 100% automatically"
+  },
+  "STEMORA Connect จะตรวจจับและเปิดใช้ระบบ rekordbox XML รวมถึงสร้างเพลย์ลิสต์ให้เสร็จสรรพ โดยไม่ต้องตั้งค่าเองใน Preferences": {
+    "th": "STEMORA Connect จะตรวจจับและเปิดใช้ระบบ rekordbox XML รวมถึงสร้างเพลย์ลิสต์ให้เสร็จสรรพ โดยไม่ต้องตั้งค่าเองใน Preferences",
+    "en": "STEMORA Connect automatically detects and activates rekordbox XML bridge and builds playlists without manual Preferences setup."
+  },
+  "กดปุ่มเปิดเล่นใน rekordbox ทันที": {
+    "th": "กดปุ่มเปิดเล่นใน rekordbox ทันที",
+    "en": "Click Open & Play in rekordbox Immediately"
+  },
+  "กดปุ่ม ⚡ ในแอป เพื่อเปิด rekordbox โฟลเดอร์ STEMORA จะปรากฏพร้อมเพลง คีย์ Camelot และค่า BPM พร้อมลากลง Deck เล่นได้ทันที": {
+    "th": "กดปุ่ม ⚡ ในแอป เพื่อเปิด rekordbox โฟลเดอร์ STEMORA จะปรากฏพร้อมเพลง คีย์ Camelot และค่า BPM พร้อมลากลง Deck เล่นได้ทันที",
+    "en": "Click ⚡ in the app to open rekordbox. The STEMORA folder appears with tracks, Camelot keys, and BPM ready to drop into decks!"
+  },
+  "แนะนำ · สะดวกที่สุด": {
+    "th": "แนะนำ · สะดวกที่สุด",
+    "en": "Recommended · Easiest"
+  },
+  "ไม่ต้องเปิด Preferences หรือเลือกพาธเอง โปรแกรม STEMORA Connect จะค้นหาและเชื่อมต่อกับ rekordbox บนเครื่องของคุณให้อัตโนมัติ 100%": {
+    "th": "ไม่ต้องเปิด Preferences หรือเลือกพาธเอง โปรแกรม STEMORA Connect จะค้นหาและเชื่อมต่อกับ rekordbox บนเครื่องของคุณให้อัตโนมัติ 100%",
+    "en": "No need to open Preferences or browse paths. STEMORA Connect automatically detects and connects Pioneer DJ rekordbox on your machine 100%."
+  },
+  "หรือหากต้องการนำเข้าไฟล์ .xml ด้วยตนเองโดยไม่ใช้โปรแกรม:": {
+    "th": "หรือหากต้องการนำเข้าไฟล์ .xml ด้วยตนเองโดยไม่ใช้โปรแกรม:",
+    "en": "Or to manually import the .xml file without the desktop app:"
   }
 }

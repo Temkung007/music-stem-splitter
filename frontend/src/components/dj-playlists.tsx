@@ -1251,7 +1251,7 @@ export function DjPlaylists({
                   <strong>{tr("ติดตั้งและเปิดแอป STEMORA Connect")}</strong>
                   <p>
                     {tr(
-                      "เปิดไฟล์ .dmg ลาก STEMORA Connect เข้าโฟลเดอร์ Applications จากนั้นเปิดแอปและนำ Sync Token ด้านบนไปใส่ในการตั้งค่า (⚙️)",
+                      "เปิดไฟล์ติดตั้ง .dmg หรือ .zip แล้วกดปุ่มล็อกอินผ่านเว็บในแอป บัญชีจะเชื่อมต่อทันทีไม่ต้องคัดลอกโทเค็น",
                     )}
                   </p>
                 </div>
@@ -1259,10 +1259,10 @@ export function DjPlaylists({
               <div className="guide-step">
                 <span className="step-num">2</span>
                 <div>
-                  <strong>{tr("เลือกไฟล์ rekordbox.xml (ทำครั้งแรกครั้งเดียว)")}</strong>
+                  <strong>{tr("แอปจะตั้งค่า rekordbox ให้อัตโนมัติ 100%")}</strong>
                   <p>
                     {tr(
-                      "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้กด Browse แล้วเลือก: ~/Music/STEMORA/rekordbox.xml",
+                      "STEMORA Connect จะตรวจจับและเปิดใช้ระบบ rekordbox XML รวมถึงสร้างเพลย์ลิสต์ให้เสร็จสรรพ โดยไม่ต้องตั้งค่าเองใน Preferences",
                     )}
                   </p>
                 </div>
@@ -1270,10 +1270,10 @@ export function DjPlaylists({
               <div className="guide-step">
                 <span className="step-num">3</span>
                 <div>
-                  <strong>{tr("เปิดแท็บ XML พร้อมเล่นทันที")}</strong>
+                  <strong>{tr("กดปุ่มเปิดเล่นใน rekordbox ทันที")}</strong>
                   <p>
                     {tr(
-                      "ใน rekordbox ไปที่ Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA พร้อมคีย์ Camelot และค่า BPM เมื่อจัดเพลงบนเว็บ rekordbox จะซิงก์ให้อัตโนมัติ!",
+                      "กดปุ่ม ⚡ ในแอป เพื่อเปิด rekordbox โฟลเดอร์ STEMORA จะปรากฏพร้อมเพลง คีย์ Camelot และค่า BPM พร้อมลากลง Deck เล่นได้ทันที",
                     )}
                   </p>
                 </div>
@@ -1318,6 +1318,40 @@ export function DjPlaylists({
           close={() => setShowRekordboxGuide(false)}
         >
           <div className="rekordbox-guide">
+            <div className="desktop-app-spotlight" style={{ marginBottom: 16 }}>
+              <div className="spotlight-header">
+                <div className="spotlight-brand">
+                  <div className="spotlight-logo">
+                    <Laptop size={20} />
+                  </div>
+                  <div>
+                    <div className="spotlight-tag">{tr("แนะนำ · สะดวกที่สุด")}</div>
+                    <h3 style={{ fontSize: 15 }}>STEMORA Connect (ตั้งค่าให้อัตโนมัติ)</h3>
+                  </div>
+                </div>
+              </div>
+              <p className="spotlight-desc" style={{ fontSize: 12 }}>
+                {tr(
+                  "ไม่ต้องเปิด Preferences หรือเลือกพาธเอง โปรแกรม STEMORA Connect จะค้นหาและเชื่อมต่อกับ rekordbox บนเครื่องของคุณให้อัตโนมัติ 100%",
+                )}
+              </p>
+              <div className="spotlight-actions">
+                <a
+                  href="/download/STEMORA-Connect-macOS.dmg"
+                  download="STEMORA-Connect-macOS.dmg"
+                  className="primary-button spotlight-dl-btn"
+                  style={{ fontSize: 12, padding: "8px 14px" }}
+                >
+                  <Download size={14} />
+                  <span>{tr("ดาวน์โหลด STEMORA Connect (.dmg)")}</span>
+                </a>
+              </div>
+            </div>
+
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 12, fontWeight: 600 }}>
+              {tr("หรือหากต้องการนำเข้าไฟล์ .xml ด้วยตนเองโดยไม่ใช้โปรแกรม:")}
+            </div>
+
             <div className="guide-step">
               <span className="step-num">1</span>
               <div>
