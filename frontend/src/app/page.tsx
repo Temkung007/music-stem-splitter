@@ -86,6 +86,18 @@ function Workspace() {
   const [view, setCurrentView] = useState<View>("studio");
   const [batchOpen, setBatchOpen] = useState(false);
   useEffect(() => { window.scrollTo({ top: 0 }); }, [view]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      const connectParam = params.get("connect");
+      if (tabParam === "playlists" || tabParam === "library" || tabParam === "account" || tabParam === "studio") {
+        setCurrentView(tabParam as View);
+      } else if (connectParam === "desktop") {
+        setCurrentView("playlists");
+      }
+    }
+  }, []);
   const [playlistDirty, setPlaylistDirty] = useState(false);
   const [leaveNotice, setLeaveNotice] = useState(false);
   const onPlaylistDirty = useCallback((dirty: boolean) => {

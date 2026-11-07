@@ -2719,6 +2719,22 @@
     "th": "⚡ ระบบ Live Sync จะคอยดึงเพลงใหม่และอัปเดตเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติทันทีที่จัดเซ็ตบนเว็บ",
     "en": "⚡ Live Sync automatically downloads new tracks and updates playlists in rekordbox on your computer as you edit on the web."
   },
+  "ตรวจพบแอป STEMORA Connect บนเครื่องของคุณ": {
+    "th": "ตรวจพบแอป STEMORA Connect บนเครื่องของคุณ",
+    "en": "STEMORA Connect detected on your computer"
+  },
+  "เชื่อมต่อเข้าแอปใน 1 คลิก": {
+    "th": "เชื่อมต่อเข้าแอปใน 1 คลิก",
+    "en": "1-Click Connect to Desktop App"
+  },
+  "เชื่อมต่ออัตโนมัติสำเร็จแล้ว! STEMORA Connect กำลังซิงก์เพลง": {
+    "th": "เชื่อมต่ออัตโนมัติสำเร็จแล้ว! STEMORA Connect กำลังซิงก์เพลง",
+    "en": "Connected successfully! STEMORA Connect is now syncing."
+  },
+  "คลิกปุ่มเดียวเพื่อเชื่อมต่อบัญชีทันที ไม่ต้องคัดลอกโทเค็น": {
+    "th": "คลิกปุ่มเดียวเพื่อเชื่อมต่อบัญชีทันที ไม่ต้องคัดลอกโทเค็น",
+    "en": "Connect your account with 1 click without copying tokens"
+  },
   "คำสั่งเริ่ม Auto-Sync บน Mac / PC:": {
     "th": "คำสั่งเริ่ม Auto-Sync บน Mac / PC:",
     "en": "Command to start Auto-Sync on Mac / PC:"

@@ -506,3 +506,44 @@ input:checked + .slider:before {
 .form-actions .btn {
   width: 100%;
 }
+
+/* Login CTA Card */
+.login-cta-card {
+  background: linear-gradient(135deg, rgba(215, 249, 139, 0.12) 0%, #151821 60%, #10121a 100%) !important;
+  border: 1px solid rgba(215, 249, 139, 0.35) !important;
+  margin-bottom: 16px;
+  padding: 16px;
+}
+.login-cta-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.login-cta-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(215, 249, 139, 0.15);
+  color: var(--lime);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.login-cta-text strong {
+  display: block;
+  font-size: 13px;
+  color: #f8fafc;
+  font-weight: 600;
+}
+.login-cta-text small {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.login-btn {
+  margin-top: 12px;
+  width: 100%;
+  font-weight: 600;
+}

@@ -29,6 +29,7 @@ import {
   Trash2,
   Unlock,
   X,
+  Zap,
 } from "lucide-react";
 import {
   api,
@@ -77,9 +78,58 @@ export function DjPlaylists({
   const [syncToken, setSyncToken] = useState<string>("");
   const [tokenLoading, setTokenLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [desktopDetected, setDesktopDetected] = useState<boolean>(false);
+  const [pairingSuccess, setPairingSuccess] = useState<boolean>(false);
+  const [isPairing, setIsPairing] = useState<boolean>(false);
+
+  const checkDesktopApp = useCallback(async () => {
+    try {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 1200);
+      const res = await fetch("http://127.0.0.1:48231/ping", {
+        mode: "cors",
+        signal: controller.signal,
+      });
+      clearTimeout(id);
+      if (res.ok) {
+        setDesktopDetected(true);
+        return true;
+      }
+    } catch {
+      setDesktopDetected(false);
+    }
+    return false;
+  }, []);
+
+  const pairWithDesktop = async (tokenToUse?: string) => {
+    const token = tokenToUse || syncToken;
+    if (!token) return;
+    setIsPairing(true);
+    try {
+      const serverUrl = typeof window !== "undefined" ? window.location.origin : "https://stemora.mydjplus.com";
+      const res = await fetch("http://127.0.0.1:48231/pair", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token,
+          server_url: serverUrl,
+        }),
+        mode: "cors",
+      });
+      if (res.ok) {
+        setPairingSuccess(true);
+        setDesktopDetected(true);
+      }
+    } catch (err) {
+      console.warn("Handshake with desktop app failed:", err);
+    } finally {
+      setIsPairing(false);
+    }
+  };
 
   const openSyncModal = async () => {
     setShowSyncModal(true);
+    void checkDesktopApp();
     if (!syncToken) {
       setTokenLoading(true);
       try {
@@ -107,6 +157,33 @@ export function DjPlaylists({
       setTokenLoading(false);
     }
   };
+
+  // Auto-connect when opened from desktop browser login button (?connect=desktop)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("connect") === "desktop") {
+        void (async () => {
+          setShowSyncModal(true);
+          setTokenLoading(true);
+          try {
+            const res = await api<{ token: string }>("/api/sync/token");
+            setSyncToken(res.token);
+            const detected = await checkDesktopApp();
+            if (detected) {
+              await pairWithDesktop(res.token);
+            }
+          } catch (err) {
+            setError((err as Error).message);
+          } finally {
+            setTokenLoading(false);
+          }
+        })();
+      } else {
+        void checkDesktopApp();
+      }
+    }
+  }, [checkDesktopApp]);
   useEffect(() => {
     onDirtyChange?.(dirty);
     if (!dirty) return;
@@ -1086,6 +1163,43 @@ export function DjPlaylists({
                 <span>Rust & Tauri Native</span>
               </div>
             </div>
+
+            {/* 1-Click Desktop Pairing Highlight */}
+            {pairingSuccess && (
+              <div className="pairing-success-banner">
+                <Check size={18} />
+                <span>
+                  {tr(
+                    "เชื่อมต่ออัตโนมัติสำเร็จแล้ว! STEMORA Connect กำลังซิงก์เพลง",
+                  )}
+                </span>
+              </div>
+            )}
+
+            {desktopDetected && (
+              <div className="desktop-pair-highlight-card">
+                <div className="pair-info">
+                  <div className="pair-indicator-dot" />
+                  <div>
+                    <strong>{tr("ตรวจพบแอป STEMORA Connect บนเครื่องของคุณ")}</strong>
+                    <small>
+                      {tr(
+                        "คลิกปุ่มเดียวเพื่อเชื่อมต่อบัญชีทันที ไม่ต้องคัดลอกโทเค็น",
+                      )}
+                    </small>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="pair-btn"
+                  onClick={() => void pairWithDesktop()}
+                  disabled={isPairing || !syncToken}
+                >
+                  <Zap size={15} />
+                  {isPairing ? tr("กำลังเชื่อมต่อ…") : tr("เชื่อมต่อเข้าแอปใน 1 คลิก")}
+                </button>
+              </div>
+            )}
 
             {/* Sync Token Pairing Card */}
             <div className="sync-token-card">

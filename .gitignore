@@ -43,6 +43,7 @@ backend/demo_files/
 *.mp3
 *.flac
 *.zip
+!frontend/public/download/*.zip
 
 # Desktop app (Rust Tauri)
 desktop/node_modules/

@@ -1,3 +1,4 @@
+pub mod local_server;
 pub mod rekordbox;
 pub mod sync;
 
@@ -74,9 +75,17 @@ async fn get_xml_path(state: State<'_, AppState>) -> Result<String, String> {
     Ok(path.to_string_lossy().to_string())
 }
 
+#[tauri::command]
+async fn open_browser_login(state: State<'_, AppState>) -> Result<(), String> {
+    let cfg = state.manager.config.lock().await;
+    let url = format!("{}/?tab=playlists&connect=desktop", cfg.server_url.trim_end_matches('/'));
+    open::that(&url).map_err(|e| e.to_string())
+}
+
 pub fn run() {
     let sync_manager = Arc::new(SyncManager::new());
     let bg_manager = Arc::clone(&sync_manager);
+    let local_srv_manager = Arc::clone(&sync_manager);
 
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
@@ -84,6 +93,9 @@ pub fn run() {
             manager: sync_manager,
         })
         .setup(move |app| {
+            // Start local HTTP handshake server for 1-click web pairing
+            local_server::start_local_handshake_server(app.handle().clone(), local_srv_manager);
+
             // Setup Tray Menu
             let quit_i = MenuItem::with_id(app, "quit", "Quit STEMORA Connect", true, None::<&str>)?;
             let sync_i = MenuItem::with_id(app, "sync", "Sync Now", true, None::<&str>)?;
@@ -160,7 +172,8 @@ pub fn run() {
             save_settings,
             toggle_auto_sync,
             open_sync_folder,
-            get_xml_path
+            get_xml_path,
+            open_browser_login
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

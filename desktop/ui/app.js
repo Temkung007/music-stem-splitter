@@ -15,6 +15,8 @@
   const openFolderBtn = document.getElementById("open-folder-btn");
   const autoSyncToggle = document.getElementById("auto-sync-toggle");
   const msgBanner = document.getElementById("msg-banner");
+  const loginCtaCard = document.getElementById("login-cta-card");
+  const browserLoginBtn = document.getElementById("browser-login-btn");
 
   // Modals
   const guideBtn = document.getElementById("guide-btn");
@@ -53,7 +55,7 @@
       statusBadge.textContent = "SYNC ERROR";
       statusBadge.style.color = "var(--danger)";
     } else if (!status.has_token) {
-      msgBanner.textContent = "กรุณาใส่ Sync Token ในการตั้งค่าเพื่อเริ่มใช้งาน";
+      msgBanner.textContent = "เชื่อมต่อบัญชีของคุณเพื่อเริ่มซิงก์เพลงลง rekordbox";
       msgBanner.classList.remove("hidden");
       pulseDot.className = "pulse-dot";
       statusBadge.textContent = "SETUP REQUIRED";
@@ -81,6 +83,16 @@
     totalTracks.textContent = status.total_tracks || 0;
     lastSyncTime.textContent = formatRelativeTime(status.last_synced);
     autoSyncToggle.checked = status.auto_sync;
+
+    if (loginCtaCard) {
+      if (!status.has_token) {
+        loginCtaCard.classList.remove("hidden");
+        syncNowBtn.style.display = "none";
+      } else {
+        loginCtaCard.classList.add("hidden");
+        syncNowBtn.style.display = "";
+      }
+    }
 
     serverInput.value = status.server_url;
     dirInput.value = status.sync_dir;
@@ -114,6 +126,18 @@
 
   // Event Listeners
   syncNowBtn.addEventListener("click", syncNow);
+
+  if (browserLoginBtn) {
+    browserLoginBtn.addEventListener("click", async () => {
+      if (invoke) {
+        try {
+          await invoke("open_browser_login");
+        } catch (e) {
+          console.error("Failed to open browser login:", e);
+        }
+      }
+    });
+  }
 
   openFolderBtn.addEventListener("click", async () => {
     if (invoke) await invoke("open_sync_folder");

@@ -32,6 +32,18 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/playlists",
+        destination: "/",
+      },
+      {
+        source: "/library",
+        destination: "/",
+      },
+      {
+        source: "/account",
+        destination: "/",
+      },
+      {
         source: "/api/:path*",
         destination: `${process.env.BACKEND_URL || "http://127.0.0.1:8000"}/api/:path*`,
       },
