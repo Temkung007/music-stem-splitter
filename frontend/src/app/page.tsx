@@ -810,7 +810,7 @@ function Workspace() {
                 </section>
               ) : (
                 <div className="studio-grid">
-                  <section className="upload-panel panel">
+                  <section className="panel studio-panel song-input-panel">
                     <div className="song-input">
                     <div className="section-heading">
                       <div className="section-number">01</div>
@@ -849,17 +849,17 @@ function Workspace() {
                         else selectFile(e.dataTransfer.files[0]);
                       }}
                     >
-                      {file && <BorderBeam duration={9} size={100} colorFrom="#d8fa85" colorTo="#6d9050" />}
+                      {file && <BorderBeam duration={8} size={120} colorFrom="#d7f98b" colorTo="#22c55e" />}
                       <div className="upload-art">
-                        <div className="upload-art-back" />
+                        <div className="upload-art-ring" />
                         <div className="upload-art-front">
                           {file ? (
-                            <FileAudio size={29} />
+                            <FileAudio size={28} />
                           ) : (
-                            <AudioLines size={30} />
+                            <AudioLines size={28} />
                           )}
                           <span>
-                            <Plus size={13} />
+                            <Plus size={12} />
                           </span>
                         </div>
                       </div>
@@ -886,8 +886,14 @@ function Workspace() {
                         <ArrowUpRight size={14} />
                       </button>
                       <div className="formats">
-                        {tr("MP3, WAV, FLAC, M4A, AAC, OGG")} <span>·</span>{" "}
-                        {tr("สูงสุด 50 MB / 10 นาที")}
+                        <span className="format-tag">MP3</span>
+                        <span className="format-tag">WAV</span>
+                        <span className="format-tag">FLAC</span>
+                        <span className="format-tag">M4A</span>
+                        <span className="format-tag">AAC</span>
+                        <span className="format-tag">OGG</span>
+                        <span className="format-divider">·</span>
+                        <span>{tr("สูงสุด 50 MB / 10 นาที")}</span>
                       </div>
                     </div>
                     <div className="upload-demo-link">
@@ -896,8 +902,10 @@ function Workspace() {
                     </div>
                     <SoundPreview />
                     </div>
+                  </section>
+                  <section className="panel studio-panel separation-settings-panel">
                     <div className="separation-settings">
-                    <div className="section-heading"><div className="section-number">02</div><div><h2>{tr("เลือกผลลัพธ์")}</h2><p>{tr("พร้อมฟัง มิกซ์ และดาวน์โหลด")}</p></div></div>
+                    <div className="section-heading"><div className="section-number">02</div><div><h2>{tr("เลือกผลลัพธ์ & ตั้งค่า")}</h2><p>{tr("พร้อมฟัง มิกซ์ และดาวน์โหลด")}</p></div><SlidersHorizontal size={19} /></div>
                     <div
                       className="mode-options"
                       role="group"
@@ -908,12 +916,14 @@ function Workspace() {
                           id: "4stems",
                           title: tr("4 Stems"),
                           text: tr("เสียงร้อง · กลอง · เบส · ดนตรี"),
+                          stems: ["Vocals", "Drums", "Bass", "Other"],
                           Icon: Layers3,
                         },
                         {
                           id: "2stems",
                           title: tr("Vocal + Instrumental"),
                           text: tr("เสียงร้อง · ดนตรีประกอบ"),
+                          stems: ["Vocals", "Inst"],
                           Icon: Mic2,
                         },
                       ].map((option) => (
@@ -924,18 +934,27 @@ function Workspace() {
                           onClick={() => setMode(option.id)}
                         >
                           <div className="mode-top">
-                            <option.Icon size={21} />
+                            <div className="mode-title-group">
+                              <option.Icon size={19} />
+                              <strong>{option.title}</strong>
+                            </div>
                             <span className="radio-dot">
                               {mode === option.id && <span />}
                             </span>
                           </div>
-                          <strong>{option.title}</strong>
-                          <small>{option.text}</small>
+                          <small className="mode-desc">{option.text}</small>
+                          <div className="mode-stems-badges">
+                            {option.stems.map((s) => (
+                              <span key={s} className={`mode-stem-badge mode-stem-${s.toLowerCase()}`}>
+                                {s}
+                              </span>
+                            ))}
+                          </div>
                         </button>
                       ))}
                     </div>
-                    <details className="processing-options">
-                    <summary>{tr("ตัวเลือกการประมวลผล")}</summary>
+                    <details className="processing-options" open>
+                    <summary>{tr("ตัวเลือกการประมวลผล AI & คุณภาพ")}</summary>
                     <div className="engine-setting">
                       <div>
                         <SlidersHorizontal size={16} />
@@ -946,12 +965,12 @@ function Workspace() {
                         value={engine}
                         onChange={(e) => { engineSelected.current = true; setEngine(e.target.value); }}
                       >
-                        {health?.worker_enabled && <option value="worker">{tr("แยกเสียงให้ฉัน")}</option>}
+                        {health?.worker_enabled && <option value="worker">{tr("แยกเสียงให้ฉัน (Cloud Worker AI)")}</option>}
                         <option value="webgpu">
-                          {tr("บนอุปกรณ์ของฉัน · WebGPU")}
+                          {tr("บนอุปกรณ์ของฉัน · WebGPU (ฟรี & ความลับ 100%)")}
                         </option>
                         <option value="demucs">
-                          {tr("บนเซิร์ฟเวอร์ · AI")}
+                          {tr("บนเซิร์ฟเวอร์ · Demucs v4 AI")}
                           {health && !health.demucs_available
                             ? tr(" · ยังไม่ติดตั้ง")
                             : ""}
@@ -1056,7 +1075,7 @@ function Workspace() {
                       <ArrowRight size={18} />
                     </button>
                     <p className="privacy-note">
-                      <ShieldCheck size={13} />{" "}
+                      <ShieldCheck size={14} />{" "}
                       {tr(
                         engine === "webgpu"
                           ? "ประมวลผลในเครื่อง บันทึกเข้า cloud เมื่อคุณเลือก"

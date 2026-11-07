@@ -58,20 +58,105 @@ export function StemBatch({ onQueued }: { onQueued: () => void }) {
     setWorking(false);
   }
   return <section className="panel stem-batch">
-    <div className="batch-heading"><div><span className="batch-eyebrow">STEM STUDIO</span><h2>{th ? "เลือกเพลง แล้วให้เราจัดการเสียง" : "Your tracks. Ready for the next set."}</h2></div><span className="batch-count">{items.filter(x => x.status === "queued").length} / {items.length} {th ? "ส่งแล้ว" : "queued"}</span></div>
-    <p>{th ? "เลือกหลายไฟล์ แล้วส่งเข้าคิว ระบบรับงานตามคิวและช่องประมวลผลที่ว่าง รอคิวได้สูงสุด 10 งาน เลือกแยกเพื่อดาวน์โหลดได้แม้ Cloud เต็ม" : "Choose multiple files to queue. Up to 10 jobs can wait per account. Songs start as processing slots become available. Download mode works even when cloud storage is full."}</p>
-    <StemStorageChoice value={storageMode} onChange={setStorageMode} disabled={working} />
-    {storageMode === "cloud" && quota && <p>{th ? `เหลือพื้นที่ ${Math.max(0, (quota.quota_bytes - quota.used_bytes) / 1e6).toFixed(1)} MB จาก ${(quota.quota_bytes / 1e6).toFixed(0)} MB · ผลลัพธ์ 4 แทร็คใช้ประมาณ 42.3 MB ต่อนาที และจองพื้นที่ต้นฉบับระหว่างทำงาน` : `${Math.max(0, (quota.quota_bytes - quota.used_bytes) / 1e6).toFixed(1)} MB free of ${(quota.quota_bytes / 1e6).toFixed(0)} MB · Four stems need about 42.3 MB per minute, plus temporary source space.`}</p>}
-    <div className="stem-batch-actions"><label className="secondary-button stem-batch-choose" htmlFor={fileId}>{th ? "+ เพิ่มเพลง" : "+ Add songs"}</label><input id={fileId} aria-label={th ? "เลือกหลายเพลง" : "Choose multiple songs"} className="stem-batch-input" type="file" multiple accept=".mp3,.wav,.flac,.m4a,.aac,.ogg" disabled={working} onChange={(e) => { const files = Array.from(e.target.files || []); setItems((old) => [...old, ...files.map((file) => ({ id: crypto.randomUUID(), file, status: "ready" as const }))]); e.target.value = ""; }} />
-    <select aria-label={th ? "จำนวนแทร็ค" : "Stem layout"} value={mode} disabled={working} onChange={(e) => setMode(e.target.value)}><option value="4stems">4 Stems</option><option value="2stems">2 Stems</option></select>
-    {items.map((item) => <div key={item.id} style={{display:"flex", alignItems:"center", gap:12, marginTop:10}}><span style={{flex:1,overflowWrap:"anywhere"}}>{item.file.name} · {item.status === "queued" ? (th ? "เข้าคิวแล้ว" : "Queued") : item.status === "uploading" ? `${th ? "กำลังส่ง" : "Uploading"} ${item.message || ""}` : item.status === "error" ? item.message : (th ? "พร้อมส่ง" : "Ready")}</span>{item.status !== "queued" && <button type="button" disabled={working} onClick={() => setItems((list) => list.filter((x) => x.id !== item.id))}>{th ? "นำออก" : "Remove"}</button>}</div>)}
-    <button className="primary-button small" disabled={working || !items.some((x) => x.status === "ready" || x.status === "error")} onClick={() => void send()}>{working ? (th ? "กำลังส่งไฟล์…" : "Uploading…") : (th ? `เริ่มแยก ${items.filter(x => x.status === "ready" || x.status === "error").length || ""} เพลง →` : `Separate ${items.filter(x => x.status === "ready" || x.status === "error").length || ""} songs →`)}</button></div>
-    <details style={{marginTop: 20}}><summary>{th ? "จัดการงานและถังขยะ" : "Manage jobs and trash"}</summary>
-      {jobs.map((job) => <div key={job.id} style={{display:"flex", gap:12, alignItems:"center", marginTop:10}}><span style={{flex:1, overflowWrap:"anywhere"}}>{job.filename} · {job.status === "completed" ? (th ? "พร้อมมิกซ์" : "Ready") : job.status === "failed" ? (th ? "ไม่สำเร็จ" : "Failed") : job.status === "cancelled" ? (th ? "ยกเลิกแล้ว" : "Cancelled") : ["expired", "expiring"].includes(job.status) ? (th ? "หมดอายุแล้ว" : "Expired") : job.status === "queued" ? (th ? "รอคิว" : "Queued") : (th ? "กำลังประมวลผล" : "Processing")}<StemJobStatus task={job} compact connectionIssue={statusUnavailable} /></span>{["queued", "processing"].includes(job.status) ? <button disabled={job.engine !== "worker"} onClick={() => void manage(job.id, "cancel")}>{th ? "ยกเลิก" : "Cancel"}</button> : <button onClick={() => void manage(job.id, "trash")}>{th ? "ลบ" : "Delete"}</button>}</div>)}
-      {trash.length > 0 && <p>{th ? "ไฟล์ Cloud ในถังขยะยังใช้พื้นที่ ส่วนผลลัพธ์ชั่วคราวจะหมดอายุตามเดิม" : "Cloud files in trash still use storage. Temporary results keep their original expiry."}</p>}
-      {trash.map((job) => <div key={job.id} style={{display:"flex",gap:12,marginTop:10}}><span style={{flex:1}}>{job.filename}</span>{job.status !== "deleting" && <button onClick={() => void manage(job.id, "restore")}>{th ? "กู้คืน" : "Restore"}</button>}<button onClick={() => { if (window.confirm(th ? "ลบถาวรและคืนพื้นที่? ไฟล์จะกู้คืนไม่ได้" : "Delete permanently and free storage? This cannot be undone.")) void manage(job.id, "purge"); }}>{th ? "ลบถาวร" : "Delete permanently"}</button></div>)}
-      {manageError && <p role="alert">{manageError}</p>}
+    <div className="batch-heading">
+      <div>
+        <span className="batch-eyebrow">BATCH STEM STUDIO</span>
+        <h2>{th ? "แยกเสียงหลายเพลงพร้อมกัน" : "Batch Stem Separation"}</h2>
+      </div>
+      <span className="batch-count">
+        {items.filter(x => x.status === "queued").length} / {items.length} {th ? "เข้าคิวแล้ว" : "queued"}
+      </span>
+    </div>
+    <p className="subtle-copy">
+      {th ? "เลือกหลายไฟล์ แล้วส่งเข้าคิวแยกเสียงอัตโนมัติ รอคิวได้สูงสุด 10 เพลง ระบบจะเริ่มประมวลผลทันทีที่ช่องว่าง" : "Select multiple files to queue for separation. Up to 10 tracks can be queued per account."}
+    </p>
+    <div style={{ margin: "16px 0" }}>
+      <StemStorageChoice value={storageMode} onChange={setStorageMode} disabled={working} />
+    </div>
+    {storageMode === "cloud" && quota && (
+      <p className="subtle-copy" style={{ fontSize: "11px", marginBottom: "16px" }}>
+        {th ? `เหลือพื้นที่ ${Math.max(0, (quota.quota_bytes - quota.used_bytes) / 1e6).toFixed(1)} MB จาก ${(quota.quota_bytes / 1e6).toFixed(0)} MB` : `${Math.max(0, (quota.quota_bytes - quota.used_bytes) / 1e6).toFixed(1)} MB free of ${(quota.quota_bytes / 1e6).toFixed(0)} MB`}
+      </p>
+    )}
+    <div className="stem-batch-actions">
+      <label className="secondary-button stem-batch-choose" htmlFor={fileId} style={{ cursor: "pointer" }}>
+        {th ? "+ เพิ่มไฟล์เพลง" : "+ Add Songs"}
+      </label>
+      <input
+        id={fileId}
+        aria-label={th ? "เลือกหลายเพลง" : "Choose multiple songs"}
+        className="stem-batch-input visually-hidden"
+        type="file"
+        multiple
+        accept=".mp3,.wav,.flac,.m4a,.aac,.ogg"
+        disabled={working}
+        onChange={(e) => {
+          const files = Array.from(e.target.files || []);
+          setItems((old) => [...old, ...files.map((file) => ({ id: crypto.randomUUID(), file, status: "ready" as const }))]);
+          e.target.value = "";
+        }}
+      />
+      <select aria-label={th ? "จำนวนแทร็ค" : "Stem layout"} value={mode} disabled={working} onChange={(e) => setMode(e.target.value)}>
+        <option value="4stems">4 Stems (Vocals, Drums, Bass, Other)</option>
+        <option value="2stems">2 Stems (Vocal + Instrumental)</option>
+      </select>
+      <button
+        className="primary-button small"
+        disabled={working || !items.some((x) => x.status === "ready" || x.status === "error")}
+        onClick={() => void send()}
+      >
+        {working
+          ? (th ? "กำลังส่งไฟล์…" : "Uploading…")
+          : (th ? `เริ่มแยก ${items.filter(x => x.status === "ready" || x.status === "error").length || ""} เพลง →` : `Separate ${items.filter(x => x.status === "ready" || x.status === "error").length || ""} songs →`)}
+      </button>
+    </div>
+
+    {items.length > 0 && (
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 18 }}>
+        {items.map((item) => (
+          <div key={item.id} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", background: "rgba(0,0,0,0.25)", border: "1px solid var(--border)", borderRadius: "8px" }}>
+            <span style={{ flex: 1, overflowWrap: "anywhere", fontSize: "13px" }}>
+              <strong>{item.file.name}</strong> · <small style={{ color: "var(--muted)" }}>{(item.file.size / 1024 / 1024).toFixed(1)} MB</small>
+            </span>
+            <span style={{ fontSize: "11px", fontFamily: "var(--font-mono-stem)", color: item.status === "queued" ? "var(--lime)" : item.status === "error" ? "#f87171" : "var(--muted)" }}>
+              {item.status === "queued" ? (th ? "เข้าคิวแล้ว ✓" : "Queued ✓") : item.status === "uploading" ? `${th ? "กำลังส่ง" : "Uploading"} ${item.message || ""}` : item.status === "error" ? item.message : (th ? "พร้อมส่ง" : "Ready")}
+            </span>
+            {item.status !== "queued" && (
+              <button type="button" className="secondary-button" style={{ minHeight: "28px", padding: "0 10px", fontSize: "11px" }} disabled={working} onClick={() => setItems((list) => list.filter((x) => x.id !== item.id))}>
+                {th ? "นำออก" : "Remove"}
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+    )}
+
+    <details style={{ marginTop: 22, background: "rgba(0,0,0,0.15)", padding: "12px 16px", borderRadius: "8px", border: "1px solid var(--border)" }}>
+      <summary style={{ cursor: "pointer", fontSize: "12px", fontWeight: 600 }}>{th ? "จัดการงานในคิวและถังขยะ" : "Manage Queue and Trash"}</summary>
+      <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
+        {jobs.map((job) => (
+          <div key={job.id} style={{ display: "flex", gap: 12, alignItems: "center", padding: "8px 12px", background: "rgba(0,0,0,0.2)", borderRadius: "6px" }}>
+            <span style={{ flex: 1, overflowWrap: "anywhere", fontSize: "12px" }}>
+              {job.filename} · <span style={{ color: "var(--lime)" }}>{job.status === "completed" ? (th ? "พร้อมมิกซ์" : "Ready") : job.status === "failed" ? (th ? "ไม่สำเร็จ" : "Failed") : job.status === "cancelled" ? (th ? "ยกเลิกแล้ว" : "Cancelled") : ["expired", "expiring"].includes(job.status) ? (th ? "หมดอายุแล้ว" : "Expired") : job.status === "queued" ? (th ? "รอคิว" : "Queued") : (th ? "กำลังประมวลผล" : "Processing")}</span>
+              <StemJobStatus task={job} compact connectionIssue={statusUnavailable} />
+            </span>
+            {["queued", "processing"].includes(job.status) ? (
+              <button className="secondary-button" style={{ minHeight: "26px", fontSize: "11px" }} disabled={job.engine !== "worker"} onClick={() => void manage(job.id, "cancel")}>{th ? "ยกเลิก" : "Cancel"}</button>
+            ) : (
+              <button className="secondary-button" style={{ minHeight: "26px", fontSize: "11px" }} onClick={() => void manage(job.id, "trash")}>{th ? "ลบ" : "Delete"}</button>
+            )}
+          </div>
+        ))}
+        {trash.length > 0 && <p style={{ fontSize: "11px", color: "var(--muted)", margin: "8px 0" }}>{th ? "ไฟล์ Cloud ในถังขยะยังใช้พื้นที่ ส่วนผลลัพธ์ชั่วคราวจะหมดอายุตามเดิม" : "Cloud files in trash still use storage. Temporary results keep their original expiry."}</p>}
+        {trash.map((job) => (
+          <div key={job.id} style={{ display: "flex", gap: 12, alignItems: "center", padding: "8px 12px", background: "rgba(239, 68, 68, 0.05)", border: "1px solid rgba(239, 68, 68, 0.2)", borderRadius: "6px" }}>
+            <span style={{ flex: 1, fontSize: "12px" }}>{job.filename}</span>
+            {job.status !== "deleting" && <button className="secondary-button" style={{ minHeight: "26px", fontSize: "11px" }} onClick={() => void manage(job.id, "restore")}>{th ? "กู้คืน" : "Restore"}</button>}
+            <button className="secondary-button" style={{ minHeight: "26px", fontSize: "11px", color: "#f87171" }} onClick={() => { if (window.confirm(th ? "ลบถาวรและคืนพื้นที่? ไฟล์จะกู้คืนไม่ได้" : "Delete permanently and free storage? This cannot be undone.")) void manage(job.id, "purge"); }}>{th ? "ลบถาวร" : "Delete permanently"}</button>
+          </div>
+        ))}
+        {manageError && <p role="alert" className="error-message">{manageError}</p>}
+      </div>
     </details>
-    <p>{th ? "เปิดหน้านี้ไว้จนส่งไฟล์ครบ จากนั้นกลับมาดูผลในงานแยกเสียงได้" : "Keep this page open until uploads finish, then find results in Stem jobs."}</p>
   </section>;
 }
