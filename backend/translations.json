@@ -3134,5 +3134,121 @@
   "รัน Live Sync Agent ผ่าน Terminal (Linux / Server)": {
     "th": "รัน Live Sync Agent ผ่าน Terminal (Linux / Server)",
     "en": "Run Live Sync Agent via Terminal (Linux / Server)"
+  },
+  "ซิงก์โปรแกรม DJ": {
+    "th": "ซิงก์โปรแกรม DJ",
+    "en": "DJ App Sync"
+  },
+  "ซิงก์เพลงและเพลย์ลิสต์ลงทั้ง 2 โปรแกรม DJ ชั้นนำระดับโลก": {
+    "th": "ซิงก์เพลงและเพลย์ลิสต์ลงทั้ง 2 โปรแกรม DJ ชั้นนำระดับโลก",
+    "en": "Sync Tracks & Playlists to Both World-Leading DJ Platforms"
+  },
+  "เชื่อมต่อตรงกับ Pioneer DJ rekordbox และ Serato DJ Pro แบบ Real-Time จัดเซ็ต คีย์ Camelot และ BPM บนเว็บ แล้วโหลดลง Decks เล่นสดหรือส่งออก USB ได้ทันที": {
+    "th": "เชื่อมต่อตรงกับ Pioneer DJ rekordbox และ Serato DJ Pro แบบ Real-Time จัดเซ็ต คีย์ Camelot และ BPM บนเว็บ แล้วโหลดลง Decks เล่นสดหรือส่งออก USB ได้ทันที",
+    "en": "Direct real-time connection with Pioneer DJ rekordbox and Serato DJ Pro. Curate your set with Camelot keys and BPM on web, then drop directly into live decks or export to USB flash drives."
+  },
+  "ซิงก์ฐานข้อมูล Live XML Auto-Bridge เชื่อมต่อไฟล์ rekordbox.xml อัตโนมัติ เพลย์ลิสต์ คีย์ Camelot (1A–12B) และค่า BPM จะปรากฏในหมวด rekordbox xml ทันที พร้อมลากลง Deck 1-4 หรือ Sync ใส่ USB สำหรับ CDJ / XDJ": {
+    "th": "ซิงก์ฐานข้อมูล Live XML Auto-Bridge เชื่อมต่อไฟล์ rekordbox.xml อัตโนมัติ เพลย์ลิสต์ คีย์ Camelot (1A–12B) และค่า BPM จะปรากฏในหมวด rekordbox xml ทันที พร้อมลากลง Deck 1-4 หรือ Sync ใส่ USB สำหรับ CDJ / XDJ",
+    "en": "Live XML Auto-Bridge links rekordbox.xml automatically. Playlists, Camelot keys (1A–12B), and BPM appear in rekordbox xml instantly, ready to drag onto Decks 1-4 or sync to USB for CDJ / XDJ."
+  },
+  "ตรวจจับและตั้งค่าพาธ rekordbox XML ให้อัตโนมัติ 100% ไม่ต้องเปิด Preferences": {
+    "th": "ตรวจจับและตั้งค่าพาธ rekordbox XML ให้อัตโนมัติ 100% ไม่ต้องเปิด Preferences",
+    "en": "Automatically detects and links rekordbox XML path 100% without opening Preferences."
+  },
+  "วิเคราะห์ Harmonic Camelot Key ช่วยจัดเซ็ตต่อเนื่องเนียนไร้สะดุด": {
+    "th": "วิเคราะห์ Harmonic Camelot Key ช่วยจัดเซ็ตต่อเนื่องเนียนไร้สะดุด",
+    "en": "Harmonic Camelot Key analysis ensures smooth, seamless in-key transitions."
+  },
+  "ส่งออกเพลย์ลิสต์ลง USB แฟลชไดรฟ์สำหรับเล่นบน Pioneer CDJ-3000 / XDJ": {
+    "th": "ส่งออกเพลย์ลิสต์ลง USB แฟลชไดรฟ์สำหรับเล่นบน Pioneer CDJ-3000 / XDJ",
+    "en": "Export playlists directly to USB flash drives for Pioneer CDJ-3000 / XDJ playback."
+  },
+  "ส่งออกและซิงก์ไฟล์ Native Binary Crates (.crate) ตรงเข้าโฟลเดอร์ Subcrates ของ Serato ทันที เมื่อเปิด Serato DJ จะพบคลังเพลง STEMORA พร้อมเล่นบน Deck 1-4 ทันที รองรับการสแครชและฟีเจอร์แยก Stems สด": {
+    "th": "ส่งออกและซิงก์ไฟล์ Native Binary Crates (.crate) ตรงเข้าโฟลเดอร์ Subcrates ของ Serato ทันที เมื่อเปิด Serato DJ จะพบคลังเพลง STEMORA พร้อมเล่นบน Deck 1-4 ทันที รองรับการสแครชและฟีเจอร์แยก Stems สด",
+    "en": "Exports and syncs Native Binary Crates (.crate) straight into Serato's Subcrates folder. Launch Serato DJ and find your STEMORA music library ready on Decks 1-4 with scratch support and live Stems."
+  },
+  "สร้างไฟล์ Binary Crate ลง ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ": {
+    "th": "สร้างไฟล์ Binary Crate ลง ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ",
+    "en": "Automatically creates Binary Crate files inside ~/Music/_Serato_/Subcrates/"
+  },
+  "พร้อมลากลง Deck เล่นสดแบบ Zero Latency บนคอนโทรลเลอร์ทุกรุ่น": {
+    "th": "พร้อมลากลง Deck เล่นสดแบบ Zero Latency บนคอนโทรลเลอร์ทุกรุ่น",
+    "en": "Ready to drag onto decks for zero-latency live performance on all DJ controllers."
+  },
+  "รองรับการแยกเสียงสด Serato Stems แยก Vocals, Melodic, Bass, Drums": {
+    "th": "รองรับการแยกเสียงสด Serato Stems แยก Vocals, Melodic, Bass, Drums",
+    "en": "Fully compatible with Serato Stems live separation across Vocals, Melody, Bass, and Drums."
+  },
+  "รูปแบบ:": {
+    "th": "รูปแบบ:",
+    "en": "Format:"
+  },
+  "ทดลองซิงก์ rekordbox": {
+    "th": "ทดลองซิงก์ rekordbox",
+    "en": "Try rekordbox Sync"
+  },
+  "ทดลองซิงก์ Serato": {
+    "th": "ทดลองซิงก์ Serato",
+    "en": "Try Serato Sync"
+  },
+  "สะพานเชื่อมต่ออัตโนมัติ ไม่ต้องแตะ Terminal": {
+    "th": "สะพานเชื่อมต่ออัตโนมัติ ไม่ต้องแตะ Terminal",
+    "en": "Automatic Bridge · Zero Terminal Required"
+  },
+  "โปรแกรมเบื้องหลังขนาดกะทัดรัด (6.9 MB) ทำงานบน Mac และ Windows ช่วยจับคู่บัญชีกับเว็บใน 1 คลิก แล้วซิงก์ทั้งเพลงและเพลย์ลิสต์ลง rekordbox และ Serato ให้อัตโนมัติทุกครั้งที่จัดเซ็ต": {
+    "th": "โปรแกรมเบื้องหลังขนาดกะทัดรัด (6.9 MB) ทำงานบน Mac และ Windows ช่วยจับคู่บัญชีกับเว็บใน 1 คลิก แล้วซิงก์ทั้งเพลงและเพลย์ลิสต์ลง rekordbox และ Serato ให้อัตโนมัติทุกครั้งที่จัดเซ็ต",
+    "en": "Lightweight background app (6.9 MB) for Mac and Windows. Pairs your account with 1 click and automatically syncs tracks and playlists into rekordbox and Serato whenever you build a set."
+  },
+  "ดาวน์โหลด Connect (.dmg สำหรับ Mac)": {
+    "th": "ดาวน์โหลด Connect (.dmg สำหรับ Mac)",
+    "en": "Download Connect (.dmg for Mac)"
+  },
+  "การซิงก์เพลงกับโปรแกรม DJ (rekordbox & Serato)": {
+    "th": "การซิงก์เพลงกับโปรแกรม DJ (rekordbox & Serato)",
+    "en": "Syncing Tracks with DJ Software (rekordbox & Serato)"
+  },
+  "STEMORA รองรับการเชื่อมต่อกับทั้ง 2 โปรแกรม DJ มาตรฐานสากล:": {
+    "th": "STEMORA รองรับการเชื่อมต่อกับทั้ง 2 โปรแกรม DJ มาตรฐานสากล:",
+    "en": "STEMORA supports seamless integration with both global DJ industry standards:"
+  },
+  "1. Pioneer DJ rekordbox: ซิงก์ฐานข้อมูล rekordbox.xml อัตโนมัติผ่านแอป STEMORA Connect หรือกดส่งออก rekordbox XML จากหน้าเพลย์ลิสต์ เพลงจะปรากฏในหมวด rekordbox xml พร้อมคีย์ Camelot และ BPM เตรียมพร้อมส่งต่อลง USB เล่นกับ CDJ/XDJ": {
+    "th": "1. Pioneer DJ rekordbox: ซิงก์ฐานข้อมูล rekordbox.xml อัตโนมัติผ่านแอป STEMORA Connect หรือกดส่งออก rekordbox XML จากหน้าเพลย์ลิสต์ เพลงจะปรากฏในหมวด rekordbox xml พร้อมคีย์ Camelot และ BPM เตรียมพร้อมส่งต่อลง USB เล่นกับ CDJ/XDJ",
+    "en": "1. Pioneer DJ rekordbox: Automatic rekordbox.xml database sync via STEMORA Connect or export rekordbox XML from the playlists tab. Tracks appear under rekordbox xml with Camelot keys and BPM ready for CDJ/XDJ USB export."
+  },
+  "2. Serato DJ Pro & Lite: ซิงก์ไฟล์ลังเพลง Binary Crates ตรงเข้าโฟลเดอร์ ~/Music/_Serato_/Subcrates/ อัตโนมัติ หรือส่งออกไฟล์ .crate จากหน้าเพลย์ลิสต์ เปิด Serato ขึ้นมาจะพบเพลย์ลิสต์ STEMORA พร้อมลากลง Deck 1-4 ทันที": {
+    "th": "2. Serato DJ Pro & Lite: ซิงก์ไฟล์ลังเพลง Binary Crates ตรงเข้าโฟลเดอร์ ~/Music/_Serato_/Subcrates/ อัตโนมัติ หรือส่งออกไฟล์ .crate จากหน้าเพลย์ลิสต์ เปิด Serato ขึ้นมาจะพบเพลย์ลิสต์ STEMORA พร้อมลากลง Deck 1-4 ทันที",
+    "en": "2. Serato DJ Pro & Lite: Automatic Binary Crates sync straight into ~/Music/_Serato_/Subcrates/ or export .crate from the playlists tab. Launch Serato to find your STEMORA playlists ready to drop onto Decks 1-4."
+  },
+  "คัดลอกโฟลเดอร์ Serato": {
+    "th": "คัดลอกโฟลเดอร์ Serato",
+    "en": "Copy Serato Path"
+  },
+  "คัดลอกไฟล์ rekordbox XML": {
+    "th": "คัดลอกไฟล์ rekordbox XML",
+    "en": "Copy XML Path"
+  },
+  "คัดลอกที่อยู่ไฟล์แล้ว": {
+    "th": "คัดลอกที่อยู่ไฟล์แล้ว",
+    "en": "Path copied to clipboard"
+  },
+  "ส่งออกพร้อมเล่น DJ (Serato & rekordbox)": {
+    "th": "ส่งออกพร้อมเล่น DJ (Serato & rekordbox)",
+    "en": "DJ Ready Export (Serato & rekordbox)"
+  },
+  "มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมซิงก์อัตโนมัติลงทั้ง Pioneer DJ rekordbox และ Serato DJ Pro หรือดาวน์โหลด Lossless WAV/ZIP และ M3U8 ครบทุกโปรแกรม DJ": {
+    "th": "มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมซิงก์อัตโนมัติลงทั้ง Pioneer DJ rekordbox และ Serato DJ Pro หรือดาวน์โหลด Lossless WAV/ZIP และ M3U8 ครบทุกโปรแกรม DJ",
+    "en": "Live mixing via 32-bit float WebAudio with 0ms latency, 0–150% faders, Solo, Mute, plus automatic live sync into both Pioneer DJ rekordbox and Serato DJ Pro, or lossless WAV/ZIP and M3U8 downloads for any DJ app."
+  },
+  "STEMORA รองรับครบทั้ง 2 โปรแกรมระดับโลก: Pioneer DJ rekordbox (ผ่าน Live XML Auto-Bridge และส่งออก USB สำหรับ CDJ/XDJ) และ Serato DJ Pro / Lite (ผ่าน Native Binary Crates ซิงก์เข้า Subcrates โดยตรง) พร้อมทั้ง Traktor Pro, Engine DJ และ Virtual DJ ด้วยเพลย์ลิสต์ M3U8 และ Lossless WAV": {
+    "th": "STEMORA รองรับครบทั้ง 2 โปรแกรมระดับโลก: Pioneer DJ rekordbox (ผ่าน Live XML Auto-Bridge และส่งออก USB สำหรับ CDJ/XDJ) และ Serato DJ Pro / Lite (ผ่าน Native Binary Crates ซิงก์เข้า Subcrates โดยตรง) พร้อมทั้ง Traktor Pro, Engine DJ และ Virtual DJ ด้วยเพลย์ลิสต์ M3U8 และ Lossless WAV",
+    "en": "STEMORA fully supports both global industry standards: Pioneer DJ rekordbox (via Live XML Auto-Bridge and USB export for CDJ/XDJ) and Serato DJ Pro & Lite (via Native Binary Crates synced directly into Subcrates), plus Traktor Pro, Engine DJ, and Virtual DJ with universal M3U8 playlists and lossless WAV."
+  },
+  "DJ SOFTWARE INTEGRATION": {
+    "th": "การเชื่อมต่อโปรแกรม DJ",
+    "en": "DJ SOFTWARE INTEGRATION"
+  },
+  "เปิดหน้าเพลย์ลิสต์และซิงก์": {
+    "th": "เปิดหน้าเพลย์ลิสต์และซิงก์",
+    "en": "Open Playlists & Sync"
   }
 }

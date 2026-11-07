@@ -83,6 +83,11 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
               </a>
             </div>
             <div className="nav__item">
+              <a className="nav__link" href="#dj-sync">
+                {tr("ซิงก์โปรแกรม DJ")}
+              </a>
+            </div>
+            <div className="nav__item">
               <a className="nav__link" href="#pipeline">
                 {tr("สถาปัตยกรรม")}
               </a>
@@ -162,8 +167,11 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
                   <span className="pill mono" style={{ height: 24, fontSize: 11, background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" }}>
                     WebGPU Offline
                   </span>
-                  <span className="pill mono" style={{ height: 24, fontSize: 11, background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" }}>
-                    200 MB S3 Storage
+                  <span className="pill mono" style={{ height: 24, fontSize: 11, color: "var(--lime)", background: "rgba(163,230,53,0.08)", borderColor: "rgba(163,230,53,0.3)" }}>
+                    ⚡ rekordbox XML
+                  </span>
+                  <span className="pill mono" style={{ height: 24, fontSize: 11, color: "#38bdf8", background: "rgba(56,189,248,0.08)", borderColor: "rgba(56,189,248,0.3)" }}>
+                    ⚡ Serato Crates
                   </span>
                   <span className="pill mono" style={{ height: 24, fontSize: 11, color: "var(--p-accent)", background: "rgba(215,249,139,0.05)", borderColor: "rgba(215,249,139,0.2)" }}>
                     Zero Logs Privacy
@@ -455,6 +463,234 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
           </div>
         </section>
 
+        {/* SECTION: UNIVERSAL DJ ECOSYSTEM (rekordbox & Serato DJ Live Sync) */}
+        <section id="dj-sync" className="section" aria-labelledby="dj-sync-h">
+          <div className="wrap">
+            <div className="section-head">
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "4px 12px", borderRadius: 999, background: "rgba(215, 249, 139, 0.1)", border: "1px solid rgba(215, 249, 139, 0.3)", marginBottom: 12 }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--lime)", boxShadow: "0 0 8px var(--lime)" }} />
+                <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: "var(--lime)", letterSpacing: "0.08em" }}>
+                  UNIVERSAL DJ LIVE SYNC
+                </span>
+              </div>
+              <h2 id="dj-sync-h">
+                {tr("ซิงก์เพลงและเพลย์ลิสต์ลงทั้ง 2 โปรแกรม DJ ชั้นนำระดับโลก")}
+              </h2>
+              <p style={{ color: "var(--p-ink)", maxWidth: 720 }}>
+                {tr("เชื่อมต่อตรงกับ Pioneer DJ rekordbox และ Serato DJ Pro แบบ Real-Time จัดเซ็ต คีย์ Camelot และ BPM บนเว็บ แล้วโหลดลง Decks เล่นสดหรือส่งออก USB ได้ทันที")}
+              </p>
+            </div>
+
+            {/* Dual App Side-by-Side Cards */}
+            <div className="grid" style={{ marginBottom: "var(--s-6)" }}>
+              {/* Card 1: Pioneer DJ rekordbox */}
+              <div
+                className="card span-6"
+                style={{
+                  background: "linear-gradient(145deg, rgba(163, 230, 53, 0.05) 0%, rgba(18, 21, 28, 0.95) 100%)",
+                  borderColor: "rgba(163, 230, 53, 0.25)",
+                  padding: "var(--s-6)",
+                  borderRadius: "var(--r-lg)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+                }}
+              >
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <div
+                        style={{
+                          width: 46,
+                          height: 46,
+                          borderRadius: 12,
+                          background: "rgba(163, 230, 53, 0.12)",
+                          border: "1px solid rgba(163, 230, 53, 0.3)",
+                          display: "grid",
+                          placeItems: "center",
+                          fontSize: 22,
+                        }}
+                      >
+                        🎛️
+                      </div>
+                      <div>
+                        <span className="mono" style={{ fontSize: 11, color: "var(--lime)", fontWeight: 700, letterSpacing: "0.08em" }}>
+                          INDUSTRY CLUB STANDARD
+                        </span>
+                        <h3 style={{ fontSize: 20, fontWeight: 700, color: "#f8fafc", margin: "2px 0 0" }}>
+                          Pioneer DJ rekordbox
+                        </h3>
+                      </div>
+                    </div>
+                    <span className="pill mono" style={{ fontSize: 11, background: "rgba(163, 230, 53, 0.12)", color: "var(--lime)", borderColor: "rgba(163, 230, 53, 0.3)" }}>
+                      v6 & v7 Ready
+                    </span>
+                  </div>
+
+                  <p style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.6, marginBottom: 18 }}>
+                    {tr("ซิงก์ฐานข้อมูล Live XML Auto-Bridge เชื่อมต่อไฟล์ rekordbox.xml อัตโนมัติ เพลย์ลิสต์ คีย์ Camelot (1A–12B) และค่า BPM จะปรากฏในหมวด rekordbox xml ทันที พร้อมลากลง Deck 1-4 หรือ Sync ใส่ USB สำหรับ CDJ / XDJ")}
+                  </p>
+
+                  <div style={{ display: "grid", gap: 10, marginBottom: 20 }}>
+                    {[
+                      tr("ตรวจจับและตั้งค่าพาธ rekordbox XML ให้อัตโนมัติ 100% ไม่ต้องเปิด Preferences"),
+                      tr("วิเคราะห์ Harmonic Camelot Key ช่วยจัดเซ็ตต่อเนื่องเนียนไร้สะดุด"),
+                      tr("ส่งออกเพลย์ลิสต์ลง USB แฟลชไดรฟ์สำหรับเล่นบน Pioneer CDJ-3000 / XDJ"),
+                    ].map((bullet, idx) => (
+                      <div key={idx} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: "#e2e8f0" }}>
+                        <span style={{ color: "var(--lime)", flexShrink: 0, marginTop: 2 }}>✓</span>
+                        <span>{bullet}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ paddingTop: 14, borderTop: "1px solid rgba(255,255,255,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span className="mono" style={{ fontSize: 11, color: "#94a3b8" }}>
+                    {tr("รูปแบบ:")} Live XML Bridge + rekordbox ZIP
+                  </span>
+                  <a
+                    href="#contact"
+                    className="btn btn--secondary"
+                    style={{ height: 34, fontSize: 12, padding: "0 14px" }}
+                    onClick={() => { setMode("register"); setModalOpen(true); }}
+                  >
+                    {tr("ทดลองซิงก์ rekordbox")}
+                  </a>
+                </div>
+              </div>
+
+              {/* Card 2: Serato DJ Pro & Lite */}
+              <div
+                className="card span-6"
+                style={{
+                  background: "linear-gradient(145deg, rgba(56, 189, 248, 0.05) 0%, rgba(18, 21, 28, 0.95) 100%)",
+                  borderColor: "rgba(56, 189, 248, 0.25)",
+                  padding: "var(--s-6)",
+                  borderRadius: "var(--r-lg)",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+                }}
+              >
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <div
+                        style={{
+                          width: 46,
+                          height: 46,
+                          borderRadius: 12,
+                          background: "rgba(56, 189, 248, 0.12)",
+                          border: "1px solid rgba(56, 189, 248, 0.3)",
+                          display: "grid",
+                          placeItems: "center",
+                          fontSize: 22,
+                        }}
+                      >
+                        🎧
+                      </div>
+                      <div>
+                        <span className="mono" style={{ fontSize: 11, color: "#38bdf8", fontWeight: 700, letterSpacing: "0.08em" }}>
+                          TURNTABLE & PERFORMANCE
+                        </span>
+                        <h3 style={{ fontSize: 20, fontWeight: 700, color: "#f8fafc", margin: "2px 0 0" }}>
+                          Serato DJ Pro & Lite
+                        </h3>
+                      </div>
+                    </div>
+                    <span className="pill mono" style={{ fontSize: 11, background: "rgba(56, 189, 248, 0.12)", color: "#38bdf8", borderColor: "rgba(56, 189, 248, 0.3)" }}>
+                      v3+ Native Crate
+                    </span>
+                  </div>
+
+                  <p style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.6, marginBottom: 18 }}>
+                    {tr("ส่งออกและซิงก์ไฟล์ Native Binary Crates (.crate) ตรงเข้าโฟลเดอร์ Subcrates ของ Serato ทันที เมื่อเปิด Serato DJ จะพบคลังเพลง STEMORA พร้อมเล่นบน Deck 1-4 ทันที รองรับการสแครชและฟีเจอร์แยก Stems สด")}
+                  </p>
+
+                  <div style={{ display: "grid", gap: 10, marginBottom: 20 }}>
+                    {[
+                      tr("สร้างไฟล์ Binary Crate ลง ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ"),
+                      tr("พร้อมลากลง Deck เล่นสดแบบ Zero Latency บนคอนโทรลเลอร์ทุกรุ่น"),
+                      tr("รองรับการแยกเสียงสด Serato Stems แยก Vocals, Melodic, Bass, Drums"),
+                    ].map((bullet, idx) => (
+                      <div key={idx} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: "#e2e8f0" }}>
+                        <span style={{ color: "#38bdf8", flexShrink: 0, marginTop: 2 }}>✓</span>
+                        <span>{bullet}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ paddingTop: 14, borderTop: "1px solid rgba(255,255,255,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span className="mono" style={{ fontSize: 11, color: "#94a3b8" }}>
+                    {tr("รูปแบบ:")} Native .crate + Serato ZIP
+                  </span>
+                  <a
+                    href="#contact"
+                    className="btn btn--secondary"
+                    style={{ height: 34, fontSize: 12, padding: "0 14px" }}
+                    onClick={() => { setMode("register"); setModalOpen(true); }}
+                  >
+                    {tr("ทดลองซิงก์ Serato")}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Companion Spotlight Banner */}
+            <div
+              style={{
+                background: "linear-gradient(135deg, rgba(215, 249, 139, 0.08) 0%, #151821 55%, #10121a 100%)",
+                border: "1px solid rgba(215, 249, 139, 0.28)",
+                borderRadius: "var(--r-lg)",
+                padding: "24px 28px",
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 20,
+              }}
+            >
+              <div style={{ maxWidth: 620 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                  <span className="pill mono" style={{ fontSize: 10, background: "rgba(215,249,139,0.12)", color: "var(--lime)", borderColor: "rgba(215,249,139,0.3)" }}>
+                    DESKTOP COMPANION · v1.0.1
+                  </span>
+                </div>
+                <h3 style={{ fontSize: 19, fontWeight: 700, color: "#f8fafc", margin: "0 0 6px" }}>
+                  STEMORA Connect · {tr("สะพานเชื่อมต่ออัตโนมัติ ไม่ต้องแตะ Terminal")}
+                </h3>
+                <p style={{ fontSize: 13, color: "#cbd5e1", lineHeight: 1.55, margin: 0 }}>
+                  {tr("โปรแกรมเบื้องหลังขนาดกะทัดรัด (6.9 MB) ทำงานบน Mac และ Windows ช่วยจับคู่บัญชีกับเว็บใน 1 คลิก แล้วซิงก์ทั้งเพลงและเพลย์ลิสต์ลง rekordbox และ Serato ให้อัตโนมัติทุกครั้งที่จัดเซ็ต")}
+                </p>
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                <a
+                  href="/download/STEMORA-Connect-macOS.dmg"
+                  download="STEMORA-Connect-macOS.dmg"
+                  className="btn btn--primary"
+                  style={{ height: 42, fontSize: 13, padding: "0 18px", textDecoration: "none" }}
+                >
+                  <FolderSync size={16} />
+                  <span>{tr("ดาวน์โหลด Connect (.dmg สำหรับ Mac)")}</span>
+                </a>
+                <a
+                  href="/download/STEMORA-Connect-macOS.zip"
+                  download="STEMORA-Connect-macOS.zip"
+                  className="btn btn--secondary"
+                  style={{ height: 42, fontSize: 13, padding: "0 14px", textDecoration: "none" }}
+                >
+                  .zip
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SECTION 4: AUDIO PIPELINE DIAGRAM (4 stages on 12-column grid, >55% fill) */}
         <section id="pipeline" className="section" aria-labelledby="pipe-h">
           <div className="wrap">
@@ -496,8 +732,8 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
                 },
                 {
                   step: "04",
-                  title: tr("มิกเซอร์ WebAudio"),
-                  desc: tr("มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมส่งออก Lossless WAV/ZIP, Serato Crates, Rekordbox XML และเพลย์ลิสต์ M3U8 สำหรับทุกโปรแกรม DJ"),
+                  title: tr("ส่งออกพร้อมเล่น DJ (Serato & rekordbox)"),
+                  desc: tr("มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมซิงก์อัตโนมัติลงทั้ง Pioneer DJ rekordbox และ Serato DJ Pro หรือดาวน์โหลด Lossless WAV/ZIP และ M3U8 ครบทุกโปรแกรม DJ"),
                   badge: "0ms Real-Time Engine",
                   icon: Disc3,
                   tag: "DJ Ready Export"
@@ -580,7 +816,7 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
               <div className="faq__item">
                 <h3>{tr("สามารถส่งออกเพลย์ลิสต์ไปใช้งานกับอุปกรณ์และโปรแกรม DJ ชั้นนำได้หรือไม่?")}</h3>
                 <p>
-                  {tr("รองรับทั้งการ Live Sync อัตโนมัติ และส่งออกไฟล์เข้ากันได้กับ Serato DJ Pro, Pioneer DJ rekordbox, Traktor, Engine DJ และ Virtual DJ ครบทุกมาตรฐานสากล")}
+                  {tr("STEMORA รองรับครบทั้ง 2 โปรแกรมระดับโลก: Pioneer DJ rekordbox (ผ่าน Live XML Auto-Bridge และส่งออก USB สำหรับ CDJ/XDJ) และ Serato DJ Pro / Lite (ผ่าน Native Binary Crates ซิงก์เข้า Subcrates โดยตรง) พร้อมทั้ง Traktor Pro, Engine DJ และ Virtual DJ ด้วยเพลย์ลิสต์ M3U8 และ Lossless WAV")}
                 </p>
               </div>
             </div>
@@ -642,6 +878,8 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
               <div className="span-2 footer__col">
                 <h4>{tr("ดีเจ")}</h4>
                 <ul>
+                  <li><a href="#dj-sync">Pioneer rekordbox</a></li>
+                  <li><a href="#dj-sync">Serato DJ Pro</a></li>
                   <li><a href="#top">Camelot Wheel</a></li>
                   <li><a href="#top">Harmonic Mixing</a></li>
                 </ul>

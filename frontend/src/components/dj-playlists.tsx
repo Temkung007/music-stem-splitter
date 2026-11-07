@@ -83,6 +83,15 @@ export function DjPlaylists({
   const [desktopDetected, setDesktopDetected] = useState<boolean>(false);
   const [pairingSuccess, setPairingSuccess] = useState<boolean>(false);
   const [isPairing, setIsPairing] = useState<boolean>(false);
+  const [copiedPath, setCopiedPath] = useState<string | null>(null);
+
+  const copyPath = (text: string) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedPath(text);
+      setTimeout(() => setCopiedPath(null), 2000);
+    }
+  };
 
   const openDjHub = (
     tab: "serato" | "rekordbox" | "traktor" | "cli" = "serato",
@@ -519,7 +528,7 @@ export function DjPlaylists({
                 download="stemora_rekordbox_library.xml"
                 title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง rekordbox XML")}
               >
-                <ArrowDownToLine size={13} /> XML
+                <ArrowDownToLine size={13} /> rekordbox XML
               </a>
               <a
                 className="secondary-button"
@@ -527,7 +536,7 @@ export function DjPlaylists({
                 download="stemora_serato_crates.zip"
                 title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง Serato Crates")}
               >
-                <ArrowDownToLine size={13} /> Serato
+                <ArrowDownToLine size={13} /> Serato Crates
               </a>
             </div>
           </div>
@@ -1334,6 +1343,20 @@ export function DjPlaylists({
                           "กดปุ่มส่งออก Serato Crate หรือ Serato ZIP ด้านล่างเพลย์ลิสต์ แล้วนำไฟล์ .crate ไปวางในโฟลเดอร์ _Serato_/Subcrates/ บนคอมพิวเตอร์ของคุณ",
                         )}
                       </p>
+                      <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                        <code style={{ fontSize: 11, background: "rgba(0,0,0,0.4)", padding: "4px 8px", borderRadius: 4, color: "#38bdf8", fontFamily: "var(--font-mono-stem)" }}>
+                          ~/Music/_Serato_/Subcrates/
+                        </code>
+                        <button
+                          type="button"
+                          className="secondary-button"
+                          style={{ height: 26, fontSize: 11, padding: "0 8px" }}
+                          onClick={() => copyPath("~/Music/_Serato_/Subcrates/")}
+                        >
+                          {copiedPath === "~/Music/_Serato_/Subcrates/" ? <Check size={12} /> : <Copy size={12} />}
+                          {copiedPath === "~/Music/_Serato_/Subcrates/" ? tr("คัดลอกที่อยู่ไฟล์แล้ว") : tr("คัดลอกโฟลเดอร์ Serato")}
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="guide-step">
@@ -1373,6 +1396,20 @@ export function DjPlaylists({
                           "ไปที่ Preferences > View > Layout ติ๊กถูกที่ช่อง rekordbox xml แล้วไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์ ~/Music/STEMORA/rekordbox.xml",
                         )}
                       </p>
+                      <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                        <code style={{ fontSize: 11, background: "rgba(0,0,0,0.4)", padding: "4px 8px", borderRadius: 4, color: "var(--lime)", fontFamily: "var(--font-mono-stem)" }}>
+                          ~/Music/STEMORA/rekordbox.xml
+                        </code>
+                        <button
+                          type="button"
+                          className="secondary-button"
+                          style={{ height: 26, fontSize: 11, padding: "0 8px" }}
+                          onClick={() => copyPath("~/Music/STEMORA/rekordbox.xml")}
+                        >
+                          {copiedPath === "~/Music/STEMORA/rekordbox.xml" ? <Check size={12} /> : <Copy size={12} />}
+                          {copiedPath === "~/Music/STEMORA/rekordbox.xml" ? tr("คัดลอกที่อยู่ไฟล์แล้ว") : tr("คัดลอกไฟล์ rekordbox XML")}
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="guide-step">

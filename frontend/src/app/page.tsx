@@ -1220,6 +1220,29 @@ function Workspace() {
                   )}
                 </p>
               </section>
+              <section className="panel guide-panel">
+                <span className="eyebrow">{tr("DJ SOFTWARE INTEGRATION")}</span>
+                <h2>{tr("การซิงก์เพลงกับโปรแกรม DJ (rekordbox & Serato)")}</h2>
+                <p>
+                  {tr("STEMORA รองรับการเชื่อมต่อกับทั้ง 2 โปรแกรม DJ มาตรฐานสากล:")}
+                </p>
+                <h3>Pioneer DJ rekordbox</h3>
+                <p>
+                  {tr("1. Pioneer DJ rekordbox: ซิงก์ฐานข้อมูล rekordbox.xml อัตโนมัติผ่านแอป STEMORA Connect หรือกดส่งออก rekordbox XML จากหน้าเพลย์ลิสต์ เพลงจะปรากฏในหมวด rekordbox xml พร้อมคีย์ Camelot และ BPM เตรียมพร้อมส่งต่อลง USB เล่นกับ CDJ/XDJ")}
+                </p>
+                <h3>Serato DJ Pro & Lite</h3>
+                <p>
+                  {tr("2. Serato DJ Pro & Lite: ซิงก์ไฟล์ลังเพลง Binary Crates ตรงเข้าโฟลเดอร์ ~/Music/_Serato_/Subcrates/ อัตโนมัติ หรือส่งออกไฟล์ .crate จากหน้าเพลย์ลิสต์ เปิด Serato ขึ้นมาจะพบเพลย์ลิสต์ STEMORA พร้อมลากลง Deck 1-4 ทันที")}
+                </p>
+                <div style={{ marginTop: 16 }}>
+                  <button
+                    className="primary-button small"
+                    onClick={() => setView("playlists")}
+                  >
+                    {tr("เปิดหน้าเพลย์ลิสต์และซิงก์")} <ArrowRight size={16} />
+                  </button>
+                </div>
+              </section>
             </div>
           )}
           {libraryTrackId && (
