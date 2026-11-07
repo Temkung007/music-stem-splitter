@@ -97,8 +97,8 @@ export function StemBatch({ onQueued }: { onQueued: () => void }) {
         }}
       />
       <select aria-label={th ? "จำนวนแทร็ค" : "Stem layout"} value={mode} disabled={working} onChange={(e) => setMode(e.target.value)}>
-        <option value="4stems">4 Stems (Vocals, Drums, Bass, Other)</option>
-        <option value="2stems">2 Stems (Vocal + Instrumental)</option>
+        <option value="4stems">{th ? "4 Stems (เสียงร้อง, กลอง, เบส, เครื่องดนตรี)" : "4 Stems (Vocals, Drums, Bass, Other)"}</option>
+        <option value="2stems">{th ? "2 Stems (เสียงร้อง + ดนตรีประกอบ)" : "2 Stems (Vocal + Instrumental)"}</option>
       </select>
       <button
         className="primary-button small"

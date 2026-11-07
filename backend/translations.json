@@ -2695,8 +2695,276 @@
     "th": "สร้างโทเค็นใหม่",
     "en": "Generate new token"
   },
-  "รีเฟรช": {
-    "th": "รีเฟรช",
-    "en": "Refresh"
+  "เลือกผลลัพธ์ & ตั้งค่า": {
+    "th": "เลือกผลลัพธ์ & ตั้งค่า",
+    "en": "Output & Engine Settings"
+  },
+  "ตัวเลือกการประมวลผล AI & คุณภาพ": {
+    "th": "ตัวเลือกการประมวลผล AI & คุณภาพ",
+    "en": "AI Processing & Quality Options"
+  },
+  "แยกเสียงให้ฉัน (Cloud Worker AI)": {
+    "th": "แยกเสียงให้ฉัน (Cloud Worker AI)",
+    "en": "Separate for me (Cloud Worker AI)"
+  },
+  "บนอุปกรณ์ของฉัน · WebGPU (ฟรี & ความลับ 100%)": {
+    "th": "บนอุปกรณ์ของฉัน · WebGPU (ฟรี & ความลับ 100%)",
+    "en": "On my device · WebGPU (Free & 100% Private)"
+  },
+  "บนเซิร์ฟเวอร์ · Demucs v4 AI": {
+    "th": "บนเซิร์ฟเวอร์ · Demucs v4 AI",
+    "en": "On server · Demucs v4 AI"
+  },
+  "· ยังไม่ติดตั้ง": {
+    "th": "· ยังไม่ติดตั้ง",
+    "en": "· Not installed"
+  },
+  "· ยังไม่พร้อม": {
+    "th": "· ยังไม่พร้อม",
+    "en": "· Not ready"
+  },
+  "ฟังเสียงสเต็ม": {
+    "th": "ฟังเสียงสเต็ม",
+    "en": "Listen to Stems"
+  },
+  "เริ่มใหม่": {
+    "th": "เริ่มใหม่",
+    "en": "Reset"
+  },
+  "4 ฟีเจอร์หลักสำหรับ DJ และ Producer": {
+    "th": "4 ฟีเจอร์หลักสำหรับ DJ และ Producer",
+    "en": "4 Core Features Built for DJs and Producers"
+  },
+  "Camelot Wheel AI": {
+    "th": "Camelot Wheel AI",
+    "en": "Camelot Wheel AI"
+  },
+  "Demucs v4 Neural": {
+    "th": "Demucs v4 Neural",
+    "en": "Demucs v4 Neural"
+  },
+  "Demucs v4 Neural Engine ให้คุณภาพเสียงระดับ 32-bit Float คมชัดสูงสุด ไร้การสูญเสียไดนามิกหรือรายละเอียดความถี่": {
+    "th": "Demucs v4 Neural Engine ให้คุณภาพเสียงระดับ 32-bit Float คมชัดสูงสุด ไร้การสูญเสียไดนามิกหรือรายละเอียดความถี่",
+    "en": "Demucs v4 Neural Engine provides 32-bit float audio fidelity with maximum clarity, preserving full dynamic range and frequency detail."
+  },
+  "Hybrid WebGPU Engine": {
+    "th": "Hybrid WebGPU Engine",
+    "en": "Hybrid WebGPU Engine"
+  },
+  "Private S3 Storage": {
+    "th": "Private S3 Storage",
+    "en": "Private S3 Storage"
+  },
+  "WebGPU ทำงานบนการ์ดจอในเครื่องของคุณโดยตรง ส่วน Cloud Worker ประมวลผลบนเซิร์ฟเวอร์ความเร็วสูงสำหรับงานขนาดใหญ่": {
+    "th": "WebGPU ทำงานบนการ์ดจอในเครื่องของคุณโดยตรง ส่วน Cloud Worker ประมวลผลบนเซิร์ฟเวอร์ความเร็วสูงสำหรับงานขนาดใหญ่",
+    "en": "WebGPU operates directly on your local GPU, while Cloud Workers process larger jobs on high-speed server GPUs."
+  },
+  "กระบวนการแปลงไฟล์เสียงแบบไม่สูญเสียคุณภาพ ตั้งแต่ Ingest ไปจนถึง Multi-Track Stem Export": {
+    "th": "กระบวนการแปลงไฟล์เสียงแบบไม่สูญเสียคุณภาพ ตั้งแต่ Ingest ไปจนถึง Multi-Track Stem Export",
+    "en": "Lossless audio transformation pipeline from source ingest to multi-track stem export."
+  },
+  "การแยกเสียงบนเบราว์เซอร์ (WebGPU) กับ Cloud Worker แตกต่างกันอย่างไร?": {
+    "th": "การแยกเสียงบนเบราว์เซอร์ (WebGPU) กับ Cloud Worker แตกต่างกันอย่างไร?",
+    "en": "What is the difference between In-Browser (WebGPU) and Cloud Worker stem separation?"
+  },
+  "ควบคุมมิกเซอร์ DSP 32-bit Float ไม่สูญเสียความละเอียด": {
+    "th": "ควบคุมมิกเซอร์ DSP 32-bit Float ไม่สูญเสียความละเอียด",
+    "en": "32-bit Float DSP Mixer with Zero Fidelity Loss"
+  },
+  "คำตอบสำหรับข้อสงสัยที่พบบ่อยเกี่ยวกับการประมวลผลเสียง ความปลอดภัย และการจัดเก็บข้อมูล": {
+    "th": "คำตอบสำหรับข้อสงสัยที่พบบ่อยเกี่ยวกับการประมวลผลเสียง ความปลอดภัย และการจัดเก็บข้อมูล",
+    "en": "Answers to common inquiries regarding audio processing, security, and cloud storage."
+  },
+  "คำถามที่พบบ่อย": {
+    "th": "คำถามที่พบบ่อย",
+    "en": "Frequently Asked Questions"
+  },
+  "คำถามที่พบบ่อย (FAQ) เกี่ยวกับระบบ STEMORA 4 ข้อหลัก": {
+    "th": "คำถามที่พบบ่อย (FAQ) เกี่ยวกับระบบ STEMORA 4 ข้อหลัก",
+    "en": "4 Core FAQs About STEMORA"
+  },
+  "คุณภาพเสียงของ Stems ที่แยกออกมาเทียบกับสตูดิโอเป็นอย่างไร?": {
+    "th": "คุณภาพเสียงของ Stems ที่แยกออกมาเทียบกับสตูดิโอเป็นอย่างไร?",
+    "en": "How does stem isolation quality compare to studio masters?"
+  },
+  "จัดเรียงเพลย์ลิสต์อัตโนมัติตามวงล้อ Camelot 1A–12B และ Energy Curve แนะนำคีย์ที่เข้ากันได้แม่นยำ": {
+    "th": "จัดเรียงเพลย์ลิสต์อัตโนมัติตามวงล้อ Camelot 1A–12B และ Energy Curve แนะนำคีย์ที่เข้ากันได้แม่นยำ",
+    "en": "Auto-sort playlists via Camelot 1A–12B wheel and energy curve with precise harmonic key recommendations."
+  },
+  "จาก Ingest สู่ DJ Set Ready": {
+    "th": "จาก Ingest สู่ DJ Set Ready",
+    "en": "From Ingest to DJ-Set Ready"
+  },
+  "ชื่อดีเจ หรือ ชื่อสตูดิโอ": {
+    "th": "ชื่อดีเจ หรือ ชื่อสตูดิโอ",
+    "en": "DJ Name or Studio Name"
+  },
+  "ดีเจ": {
+    "th": "ดีเจ",
+    "en": "DJs"
+  },
+  "ติดต่อ": {
+    "th": "ติดต่อ",
+    "en": "Contact"
+  },
+  "ถอดรหัสและวิเคราะห์ความเร็ว BPM, คีย์เสียงตามวงล้อ Camelot Wheel (1A–12B), ระดับความดัง LUFS และพลังงาน Spectral Centroid ด้วย Librosa": {
+    "th": "ถอดรหัสและวิเคราะห์ความเร็ว BPM, คีย์เสียงตามวงล้อ Camelot Wheel (1A–12B), ระดับความดัง LUFS และพลังงาน Spectral Centroid ด้วย Librosa",
+    "en": "Decodes and computes BPM tempo, Camelot Wheel harmonic key (1A–12B), LUFS loudness, and spectral energy with Librosa."
+  },
+  "นำเข้าไฟล์เสียง": {
+    "th": "นำเข้าไฟล์เสียง",
+    "en": "Audio Ingest"
+  },
+  "ประมวลผลบนการ์ดจอของคุณด้วย WebGPU ในเบราว์เซอร์ได้ทันที หรือส่งงานเข้าคิวประมวลผลบน Cloud": {
+    "th": "ประมวลผลบนการ์ดจอของคุณด้วย WebGPU ในเบราว์เซอร์ได้ทันที หรือส่งงานเข้าคิวประมวลผลบน Cloud",
+    "en": "Process audio directly on your GPU via in-browser WebGPU, or queue jobs for cloud server processing."
+  },
+  "ประมวลผลแยกช่องสัญญาณด้วย Demucs v4 Hybrid Transformer แยก 4 สเตมอิสระ Vocals, Drums, Bass, Other โดยไม่มี Inter-Channel Bleed": {
+    "th": "ประมวลผลแยกช่องสัญญาณด้วย Demucs v4 Hybrid Transformer แยก 4 สเตมอิสระ Vocals, Drums, Bass, Other โดยไม่มี Inter-Channel Bleed",
+    "en": "Multi-channel isolation powered by Demucs v4 Hybrid Transformer separates Vocals, Drums, Bass, and Other with zero inter-channel bleed."
+  },
+  "ประมวลผลแยกแทร็กด้วย Demucs v4 พร้อมช่องสัญญาณอิสระ Vocals, Drums, Bass, Other เพื่อสร้างมิกซ์หรือรีมิกซ์สดได้ทันที": {
+    "th": "ประมวลผลแยกแทร็กด้วย Demucs v4 พร้อมช่องสัญญาณอิสระ Vocals, Drums, Bass, Other เพื่อสร้างมิกซ์หรือรีมิกซ์สดได้ทันที",
+    "en": "Isolate tracks using Demucs v4 with discrete channels for Vocals, Drums, Bass, and Other to craft live mixes or remixes on the fly."
+  },
+  "ปรับเกนแยกอิสระ 0–150%, Solo, Mute และส่งออก Lossless WAV/ZIP": {
+    "th": "ปรับเกนแยกอิสระ 0–150%, Solo, Mute และส่งออก Lossless WAV/ZIP",
+    "en": "Independent 0–150% gain control, Solo, Mute, and lossless WAV/ZIP export."
+  },
+  "ผสมผสานการวิเคราะห์ความกลมกลืนทางดนตรี Harmonic เข้ากับระบบประมวลผล DSP แม่นยำ": {
+    "th": "ผสมผสานการวิเคราะห์ความกลมกลืนทางดนตรี Harmonic เข้ากับระบบประมวลผล DSP แม่นยำ",
+    "en": "Harmonic musical analysis integrated with precision DSP processing."
+  },
+  "พร้อมเปิดสตูดิโอและแยกเพลงของคุณหรือยัง?": {
+    "th": "พร้อมเปิดสตูดิโอและแยกเพลงของคุณหรือยัง?",
+    "en": "Ready to launch your studio and separate your music?"
+  },
+  "พื้นที่จัดเก็บเพลงส่วนตัว 200 MB บน Garage S3 สตรีมเฉพาะช่วงไบต์ ปลอดภัย เข้ารหัสเฉพาะคุณ": {
+    "th": "พื้นที่จัดเก็บเพลงส่วนตัว 200 MB บน Garage S3 สตรีมเฉพาะช่วงไบต์ ปลอดภัย เข้ารหัสเฉพาะคุณ",
+    "en": "200 MB private music storage on Garage S3 with byte-range streaming, encrypted exclusively for your account."
+  },
+  "ฟีเจอร์เด่น": {
+    "th": "ฟีเจอร์เด่น",
+    "en": "Key Features"
+  },
+  "มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมส่งออก Lossless WAV/ZIP และเพลย์ลิสต์ Rekordbox M3U8": {
+    "th": "มิกซ์สดด้วย WebAudio 32-bit Float 0ms Latency ปรับเกน 0–150%, Solo, Mute พร้อมส่งออก Lossless WAV/ZIP และเพลย์ลิสต์ Rekordbox M3U8",
+    "en": "Live mixing via 32-bit float WebAudio with 0ms latency, 0–150% faders, Solo, Mute, plus lossless WAV/ZIP export and Rekordbox M3U8 playlists."
+  },
+  "มิกเซอร์ WebAudio": {
+    "th": "มิกเซอร์ WebAudio",
+    "en": "WebAudio Mixer"
+  },
+  "มีบัญชีอยู่แล้ว?": {
+    "th": "มีบัญชีอยู่แล้ว?",
+    "en": "Already have an account?"
+  },
+  "ยังไม่มีบัญชี?": {
+    "th": "ยังไม่มีบัญชี?",
+    "en": "Don't have an account?"
+  },
+  "รองรับการส่งออก M3U8 Playlist เข้ากันได้กับ Rekordbox, Traktor, Serato และ Engine DJ พร้อมดาวน์โหลด Lossless ZIP": {
+    "th": "รองรับการส่งออก M3U8 Playlist เข้ากันได้กับ Rekordbox, Traktor, Serato และ Engine DJ พร้อมดาวน์โหลด Lossless ZIP",
+    "en": "Export M3U8 playlists compatible with Rekordbox, Traktor, Serato, and Engine DJ, plus lossless ZIP bundle downloads."
+  },
+  "รองรับไฟล์เสียงความละเอียดสูง WAV 24/32-bit, FLAC, AIFF, MP3, AAC และ OGG ผ่านระบบ Streaming Ingest ขีดจำกัดสูงสุด 50 MB ต่อแทร็ก": {
+    "th": "รองรับไฟล์เสียงความละเอียดสูง WAV 24/32-bit, FLAC, AIFF, MP3, AAC และ OGG ผ่านระบบ Streaming Ingest ขีดจำกัดสูงสุด 50 MB ต่อแทร็ก",
+    "en": "Supports high-resolution WAV (24/32-bit), FLAC, AIFF, MP3, AAC, and OGG via streaming ingest up to 50 MB per track."
+  },
+  "ระบบ": {
+    "th": "ระบบ",
+    "en": "System"
+  },
+  "ระบบแยก 4 สเตมเสียงร้อง กลอง เบส และเครื่องดนตรีด้วย Demucs v4 Neural DSP พร้อม WebAudio 32-bit Float บนคลาวด์และ WebGPU ฟรี 200 MB S3": {
+    "th": "ระบบแยก 4 สเตมเสียงร้อง กลอง เบส และเครื่องดนตรีด้วย Demucs v4 Neural DSP พร้อม WebAudio 32-bit Float บนคลาวด์และ WebGPU ฟรี 200 MB S3",
+    "en": "4-stem isolation for vocals, drums, bass, and instruments with Demucs v4 Neural DSP, 32-bit float WebAudio, and free 200 MB S3 storage."
+  },
+  "ระบบแยกเสียง": {
+    "th": "ระบบแยกเสียง",
+    "en": "Stem Separation"
+  },
+  "ระบบแยกเสียง 4 แทร็กอย่างหมดจด": {
+    "th": "ระบบแยกเสียง 4 แทร็กอย่างหมดจด",
+    "en": "Pristine 4-Track Stem Separation"
+  },
+  "รับพื้นที่จัดเก็บฟรี 200 MB และประมวลผล 4 แทร็กทันที": {
+    "th": "รับพื้นที่จัดเก็บฟรี 200 MB และประมวลผล 4 แทร็กทันที",
+    "en": "Receive 200 MB free storage and process 4 tracks immediately"
+  },
+  "ลงทะเบียนและเริ่มใช้งาน": {
+    "th": "ลงทะเบียนและเริ่มใช้งาน",
+    "en": "Sign Up and Get Started"
+  },
+  "วิเคราะห์ DSP": {
+    "th": "วิเคราะห์ DSP",
+    "en": "DSP Analysis"
+  },
+  "สตูดิโอแยกเสียงและคลังเพลงส่วนตัวสำหรับ DJ": {
+    "th": "สตูดิโอแยกเสียงและคลังเพลงส่วนตัวสำหรับ DJ",
+    "en": "Stem Studio & Private Music Workspace for DJs"
+  },
+  "สถาปัตยกรรม": {
+    "th": "สถาปัตยกรรม",
+    "en": "Architecture"
+  },
+  "สถาปัตยกรรมประมวลผลเสียง 4 ขั้นตอน": {
+    "th": "สถาปัตยกรรมประมวลผลเสียง 4 ขั้นตอน",
+    "en": "4-Step Audio Processing Architecture"
+  },
+  "สมัครสมาชิกใหม่": {
+    "th": "สมัครสมาชิกใหม่",
+    "en": "Sign up"
+  },
+  "สร้างบัญชีดีเจใหม่": {
+    "th": "สร้างบัญชีดีเจใหม่",
+    "en": "Create New DJ Account"
+  },
+  "สร้างบัญชีฟรีวันนี้ รับพื้นที่จัดเก็บ 200 MB และเริ่มแยกเสียงแทร็กแรกของคุณได้ทันที": {
+    "th": "สร้างบัญชีฟรีวันนี้ รับพื้นที่จัดเก็บ 200 MB และเริ่มแยกเสียงแทร็กแรกของคุณได้ทันที",
+    "en": "Create a free account today, receive 200 MB storage, and separate your first track instantly."
+  },
+  "สามารถส่งออกเพลย์ลิสต์ไปใช้งานกับอุปกรณ์และโปรแกรม DJ ชั้นนำได้หรือไม่?": {
+    "th": "สามารถส่งออกเพลย์ลิสต์ไปใช้งานกับอุปกรณ์และโปรแกรม DJ ชั้นนำได้หรือไม่?",
+    "en": "Can I export playlists to major DJ hardware and software?"
+  },
+  "หรือใช้อีเมล": {
+    "th": "หรือใช้อีเมล",
+    "en": "Or use your email"
+  },
+  "เข้าสู่ระบบสตูดิโอ": {
+    "th": "เข้าสู่ระบบสตูดิโอ",
+    "en": "Studio Login"
+  },
+  "เข้าสู่ระบบเพื่อเข้าถึงคลังเพลงและมิกเซอร์ส่วนตัว": {
+    "th": "เข้าสู่ระบบเพื่อเข้าถึงคลังเพลงและมิกเซอร์ส่วนตัว",
+    "en": "Log in to access your private library and mixer"
+  },
+  "เข้าใช้งานด้วย Demo Account (คลิกเดียว)": {
+    "th": "เข้าใช้งานด้วย Demo Account (คลิกเดียว)",
+    "en": "Enter with Demo Account (One-click)"
+  },
+  "เปิดสตูดิโอของคุณฟรี": {
+    "th": "เปิดสตูดิโอของคุณฟรี",
+    "en": "Launch Your Studio Free"
+  },
+  "เริ่มแยกเพลงของคุณ": {
+    "th": "เริ่มแยกเพลงของคุณ",
+    "en": "Start Separating Your Music"
+  },
+  "แยกเสียง AI": {
+    "th": "แยกเสียง AI",
+    "en": "AI Stem Splitter"
+  },
+  "แยกเสียงร้อง กลอง เบส และเครื่องดนตรีด้วย Hybrid Transformer 32-bit Float คมชัดไร้การบีบอัด": {
+    "th": "แยกเสียงร้อง กลอง เบส และเครื่องดนตรีด้วย Hybrid Transformer 32-bit Float คมชัดไร้การบีบอัด",
+    "en": "Isolate vocals, drums, bass, and instruments using Hybrid Transformer 32-bit float without compression."
+  },
+  "ไฟล์เพลงของฉันมีความเป็นส่วนตัวและปลอดภัยแค่ไหนบนระบบ Cloud S3?": {
+    "th": "ไฟล์เพลงของฉันมีความเป็นส่วนตัวและปลอดภัยแค่ไหนบนระบบ Cloud S3?",
+    "en": "How private and secure are my audio files on Cloud S3 storage?"
+  },
+  "ไฟล์เสียงทุกไฟล์ถูกจัดเก็บใน S3 Bucket ส่วนตัวที่มีการตรวจสิทธิ์เซสชันเข้มงวด ไม่เปิดเผยสู่สาธารณะ และไม่มีการส่งต่อให้ภายนอก": {
+    "th": "ไฟล์เสียงทุกไฟล์ถูกจัดเก็บใน S3 Bucket ส่วนตัวที่มีการตรวจสิทธิ์เซสชันเข้มงวด ไม่เปิดเผยสู่สาธารณะ และไม่มีการส่งต่อให้ภายนอก",
+    "en": "All audio files reside in private S3 buckets with strict session validation. Never public, never forwarded."
   }
 }

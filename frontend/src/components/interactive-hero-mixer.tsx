@@ -575,7 +575,7 @@ export function InteractiveHeroMixer() {
                   step="0.05"
                   value={track.volume}
                   onChange={(e) => setVolume(track.id, parseFloat(e.target.value))}
-                  aria-label={`${track.name} Volume`}
+                  aria-label={`${locale === "th" ? track.name : track.nameEn} ${locale === "th" ? "ระดับเสียง" : "Volume"}`}
                   style={{
                     width: 46,
                     height: 4,
