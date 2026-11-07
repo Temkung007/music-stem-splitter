@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STEMORA Connect</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <svg class="logo-icon" viewBox="88 374.5 275 275" fill="none">
+          <circle cx="225.5" cy="512" r="100" stroke="#a3e635" stroke-width="18"/>
+          <path d="M175 512 C 175 480, 275 480, 275 512 C 275 544, 175 544, 175 512" stroke="#a3e635" stroke-width="14" stroke-linecap="round"/>
+        </svg>
+        <div class="brand-text">
+          <h1>STEMORA</h1>
+          <span class="sub-brand">CONNECT</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="guide-btn" class="icon-btn" title="วิธีเชื่อมต่อ rekordbox">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </button>
+        <button id="settings-btn" class="icon-btn" title="การตั้งค่า">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Status Card -->
+      <section class="card status-card">
+        <div class="status-indicator-row">
+          <span id="pulse-dot" class="pulse-dot active"></span>
+          <span id="status-badge" class="badge">LIVE SYNC ACTIVE</span>
+          <span id="last-sync-time" class="subtle-text">กำลังตรวจสอบ…</span>
+        </div>
+
+        <div class="user-row">
+          <span class="user-label">บัญชีที่เชื่อมต่อ:</span>
+          <strong id="user-name">—</strong>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-number" id="total-playlists">0</span>
+            <span class="stat-label">เพลย์ลิสต์</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="total-tracks">0</span>
+            <span class="stat-label">เพลงพร้อมเล่น</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Primary Controls -->
+      <section class="controls-section">
+        <button id="sync-now-btn" class="btn btn-primary">
+          <svg class="spin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
+          <span id="sync-btn-text">ซิงก์กับ rekordbox ทันที</span>
+        </button>
+
+        <button id="open-folder-btn" class="btn btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>เปิดโฟลเดอร์เพลงใน Finder</span>
+        </button>
+      </section>
+
+      <!-- Auto-Sync Toggle Row -->
+      <section class="card toggle-card">
+        <div class="toggle-info">
+          <strong>Auto-Sync อัตโนมัติ</strong>
+          <small>ดึงเพลงและอัปเดตเมื่อจัดเซ็ตบนเว็บ</small>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="auto-sync-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </section>
+
+      <!-- Message Banner -->
+      <div id="msg-banner" class="msg-banner hidden"></div>
+    </main>
+
+    <!-- Guide Modal -->
+    <div id="guide-modal" class="modal-overlay hidden">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2>วิธีตั้งค่าใน rekordbox</h2>
+          <button class="close-btn" id="close-guide-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="guide-step">
+            <span class="step-num">1</span>
+            <div>
+              <strong>เปิด rekordbox XML ในการตั้งค่า</strong>
+              <p>ไปที่ <code>Preferences > View > Layout</code> แล้วติ๊กถูกที่ช่อง <code>rekordbox xml</code></p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">2</span>
+            <div>
+              <strong>เลือกไฟล์ฐานข้อมูล STEMORA</strong>
+              <p>ไปที่ <code>Preferences > Advanced > Database</code> ในช่อง <code>rekordbox xml</code> ให้กด Browse แล้วเลือกไฟล์:</p>
+              <div class="copy-path-row">
+                <code id="xml-path-display">~/Music/STEMORA/rekordbox.xml</code>
+                <button id="copy-xml-path-btn" class="btn-micro">คัดลอก</button>
+              </div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">3</span>
+            <div>
+              <strong>พร้อมเล่นบน CDJ / Controller</strong>
+              <p>ในแถบซ้ายของ rekordbox จะมีหัวข้อ <code>rekordbox xml > STEMORA</code> ลากเพลงลง Deck เล่นได้ทันที!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay hidden">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2>การตั้งค่าการเชื่อมต่อ</h2>
+          <button class="close-btn" id="close-settings-btn">&times;</button>
+        </div>
+        <form id="settings-form" class="modal-body">
+          <label class="form-group">
+            <span>Sync Token:</span>
+            <input type="password" id="token-input" placeholder="st_live_..." required>
+            <small>รับ Token ได้จากหน้า DJ Playlists ในเว็บ STEMORA</small>
+          </label>
+          <label class="form-group">
+            <span>เซิร์ฟเวอร์ STEMORA:</span>
+            <input type="url" id="server-input" value="https://stemora.mydjplus.com" required>
+          </label>
+          <label class="form-group">
+            <span>โฟลเดอร์จัดเก็บเพลง:</span>
+            <input type="text" id="dir-input" required>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">บันทึกการตั้งค่า</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

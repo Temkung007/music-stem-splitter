@@ -44,6 +44,11 @@ backend/demo_files/
 *.flac
 *.zip
 
+# Desktop app (Rust Tauri)
+desktop/node_modules/
+desktop/src-tauri/target/
+release/
+
 # OS
 .DS_Store
 Thumbs.db
