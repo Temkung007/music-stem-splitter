@@ -254,6 +254,18 @@ body {
   transform: translateY(1px);
 }
 
+.sync-dual-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: -2px;
+  margin-bottom: 2px;
+}
+
 .dj-launch-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
