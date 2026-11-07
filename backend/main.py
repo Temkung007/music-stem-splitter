@@ -43,6 +43,7 @@ from fastapi import (
 from fastapi.responses import FileResponse, JSONResponse
 from i18n import LocalizedJSONResponse, language, preferred_language
 from playlists import router as playlists_router
+from sync import router as sync_router
 from starlette.background import BackgroundTask
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from storage import storage
@@ -85,6 +86,7 @@ app = FastAPI(
 app.include_router(auth_router)
 app.include_router(cloud_router)
 app.include_router(playlists_router)
+app.include_router(sync_router)
 
 
 @app.exception_handler(StarletteHTTPException)
@@ -105,6 +107,7 @@ async def private_workspace(request: Request, call_next):
                 and request.url.path != "/api/health"
                 and not request.url.path.startswith("/api/auth/")
                 and not request.url.path.startswith("/api/worker/")
+                and not request.url.path.startswith("/api/sync/agent")
             ):
                 current_user(request)
                 if request.method not in {"GET", "HEAD", "OPTIONS"}:

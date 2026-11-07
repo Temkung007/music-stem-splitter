@@ -112,7 +112,7 @@ class PostgresMigrationTests(unittest.TestCase):
                 report = database.import_sqlite(source)
                 self.assertTrue(
                     all(
-                        entry["rows"] == (0 if table in {"workers", "stem_jobs"} else 1)
+                        entry["rows"] == (0 if table in {"workers", "stem_jobs", "sync_tokens"} else 1)
                         for table, entry in report.items()
                     )
                 )

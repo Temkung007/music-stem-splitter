@@ -70,6 +70,40 @@ export function DjPlaylists({
   >(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [showRekordboxGuide, setShowRekordboxGuide] = useState(false);
+  const [showSyncModal, setShowSyncModal] = useState(false);
+  const [syncToken, setSyncToken] = useState<string>("");
+  const [tokenLoading, setTokenLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const openSyncModal = async () => {
+    setShowSyncModal(true);
+    if (!syncToken) {
+      setTokenLoading(true);
+      try {
+        const res = await api<{ token: string }>("/api/sync/token");
+        setSyncToken(res.token);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setTokenLoading(false);
+      }
+    }
+  };
+
+  const rotateSyncToken = async () => {
+    setTokenLoading(true);
+    try {
+      const res = await api<{ token: string }>(
+        "/api/sync/token/rotate",
+        jsonRequest("POST", {}),
+      );
+      setSyncToken(res.token);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setTokenLoading(false);
+    }
+  };
   useEffect(() => {
     onDirtyChange?.(dirty);
     if (!dirty) return;
@@ -376,21 +410,29 @@ export function DjPlaylists({
           )}
           <div className="set-list-actions">
             <button
-              className="secondary-button"
-              onClick={() => void load()}
-              disabled={busy}
+              className="primary-button small"
+              onClick={() => void openSyncModal()}
+              type="button"
             >
-              {tr("รีเฟรชรายการ")}
+              <RefreshCw size={13} /> {tr("ซิงก์กับ rekordbox")}
             </button>
-            <a
-              className="secondary-button"
-              href="/api/playlists/export/rekordbox"
-              download="stemora_rekordbox_library.xml"
-              title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง rekordbox XML")}
-            >
-              <ArrowDownToLine size={14} />
-              {tr("ส่งออกคลัง rekordbox")}
-            </a>
+            <div className="set-list-action-row">
+              <button
+                className="secondary-button"
+                onClick={() => void load()}
+                disabled={busy}
+              >
+                {tr("รีเฟรช")}
+              </button>
+              <a
+                className="secondary-button"
+                href="/api/playlists/export/rekordbox"
+                download="stemora_rekordbox_library.xml"
+                title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง rekordbox XML")}
+              >
+                <ArrowDownToLine size={13} /> XML
+              </a>
+            </div>
           </div>
           </div>
         </aside>
@@ -918,6 +960,15 @@ export function DjPlaylists({
                     <button
                       type="button"
                       className="icon-button"
+                      title={tr("ซิงก์กับ rekordbox")}
+                      aria-label={tr("ซิงก์กับ rekordbox")}
+                      onClick={() => void openSyncModal()}
+                    >
+                      <RefreshCw size={15} />
+                    </button>
+                    <button
+                      type="button"
+                      className="icon-button"
                       title={tr("วิธีเชื่อมต่อกับ rekordbox")}
                       aria-label={tr("วิธีเชื่อมต่อกับ rekordbox")}
                       onClick={() => setShowRekordboxGuide(true)}
@@ -980,6 +1031,93 @@ export function DjPlaylists({
               </div>
             ))
           )}
+        </Modal>
+      )}
+      {showSyncModal && (
+        <Modal
+          title={tr("ซิงก์อัตโนมัติกับ Pioneer DJ rekordbox")}
+          close={() => setShowSyncModal(false)}
+        >
+          <div className="rekordbox-guide">
+            <div className="guide-note">
+              <small>
+                {tr(
+                  "⚡ ระบบ Live Sync จะคอยดึงเพลงใหม่และอัปเดตเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติทันทีที่จัดเซ็ตบนเว็บ",
+                )}
+              </small>
+            </div>
+            <div className="sync-command-box">
+              <label>
+                <strong>{tr("คำสั่งเริ่ม Auto-Sync บน Mac / PC:")}</strong>
+                <div className="command-row">
+                  <code>
+                    {tokenLoading
+                      ? tr("กำลังโหลดโทเค็น…")
+                      : `curl -fsSL ${typeof window !== "undefined" ? window.location.origin : "https://stemora.mydjplus.com"}/api/sync/agent.py | python3 - --token=${syncToken || "..."} --watch`}
+                  </code>
+                  <button
+                    type="button"
+                    className="secondary-button"
+                    onClick={() => {
+                      const cmd = `curl -fsSL ${typeof window !== "undefined" ? window.location.origin : "https://stemora.mydjplus.com"}/api/sync/agent.py | python3 - --token=${syncToken} --watch`;
+                      if (navigator.clipboard) {
+                        navigator.clipboard.writeText(cmd);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }
+                    }}
+                    disabled={tokenLoading || !syncToken}
+                  >
+                    {copied ? <Sparkles size={14} /> : <Copy size={14} />}
+                    {copied ? tr("คัดลอกแล้ว") : tr("คัดลอกคำสั่ง")}
+                  </button>
+                </div>
+              </label>
+            </div>
+            <div className="guide-step">
+              <span className="step-num">1</span>
+              <div>
+                <strong>{tr("รันคำสั่งใน Terminal บนเครื่องของคุณ")}</strong>
+                <p>
+                  {tr(
+                    "เปิดโปรแกรม Terminal บน Mac (หรือ PowerShell บน Windows) วางคำสั่งด้านบนแล้วกด Enter ตัว Agent จะสร้างโฟลเดอร์ ~/Music/STEMORA และดึงเพลงมาเตรียมพร้อมให้ทันที",
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="guide-step">
+              <span className="step-num">2</span>
+              <div>
+                <strong>{tr("เชื่อมต่อกับ rekordbox (ตั้งค่าครั้งเดียว)")}</strong>
+                <p>
+                  {tr(
+                    "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์: ~/Music/STEMORA/rekordbox.xml",
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="guide-step">
+              <span className="step-num">3</span>
+              <div>
+                <strong>{tr("เปิดใช้งานและเล่นได้เลย")}</strong>
+                <p>
+                  {tr(
+                    "เปิด Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA ในแถบซ้ายของ rekordbox พร้อมเล่นเพลงและคีย์ Camelot ทันที เมื่อคุณจัดเซ็ตบนเว็บ rekordbox จะซิงก์ตามตลอดเวลา!",
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button
+                type="button"
+                className="text-button"
+                onClick={() => void rotateSyncToken()}
+                disabled={tokenLoading}
+              >
+                <RotateCcw size={13} /> {tr("สร้างโทเค็นใหม่")}
+              </button>
+            </div>
+          </div>
         </Modal>
       )}
       {showRekordboxGuide && (

@@ -28,6 +28,7 @@ TABLES = (
     "workers",
     "stem_jobs",
     "processing_usage",
+    "sync_tokens",
 )
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS users (
@@ -87,6 +88,15 @@ CREATE TABLE IF NOT EXISTS processing_usage (
 CREATE INDEX IF NOT EXISTS processing_usage_day ON processing_usage(user_id, day);
 CREATE INDEX IF NOT EXISTS stem_jobs_queue ON stem_jobs(status, created_at);
 CREATE INDEX IF NOT EXISTS stem_jobs_owner ON stem_jobs(owner_id, created_at);
+CREATE TABLE IF NOT EXISTS sync_tokens (
+  token TEXT PRIMARY KEY,
+  token_hash TEXT UNIQUE NOT NULL,
+  user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  name TEXT NOT NULL DEFAULT 'rekordbox-sync',
+  created_at TEXT NOT NULL,
+  last_used_at DOUBLE PRECISION
+);
+CREATE INDEX IF NOT EXISTS sync_tokens_user ON sync_tokens(user_id);
 """
 
 

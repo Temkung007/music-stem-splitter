@@ -652,6 +652,14 @@
   justify-content: center;
   padding: 8px 10px;
 }
+.set-list-action-row {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+.set-list-action-row > * {
+  flex: 1;
+}
 .set-list-empty {
   padding: 30px 10px;
   text-align: center;
@@ -1071,6 +1079,35 @@
   color: #b5c7aa;
   line-height: 1.5;
   display: block;
+}
+.sync-command-box {
+  background: #11150e;
+  border: 1px solid #364429;
+  border-radius: 8px;
+  padding: 14px;
+}
+.sync-command-box label strong {
+  display: block;
+  font-size: 11px;
+  color: var(--lime);
+  margin-bottom: 8px;
+}
+.command-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.command-row code {
+  flex: 1;
+  background: #1a2215;
+  border: 1px solid #2d3b22;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #c7dbb4;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 .account-fact {
   display: flex;

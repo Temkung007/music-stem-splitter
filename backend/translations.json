@@ -2638,5 +2638,65 @@
   "💡 หมายเหตุ: CloudDirectPlay ของ AlphaTheta เป็นระบบคลาวด์ปิดของ Pioneer DJ โดยเฉพาะ แต่การใช้ rekordbox XML Bridge เป็นวิธีมาตรฐานของ DJ สากลที่นำเข้าเพลง คีย์ และ Beatgrid ได้สมบูรณ์ที่สุด": {
     "th": "💡 หมายเหตุ: CloudDirectPlay ของ AlphaTheta เป็นระบบคลาวด์ปิดของ Pioneer DJ โดยเฉพาะ แต่การใช้ rekordbox XML Bridge เป็นวิธีมาตรฐานของ DJ สากลที่นำเข้าเพลง คีย์ และ Beatgrid ได้สมบูรณ์ที่สุด",
     "en": "💡 Note: AlphaTheta CloudDirectPlay is a closed proprietary cloud system, but the rekordbox XML Bridge is the universal DJ industry standard to import playlists with Camelot keys and beatgrids."
+  },
+  "ซิงก์กับ rekordbox": {
+    "th": "ซิงก์กับ rekordbox",
+    "en": "Sync with rekordbox"
+  },
+  "ซิงก์อัตโนมัติกับ Pioneer DJ rekordbox": {
+    "th": "ซิงก์อัตโนมัติกับ Pioneer DJ rekordbox",
+    "en": "Live Sync with Pioneer DJ rekordbox"
+  },
+  "⚡ ระบบ Live Sync จะคอยดึงเพลงใหม่และอัปเดตเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติทันทีที่จัดเซ็ตบนเว็บ": {
+    "th": "⚡ ระบบ Live Sync จะคอยดึงเพลงใหม่และอัปเดตเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติทันทีที่จัดเซ็ตบนเว็บ",
+    "en": "⚡ Live Sync automatically downloads new tracks and updates playlists in rekordbox on your computer as you edit on the web."
+  },
+  "คำสั่งเริ่ม Auto-Sync บน Mac / PC:": {
+    "th": "คำสั่งเริ่ม Auto-Sync บน Mac / PC:",
+    "en": "Command to start Auto-Sync on Mac / PC:"
+  },
+  "กำลังโหลดโทเค็น…": {
+    "th": "กำลังโหลดโทเค็น…",
+    "en": "Loading token…"
+  },
+  "คัดลอกคำสั่ง": {
+    "th": "คัดลอกคำสั่ง",
+    "en": "Copy command"
+  },
+  "คัดลอกแล้ว": {
+    "th": "คัดลอกแล้ว",
+    "en": "Copied"
+  },
+  "รันคำสั่งใน Terminal บนเครื่องของคุณ": {
+    "th": "รันคำสั่งใน Terminal บนเครื่องของคุณ",
+    "en": "Run command in Terminal on your computer"
+  },
+  "เปิดโปรแกรม Terminal บน Mac (หรือ PowerShell บน Windows) วางคำสั่งด้านบนแล้วกด Enter ตัว Agent จะสร้างโฟลเดอร์ ~/Music/STEMORA และดึงเพลงมาเตรียมพร้อมให้ทันที": {
+    "th": "เปิดโปรแกรม Terminal บน Mac (หรือ PowerShell บน Windows) วางคำสั่งด้านบนแล้วกด Enter ตัว Agent จะสร้างโฟลเดอร์ ~/Music/STEMORA และดึงเพลงมาเตรียมพร้อมให้ทันที",
+    "en": "Open Terminal on Mac (or PowerShell on Windows), paste the command, and press Enter. The Agent creates ~/Music/STEMORA and syncs your tracks immediately."
+  },
+  "เชื่อมต่อกับ rekordbox (ตั้งค่าครั้งเดียว)": {
+    "th": "เชื่อมต่อกับ rekordbox (ตั้งค่าครั้งเดียว)",
+    "en": "Connect with rekordbox (one-time setup)"
+  },
+  "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์: ~/Music/STEMORA/rekordbox.xml": {
+    "th": "ใน rekordbox เข้าไปที่ Preferences > Advanced > Database ในช่อง rekordbox xml ให้เลือกไฟล์: ~/Music/STEMORA/rekordbox.xml",
+    "en": "In rekordbox, go to Preferences > Advanced > Database. In the 'rekordbox xml' field, select: ~/Music/STEMORA/rekordbox.xml"
+  },
+  "เปิดใช้งานและเล่นได้เลย": {
+    "th": "เปิดใช้งานและเล่นได้เลย",
+    "en": "Enable and start playing"
+  },
+  "เปิด Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA ในแถบซ้ายของ rekordbox พร้อมเล่นเพลงและคีย์ Camelot ทันที เมื่อคุณจัดเซ็ตบนเว็บ rekordbox จะซิงก์ตามตลอดเวลา!": {
+    "th": "เปิด Preferences > View > Layout แล้วติ๊กเลือก rekordbox xml คุณจะเห็นโฟลเดอร์ STEMORA ในแถบซ้ายของ rekordbox พร้อมเล่นเพลงและคีย์ Camelot ทันที เมื่อคุณจัดเซ็ตบนเว็บ rekordbox จะซิงก์ตามตลอดเวลา!",
+    "en": "Open Preferences > View > Layout and check 'rekordbox xml'. You'll see the STEMORA folder in rekordbox's left sidebar with Camelot keys and tracks ready to play. As you build sets on the web, rekordbox stays synced automatically!"
+  },
+  "สร้างโทเค็นใหม่": {
+    "th": "สร้างโทเค็นใหม่",
+    "en": "Generate new token"
+  },
+  "รีเฟรช": {
+    "th": "รีเฟรช",
+    "en": "Refresh"
   }
 }

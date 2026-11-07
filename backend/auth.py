@@ -44,6 +44,11 @@ def safe_user(row):
 
 def current_user(request: Request):
     token = request.cookies.get(COOKIE, "")
+    auth = request.headers.get("Authorization", "")
+    if not token and auth.startswith("Bearer "):
+        token = auth[7:].strip()
+    if not token:
+        token = request.query_params.get("token", "")
     if not token:
         raise HTTPException(401, "กรุณาเข้าสู่ระบบ")
     digest = hashlib.sha256(token.encode()).hexdigest()
@@ -52,6 +57,16 @@ def current_user(request: Request):
             "SELECT u.* FROM users u JOIN sessions s ON u.id=s.user_id WHERE s.hash=? AND s.expires_at>?",
             (digest, time.time()),
         ).fetchone()
+        if not user:
+            user = db.execute(
+                "SELECT u.* FROM users u JOIN sync_tokens st ON u.id=st.user_id WHERE st.token_hash=?",
+                (digest,),
+            ).fetchone()
+            if user:
+                db.execute(
+                    "UPDATE sync_tokens SET last_used_at=? WHERE token_hash=?",
+                    (time.time(), digest),
+                )
     if not user:
         raise HTTPException(401, "เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง")
     return safe_user(user)
