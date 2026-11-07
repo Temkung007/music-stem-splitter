@@ -37,15 +37,13 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
+      className="dark"
       data-type="software"
       data-radius="soft"
-      data-ground="sage"
       data-buttons="solid"
       data-motion="on"
     >
       <head>
-        <meta name="site-kind" content="software" />
-        <meta name="page-type" content="software" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -62,18 +60,18 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               :root {
-                --p-bg: #111213;
-                --p-surface: #18191b;
-                --p-ink: #f2f4ec;
-                --p-muted: #9fa697;
+                --p-bg: #090a0d;
+                --p-surface: #12141a;
+                --p-ink: #f8fafc;
+                --p-muted: #94a3b8;
                 --p-accent: #d7f98b;
-                --p-accent-ink: #111213;
+                --p-accent-ink: #090a0d;
                 --p-action: #d7f98b;
-                --p-action-ink: #111213;
+                --p-action-ink: #090a0d;
                 --accent: #d7f98b;
                 --action: #d7f98b;
-                --line: rgba(242, 244, 236, 0.12);
-                --line-strong: rgba(242, 244, 236, 0.22);
+                --line: rgba(255, 255, 255, 0.08);
+                --line-strong: rgba(255, 255, 255, 0.16);
                 --btn-h: 44px;
               }
               main#top {

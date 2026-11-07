@@ -63,8 +63,8 @@
    studios); on a tech page (site-kind tech, software or gaming) a soft mesh of the ground's own tones,
    the Figma tile, with no grain (grain or texture would be the page's one effect). A [data-fx] panel
    draws its effect instead. */
-.panel:not([data-fx], .panel--device) { background: var(--ground-bg, #d9ccb7); }
-:root:has(meta[name="site-kind"]:is([content="tech"], [content="software"], [content="gaming"])) .panel:not([data-fx], .panel--device) {
+.card > .panel:not([data-fx], .panel--device) { background: var(--ground-bg, #d9ccb7); }
+:root:has(meta[name="site-kind"]:is([content="tech"], [content="software"], [content="gaming"])) .card > .panel:not([data-fx], .panel--device) {
   background-color: var(--ground-bg, #d9ccb7);
   background-image:
     radial-gradient(70% 90% at 12% 0%, color-mix(in oklab, var(--ground-surface, #e9e0d2) 92%, white), transparent 70%),
@@ -76,12 +76,12 @@
 /* system.css spaces the text above a panel itself; here the panel carries the 32px */
 .card > :has(+ .panel) { margin-bottom: 0; }
 /* a crisp 1px edge over the ground and over any fragment it crops */
-.panel::after {
+.card > .panel::after {
   content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: inherit;
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ink) 7%, transparent), inset 0 1px 0 color-mix(in oklab, var(--ink) 4%, transparent);
 }
 /* the vignette that calms the ground where the fragment sits (--vx, --vy: its centre) */
-.panel::before {
+.card > .panel::before {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; width: auto; padding: 0;
   background: radial-gradient(ellipse 70% 62% at var(--vx, 50%) var(--vy, 62%),
     color-mix(in oklab, var(--calm, var(--card)) var(--calm-k, 34%), transparent), transparent 72%);

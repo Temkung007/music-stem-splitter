@@ -9,14 +9,14 @@
 
 /* Taste-Skill Dark Studio Palette & Tokens for STEMORA */
 :root {
-  --p-bg: #111213;
-  --p-surface: #18191b;
-  --p-ink: #f2f4ec;
-  --p-muted: #9fa697;
+  --p-bg: #090a0d;
+  --p-surface: #12141a;
+  --p-ink: #f8fafc;
+  --p-muted: #94a3b8;
   --p-accent: #d7f98b;
-  --p-accent-ink: #111213;
+  --p-accent-ink: #090a0d;
   --p-action: #d7f98b;
-  --p-action-ink: #111213;
+  --p-action-ink: #090a0d;
   --p-inv-bg: #f2f4ec;
   --p-inv-surface: #e0e2db;
   --p-inv-ink: #111213;
