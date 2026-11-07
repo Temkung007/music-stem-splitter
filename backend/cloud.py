@@ -369,13 +369,12 @@ def make_library_demo(path, bpm, note, energy):
 async def demo_library(background_tasks: BackgroundTasks, user=Depends(current_user)):
     rate_limit("demo:" + user["id"], 2)
     identifiers = []
-    for title, bpm, note, energy in [
-        ("Golden hour", 105, 60, 0.45),
-        ("Late checkout", 112, 67, 0.55),
-        ("Night drive", 120, 62, 0.65),
-        ("Neon room", 124, 69, 0.8),
-        ("After midnight", 128, 64, 1),
-        ("First light", 118, 57, 0.65),
+    for title, artist, genre, bpm, note, energy in [
+        ("Bangkok Midnight", "Nova Skyline", "Tech House", 126, 60, 0.85),
+        ("Phuket Sunset Groove", "DJ Sunburst", "Melodic House", 122, 65, 0.72),
+        ("Chao Phraya Deep", "Aqua Resonance", "Deep House", 124, 62, 0.78),
+        ("Neon Silom", "Cyberpulse", "Nu-Disco / Synth", 120, 57, 0.68),
+        ("Thonglor Afterhours", "K-Rhythm", "Afro House / Peak", 128, 64, 0.92),
     ]:
         path = INCOMING / f"{uuid.uuid4()}.wav"
         await asyncio.to_thread(make_library_demo, path, bpm, note, energy)
@@ -388,8 +387,8 @@ async def demo_library(background_tasks: BackgroundTasks, user=Depends(current_u
                 path.stat().st_size,
                 {
                     "title": title,
-                    "artist": "STEMORA Sessions",
-                    "genre": "Demo synth",
+                    "artist": artist,
+                    "genre": genre,
                     "duration": 16,
                 },
             )
@@ -399,7 +398,27 @@ async def demo_library(background_tasks: BackgroundTasks, user=Depends(current_u
             path.unlink(missing_ok=True)
             if error.status_code != 409:
                 raise
+
+    async def seed_playlist_after(track_ids, uid):
+        await asyncio.sleep(3)
+        try:
+            with connect() as db:
+                existing = db.execute("SELECT COUNT(*) FROM playlists WHERE user_id=? AND deleted_at IS NULL", (uid,)).fetchone()[0]
+                if existing == 0 and track_ids:
+                    pid = str(uuid.uuid4())
+                    ts = datetime.now(timezone.utc).isoformat()
+                    items = [{"track_id": tid, "note": f"Camelot transition {idx+1}", "locked": False} for idx, tid in enumerate(track_ids)]
+                    db.execute(
+                        "INSERT INTO playlists(id, user_id, name, description, prompt, target_minutes, profile, items, revision, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?)",
+                        (pid, uid, "Weekend Club Peak (Rekordbox Ready)", "เซ็ตเพลงทดสอบระบบ 5 เพลง คัดสรรคีย์และ BPM พร้อมเปิดใน Pioneer DJ rekordbox", "จัดเพลงปาร์ตี้พลังงานสูง 5 เพลง", 60, "build", json.dumps(items, ensure_ascii=False), ts, ts)
+                    )
+        except Exception:
+            logger.exception("Failed to auto-seed playlist for user: %s", uid)
+
+    if identifiers:
+        background_tasks.add_task(seed_playlist_after, identifiers, user["id"])
+
     return {
         "track_ids": identifiers,
-        "message": "เพลงสังเคราะห์สำหรับทดลองระบบ ไม่มีการนำเพลงผู้อื่นมาใช้",
+        "message": "เพิ่มเพลงทดสอบระบบ 5 เพลงสำหรับทดลองระบบพร้อมเปิดใน rekordbox แล้ว",
     }

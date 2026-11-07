@@ -243,18 +243,28 @@ export function MusicLibrary({
             e.target.value = "";
           }}
         />
-        <button
-          className="primary-button small"
-          onClick={() => input.current?.click()}
-          disabled={busy}
-        >
-          {busy ? (
-            <LoaderCircle size={16} className="spin" />
-          ) : (
-            <Plus size={16} />
-          )}{" "}
-          {tr("เพิ่มเพลง")}
-        </button>
+        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+          <button
+            className="secondary-button small"
+            onClick={() => void demo()}
+            disabled={busy}
+            title={tr("เพิ่มเพลงตัวอย่าง 5 เพลงสำหรับทดสอบระบบ")}
+          >
+            <Sparkles size={14} /> {tr("เพิ่มเพลงทดสอบ (5 เพลง)")}
+          </button>
+          <button
+            className="primary-button small"
+            onClick={() => input.current?.click()}
+            disabled={busy}
+          >
+            {busy ? (
+              <LoaderCircle size={16} className="spin" />
+            ) : (
+              <Plus size={16} />
+            )}{" "}
+            {tr("เพิ่มเพลง")}
+          </button>
+        </div>
       </section>
       <section className="panel music-table-panel">
         <div className="library-tools">
