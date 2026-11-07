@@ -74,10 +74,8 @@ body {
 }
 
 .logo-icon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(163, 230, 53, 0.45));
+  width: 26px;
+  height: 26px;
 }
 
 .brand-text h1 {
