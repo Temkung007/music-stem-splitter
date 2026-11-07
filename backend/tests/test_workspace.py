@@ -306,6 +306,27 @@ class WorkspaceTests(HttpHarness):
         self.assertEqual(
             self.request(f"/api/playlists/{playlist['id']}/export?format=csv")[0], 200
         )
+        code, xml_bytes, _ = self.request(
+            f"/api/playlists/{playlist['id']}/export?format=rekordbox"
+        )
+        self.assertEqual(code, 200)
+        xml_str = xml_bytes.decode()
+        self.assertIn("<DJ_PLAYLISTS", xml_str)
+        self.assertIn("My private set", xml_str)
+        self.assertIn('<COLLECTION Entries="2"', xml_str)
+
+        code, zip_bytes, _ = self.request(
+            f"/api/playlists/{playlist['id']}/export?format=rekordbox_zip"
+        )
+        self.assertEqual(code, 200)
+        with zipfile.ZipFile(io.BytesIO(zip_bytes)) as archive:
+            files = archive.namelist()
+            self.assertIn("rekordbox.xml", files)
+            self.assertIn("playlist.m3u8", files)
+
+        code, all_xml, _ = self.request("/api/playlists/export/rekordbox")
+        self.assertEqual(code, 200)
+        self.assertIn("<DJ_PLAYLISTS", all_xml.decode())
         self.assertEqual(
             self.json(f"/api/playlists/{playlist['id']}/duplicate", {})[0], 201
         )

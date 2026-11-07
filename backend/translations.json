@@ -1784,8 +1784,8 @@
     "en": "Some songs are in Trash. Restore or remove them from the playlist before exporting."
   },
   "รองรับ m3u, csv หรือ zip": {
-    "th": "รองรับ m3u, csv หรือ zip",
-    "en": "Supported export formats are m3u, csv and zip."
+    "th": "รองรับ m3u, csv, zip หรือ rekordbox",
+    "en": "Supported export formats are m3u, csv, zip and rekordbox."
   },
   "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์": {
     "th": "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์",
@@ -2594,5 +2594,49 @@
   "โควตาแยกเสียงวันนี้ไม่พอ กรุณารอรอบใหม่ หรือเลือกแยกบนอุปกรณ์ของคุณ": {
     "th": "โควตาแยกเสียงวันนี้ไม่พอ กรุณารอรอบใหม่ หรือเลือกแยกบนอุปกรณ์ของคุณ",
     "en": "Not enough audio minutes left today. Wait for the daily reset or process on your own device."
+  },
+  "วิธีเชื่อมต่อกับ rekordbox": {
+    "th": "วิธีเชื่อมต่อกับ rekordbox",
+    "en": "How to connect with rekordbox"
+  },
+  "วิธีเชื่อมต่อเพลย์ลิสต์กับ Pioneer DJ rekordbox": {
+    "th": "วิธีเชื่อมต่อเพลย์ลิสต์กับ Pioneer DJ rekordbox",
+    "en": "How to connect playlists with Pioneer DJ rekordbox"
+  },
+  "ส่งออกคลัง rekordbox": {
+    "th": "ส่งออกคลัง rekordbox",
+    "en": "Export rekordbox library"
+  },
+  "ส่งออกทุกเพลย์ลิสต์ไปยัง rekordbox XML": {
+    "th": "ส่งออกทุกเพลย์ลิสต์ไปยัง rekordbox XML",
+    "en": "Export all playlists to rekordbox XML"
+  },
+  "เปิดเมนู rekordbox XML ในการตั้งค่า": {
+    "th": "เปิดเมนู rekordbox XML ในการตั้งค่า",
+    "en": "Enable rekordbox XML in preferences"
+  },
+  "เปิด rekordbox เข้าไปที่ Preferences (การตั้งค่า) > View (มุมมอง) > Layout แล้วติ๊กถูกที่ช่อง rekordbox xml": {
+    "th": "เปิด rekordbox เข้าไปที่ Preferences (การตั้งค่า) > View (มุมมอง) > Layout แล้วติ๊กถูกที่ช่อง rekordbox xml",
+    "en": "Open rekordbox, go to Preferences > View > Layout, and enable the 'rekordbox xml' checkbox."
+  },
+  "เลือกไฟล์ XML จาก STEMORA": {
+    "th": "เลือกไฟล์ XML จาก STEMORA",
+    "en": "Select XML file from STEMORA"
+  },
+  "ไปที่ Preferences > Advanced (ขั้นสูง) > Database (ฐานข้อมูล) ในหัวข้อ rekordbox xml ให้กด Browse แล้วเลือกไฟล์ .xml ที่ดาวน์โหลดจาก STEMORA": {
+    "th": "ไปที่ Preferences > Advanced (ขั้นสูง) > Database (ฐานข้อมูล) ในหัวข้อ rekordbox xml ให้กด Browse แล้วเลือกไฟล์ .xml ที่ดาวน์โหลดจาก STEMORA",
+    "en": "Go to Preferences > Advanced > Database. Under rekordbox xml, click Browse and choose the .xml file exported from STEMORA."
+  },
+  "นำเข้าเพลงพร้อมเล่นบน CDJ / Controller": {
+    "th": "นำเข้าเพลงพร้อมเล่นบน CDJ / Controller",
+    "en": "Import tracks ready for CDJ / Controller"
+  },
+  "ในแถบซ้ายของ rekordbox ให้เปิดหมวด rekordbox xml > STEMORA จะพบเพลย์ลิสต์พร้อมค่า BPM, Camelot Key, และ Cue Marker สามารถลากลง Deck หรือกด Import to Collection / Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที": {
+    "th": "ในแถบซ้ายของ rekordbox ให้เปิดหมวด rekordbox xml > STEMORA จะพบเพลย์ลิสต์พร้อมค่า BPM, Camelot Key, และ Cue Marker สามารถลากลง Deck หรือกด Import to Collection / Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที",
+    "en": "In rekordbox's left sidebar, expand rekordbox xml > STEMORA to find your playlist with BPM, Camelot Keys, and Cue Markers ready to drag to decks or sync to USB for CDJ playback."
+  },
+  "💡 หมายเหตุ: CloudDirectPlay ของ AlphaTheta เป็นระบบคลาวด์ปิดของ Pioneer DJ โดยเฉพาะ แต่การใช้ rekordbox XML Bridge เป็นวิธีมาตรฐานของ DJ สากลที่นำเข้าเพลง คีย์ และ Beatgrid ได้สมบูรณ์ที่สุด": {
+    "th": "💡 หมายเหตุ: CloudDirectPlay ของ AlphaTheta เป็นระบบคลาวด์ปิดของ Pioneer DJ โดยเฉพาะ แต่การใช้ rekordbox XML Bridge เป็นวิธีมาตรฐานของ DJ สากลที่นำเข้าเพลง คีย์ และ Beatgrid ได้สมบูรณ์ที่สุด",
+    "en": "💡 Note: AlphaTheta CloudDirectPlay is a closed proprietary cloud system, but the rekordbox XML Bridge is the universal DJ industry standard to import playlists with Camelot keys and beatgrids."
   }
 }

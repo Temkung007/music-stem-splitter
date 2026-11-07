@@ -20,6 +20,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import FileResponse, Response
 from i18n import t
 from pydantic import BaseModel, Field
+from rekordbox_export import generate_rekordbox_xml
 from starlette.background import BackgroundTask
 from storage import storage
 
@@ -181,6 +182,29 @@ def list_playlists(trash: bool = False, user=Depends(current_user)):
 @router.post("", status_code=201, dependencies=[Depends(mutation_guard)])
 def create(body: PlaylistInput, user=Depends(current_user)):
     return save(user["id"], body)
+
+
+@router.get("/export/rekordbox")
+def export_all_rekordbox(user=Depends(current_user)):
+    with connect() as db:
+        playlists_rows = db.execute(
+            "SELECT * FROM playlists WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC",
+            (user["id"],),
+        ).fetchall()
+        tracks_rows = db.execute(
+            "SELECT * FROM tracks WHERE user_id=? AND deleted_at IS NULL AND status='ready'",
+            (user["id"],),
+        ).fetchall()
+    playlists = [dict(r) for r in playlists_rows]
+    tracks = [dict(r) for r in tracks_rows]
+    xml_content = generate_rekordbox_xml(playlists, tracks)
+    return Response(
+        xml_content,
+        media_type="application/xml",
+        headers={
+            "Content-Disposition": 'attachment; filename="stemora_rekordbox_library.xml"'
+        },
+    )
 
 
 @router.get("/{playlist_id}")
@@ -556,8 +580,45 @@ def export(playlist_id: str, format: str = "m3u", user=Depends(current_user)):
             media_type="audio/x-mpegurl",
             headers={"Content-Disposition": 'attachment; filename="playlist.m3u8"'},
         )
+    if format in ("rekordbox", "rekordbox_xml", "xml"):
+        xml_content = generate_rekordbox_xml([playlist], entries)
+        quoted = __import__("urllib.parse", fromlist=["quote"]).quote(
+            f"{filename}_rekordbox.xml"
+        )
+        return Response(
+            xml_content,
+            media_type="application/xml",
+            headers={"Content-Disposition": f"attachment; filename*=UTF-8''{quoted}"},
+        )
+    if format == "rekordbox_zip":
+        if sum(t["size_bytes"] for t in entries) > 1024**3:
+            raise HTTPException(
+                413, "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์"
+            )
+        xml_content = generate_rekordbox_xml([playlist], entries)
+        descriptor, name = tempfile.mkstemp(suffix=".zip", dir=DATA)
+        os.close(descriptor)
+        temporary = Path(name)
+        try:
+            with zipfile.ZipFile(temporary, "w", zipfile.ZIP_STORED) as archive:
+                archive.writestr("rekordbox.xml", xml_content)
+                archive.writestr("playlist.m3u8", m3u)
+                for track in entries:
+                    archive.write(
+                        storage.materialize(track["object_key"]),
+                        track["export_filename"],
+                    )
+        except Exception:
+            temporary.unlink(missing_ok=True)
+            raise HTTPException(503, "เตรียมไฟล์ไม่สำเร็จ กรุณาลองใหม่")
+        return FileResponse(
+            temporary,
+            filename=f"{filename}_rekordbox.zip",
+            media_type="application/zip",
+            background=BackgroundTask(temporary.unlink, missing_ok=True),
+        )
     if format != "zip":
-        raise HTTPException(422, "รองรับ m3u, csv หรือ zip")
+        raise HTTPException(422, "รองรับ m3u, csv, zip หรือ rekordbox")
     if sum(t["size_bytes"] for t in entries) > 1024**3:
         raise HTTPException(413, "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์")
     descriptor, name = tempfile.mkstemp(suffix=".zip", dir=DATA)

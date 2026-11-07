@@ -11,6 +11,7 @@ import {
   Clock3,
   Copy,
   GripVertical,
+  HelpCircle,
   History,
   ListMusic,
   LoaderCircle,
@@ -68,6 +69,7 @@ export function DjPlaylists({
     { revision: number; created_at: string }[] | null
   >(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [showRekordboxGuide, setShowRekordboxGuide] = useState(false);
   useEffect(() => {
     onDirtyChange?.(dirty);
     if (!dirty) return;
@@ -372,13 +374,24 @@ export function DjPlaylists({
               </button>
             ))
           )}
-          <button
-            className="secondary-button"
-            onClick={() => void load()}
-            disabled={busy}
-          >
-            {tr("รีเฟรชรายการ")}
-          </button>
+          <div className="set-list-actions">
+            <button
+              className="secondary-button"
+              onClick={() => void load()}
+              disabled={busy}
+            >
+              {tr("รีเฟรชรายการ")}
+            </button>
+            <a
+              className="secondary-button"
+              href="/api/playlists/export/rekordbox"
+              download="stemora_rekordbox_library.xml"
+              title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง rekordbox XML")}
+            >
+              <ArrowDownToLine size={14} />
+              {tr("ส่งออกคลัง rekordbox")}
+            </a>
+          </div>
           </div>
         </aside>
         <div className="set-main">
@@ -874,11 +887,17 @@ export function DjPlaylists({
                         )}
                       </p>
                     </div>
-                    {["csv", "m3u", "zip"].map((format) => (
+                    {[
+                      { key: "csv", label: "CSV" },
+                      { key: "m3u", label: "M3U8" },
+                      { key: "zip", label: "ZIP" },
+                      { key: "rekordbox", label: "rekordbox XML" },
+                      { key: "rekordbox_zip", label: "rekordbox ZIP" },
+                    ].map(({ key, label }) => (
                       <a
-                        key={format}
+                        key={key}
                         className={
-                          format === "zip"
+                          key === "rekordbox_zip" || key === "zip"
                             ? "primary-button small"
                             : "secondary-button"
                         }
@@ -889,13 +908,22 @@ export function DjPlaylists({
                             setError(tr("กรุณาบันทึกและเพิ่มเพลงก่อนส่งออก"));
                           }
                         }}
-                        href={`/api/playlists/${draft.id}/export?format=${format}`}
+                        href={`/api/playlists/${draft.id}/export?format=${key}`}
                         download
                       >
                         <ArrowDownToLine size={14} />
-                        {format === "m3u" ? "M3U8" : format.toUpperCase()}
+                        {label}
                       </a>
                     ))}
+                    <button
+                      type="button"
+                      className="icon-button"
+                      title={tr("วิธีเชื่อมต่อกับ rekordbox")}
+                      aria-label={tr("วิธีเชื่อมต่อกับ rekordbox")}
+                      onClick={() => setShowRekordboxGuide(true)}
+                    >
+                      <HelpCircle size={15} />
+                    </button>
                   </footer>
                 </>
               )}
@@ -952,6 +980,57 @@ export function DjPlaylists({
               </div>
             ))
           )}
+        </Modal>
+      )}
+      {showRekordboxGuide && (
+        <Modal
+          title={tr("วิธีเชื่อมต่อเพลย์ลิสต์กับ Pioneer DJ rekordbox")}
+          close={() => setShowRekordboxGuide(false)}
+        >
+          <div className="rekordbox-guide">
+            <div className="guide-step">
+              <span className="step-num">1</span>
+              <div>
+                <strong>{tr("เปิดเมนู rekordbox XML ในการตั้งค่า")}</strong>
+                <p>
+                  {tr(
+                    "เปิด rekordbox เข้าไปที่ Preferences (การตั้งค่า) > View (มุมมอง) > Layout แล้วติ๊กถูกที่ช่อง rekordbox xml",
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="guide-step">
+              <span className="step-num">2</span>
+              <div>
+                <strong>{tr("เลือกไฟล์ XML จาก STEMORA")}</strong>
+                <p>
+                  {tr(
+                    "ไปที่ Preferences > Advanced (ขั้นสูง) > Database (ฐานข้อมูล) ในหัวข้อ rekordbox xml ให้กด Browse แล้วเลือกไฟล์ .xml ที่ดาวน์โหลดจาก STEMORA",
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="guide-step">
+              <span className="step-num">3</span>
+              <div>
+                <strong>
+                  {tr("นำเข้าเพลงพร้อมเล่นบน CDJ / Controller")}
+                </strong>
+                <p>
+                  {tr(
+                    "ในแถบซ้ายของ rekordbox ให้เปิดหมวด rekordbox xml > STEMORA จะพบเพลย์ลิสต์พร้อมค่า BPM, Camelot Key, และ Cue Marker สามารถลากลง Deck หรือกด Import to Collection / Sync ไปยัง USB เพื่อเล่นกับ CDJ ได้ทันที",
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="guide-note">
+              <small>
+                {tr(
+                  "💡 หมายเหตุ: CloudDirectPlay ของ AlphaTheta เป็นระบบคลาวด์ปิดของ Pioneer DJ โดยเฉพาะ แต่การใช้ rekordbox XML Bridge เป็นวิธีมาตรฐานของ DJ สากลที่นำเข้าเพลง คีย์ และ Beatgrid ได้สมบูรณ์ที่สุด",
+                )}
+              </small>
+            </div>
+          </div>
         </Modal>
       )}
     </div>

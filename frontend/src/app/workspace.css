@@ -636,10 +636,21 @@
 .library-tabs.compact button {
   font-size: 10px;
 }
-.set-list > .secondary-button {
+.set-list > .secondary-button,
+.set-list-actions {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 16px;
+}
+.set-list-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.set-list-actions .secondary-button {
+  width: 100%;
   font-size: 10px;
+  justify-content: center;
+  padding: 8px 10px;
 }
 .set-list-empty {
   padding: 30px 10px;
@@ -1007,6 +1018,59 @@
   color: #819d69;
   font-size: 10px;
   margin-top: 3px;
+}
+.rekordbox-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px 0 10px;
+}
+.guide-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 13px 14px;
+  background: #141711;
+  border: 1px solid #334026;
+  border-radius: 8px;
+}
+.guide-step .step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: #0c120a;
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.guide-step strong {
+  display: block;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.guide-step p {
+  font-size: 11px;
+  color: #9db090;
+  line-height: 1.6;
+  margin: 0;
+}
+.guide-note {
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: #1e2617;
+  border-left: 3px solid var(--lime);
+}
+.guide-note small {
+  font-size: 11px;
+  color: #b5c7aa;
+  line-height: 1.5;
+  display: block;
 }
 .account-fact {
   display: flex;
