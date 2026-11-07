@@ -1,0 +1,10 @@
+[Unit]
+Description=STEMORA operator health and queue checks
+Requires=docker.service
+After=docker.service
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/stemora
+ExecStart=/usr/bin/python3 scripts/operations.py monitor
+UMask=0077
+TimeoutStartSec=2min

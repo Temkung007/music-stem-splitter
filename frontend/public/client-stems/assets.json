@@ -1,0 +1,18 @@
+{
+  "version": "gpu-lite-v1-8193504c",
+  "files": [
+    {
+      "name": "runtime-lite-v1_bg.wasm",
+      "packaged": "runtime-lite-v1_bg.wasm.gz",
+      "bytes": 12771203,
+      "sha256": "d3b03c11cc113c9c915e4eed1da7199bbab8081900ef4cb108bccd284e325a7a"
+    },
+    {
+      "name": "weights-8193504c.bin",
+      "url": "https://huggingface.co/set-soft/audio_separation/resolve/939723568b2dca203e61cc7294317ba38549964f/Demucs/htdemucs.safetensors",
+      "bytes": 84030696,
+      "sha256": "8193504cdfb3943adaf039b8acb524a46e87ebf232c383ac7a32c80a6578423e"
+    }
+  ],
+  "worker": "worker-lite-v1.js"
+}

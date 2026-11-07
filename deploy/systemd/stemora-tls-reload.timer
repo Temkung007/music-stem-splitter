@@ -1,0 +1,10 @@
+[Unit]
+Description=Check for a renewed STEMORA certificate
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=1h
+Unit=stemora-tls-reload.service
+
+[Install]
+WantedBy=timers.target

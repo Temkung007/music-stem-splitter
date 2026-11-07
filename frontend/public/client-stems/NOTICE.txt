@@ -1,0 +1,26 @@
+STEMORA browser audio separation
+
+The runtime-lite-v1.js / runtime-lite-v1_bg.wasm files are a STEMORA build of
+Apache-2.0 licensed demucs-rs v0.3.5, source commit
+805d6f72ede20282832ac78c634e8767716c0b21.
+Source: https://github.com/nikhilunni/demucs-rs/tree/v0.3.5
+Copyright the demucs-rs contributors. See APACHE-2.0.txt.
+
+MODIFICATION: disable Burn autotune and default features in demucs-wasm/Cargo.toml,
+while retaining std, WebGPU and fusion. Model layers and weights are unchanged.
+Compiler: rustc 1.94.0, wasm-bindgen 0.2.108, target wasm32-unknown-unknown.
+Patch and build instructions: frontend/inference-assets/runtime-lite-v1.patch
+and frontend/inference-assets/README.md in the STEMORA source.
+The generated JavaScript binding is unmodified. The WASM digest and size are
+recorded in assets.json; its gzipped build artifact ships with the source.
+
+The runtime includes Burn, CubeCL, wgpu, wasm-bindgen and their dependencies.
+Conservative dependency notices are provided in THIRD-PARTY.txt.
+
+The model is standard four-source HTDemucs by Meta Research (MIT).
+Original source: https://github.com/facebookresearch/demucs
+Converted safetensors: set-soft/audio_separation on Hugging Face.
+Exact revision and SHA-256: assets.json. License: DEMUCS-MIT.txt.
+
+STEMORA's worker bridge, WAV/ZIP packaging, UI and cloud import are application
+code. The browser requests runtime and model files only from its own origin.

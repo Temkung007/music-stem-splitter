@@ -1,0 +1,10 @@
+[Unit]
+Description=Load renewed STEMORA certificate in the shared Nginx
+After=docker.service
+Requires=docker.service
+ConditionPathExists=/var/www/TicketPlus-dashboard/nginx/conf.d/stemora.mydjplus.com.conf
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /var/www/stemora/scripts/reload-tls.sh
+TimeoutStartSec=30

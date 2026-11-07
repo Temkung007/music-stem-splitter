@@ -1,917 +1,1417 @@
 "use client";
+import { translateClient as tr } from "@/lib/i18n";
 
-import React, { useState, useRef, useEffect } from "react";
+import { LanguageSwitcher, useLocale } from "@/components/locale-provider";
 import {
-  Music2,
-  Mic2,
-  Disc3,
-  Sliders,
-  Volume2,
-  VolumeX,
-  Play,
-  Pause,
-  RotateCcw,
-  Download,
-  Upload,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  AudioLines,
+  Check,
   CheckCircle2,
-  Sparkles,
-  Layers,
-  Cpu,
-  RefreshCw,
-  FolderArchive,
-  Volume1,
+  ChevronRight,
+  CircleHelp,
+  Clock3,
+  Cloud,
+  ListMusic,
+  Settings,
+  LogOut,
   FileAudio,
+  FolderOpen,
+  Layers3,
+  LoaderCircle,
+  Mic2,
+  Plus,
+  ShieldCheck,
+  SlidersHorizontal,
+  Sparkles,
+  Upload,
+  Trash2,
+  X,
 } from "lucide-react";
-import confetti from "canvas-confetti";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import { BorderBeam } from "@/components/magicui/border-beam";
+import { SoundPreview } from "@/components/sound-preview";
+import { Brand } from "@/components/brand";
+import { StemStorageChoice } from "@/components/stem-storage-choice";
+import { StemJobStatus } from "@/components/stem-job-status";
+import { StemBatch } from "@/components/stem-batch";
+import { AuthBoundary, useAuth } from "@/components/auth-boundary";
+import { MusicLibrary } from "@/components/music-library";
+import { DjPlaylists } from "@/components/dj-playlists";
+import { AccountPanel } from "@/components/account-panel";
+import { Modal, Notice } from "@/components/workspace-ui";
+import { queueSeparation } from "@/lib/separation-upload";
+import { apiFetch } from "@/lib/api";
+import { useClientStems } from "@/hooks/use-client-stems";
+import {
+  StemMixer,
+  formatTime,
+  type Task,
+} from "@/components/stem-mixer";
 
-interface StemData {
-  filename: string;
-  url: string;
-  peaks: number[];
-  size_bytes?: number;
-}
-
-interface TaskResult {
-  id: string;
-  filename: string;
-  stems_mode: string;
-  status: "queued" | "processing" | "completed" | "failed";
-  progress: number;
-  message: string;
-  stems: Record<string, StemData>;
-  original?: {
-    filename: string;
-    url: string;
-    peaks: number[];
-  };
-}
-
-interface StemControl {
-  name: string;
-  label: string;
-  icon: string;
-  color: string;
-  textColor: string;
-  borderColor: string;
-  glowClass: string;
-  volume: number; // 0 to 1.5
-  muted: boolean;
-  solo: boolean;
-}
-
-const STEM_CONFIGS: Record<string, { label: string; icon: string; color: string; textColor: string; borderColor: string; glowClass: string }> = {
-  vocals: {
-    label: "เสียงร้อง (Vocals)",
-    icon: "🎤",
-    color: "#06b6d4",
-    textColor: "text-cyan-400",
-    borderColor: "border-cyan-500/40",
-    glowClass: "glow-cyan",
-  },
-  drums: {
-    label: "กลอง (Drums)",
-    icon: "🥁",
-    color: "#f59e0b",
-    textColor: "text-amber-400",
-    borderColor: "border-amber-500/40",
-    glowClass: "glow-amber",
-  },
-  bass: {
-    label: "เบส (Bass)",
-    icon: "🎸",
-    color: "#a855f7",
-    textColor: "text-purple-400",
-    borderColor: "border-purple-500/40",
-    glowClass: "glow-purple",
-  },
-  other: {
-    label: "ดนตรีอื่นๆ (Instruments)",
-    icon: "🎹",
-    color: "#10b981",
-    textColor: "text-emerald-400",
-    borderColor: "border-emerald-500/40",
-    glowClass: "glow-emerald",
-  },
-  no_vocals: {
-    label: "ดนตรีล้วน (Karaoke/Instrumental)",
-    icon: "🎵",
-    color: "#ec4899",
-    textColor: "text-pink-400",
-    borderColor: "border-pink-500/40",
-    glowClass: "glow-cyan",
-  },
+type Health = {
+  demucs_available: boolean;
+  ffmpeg_available: boolean;
+  device: string;
+  worker_enabled?: boolean;
+  worker_online?: boolean;
+  default_engine?: string;
 };
+type View = "studio" | "library" | "guide" | "cloud" | "playlists" | "account";
+const ACCEPT = ".mp3,.wav,.flac,.m4a,.aac,.ogg";
+async function responseData(response: Response) {
+  const data = await response.json().catch(() => null);
+  if (!response.ok)
+    throw new Error(
+      typeof data?.detail === "string"
+        ? data.detail
+        : tr("เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองอีกครั้ง"),
+    );
+  if (!data)
+    throw new Error(tr("เซิร์ฟเวอร์ตอบกลับไม่ถูกต้อง กรุณาลองอีกครั้ง"));
+  return data;
+}
 
-export default function Home() {
-  const [file, setFile] = useState<File | null>(null);
-  const [stemsMode, setStemsMode] = useState<"4stems" | "2stems">("4stems");
-  const [modelName, setModelName] = useState<string>("htdemucs");
-  const [isUploading, setIsUploading] = useState(false);
-  const [taskId, setTaskId] = useState<string | null>(null);
-  const [taskData, setTaskData] = useState<TaskResult | null>(null);
-  const [systemHealth, setSystemHealth] = useState<{
-    device?: string;
-    demucs_available?: boolean;
-    ffmpeg_available?: boolean;
-  } | null>(null);
+function Workspace() {
+  const { t: tr, locale } = useLocale();
 
-  // Playback state
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isLooping, setIsLooping] = useState(false);
-  const [masterVolume, setMasterVolume] = useState(1.0);
-
-  // Stems controls
-  const [stemControls, setStemControls] = useState<Record<string, StemControl>>({});
-
-  // Audio elements references for synchronization
-  const audioRefs = useRef<Record<string, HTMLAudioElement>>({});
-  const animationFrameRef = useRef<number | null>(null);
-
-  // Check system health on load
-  useEffect(() => {
-    fetch("/api/health")
-      .then((r) => r.json())
-      .then((data) => setSystemHealth(data))
-      .catch((err) => console.log("Backend offline or waiting:", err));
+  const { user, logout } = useAuth();
+  const [view, setCurrentView] = useState<View>("studio");
+  const [batchOpen, setBatchOpen] = useState(false);
+  useEffect(() => { window.scrollTo({ top: 0 }); }, [view]);
+  const [playlistDirty, setPlaylistDirty] = useState(false);
+  const [leaveNotice, setLeaveNotice] = useState(false);
+  const onPlaylistDirty = useCallback((dirty: boolean) => {
+    setPlaylistDirty(dirty);
+    if (!dirty) setLeaveNotice(false);
   }, []);
+  function setView(next: View) {
+    if (playlistDirty && next !== "playlists") {
+      setLeaveNotice(true);
+      return;
+    }
+    setLeaveNotice(false);
+    setCurrentView(next);
+  }
+  const [playlistSeed, setPlaylistSeed] = useState<string[]>([]);
+  const [libraryTrackId, setLibraryTrackId] = useState<string | null>(null);
+  const [health, setHealth] = useState<Health | null>(null);
+  const [connected, setConnected] = useState<boolean | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [mode, setMode] = useState("4stems");
+  const [engine, setEngine] = useState("webgpu");
+  const [storageMode, setStorageMode] = useState("download");
+  const [model, setModel] = useState("htdemucs");
+  const [dragging, setDragging] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  function uploadId(key: string) {
+    const name = `stemora-pending-upload:${user.id}`;
+    try {
+      const old = JSON.parse(localStorage.getItem(name) || "null");
+      if (old?.key === key && typeof old.id === "string") return old.id as string;
+    } catch { /* Replace invalid local state. */ }
+    const id = crypto.randomUUID();
+    localStorage.setItem(name, JSON.stringify({key, id}));
+    return id;
+  }
+  const [taskId, setTaskId] = useState<string | null>(null);
+  const [task, setTask] = useState<Task | null>(null);
+  const local = useClientStems(setTask);
+  const [history, setHistory] = useState<Task[]>([]);
+  const [error, setError] = useState("");
+  const [pollError, setPollError] = useState("");
+  const [historyError, setHistoryError] = useState("");
+  const [historyUnavailable, setHistoryUnavailable] = useState(false);
+  const [pollRetry, setPollRetry] = useState(0);
+  const input = useRef<HTMLInputElement>(null);
+  const engineSelected = useRef(false);
+  const fileUrl = useRef<string | null>(null);
+  const fileCheck = useRef(0);
+  const [fileDuration, setFileDuration] = useState<number | null>(null);
+  const [checkingFile, setCheckingFile] = useState(false);
+  const busy =
+    uploading ||
+    local.running ||
+    local.saving ||
+    task?.status === "queued" ||
+    task?.status === "processing";
+  const blocking = uploading || local.running || local.saving ||
+    ((task?.status === "queued" || task?.status === "processing") && task.engine !== "worker");
+  const completed = task?.status === "completed";
+  const available = connected && health?.ffmpeg_available;
 
-  // Poll task progress
+  const refresh = useCallback(async () => {
+    try {
+      const result = await responseData(
+        await apiFetch("/api/health", { signal: AbortSignal.timeout(8000) }),
+      );
+      setHealth(result);
+      if (!engineSelected.current) {
+        setEngine(result.default_engine || "webgpu");
+        engineSelected.current = true;
+      }
+      setConnected(true);
+    } catch {
+      setConnected(false);
+    }
+    try {
+      setHistory(
+        await responseData(
+          await apiFetch("/api/tasks", { signal: AbortSignal.timeout(8000) }),
+        ),
+      );
+      setHistoryUnavailable(false);
+    } catch {
+      setHistoryUnavailable(true);
+    }
+  }, []);
+  useEffect(() => {
+    const startup = setTimeout(() => {
+      void refresh();
+      const saved = localStorage.getItem("stemora-active-task");
+      if (saved) setTaskId(saved);
+    }, 0);
+    const interval = setInterval(() => void refresh(), 20000);
+    return () => {
+      clearTimeout(startup);
+      clearInterval(interval);
+      if (fileUrl.current) URL.revokeObjectURL(fileUrl.current);
+    };
+  }, [refresh]);
+
   useEffect(() => {
     if (!taskId) return;
-
-    const interval = setInterval(async () => {
+    const controller = new AbortController();
+    let timer: ReturnType<typeof setTimeout>;
+    let failures = 0;
+    async function poll() {
       try {
-        const res = await fetch(`/api/tasks/${taskId}`);
-        if (!res.ok) return;
-        const data: TaskResult = await res.json();
-        setTaskData(data);
-
-        if (data.status === "completed") {
-          clearInterval(interval);
-          setIsUploading(false);
-          confetti({
-            particleCount: 80,
-            spread: 70,
-            origin: { y: 0.6 },
-          });
-
-          // Initialize controls for stems
-          const controls: Record<string, StemControl> = {};
-          Object.keys(data.stems).forEach((stemKey) => {
-            const conf = STEM_CONFIGS[stemKey] || {
-              label: stemKey.toUpperCase(),
-              icon: "🎵",
-              color: "#38bdf8",
-              textColor: "text-sky-400",
-              borderColor: "border-sky-500/40",
-              glowClass: "glow-cyan",
-            };
-            controls[stemKey] = {
-              name: stemKey,
-              ...conf,
-              volume: 1.0,
-              muted: false,
-              solo: false,
-            };
-          });
-          setStemControls(controls);
-        } else if (data.status === "failed") {
-          clearInterval(interval);
-          setIsUploading(false);
+        const response = await apiFetch(`/api/tasks/${taskId}`, {
+          signal: AbortSignal.any([
+            controller.signal,
+            AbortSignal.timeout(10000),
+          ]),
+        });
+        if (response.status === 404) {
+          localStorage.removeItem("stemora-active-task");
+          setTaskId(null);
+          setTask(null);
+          throw new Error(tr("ไม่พบงานเดิม กรุณาเลือกไฟล์เพื่อเริ่มใหม่"));
         }
-      } catch (err) {
-        console.error("Polling error:", err);
-      }
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, [taskId]);
-
-  // Audio synchronization loop
-  useEffect(() => {
-    const updateTime = () => {
-      const firstAudio = Object.values(audioRefs.current)[0];
-      if (firstAudio) {
-        setCurrentTime(firstAudio.currentTime);
-        if (firstAudio.duration && !isNaN(firstAudio.duration)) {
-          setDuration(firstAudio.duration);
+        const data: Task = await responseData(response);
+        if (controller.signal.aborted) return;
+        setTask(data);
+        setPollError("");
+        failures = 0;
+        if (["completed", "failed", "cancelled", "expired", "expiring"].includes(data.status)) {
+          void refresh();
+          return;
         }
-        if (firstAudio.ended) {
-          if (isLooping) {
-            handleSeek(0);
-            handlePlay();
-          } else {
-            setIsPlaying(false);
-          }
-        }
+      } catch (cause) {
+        if (controller.signal.aborted) return;
+        failures++;
+        setPollError(
+          cause instanceof Error && cause.message === tr("ไม่พบงานเดิม กรุณาเลือกไฟล์เพื่อเริ่มใหม่") ? cause.message : tr("ตรวจสถานะไม่ได้ชั่วคราว กำลังเชื่อมต่ออีกครั้ง…"),
+        );
       }
-      if (isPlaying) {
-        animationFrameRef.current = requestAnimationFrame(updateTime);
-      }
-    };
-
-    if (isPlaying) {
-      animationFrameRef.current = requestAnimationFrame(updateTime);
-    } else if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
+      timer = setTimeout(poll, Math.min(15000, 1500 * Math.max(1, failures)));
     }
-
+    void poll();
     return () => {
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      controller.abort();
+      clearTimeout(timer);
     };
-  }, [isPlaying, isLooping]);
+  }, [taskId, pollRetry, refresh, tr]);
 
-  // Update audio element volumes when stem controls or master volume changes
-  useEffect(() => {
-    const hasSolo = Object.values(stemControls).some((c) => c.solo);
-
-    Object.entries(stemControls).forEach(([key, ctrl]) => {
-      const audio = audioRefs.current[key];
-      if (audio) {
-        if (ctrl.muted || (hasSolo && !ctrl.solo)) {
-          audio.volume = 0;
-        } else {
-          audio.volume = Math.min(1.0, Math.max(0, ctrl.volume * masterVolume));
-        }
+  function selectFile(candidate?: File) {
+    if (!candidate || busy) return;
+    const check = ++fileCheck.current;
+    setError("");
+    setFile(null);
+    setFileDuration(null);
+    setCheckingFile(false);
+    if (!/\.(mp3|wav|flac|m4a|aac|ogg)$/i.test(candidate.name)) {
+      setError(
+        tr("ไฟล์นี้ยังไม่รองรับ เลือก MP3, WAV, FLAC, M4A, AAC หรือ OGG"),
+      );
+      return;
+    }
+    if (candidate.size === 0 || candidate.size > 50_000_000) {
+      setError(
+        candidate.size === 0
+          ? tr("ไฟล์นี้ไม่มีข้อมูล กรุณาเลือกไฟล์ใหม่")
+          : tr("ไฟล์ใหญ่เกิน 50 MB กรุณาเลือกไฟล์ที่เล็กลง"),
+      );
+      return;
+    }
+    setFile(candidate);
+    setCheckingFile(true);
+    if (fileUrl.current) URL.revokeObjectURL(fileUrl.current);
+    fileUrl.current = URL.createObjectURL(candidate);
+    const audio = new Audio();
+    const timeout = setTimeout(() => {
+      if (fileCheck.current === check) setCheckingFile(false);
+      audio.removeAttribute("src");
+      audio.load();
+    }, 5000);
+    audio.preload = "metadata";
+    audio.onloadedmetadata = () => {
+      clearTimeout(timeout);
+      if (fileCheck.current !== check) return;
+      setCheckingFile(false);
+      if (Number.isFinite(audio.duration)) {
+        if (audio.duration > 600) {
+          setFile(null);
+          setError(tr("รองรับเพลงความยาวไม่เกิน 10 นาที กรุณาตัดไฟล์ก่อน"));
+        } else setFileDuration(audio.duration);
       }
-    });
-  }, [stemControls, masterVolume]);
-
-  const handleFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFile(e.dataTransfer.files[0]);
+      audio.removeAttribute("src");
+      audio.load();
+    };
+    audio.onerror = () => {
+      clearTimeout(timeout);
+      if (fileCheck.current === check) setCheckingFile(false);
+    }; // Server validates codecs the browser cannot read.
+    audio.src = fileUrl.current;
+  }
+  function newSession() {
+    setView("studio");
+    if (blocking) return;
+    local.clear();
+    setTask(null);
+    setTaskId(null);
+    setFile(null);
+    setFileDuration(null);
+    setError("");
+    setPollError("");
+    localStorage.removeItem("stemora-active-task");
+  }
+  async function start(demo = false) {
+    if (busy || (!demo && !file)) return;
+    setError("");
+    setPollError("");
+    setTask(null);
+    setTaskId(null);
+    setView("studio");
+    localStorage.removeItem("stemora-active-task");
+    if (!demo && engine === "webgpu" && file) {
+      await local.run(file, mode);
+      return;
     }
-  };
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+    local.clear();
+    setUploading(true);
+    setUploadProgress(0);
+    const form = new FormData();
+    form.append("stems_mode", mode);
+    form.append("storage_mode", storageMode);
+    if (!demo && file) {
+      form.append("file", file);
+      form.append("engine", engine);
+      form.append("model_name", model);
     }
-  };
-
-  const handleStartSeparation = async () => {
-    if (!file) return;
-
-    setIsUploading(true);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("stems_mode", stemsMode);
-    formData.append("model_name", modelName);
-
     try {
-      const res = await fetch("/api/separate", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
+      const data = !demo && engine === "worker" && file
+        ? await queueSeparation(form, uploadId(JSON.stringify([file.name, file.size, file.lastModified, mode, engine, storageMode])), setUploadProgress)
+        : await responseData(await apiFetch(demo ? "/api/demo-audio" : "/api/separate", {method: "POST", body: form, signal: AbortSignal.timeout(120000)}));
+      localStorage.removeItem(`stemora-pending-upload:${user.id}`);
+      localStorage.setItem("stemora-active-task", data.task_id);
       setTaskId(data.task_id);
-    } catch (err) {
-      console.error("Separation request error:", err);
-      setIsUploading(false);
-      alert("เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
+      setTask({
+        id: data.task_id,
+        filename: data.filename,
+        stems_mode: mode,
+        engine: demo ? "demo" : engine,
+        status: "queued",
+        progress: 5,
+        message: tr("รอประมวลผล"),
+        stems: {},
+        created_at: new Date().toISOString(),
+      });
+    } catch (cause) {
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : tr("ส่งไฟล์ไม่สำเร็จ กรุณาลองอีกครั้ง"),
+      );
+    } finally {
+      setUploading(false);
     }
-  };
-
-  const handleTryDemo = async () => {
-    setIsUploading(true);
+  }
+  async function trashTask(item: Task) {
     try {
-      const res = await fetch("/api/demo-audio", { method: "POST" });
-      const data = await res.json();
-      setTaskId(data.task_id);
-    } catch (err) {
-      console.error("Demo request error:", err);
-      setIsUploading(false);
-      alert("ไม่สามารถสร้างไฟล์ตัวอย่างได้");
-    }
-  };
-
-  // Playback handlers
-  const handlePlay = () => {
-    Object.values(audioRefs.current).forEach((audio) => {
-      audio.play().catch((e) => console.log("Audio play prevented:", e));
-    });
-    setIsPlaying(true);
-  };
-
-  const handlePause = () => {
-    Object.values(audioRefs.current).forEach((audio) => {
-      audio.pause();
-    });
-    setIsPlaying(false);
-  };
-
-  const handleSeek = (time: number) => {
-    setCurrentTime(time);
-    Object.values(audioRefs.current).forEach((audio) => {
-      audio.currentTime = time;
-    });
-  };
-
-  const handleResetTracks = () => {
-    handleSeek(0);
-    handlePause();
-  };
-
-  // Stem control toggles
-  const toggleMute = (stemKey: string) => {
-    setStemControls((prev) => ({
-      ...prev,
-      [stemKey]: { ...prev[stemKey], muted: !prev[stemKey].muted },
-    }));
-  };
-
-  const toggleSolo = (stemKey: string) => {
-    setStemControls((prev) => {
-      const isCurrentSolo = prev[stemKey].solo;
-      const updated: Record<string, StemControl> = {};
-      Object.keys(prev).forEach((k) => {
-        updated[k] = {
-          ...prev[k],
-          solo: k === stemKey ? !isCurrentSolo : false,
-        };
-      });
-      return updated;
-    });
-  };
-
-  const setVolume = (stemKey: string, volume: number) => {
-    setStemControls((prev) => ({
-      ...prev,
-      [stemKey]: { ...prev[stemKey], volume },
-    }));
-  };
-
-  // Preset handlers
-  const applyPreset = (preset: "acapella" | "karaoke" | "drumbass" | "reset") => {
-    setStemControls((prev) => {
-      const next = { ...prev };
-      Object.keys(next).forEach((k) => {
-        next[k] = { ...next[k], solo: false, muted: false, volume: 1.0 };
-      });
-
-      if (preset === "acapella") {
-        if (next["vocals"]) next["vocals"].solo = true;
-      } else if (preset === "karaoke") {
-        if (next["vocals"]) next["vocals"].muted = true;
-      } else if (preset === "drumbass") {
-        if (next["drums"]) next["drums"].solo = true;
-        if (next["bass"]) next["bass"].solo = true;
+      setHistoryError("");
+      if (["queued", "processing"].includes(item.status) && item.engine === "worker")
+        await responseData(await apiFetch(`/api/tasks/${item.id}/cancel`, { method: "POST" }));
+      await responseData(await apiFetch(`/api/tasks/${item.id}/trash`, { method: "POST" }));
+      if (taskId === item.id) {
+        setTask(null); setTaskId(null); localStorage.removeItem("stemora-active-task");
       }
-      return next;
-    });
-  };
-
-  const formatTime = (secs: number) => {
-    const m = Math.floor(secs / 60);
-    const s = Math.floor(secs % 60);
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-  };
-
+      await refresh();
+      window.dispatchEvent(new Event("stemora:tasks-changed"));
+    } catch (cause) {
+      setHistoryError(cause instanceof Error ? cause.message : tr("ทำรายการไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองอีกครั้ง"));
+    }
+  }
+  function openTask(item: Task) {
+    if (blocking && item.id !== taskId) return;
+    local.clear();
+    setTask(item);
+    setTaskId(item.id);
+    setView("studio");
+    setError("");
+    setPollError("");
+    localStorage.setItem("stemora-active-task", item.id);
+  }
+  const viewTitle =
+    view === "cloud"
+      ? tr("Music library")
+      : view === "playlists"
+        ? tr("Set builder")
+        : view === "account"
+          ? tr("Your workspace")
+          : view === "studio"
+            ? tr("Stem studio")
+            : view === "library"
+              ? tr("Stem archive")
+              : tr("Getting started");
   return (
-    <div className="min-h-screen flex flex-col justify-between">
-      {/* Top Navigation */}
-      <header className="border-b border-slate-800/80 bg-slate-950/60 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-purple-500 p-0.5 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <Disc3 className="w-5 h-5 text-cyan-400 animate-spin-slow" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-300 bg-clip-text text-transparent">
-                  StemX Studio
-                </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-800/50 font-medium">
-                  v1.0 AI
-                </span>
-              </div>
-              <p className="text-xs text-slate-400">ระบบแยกสเต็ป/สเต็มไฟล์เพลงระดับมืออาชีพ</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {systemHealth && (
-              <div className="hidden sm:flex items-center gap-2 text-xs bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-lg text-slate-300">
-                <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-                <span>
-                  Hardware: <strong className="text-cyan-300 uppercase">{systemHealth.device || "CPU"}</strong>
-                </span>
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              </div>
-            )}
+    <div className="app-shell">
+      <a className="skip-link" href="#workspace-content">{tr("ข้ามไปยังเนื้อหา")}</a>
+      <aside className="sidebar">
+        <a
+          className="brand-link"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setView("studio");
+          }}
+          aria-label={tr("STEMORA หน้าสตูดิโอ")}
+        >
+          <Brand />
+        </a>
+        <div className="workspace-label">{tr("YOUR WORKSPACE")}</div>
+        <nav aria-label={tr("เมนูหลัก")}>
+          {(
+            [
+              { key: "cloud", label: tr("คลังเพลงส่วนตัว"), Icon: Cloud },
+              {
+                key: "playlists",
+                label: tr("จัดเซ็ตและ Playlist"),
+                Icon: ListMusic,
+              },
+              {
+                key: "studio",
+                label: tr("สตูดิโอแยกเสียง"),
+                Icon: SlidersHorizontal,
+              },
+              { key: "library", label: tr("งานแยกเสียง"), Icon: FolderOpen },
+            ] as const
+          ).map(({ key, label, Icon }) => (
             <button
-              onClick={handleTryDemo}
-              disabled={isUploading}
-              className="text-xs font-medium px-3.5 py-1.5 rounded-lg bg-indigo-950/60 hover:bg-indigo-900/80 text-indigo-300 border border-indigo-800/60 transition flex items-center gap-1.5"
+              key={key}
+              className={`nav-item ${view === key ? "nav-active" : ""}`}
+              onClick={() => {
+                if (key === "playlists") setPlaylistSeed([]);
+                setView(key);
+              }}
+              aria-current={view === key ? "page" : undefined}
             >
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-              ลองไฟล์เพลงตัวอย่าง
+              <Icon size={18} />
+              {label}
+              {key === "studio" ? (
+                busy ? (
+                  <span className="nav-dot" />
+                ) : null
+              ) : key === "library" ? (
+                <span className="nav-count">
+                  {history.length}
+                </span>
+              ) : null}
             </button>
+          ))}
+        </nav>
+        <div className="sidebar-note">
+          <span className="sidebar-note-label"><Sparkles size={15} /> {tr("สร้างได้มากกว่าเสียงเดิม")}</span>
+          <p>{tr("แยกเสียง จัดเซ็ต และเก็บเพลงไว้ในที่เดียว")}</p>
+          <button onClick={() => setView("guide")}>
+            {tr("คู่มือเริ่มต้น")} <ArrowUpRight size={14} />
+          </button>
+        </div>
+        <div className="sidebar-bottom">
+          <button
+            className={`nav-item ${view === "account" ? "nav-active" : ""}`}
+            onClick={() => setView("account")}
+          >
+            <Settings size={18} /> {tr("บัญชีและพื้นที่จัดเก็บ")}
+          </button>
+          <button
+            className="nav-item"
+            disabled={local.running || local.saving}
+            onClick={() => {
+              if (playlistDirty) setLeaveNotice(true);
+              else void logout();
+            }}
+          >
+            <LogOut size={18} /> {tr("ออกจากระบบ")}
+          </button>
+          <button
+            className={`nav-item ${view === "guide" ? "nav-active" : ""}`}
+            onClick={() => setView("guide")}
+          >
+            <CircleHelp size={18} /> {tr("วิธีใช้งาน")}
+          </button>
+          <div className="local-profile">
+            <div className="profile-avatar">{user.name.slice(0, 1).toUpperCase()}</div>
+            <div>
+              <strong>{user.name}</strong>
+              <small>{tr("คลังเพลงส่วนตัว")}</small>
+            </div>
+            <span className="status-dot" />
           </div>
         </div>
-      </header>
-
-      {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
-        {/* Upload Deck if no completed task */}
-        {!taskData || taskData.status !== "completed" ? (
-          <div className="max-w-3xl mx-auto space-y-8 py-6">
-            <div className="text-center space-y-3">
-              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                แยกท่อนและ Stems ไฟล์เพลงด้วย{" "}
-                <span className="bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                  AI Deep Learning
-                </span>
+      </aside>
+      <div className="main-shell">
+        <header className="topbar">
+          <div className="mobile-brand">
+            <Brand compact />
+          </div>
+          <div className="breadcrumb">
+            {tr("Workspace")} <ChevronRight size={14} />
+            <strong>{viewTitle}</strong>
+          </div>
+          <div className="topbar-right">
+            <LanguageSwitcher />
+            <button
+              className={`connection ${connected === false || health?.ffmpeg_available === false ? "offline" : ""}`}
+              onClick={() => void refresh()}
+              title={tr("ตรวจสอบการเชื่อมต่ออีกครั้ง")}
+            >
+              <span className="status-dot" />
+              {connected === null
+                ? tr("กำลังเชื่อมต่อ")
+                : connected === false
+                  ? tr("เซิร์ฟเวอร์ออฟไลน์")
+                  : !health?.ffmpeg_available
+                    ? tr("ต้องติดตั้ง FFmpeg")
+                    : tr("ระบบพร้อมใช้งาน")}
+            </button>
+            <button className="local-badge" onClick={() => setView("account")}>
+              {tr("PRIVATE")}
+            </button>
+          </div>
+        </header>
+        <nav className="mobile-nav" aria-label={tr("เมนูมือถือ")}>
+          <button
+            className={view === "cloud" ? "selected" : ""}
+            onClick={() => setView("cloud")}
+          >
+            {tr("คลังเพลง")}
+          </button>
+          <button
+            className={view === "playlists" ? "selected" : ""}
+            onClick={() => {
+              setPlaylistSeed([]);
+              setView("playlists");
+            }}
+          >
+            {tr("Playlist")}
+          </button>
+          <button
+            className={view === "account" ? "selected" : ""}
+            onClick={() => setView("account")}
+          >
+            {tr("บัญชี")}
+          </button>
+          <button
+            className={view === "studio" ? "selected" : ""}
+            onClick={() => setView("studio")}
+          >
+            {tr("สตูดิโอ")}
+          </button>
+          <button
+            className={view === "library" ? "selected" : ""}
+            onClick={() => setView("library")}
+          >
+            {tr("งานแยกเสียง")}
+          </button>
+          <button
+            className={view === "guide" ? "selected" : ""}
+            onClick={() => setView("guide")}
+          >
+            {tr("วิธีใช้งาน")}
+          </button>
+        </nav>
+        <main id="workspace-content" tabIndex={-1}>
+          <BlurFade key={view} duration={0.25} blur="3px" offset={4} className="page-heading">
+            <div>
+              <div className="eyebrow">STEMORA WORKSPACE <span>/</span> {view === "studio" ? "01" : view === "cloud" ? "02" : view === "playlists" ? "03" : "04"}</div>
+              <h1>
+                {viewTitle}
               </h1>
-              <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
-                อัปโหลดเพลงโปรดเพื่อแยกเสียงร้อง (Vocals), กลอง (Drums), เบส (Bass) และเครื่องดนตรี (Instruments)
-                แบบแยกแทร็คชัดเจน พร้อมมิกเซอร์ควบคุมในตัว
+              <p>
+                {view === "cloud"
+                  ? tr("เก็บทุกเสียงไว้ด้วยกัน พร้อมสำหรับเซ็ตถัดไป")
+                  : view === "playlists"
+                    ? tr("วางเส้นทางพลังงาน แล้วจัดจังหวะในแบบของคุณ")
+                    : view === "account"
+                      ? tr("จัดการบัญชีและพื้นที่สร้างสรรค์ของคุณ")
+                      : view === "studio"
+                        ? tr(
+                            "เปลี่ยนเพลงที่คุณชอบ ให้เป็นเสียงในแบบของคุณ",
+                          )
+                        : view === "library"
+                          ? tr("กลับมาฟัง มิกซ์ และดาวน์โหลดผลงานของคุณได้เสมอ")
+                          : tr("จากเพลงหนึ่งเพลง สู่ความเป็นไปได้อีกมากมาย")}
               </p>
             </div>
-
-            {/* Upload Box */}
-            <div
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={handleFileDrop}
-              className={`relative border-2 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all duration-300 ${
-                file
-                  ? "border-cyan-500/60 bg-cyan-950/10"
-                  : "border-slate-800 hover:border-slate-700 bg-slate-900/40"
-              }`}
-            >
-              <input
-                type="file"
-                id="audio-input"
-                accept="audio/*,.mp3,.wav,.flac,.m4a,.aac,.ogg"
-                onChange={handleFileSelect}
-                className="hidden"
-              />
-
-              {file ? (
-                <div className="space-y-4">
-                  <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto text-cyan-400 shadow-lg shadow-cyan-500/10">
-                    <FileAudio className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg text-white">{file.name}</h3>
-                    <p className="text-xs text-slate-400 mt-1">
-                      ขนาด: {(file.size / (1024 * 1024)).toFixed(2)} MB • พร้อมทำการแยกแทร็ค
-                    </p>
-                  </div>
-                  <label
-                    htmlFor="audio-input"
-                    className="inline-block text-xs text-slate-400 hover:text-cyan-300 cursor-pointer underline"
-                  >
-                    เปลี่ยนไฟล์เพลงอื่น
-                  </label>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div className="w-16 h-16 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto text-cyan-400">
-                    <Upload className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg text-white">ลากไฟล์เพลงมาวางที่นี่</h3>
-                    <p className="text-xs text-slate-400 mt-1">
-                      รองรับไฟล์ MP3, WAV, FLAC, M4A, AAC, OGG (สูงสุด 50MB)
-                    </p>
-                  </div>
-                  <label
-                    htmlFor="audio-input"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium cursor-pointer transition border border-slate-700/80"
-                  >
-                    <Music2 className="w-4 h-4 text-cyan-400" />
-                    เลือกไฟล์จากเครื่อง
-                  </label>
-                </div>
-              )}
-            </div>
-
-            {/* Separation Options */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div
-                onClick={() => setStemsMode("4stems")}
-                className={`p-4 rounded-xl border cursor-pointer transition flex items-start gap-3.5 ${
-                  stemsMode === "4stems"
-                    ? "border-cyan-500/50 bg-cyan-950/20 text-white shadow-lg shadow-cyan-500/5"
-                    : "border-slate-800/80 bg-slate-900/30 text-slate-400 hover:border-slate-700"
-                }`}
-              >
-                <div
-                  className={`p-2.5 rounded-lg ${
-                    stemsMode === "4stems" ? "bg-cyan-500/20 text-cyan-400" : "bg-slate-800 text-slate-400"
-                  }`}
-                >
-                  <Layers className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm text-slate-200">แยก 4 Stems (แนะนำ)</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    แยก 4 แทร็ค: เสียงร้อง, กลอง, เบส, และเมโลดี้/ดนตรีอื่นๆ
-                  </p>
-                </div>
-              </div>
-
-              <div
-                onClick={() => setStemsMode("2stems")}
-                className={`p-4 rounded-xl border cursor-pointer transition flex items-start gap-3.5 ${
-                  stemsMode === "2stems"
-                    ? "border-indigo-500/50 bg-indigo-950/20 text-white shadow-lg shadow-indigo-500/5"
-                    : "border-slate-800/80 bg-slate-900/30 text-slate-400 hover:border-slate-700"
-                }`}
-              >
-                <div
-                  className={`p-2.5 rounded-lg ${
-                    stemsMode === "2stems" ? "bg-indigo-500/20 text-indigo-400" : "bg-slate-800 text-slate-400"
-                  }`}
-                >
-                  <Mic2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-sm text-slate-200">แยก 2 Stems (Karaoke)</h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    แยก 2 แทร็ค: เสียงร้อง (Vocals) + ดนตรีแบ็คกิ้งแทร็ค (Instrumental)
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Button & Status */}
-            <div className="space-y-4">
+            {view === "cloud" ||
+            view === "playlists" ||
+            view === "account" ? null : view === "studio" &&
+              !completed &&
+              !busy ? (
+              <div className="studio-heading-actions">
+              {health?.worker_enabled && <button className="secondary-button" aria-expanded={batchOpen} aria-controls="batch-separation" onClick={() => setBatchOpen(!batchOpen)}><Layers3 size={15} />{tr("แยกหลายเพลง")}</button>}
               <button
-                onClick={handleStartSeparation}
-                disabled={!file || isUploading}
-                className={`w-full py-3.5 px-6 rounded-xl font-bold text-base transition flex items-center justify-center gap-2 shadow-lg ${
-                  file && !isUploading
-                    ? "bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-cyan-500/25 cursor-pointer"
-                    : "bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700/50"
-                }`}
+                className="secondary-button demo-top"
+                disabled={!available}
+                onClick={() => void start(true)}
               >
-                {isUploading ? (
-                  <>
-                    <RefreshCw className="w-5 h-5 animate-spin text-cyan-300" />
-                    กำลังประมวลผลแยกแทร็ค... ({taskData?.progress || 10}%)
-                  </>
-                ) : (
-                  <>
-                    <Sliders className="w-5 h-5" />
-                    เริ่มแยกแทร็คเพลงทันที
-                  </>
-                )}
+                <PlayIcon /> {tr("ลองเพลงตัวอย่าง")} <ArrowUpRight size={15} />
               </button>
-
-              {/* Progress Box */}
-              {isUploading && taskData && (
-                <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-300 font-medium flex items-center gap-2">
-                      <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                      {taskData.message || "กำลังวิเคราะห์ไฟล์เพลง..."}
+              </div>
+            ) : (
+              <button
+                className="secondary-button"
+                disabled={blocking}
+                onClick={newSession}
+              >
+                <Plus size={17} /> {tr("เริ่มเพลงใหม่")}
+              </button>
+            )}
+          </BlurFade>
+          {leaveNotice && (
+            <Notice
+              text={tr(
+                "มีการแก้ไขเซ็ตที่ยังไม่บันทึก กรุณาบันทึกหรือย้อนค่าก่อนเปลี่ยนหน้าหรือออกจากระบบ",
+              )}
+              dismiss={() => setLeaveNotice(false)}
+            />
+          )}
+          {view === "cloud" && (
+            <MusicLibrary
+              onSeparate={(id) => {
+                if (busy) {
+                  setView("studio");
+                  return;
+                }
+                setLibraryTrackId(id);
+              }}
+              onPlaylist={(ids) => {
+                setPlaylistSeed(ids);
+                setView("playlists");
+              }}
+            />
+          )}
+          {view === "playlists" && (
+            <DjPlaylists seed={playlistSeed} onDirtyChange={onPlaylistDirty} />
+          )}
+          {view === "account" && <AccountPanel />}
+          {view === "studio" && (
+            <>
+              {health?.worker_enabled && batchOpen && !busy && !completed && <div id="batch-separation"><StemBatch onQueued={() => void refresh()} /></div>}
+              <div className="steps" aria-label={tr("ขั้นตอนการทำงาน")}>
+                {[
+                  tr("เลือกเพลงของคุณ"),
+                  tr("แยกเสียง"),
+                  tr("มิกซ์และดาวน์โหลด"),
+                ].map((label, index) => (
+                  <div
+                    key={label}
+                    className={`step ${(completed ? 2 : busy ? 1 : 0) === index ? "step-active" : ""}`}
+                  >
+                    <span>
+                      {(completed ? 2 : busy ? 1 : 0) > index ? (
+                        <Check size={12} />
+                      ) : (
+                        `0${index + 1}`
+                      )}
                     </span>
-                    <span className="text-cyan-400 font-bold">{taskData.progress}%</span>
+                    {label}
+                    {index < 2 && <div className="step-line" />}
                   </div>
-                  <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="bg-gradient-to-r from-cyan-500 to-indigo-500 h-full transition-all duration-500 rounded-full"
-                      style={{ width: `${taskData.progress}%` }}
-                    />
-                  </div>
+                ))}
+              </div>
+              {(error || local.error) && (
+                <div className="error-message" role="alert">
+                  {tr(error || local.error)}
+                  <button
+                    className="icon-button"
+                    onClick={() => {
+                      setError("");
+                      local.dismissError();
+                    }}
+                    aria-label={tr("ปิดข้อความ")}
+                  >
+                    <X size={16} />
+                  </button>
                 </div>
               )}
-            </div>
-          </div>
-        ) : (
-          /* Multi-track Stem Mixer Deck */
-          <div className="space-y-6">
-            {/* Top Deck Info & Master Action */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 font-semibold flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3" /> แยกลำโพง/สเต็มสำเร็จ
-                  </span>
-                  <span className="text-xs text-slate-400">
-                    {taskData.stems_mode === "4stems" ? "4 Stems" : "2 Stems"}
-                  </span>
-                </div>
-                <h2 className="text-xl font-bold text-white mt-1">{taskData.filename}</h2>
-              </div>
-
-              <div className="flex items-center gap-2 flex-wrap">
-                <button
-                  onClick={() => {
-                    setTaskData(null);
-                    setTaskId(null);
-                    setFile(null);
-                  }}
-                  className="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1.5"
-                >
-                  <Upload className="w-3.5 h-3.5" />
-                  แยกเพลงใหม่
-                </button>
-
-                <a
-                  href={`/api/download-all/${taskData.id}`}
-                  download
-                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-lg shadow-cyan-500/20"
-                >
-                  <FolderArchive className="w-4 h-4" />
-                  ดาวน์โหลดทุก Stems (.ZIP)
-                </a>
-              </div>
-            </div>
-
-            {/* Master Transport & Preset Control Bar */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                {/* Transport Buttons */}
-                <div className="flex items-center gap-3">
+              {pollError && (
+                <div className="error-message" role="alert">
+                  {pollError}
                   <button
-                    onClick={isPlaying ? handlePause : handlePlay}
-                    className="w-12 h-12 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white flex items-center justify-center shadow-lg shadow-cyan-500/25 transition cursor-pointer"
+                    onClick={() => {
+                      setPollRetry((value) => value + 1);
+                    }}
                   >
-                    {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-0.5" />}
-                  </button>
-
-                  <button
-                    onClick={handleResetTracks}
-                    title="เริ่มใหม่ (Restart)"
-                    className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition border border-slate-700/80 cursor-pointer"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                  </button>
-
-                  <button
-                    onClick={() => setIsLooping(!isLooping)}
-                    title="วนลูป (Loop)"
-                    className={`px-3 py-2 rounded-xl text-xs font-semibold border transition cursor-pointer ${
-                      isLooping
-                        ? "bg-cyan-950/80 border-cyan-500/60 text-cyan-300"
-                        : "bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    Loop: {isLooping ? "ON" : "OFF"}
-                  </button>
-
-                  {/* Time readout */}
-                  <div className="font-mono text-sm px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-cyan-400">
-                    {formatTime(currentTime)} / {formatTime(duration || 0)}
-                  </div>
-                </div>
-
-                {/* Quick Presets */}
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="text-xs text-slate-400 font-medium mr-1">Presets:</span>
-                  <button
-                    onClick={() => applyPreset("acapella")}
-                    className="text-xs px-2.5 py-1 rounded-md bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-800/50 transition cursor-pointer"
-                  >
-                    🎤 Acapella
+                    {tr("เชื่อมต่ออีกครั้ง")}
                   </button>
                   <button
-                    onClick={() => applyPreset("karaoke")}
-                    className="text-xs px-2.5 py-1 rounded-md bg-pink-950/60 hover:bg-pink-900/80 text-pink-300 border border-pink-800/50 transition cursor-pointer"
+                    onClick={() => {
+                      setTask(null);
+                      setTaskId(null);
+                      setPollError("");
+                      localStorage.removeItem("stemora-active-task");
+                    }}
                   >
-                    🎵 Karaoke
-                  </button>
-                  <button
-                    onClick={() => applyPreset("drumbass")}
-                    className="text-xs px-2.5 py-1 rounded-md bg-amber-950/60 hover:bg-amber-900/80 text-amber-300 border border-amber-800/50 transition cursor-pointer"
-                  >
-                    🥁 Drum & Bass
-                  </button>
-                  <button
-                    onClick={() => applyPreset("reset")}
-                    className="text-xs px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition cursor-pointer"
-                  >
-                    🔄 รีเซ็ตทั้งหมด
+                    {tr("กลับไปเลือกเพลง")}
                   </button>
                 </div>
-
-                {/* Master Volume */}
-                <div className="flex items-center gap-2 min-w-[140px]">
-                  {masterVolume === 0 ? (
-                    <VolumeX className="w-4 h-4 text-slate-500" />
-                  ) : masterVolume < 0.5 ? (
-                    <Volume1 className="w-4 h-4 text-cyan-400" />
-                  ) : (
-                    <Volume2 className="w-4 h-4 text-cyan-400" />
-                  )}
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={masterVolume}
-                    onChange={(e) => setMasterVolume(parseFloat(e.target.value))}
-                    className="w-full accent-cyan-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer"
-                  />
-                </div>
-              </div>
-
-              {/* Master Scrubber Timeline */}
-              <div className="relative pt-2">
-                <input
-                  type="range"
-                  min="0"
-                  max={duration || 100}
-                  step="0.1"
-                  value={currentTime}
-                  onChange={(e) => handleSeek(parseFloat(e.target.value))}
-                  className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
-                />
-              </div>
-            </div>
-
-            {/* Individual Stem Channel Strips */}
-            <div className="space-y-3">
-              {Object.entries(taskData.stems).map(([key, stem]) => {
-                const ctrl = stemControls[key] || {
-                  name: key,
-                  label: key.toUpperCase(),
-                  icon: "🎵",
-                  color: "#38bdf8",
-                  textColor: "text-sky-400",
-                  borderColor: "border-sky-500/40",
-                  glowClass: "glow-cyan",
-                  volume: 1.0,
-                  muted: false,
-                  solo: false,
-                };
-
-                const progressRatio = duration > 0 ? currentTime / duration : 0;
-
-                return (
-                  <div
-                    key={key}
-                    className={`p-4 rounded-xl border transition-all duration-200 bg-slate-900/60 backdrop-blur-sm ${
-                      ctrl.muted
-                        ? "opacity-60 border-slate-800/80"
-                        : ctrl.solo
-                        ? `${ctrl.borderColor} ${ctrl.glowClass} bg-slate-900/90`
-                        : "border-slate-800/80 hover:border-slate-700"
-                    }`}
-                  >
-                    {/* Hidden Audio Element */}
-                    <audio
-                      ref={(el) => {
-                        if (el) audioRefs.current[key] = el;
-                      }}
-                      src={stem.url}
-                      preload="auto"
-                    />
-
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-                      {/* Stem Identity & Track Info */}
-                      <div className="w-full lg:w-48 flex items-center justify-between lg:justify-start gap-3">
-                        <div className="flex items-center gap-2.5">
-                          <span className="text-xl">{ctrl.icon}</span>
-                          <div>
-                            <h4 className={`font-bold text-sm ${ctrl.textColor}`}>{ctrl.label}</h4>
-                            <p className="text-[11px] text-slate-400">
-                              {stem.filename}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Mobile solo/mute buttons */}
-                        <div className="flex lg:hidden items-center gap-1.5">
-                          <button
-                            onClick={() => toggleSolo(key)}
-                            className={`w-7 h-7 rounded text-xs font-bold transition cursor-pointer ${
-                              ctrl.solo
-                                ? "bg-amber-500 text-black font-extrabold shadow-sm shadow-amber-500/50"
-                                : "bg-slate-800 text-slate-400 hover:text-white"
-                            }`}
-                          >
-                            S
-                          </button>
-                          <button
-                            onClick={() => toggleMute(key)}
-                            className={`w-7 h-7 rounded text-xs font-bold transition cursor-pointer ${
-                              ctrl.muted
-                                ? "bg-rose-500 text-white font-extrabold shadow-sm shadow-rose-500/50"
-                                : "bg-slate-800 text-slate-400 hover:text-white"
-                            }`}
-                          >
-                            M
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Interactive Waveform Display */}
-                      <div
-                        onClick={(e) => {
-                          const rect = e.currentTarget.getBoundingClientRect();
-                          const clickX = e.clientX - rect.left;
-                          const ratio = clickX / rect.width;
-                          if (duration > 0) handleSeek(ratio * duration);
-                        }}
-                        className="flex-1 h-14 bg-slate-950/90 rounded-lg p-2 border border-slate-800/80 relative flex items-center gap-[2px] cursor-pointer overflow-hidden group"
-                      >
-                        {/* Playhead line */}
-                        <div
-                          className="absolute top-0 bottom-0 w-[2px] bg-white z-20 shadow-md shadow-white transition-all pointer-events-none"
-                          style={{ left: `${progressRatio * 100}%` }}
-                        />
-
-                        {/* Waveform bars */}
-                        {stem.peaks && stem.peaks.length > 0 ? (
-                          stem.peaks.map((val, idx) => {
-                            const barRatio = idx / stem.peaks.length;
-                            const isPast = barRatio <= progressRatio;
-                            return (
-                              <div
-                                key={idx}
-                                className="flex-1 rounded-sm transition-all"
-                                style={{
-                                  height: `${Math.max(12, val * 100)}%`,
-                                  backgroundColor: isPast ? ctrl.color : "#334155",
-                                  opacity: ctrl.muted ? 0.3 : isPast ? 0.95 : 0.4,
-                                }}
-                              />
-                            );
-                          })
-                        ) : (
-                          <div className="w-full text-center text-xs text-slate-500">
-                            ไม่มีข้อมูล Waveform
-                          </div>
+              )}
+              {completed ? (
+                <>
+                  {task.local && local.result && (
+                    <div className="local-result-banner panel" role="status">
+                      <div>
+                        <strong>
+                          {tr(
+                            local.saved
+                              ? "บันทึกใน cloud แล้ว"
+                              : "แยกเสียงเสร็จบนอุปกรณ์ของคุณ",
+                          )}
+                        </strong>
+                        <p>
+                          {tr(
+                            local.saved
+                              ? "เปิดผลงานนี้จากงานแยกเสียงได้ในครั้งถัดไป"
+                              : "ดาวน์โหลดได้ทันที ผลลัพธ์ในเครื่องจะหายเมื่อปิดหรือโหลดแท็บใหม่ หากต้องการเก็บไว้ให้บันทึกเข้า cloud",
+                          )}
+                        </p>
+                        {!local.saved && (
+                          <small>
+                            {tr("ใช้พื้นที่ cloud {0} MB", {
+                              0: (
+                                local.result.files.reduce(
+                                  (total, file) => total + file.size_bytes,
+                                  0,
+                                ) / 1_000_000
+                              ).toFixed(1),
+                            })}
+                          </small>
                         )}
                       </div>
-
-                      {/* Controls Strip (Solo, Mute, Fader, Download) */}
-                      <div className="flex items-center justify-between lg:justify-end gap-3 min-w-[280px]">
-                        {/* Desktop Solo & Mute Buttons */}
-                        <div className="hidden lg:flex items-center gap-1.5">
-                          <button
-                            onClick={() => toggleSolo(key)}
-                            title="Solo: ฟังเฉพาะเสียงนี้"
-                            className={`w-8 h-8 rounded-lg text-xs font-bold transition cursor-pointer ${
-                              ctrl.solo
-                                ? "bg-amber-500 text-black font-extrabold shadow-md shadow-amber-500/30"
-                                : "bg-slate-800 text-slate-400 hover:text-slate-100 hover:bg-slate-700"
-                            }`}
-                          >
-                            S
-                          </button>
-                          <button
-                            onClick={() => toggleMute(key)}
-                            title="Mute: ปิดเสียงนี้"
-                            className={`w-8 h-8 rounded-lg text-xs font-bold transition cursor-pointer ${
-                              ctrl.muted
-                                ? "bg-rose-500 text-white font-extrabold shadow-md shadow-rose-500/30"
-                                : "bg-slate-800 text-slate-400 hover:text-slate-100 hover:bg-slate-700"
-                            }`}
-                          >
-                            M
-                          </button>
-                        </div>
-
-                        {/* Track Volume Fader Slider */}
-                        <div className="flex items-center gap-2 flex-1 max-w-[140px]">
-                          <input
-                            type="range"
-                            min="0"
-                            max="1.5"
-                            step="0.02"
-                            value={ctrl.volume}
-                            disabled={ctrl.muted}
-                            onChange={(e) => setVolume(key, parseFloat(e.target.value))}
-                            className="w-full accent-cyan-400 h-1.5 bg-slate-800 rounded-lg cursor-pointer disabled:opacity-40"
-                          />
-                          <span className="text-[11px] font-mono text-slate-400 w-8 text-right">
-                            {Math.round(ctrl.volume * 100)}%
+                      <button
+                        className="primary-button small"
+                        disabled={local.saving || local.saved}
+                        onClick={async () => {
+                          const saved = await local.save();
+                          if (saved) void refresh();
+                        }}
+                      >
+                        {local.saving ? (
+                          <LoaderCircle size={17} className="spin" />
+                        ) : local.saved ? (
+                          <Check size={17} />
+                        ) : (
+                          <Cloud size={17} />
+                        )}
+                        {tr(
+                          local.saving
+                            ? "กำลังบันทึกเข้า cloud…"
+                            : local.saved
+                              ? "บันทึกแล้ว"
+                              : "บันทึกเข้า cloud",
+                        )}
+                        {local.saving && ` ${local.saveProgress}%`}
+                      </button>
+                    </div>
+                  )}
+                  {task.storage_mode === "download" && <p className="stem-temporary-notice" role="status">{tr("ผลลัพธ์ชั่วคราว ไม่ใช้พื้นที่ Cloud · ดาวน์โหลดก่อน {0}", {0: new Date((task.expires_at || 0) * 1000).toLocaleString(locale === "th" ? "th-TH" : "en-US")})}</p>}
+                  <StemMixer key={task.id} task={task} />
+                </>
+              ) : busy ? (
+                <section className={`processing panel ${task?.engine === "worker" ? "processing-worker" : ""}`} aria-live={task?.engine === "worker" ? "off" : "polite"}>
+                  <div className="processing-art">
+                    {task?.engine === "worker" && task.status === "queued" ? <Clock3 size={44} /> : <AudioLines size={44} />}
+                    <div className="orbit" />
+                  </div>
+                  <span className="eyebrow">{tr("FINDING EVERY LAYER")}</span>
+                  {task?.engine === "worker" && !uploading ? <>
+                    <p className="processing-file">{task.filename}</p>
+                    <StemJobStatus task={task} connectionIssue={!!pollError} />
+                  </> : <>
+                  <h2>
+                    {uploading
+                      ? uploadProgress === 100 ? tr("อัปโหลดครบแล้ว กำลังตรวจและส่งเข้าคิว…") : `${tr("กำลังส่งเพลงของคุณ")} ${uploadProgress}%`
+                      : task?.local
+                        ? tr("กำลังแยกเสียงบนอุปกรณ์ของคุณ")
+                        : tr("กำลังเตรียมเสียงสำหรับคุณ")}
+                  </h2>
+                  <p className="processing-file">
+                    {task?.filename || file?.name}
+                  </p>
+                  <div className="progress-label">
+                    <span>
+                      {uploading
+                        ? tr("กำลังอัปโหลดและตรวจสอบไฟล์…")
+                        : tr(task?.message || "")}
+                    </span>
+                    <strong>
+                      {uploading ? "…" : `${task?.progress || 5}%`}
+                    </strong>
+                  </div>
+                  <progress
+                    max="100"
+                    value={uploading ? undefined : task?.progress}
+                  />
+                  </>}
+                  <p>
+                    {tr(
+                      task?.local
+                        ? "เปิดคลังเพลงในเว็บนี้ได้ระหว่างรอ กรุณาเปิดแท็บนี้ไว้ GPU บนอุปกรณ์กำลังทำงาน"
+                        : task?.engine === "worker"
+                          ? (locale === "th" ? "ดูผลได้ในงานแยกเสียง" : "Find your results in Stem jobs")
+                          : "คุณเปิดคลังเพลงได้ระหว่างรอ งานจะประมวลผลต่อบนเซิร์ฟเวอร์",
+                    )}
+                  </p>
+                  {task?.local && (
+                    <button className="secondary-button" onClick={local.cancel}>
+                      <X size={16} />
+                      {tr("ยกเลิกการแยกเสียง")}
+                    </button>
+                  )}
+                  {task?.engine === "worker" && !uploading && (
+                    <button className="secondary-button" onClick={async () => {
+                      try {
+                        await responseData(await apiFetch(`/api/tasks/${task.id}/cancel`, { method: "POST" }));
+                        setPollRetry((value) => value + 1);
+                      } catch (cause) { setError((cause as Error).message); }
+                    }}>
+                      <X size={16} />{tr("ยกเลิกงานในคิว")}
+                    </button>
+                  )}
+                </section>
+              ) : (
+                <div className="studio-grid">
+                  <section className="upload-panel panel">
+                    <div className="song-input">
+                    <div className="section-heading">
+                      <div className="section-number">01</div>
+                      <div>
+                        <h2>{tr("เพิ่มเพลงของคุณ")}</h2>
+                        <p>{tr(engine === "worker" ? "เลือกเพลง แล้วกลับมาฟังผลได้เมื่อพร้อม" : "เลือกไฟล์ แล้วแยกเสียงบนอุปกรณ์ของคุณ")}</p>
+                      </div>
+                      <Upload size={19} />
+                    </div>
+                    <input
+                      ref={input}
+                      type="file"
+                      accept={ACCEPT}
+                      className="visually-hidden"
+                      tabIndex={-1}
+                      onChange={(e) => {
+                        selectFile(e.target.files?.[0]);
+                        e.target.value = "";
+                      }}
+                    />
+                    <div
+                      className={`dropzone ${dragging ? "dragging" : ""} ${file ? "has-file" : ""}`}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        setDragging(true);
+                      }}
+                      onDragLeave={(e) => {
+                        if (!e.currentTarget.contains(e.relatedTarget as Node))
+                          setDragging(false);
+                      }}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        setDragging(false);
+                        if (e.dataTransfer.files.length > 1)
+                          setError(tr("กรุณาเลือกเพลงครั้งละ 1 ไฟล์"));
+                        else selectFile(e.dataTransfer.files[0]);
+                      }}
+                    >
+                      {file && <BorderBeam duration={9} size={100} colorFrom="#d8fa85" colorTo="#6d9050" />}
+                      <div className="upload-art">
+                        <div className="upload-art-back" />
+                        <div className="upload-art-front">
+                          {file ? (
+                            <FileAudio size={29} />
+                          ) : (
+                            <AudioLines size={30} />
+                          )}
+                          <span>
+                            <Plus size={13} />
                           </span>
                         </div>
-
-                        {/* Download Stem Button */}
-                        <a
-                          href={stem.url}
-                          download={`${taskData.filename.replace(/\.[^/.]+$/, "")}_${key}.wav`}
-                          title={`ดาวน์โหลด ${ctrl.label}`}
-                          className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 flex items-center justify-center transition border border-slate-700/80 cursor-pointer"
-                        >
-                          <Download className="w-4 h-4" />
-                        </a>
+                      </div>
+                      <h3>
+                        {file
+                          ? file.name
+                          : dragging
+                            ? tr("วางเพลงของคุณได้เลย")
+                            : tr("ลากเพลงของคุณมาวางที่นี่")}
+                      </h3>
+                      <p>
+                        {file
+                          ? `${(file.size / 1024 / 1024).toFixed(1)} MB${fileDuration ? ` · ${formatTime(fileDuration)}` : ""}`
+                          : tr("ให้เสียงที่ซ่อนอยู่ ได้ออกมาเป็นตัวเอง")}
+                      </p>
+                      <button
+                        className="file-button"
+                        onClick={() => input.current?.click()}
+                      >
+                        <FolderOpen size={16} />
+                        {file
+                          ? tr("เปลี่ยนไฟล์เพลง")
+                          : tr("เลือกไฟล์จากเครื่อง")}
+                        <ArrowUpRight size={14} />
+                      </button>
+                      <div className="formats">
+                        {tr("MP3, WAV, FLAC, M4A, AAC, OGG")} <span>·</span>{" "}
+                        {tr("สูงสุด 50 MB / 10 นาที")}
                       </div>
                     </div>
+                    <div className="upload-demo-link">
+                      <span>{tr("ยังไม่มีไฟล์เพลง?")}</span>
+                      <button disabled={!available} onClick={() => void start(true)}><PlayIcon /> {tr("ลองเพลงตัวอย่าง")}</button>
+                    </div>
+                    <SoundPreview />
+                    </div>
+                    <div className="separation-settings">
+                    <div className="section-heading"><div className="section-number">02</div><div><h2>{tr("เลือกผลลัพธ์")}</h2><p>{tr("พร้อมฟัง มิกซ์ และดาวน์โหลด")}</p></div></div>
+                    <div
+                      className="mode-options"
+                      role="group"
+                      aria-label={tr("รูปแบบการแยกเสียง")}
+                    >
+                      {[
+                        {
+                          id: "4stems",
+                          title: tr("4 Stems"),
+                          text: tr("เสียงร้อง · กลอง · เบส · ดนตรี"),
+                          Icon: Layers3,
+                        },
+                        {
+                          id: "2stems",
+                          title: tr("Vocal + Instrumental"),
+                          text: tr("เสียงร้อง · ดนตรีประกอบ"),
+                          Icon: Mic2,
+                        },
+                      ].map((option) => (
+                        <button
+                          key={option.id}
+                          className={`mode-card ${mode === option.id ? "mode-selected" : ""}`}
+                          aria-pressed={mode === option.id}
+                          onClick={() => setMode(option.id)}
+                        >
+                          <div className="mode-top">
+                            <option.Icon size={21} />
+                            <span className="radio-dot">
+                              {mode === option.id && <span />}
+                            </span>
+                          </div>
+                          <strong>{option.title}</strong>
+                          <small>{option.text}</small>
+                        </button>
+                      ))}
+                    </div>
+                    <details className="processing-options">
+                    <summary>{tr("ตัวเลือกการประมวลผล")}</summary>
+                    <div className="engine-setting">
+                      <div>
+                        <SlidersHorizontal size={16} />
+                        <label htmlFor="engine">{tr("การประมวลผล")}</label>
+                      </div>
+                      <select
+                        id="engine"
+                        value={engine}
+                        onChange={(e) => { engineSelected.current = true; setEngine(e.target.value); }}
+                      >
+                        {health?.worker_enabled && <option value="worker">{tr("แยกเสียงให้ฉัน")}</option>}
+                        <option value="webgpu">
+                          {tr("บนอุปกรณ์ของฉัน · WebGPU")}
+                        </option>
+                        <option value="demucs">
+                          {tr("บนเซิร์ฟเวอร์ · AI")}
+                          {health && !health.demucs_available
+                            ? tr(" · ยังไม่ติดตั้ง")
+                            : ""}
+                        </option>
+                        <option value="dsp">{tr("DSP · กรองย่านเสียง")}</option>
+                      </select>
+                    </div>
+                    {engine === "demucs" && health?.demucs_available && (
+                      <div className="engine-setting">
+                        <label htmlFor="model">{tr("ระดับความละเอียด")}</label>
+                        <select
+                          id="model"
+                          value={model}
+                          onChange={(e) => setModel(e.target.value)}
+                        >
+                          <option value="htdemucs">
+                            {tr("มาตรฐาน · เร็วกว่า")}
+                          </option>
+                          <option value="htdemucs_ft">
+                            {tr("ละเอียด · ใช้เวลามากขึ้น")}
+                          </option>
+                        </select>
+                      </div>
+                    )}
+                    </details>
+                    {engine === "worker" && <StemStorageChoice value={storageMode} onChange={setStorageMode} disabled={uploading} />}
+                    {engine === "worker" ? (
+                      <p className="engine-hint gpu-device-hint" role="status">
+                        <strong>{tr(health?.worker_online ? "พร้อมรับเพลงของคุณ" : "รับเพลงเข้าคิวไว้ก่อนได้")}</strong>
+                        <span>{tr(health?.worker_online ? "ปิดหน้าเว็บแล้วกลับมาดูผลได้" : "เพลงจะเริ่มอัตโนมัติเมื่อระบบพร้อม")}</span>
+                      </p>
+                    ) : engine === "webgpu" ? (
+                      <p
+                        className={`engine-hint gpu-device-hint ${local.support === "unsupported" ? "gpu-unavailable" : ""}`}
+                        role="status"
+                      >
+                        <strong>
+                          {tr(
+                            local.support === "checking"
+                              ? "กำลังตรวจสอบ GPU ของอุปกรณ์…"
+                              : local.support === "ready"
+                                ? "GPU พร้อมใช้งาน · ประมวลผลบนอุปกรณ์"
+                                : "อุปกรณ์นี้ยังใช้ WebGPU ไม่ได้",
+                          )}
+                        </strong>
+                        <span>
+                          {tr(
+                            local.support === "unsupported"
+                              ? "ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์"
+                              : "ครั้งแรกดาวน์โหลดไฟล์ AI ประมาณ 96 MB และเก็บบนอุปกรณ์ เพลงจะไม่ถูกอัปโหลดจนกว่าจะกดบันทึกเข้า cloud",
+                          )}
+                        </span>
+                      </p>
+                    ) : engine === "demucs" &&
+                      health &&
+                      !health.demucs_available ? (
+                      <p className="engine-hint">
+                        {tr("ยังไม่ติดตั้ง AI บนเครื่องนี้")}{" "}
+                        <button onClick={() => setView("guide")}>
+                          {tr("ดูวิธีติดตั้ง")}
+                        </button>{" "}
+                        {tr("หรือเลือก DSP เพื่อทดลองกรองย่านเสียง")}
+                      </p>
+                    ) : engine === "dsp" ? (
+                      <p className="engine-hint">
+                        {tr(
+                          "DSP กรองความถี่และตำแหน่งเสียง อาจมีเสียงอื่นปะปน ไม่ใช่การแยกเครื่องดนตรีด้วย AI",
+                        )}
+                      </p>
+                    ) : (
+                      <p className="engine-hint">
+                        {tr(
+                          "ประมวลผลในพื้นที่ส่วนตัวของคุณ การใช้ครั้งแรกอาจต้องดาวน์โหลดไฟล์ที่จำเป็น",
+                        )}
+                      </p>
+                    )}
+                    {(task?.status === "failed" || task?.status === "cancelled" || task?.status === "expired" || task?.status === "expiring") && (
+                      <p className="error-message" role="alert">
+                        {tr(task.message)}
+                      </p>
+                    )}
+                    <button
+                      className="primary-button separate-button"
+                      disabled={
+                        !file ||
+                        checkingFile ||
+                        (engine === "webgpu"
+                          ? local.support !== "ready"
+                          : !available) ||
+                        (engine === "demucs" && !health?.demucs_available)
+                      }
+                      onClick={() => void start()}
+                    >
+                      {checkingFile ? (
+                        <LoaderCircle size={18} className="spin" />
+                      ) : (
+                        <Sparkles size={18} />
+                      )}{" "}
+                      {checkingFile
+                        ? tr("กำลังตรวจสอบไฟล์")
+                        : tr("แยกเสียงเพลง")}
+                      <ArrowRight size={18} />
+                    </button>
+                    <p className="privacy-note">
+                      <ShieldCheck size={13} />{" "}
+                      {tr(
+                        engine === "webgpu"
+                          ? "ประมวลผลในเครื่อง บันทึกเข้า cloud เมื่อคุณเลือก"
+                          : "เข้าถึงแทร็คได้เฉพาะบัญชีของคุณ",
+                      )}
+                    </p>
+                    </div>
+                  </section>
+                </div>
+              )}
+              {!busy && !completed && (
+                <div className="studio-bottom">
+                  <section className="recent-stems panel">
+                    <header><h2>{tr("งานล่าสุด")}</h2><button className="text-button" onClick={() => setView("library")}>{tr("ดูทั้งหมด")} <ArrowUpRight size={14} /></button></header>
+                    {history.length ? history.slice(0, 3).map((item) => (
+                      <button key={item.id} className="recent-stem" onClick={() => { setTaskId(item.id); setView("studio"); }}>
+                        <span className="recent-stem-icon"><FileAudio size={18} /></span>
+                        <span><strong>{item.filename}</strong><small>{tr(item.status === "completed" ? "พร้อมดาวน์โหลด" : item.status === "queued" ? "กำลังรอคิว" : item.status === "processing" ? "กำลังแยกเสียง" : item.status === "failed" ? "ไม่สำเร็จ" : item.status === "cancelled" ? "ยกเลิกแล้ว" : "หมดอายุแล้ว")}</small></span>
+                        <ArrowRight size={16} />
+                      </button>
+                    )) : <div className="recent-empty"><AudioLines size={23} /><p>{tr("เพลงแรกของคุณ เริ่มได้จากด้านบน")}</p></div>}
+                  </section>
+                  <section className="workflow-card panel">
+                    <span className="eyebrow">YOUR NEXT MOVE</span>
+                    <h2>{tr("เตรียมพร้อมสำหรับเซ็ตถัดไป")}</h2>
+                    <button onClick={() => setView("cloud")}><Cloud size={20} /><span><strong>{tr("คลังเพลงส่วนตัว")}</strong><small>{tr("ทุกเพลงของคุณ อยู่ด้วยกัน")}</small></span><ArrowUpRight size={17} /></button>
+                    <button onClick={() => { setPlaylistSeed([]); setView("playlists"); }}><ListMusic size={20} /><span><strong>{tr("จัดเซ็ตและ Playlist")}</strong><small>{tr("ให้ AI ช่วยเรียงจังหวะถัดไป")}</small></span><ArrowUpRight size={17} /></button>
+                  </section>
+                </div>
+              )}
+              <div className="workspace-footer"><span>STEMORA</span><span><ShieldCheck size={13} /> {tr("พื้นที่ส่วนตัวสำหรับเสียงของคุณ")}</span></div>
+            </>
+          )}
+          {view === "library" && health?.worker_enabled && <StemBatch onQueued={() => void refresh()} />}
+          {view === "library" && (
+            <section className="panel library-panel">
+              <div className="section-heading">
+                <FolderOpen size={21} />
+                <div>
+                  <h2>{tr("เพลงทั้งหมด")}</h2>
+                  <p>{tr("งานทั้งหมดของบัญชีคุณ")}</p>
+                </div>
+                <button className="text-button" onClick={() => void refresh()}>
+                  {tr("รีเฟรช")}
+                </button>
+              </div>
+              {historyError && <p role="alert" className="batch-error">{historyError}</p>}
+              {!history.length ? (
+                <div className="empty-state">
+                  <FolderOpen size={36} />
+                  <h3>{tr("พื้นที่สำหรับเสียงของคุณ")}</h3>
+                  <p>{tr("เริ่มแยกเพลงแรก แล้วกลับมามิกซ์ต่อได้ที่นี่")}</p>
+                  <button className="primary-button small" onClick={newSession}>
+                    {tr("ไปที่สตูดิโอ")} <ArrowRight size={16} />
+                  </button>
+                </div>
+              ) : (
+                <div className="library-list">
+                  {history.map((item) => (
+                    <div key={item.id} className="stem-history-row">
+                    <button
+                      className="library-item"
+                      disabled={!!blocking && item.id !== taskId}
+                      onClick={() => openTask(item)}
+                    >
+                      <div className="library-icon">
+                        <FileAudio size={22} />
+                      </div>
+                      <div className="library-name">
+                        <strong>{item.filename}</strong>
+                        <small>
+                          {new Date(item.created_at).toLocaleDateString(
+                            locale === "th" ? "th-TH" : "en-US",
+                            { day: "numeric", month: "short", year: "numeric" },
+                          )}{" "}
+                          ·{" "}
+                          {item.engine === "demo"
+                            ? tr("เพลงตัวอย่าง")
+                            : item.engine === "dsp"
+                              ? "DSP"
+                              : tr("แยกเสียงด้วย AI")}{" "}
+                          · {item.stems_mode === "4stems" ? 4 : 2} {tr("stems")}
+                        </small>
+                        <StemJobStatus task={item} compact connectionIssue={historyUnavailable} />
+                      </div>
+                      <span className={`task-badge ${item.status}`}>
+                        {item.status === "completed" ? (
+                          <CheckCircle2 size={13} />
+                        ) : (
+                          <Clock3 size={13} />
+                        )}{" "}
+                        {item.status === "completed"
+                          ? tr("พร้อมมิกซ์")
+                          : item.status === "cancelled"
+                            ? tr("ยกเลิกแล้ว")
+                          : item.status === "expired" || item.status === "expiring"
+                            ? tr("หมดอายุแล้ว")
+                          : item.status === "failed"
+                            ? tr("ไม่สำเร็จ")
+                            : item.status === "queued" ? tr("รอคิว") : tr("กำลังประมวลผล")}
+                      </span>
+                      <ChevronRight size={17} />
+                    </button>
+                    <button className="stem-history-delete" aria-label={`${locale === "th" ? "ลบงาน" : "Delete job"} ${item.filename}`} title={locale === "th" ? "ย้ายไปถังขยะ" : "Move to trash"} disabled={["queued", "processing"].includes(item.status) && item.engine !== "worker"} onClick={() => void trashTask(item)}><Trash2 size={18} /></button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          )}
+          {view === "guide" && (
+            <div className="guide-grid">
+              <section className="panel guide-panel">
+                <span className="eyebrow">
+                  {tr("FROM A SONG TO YOUR NEXT IDEA")}
+                </span>
+                <h2>{tr("สามขั้นตอน สู่เสียงที่เป็นคุณ")}</h2>
+                {[
+                  {
+                    title: tr("เลือกเพลง"),
+                    text: tr(
+                      "ลากไฟล์เพลงมาวาง หรือเลือกจากเครื่อง รองรับ 6 รูปแบบ ขนาดไม่เกิน 50 MB และความยาวไม่เกิน 10 นาที",
+                    ),
+                  },
+                  {
+                    title: tr("เลือกสิ่งที่อยากแยก"),
+                    text: tr(
+                      "4 Stems สำหรับมิกซ์เสียงร้อง กลอง เบส และเครื่องดนตรี หรือ 2 Stems สำหรับเสียงร้องกับดนตรีประกอบ",
+                    ),
+                  },
+                  {
+                    title: tr("ฟัง ปรับ แล้วดาวน์โหลด"),
+                    text: tr(
+                      "กดเล่นเพื่อฟังพร้อมกัน ใช้ M ปิดเสียง และ S ฟังเฉพาะแทร็คที่เลือก ปรับความดังได้ถึง 150% คลิก waveform เพื่อเลื่อนตำแหน่ง และดาวน์โหลด WAV หรือ ZIP",
+                    ),
+                  },
+                ].map((item, index) => (
+                  <div className="guide-step" key={item.title}>
+                    <span>0{index + 1}</span>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
                   </div>
-                );
-              })}
+                ))}
+                <button
+                  className="primary-button small"
+                  onClick={() => setView("studio")}
+                >
+                  {tr("เริ่มสร้างสรรค์")} <ArrowRight size={16} />
+                </button>
+              </section>
+              <section className="panel guide-panel">
+                <span className="eyebrow">{tr("UNDER THE HOOD")}</span>
+                <h2>{tr("เลือกเครื่องมือให้เหมาะกับงาน")}</h2>
+                <h3>{tr("แยกเสียงด้วย AI")}</h3>
+                <p>
+                  {tr(
+                    "โหมด WebGPU ใช้ GPU บนอุปกรณ์ของคุณ ดาวน์โหลดไฟล์ประมวลผลครั้งแรกแล้วเก็บไว้ใช้ซ้ำ กรุณาเปิดแท็บไว้ระหว่างแยกเสียง ฟังและดาวน์โหลดได้ทันที หรือกดบันทึกเข้า cloud ภายในโควตาของบัญชี",
+                  )}
+                </p>
+                <p>
+                  {tr(
+                    "แยกเสียงร้องและเครื่องดนตรีด้วย AI ผลลัพธ์ขึ้นอยู่กับต้นฉบับ การใช้งานครั้งแรกต้องเชื่อมต่ออินเทอร์เน็ตเพื่อดาวน์โหลดไฟล์ที่จำเป็น",
+                  )}
+                </p>
+                <p>
+                  {tr(
+                    "เลือกความละเอียดให้เหมาะกับงาน แล้วตรวจฟังผลลัพธ์ในมิกเซอร์ ก่อนนำไปใช้งานจริง",
+                  )}
+                </p>
+                <h3>{tr("DSP preview")}</h3>
+                <p>
+                  {tr(
+                    "กรองย่านความถี่และตำแหน่งเสียง เหมาะสำหรับทดลองฟัง ไม่สามารถแยกเครื่องดนตรีได้เหมือน AI และไม่รับประกันการตัดเสียงร้อง",
+                  )}
+                </p>
+                <h3>{tr("เพลงตัวอย่าง")}</h3>
+                <p>
+                  {tr(
+                    "เพลงซินธ์สร้างขึ้นเพื่อทดลองมิกเซอร์ มีแทร็คแยกตั้งแต่ต้น ไม่ได้ผ่านการแยกด้วย AI",
+                  )}
+                </p>
+                <h3>{tr("พื้นที่จัดเก็บ")}</h3>
+                <p>
+                  {tr(
+                    "เพลงที่เพิ่มในคลังจะเก็บในพื้นที่ส่วนตัว และเปิดใช้งานได้หลังเข้าสู่ระบบ เพลงในถังขยะกู้คืนได้ ส่วนไฟล์ที่อัปโหลดตรงเข้าสูตรูดิโอจะใช้เพื่อแยกแทร็คและเก็บเฉพาะผลลัพธ์",
+                  )}
+                </p>
+              </section>
             </div>
-          </div>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
-        <p>StemX Studio • Powered by Demucs AI & Web Audio • Separate any track into clean stems</p>
-      </footer>
+          )}
+          {libraryTrackId && (
+            <Modal
+              title={tr("แยกเสียงจากคลังเพลง")}
+              close={() => setLibraryTrackId(null)}
+            >
+              <div className="workspace-form">
+                <label>
+                  {tr("รูปแบบแทร็ค")}
+                  <select
+                    value={mode}
+                    onChange={(e) => setMode(e.target.value)}
+                  >
+                    <option value="4stems">
+                      {tr("เสียงร้อง กลอง เบส และดนตรี")}
+                    </option>
+                    <option value="2stems">
+                      {tr("เสียงร้องและดนตรีประกอบ")}
+                    </option>
+                  </select>
+                </label>
+                <details className="processing-options">
+                <summary>{tr("ตัวเลือกการประมวลผล")}</summary>
+                <label>
+                  {tr("การประมวลผล")}
+                  <select
+                    value={engine}
+                    onChange={(e) => { engineSelected.current = true; setEngine(e.target.value); }}
+                  >
+                    {health?.worker_enabled && <option value="worker">{tr("แยกเสียงให้ฉัน")}</option>}
+                    <option value="webgpu">
+                      {tr("บนอุปกรณ์ของฉัน · WebGPU")}
+                    </option>
+                    <option value="demucs">
+                      {tr("บนเซิร์ฟเวอร์ · AI")}
+                      {health && !health.demucs_available
+                        ? tr(" · ยังไม่พร้อม")
+                        : ""}
+                    </option>
+                    <option value="dsp">{tr("กรองย่านเสียง")}</option>
+                  </select>
+                </label>
+                </details>
+                {engine === "worker" && <StemStorageChoice value={storageMode} onChange={setStorageMode} disabled={uploading} />}
+                <p className="subtle-copy">
+                  {engine === "webgpu"
+                    ? tr(
+                        "ดาวน์โหลดเพลงจากคลังมาแยกบนอุปกรณ์ ผลลัพธ์จะเก็บในเครื่องก่อน จนกว่าจะกดบันทึกเข้า cloud",
+                      )
+                    : engine === "worker"
+                      ? tr("แยกเสียงให้อัตโนมัติ ปิดหน้าเว็บแล้วกลับมาดูผลได้")
+                    : engine === "dsp"
+                      ? tr("การกรองย่านเสียงอาจมีเสียงอื่นปะปน")
+                      : tr("ผลลัพธ์จะบันทึกในงานแยกเสียงของบัญชีคุณ")}
+                </p>
+                {engine === "webgpu" && local.support !== "ready" && (
+                  <p className="engine-hint" role="status">
+                    {tr(
+                      local.support === "checking"
+                        ? "กำลังตรวจสอบ GPU ของอุปกรณ์…"
+                        : "ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์",
+                    )}
+                  </p>
+                )}
+                <button
+                  className="primary-button"
+                  disabled={
+                    uploading ||
+                    (engine === "webgpu" && local.support !== "ready") ||
+                    (engine === "demucs" && !health?.demucs_available)
+                  }
+                  onClick={async () => {
+                    setUploading(true);
+                    setError("");
+                    try {
+                      if (engine === "webgpu") {
+                        const metadata = await responseData(
+                          await apiFetch(`/api/cloud/tracks/${libraryTrackId}`),
+                        );
+                        if (metadata.size_bytes > 50_000_000)
+                          throw new Error(
+                            tr("ไฟล์ใหญ่เกิน 50 MB กรุณาเลือกไฟล์ที่เล็กลง"),
+                          );
+                        if (metadata.duration > 600)
+                          throw new Error(
+                            tr(
+                              "รองรับเพลงความยาวไม่เกิน 10 นาที กรุณาตัดไฟล์ก่อน",
+                            ),
+                          );
+                        const audio = await apiFetch(
+                          `/api/cloud/tracks/${libraryTrackId}/audio`,
+                          { signal: AbortSignal.timeout(120000) },
+                        );
+                        if (!audio.ok) {
+                          await responseData(audio);
+                          return;
+                        }
+                        const source = new File(
+                          [await audio.blob()],
+                          metadata.filename,
+                          { type: "audio/wav" },
+                        );
+                        setLibraryTrackId(null);
+                        setTaskId(null);
+                        setTask(null);
+                        setView("studio");
+                        localStorage.removeItem("stemora-active-task");
+                        setUploading(false);
+                        await local.run(source, mode);
+                        return;
+                      }
+                      local.clear();
+                      const form = new FormData();
+                      form.append("stems_mode", mode);
+    form.append("storage_mode", storageMode);
+                      form.append("engine", engine);
+                      const path = `/api/cloud/tracks/${libraryTrackId}/separate`;
+                      const result = engine === "worker"
+                        ? await queueSeparation(form, uploadId(JSON.stringify([libraryTrackId, mode, engine, storageMode])), setUploadProgress, path)
+                        : await responseData(await apiFetch(path, {method: "POST", body: form}));
+                      localStorage.removeItem(`stemora-pending-upload:${user.id}`);
+                      setTask(null);
+                      setTaskId(result.task_id);
+                      localStorage.setItem(
+                        "stemora-active-task",
+                        result.task_id,
+                      );
+                      setLibraryTrackId(null);
+                      setView("studio");
+                    } catch (cause) {
+                      setError((cause as Error).message);
+                    } finally {
+                      setUploading(false);
+                    }
+                  }}
+                >
+                  <Sparkles size={16} />{" "}
+                  {uploading ? tr("กำลังเตรียมเพลง…") : tr("เริ่มแยกเสียง")}
+                </button>
+                {error && (
+                  <div className="error-message" role="alert">
+                    {tr(error)}
+                  </div>
+                )}
+              </div>
+            </Modal>
+          )}
+        </main>
+      </div>
     </div>
+  );
+}
+function PlayIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M5 3.5 12 8l-7 4.5z" fill="currentColor" />
+    </svg>
+  );
+}
+
+export default function Home() {
+  return (
+    <AuthBoundary>
+      <Workspace />
+    </AuthBoundary>
   );
 }

@@ -1,0 +1,15 @@
+diff --git a/demucs-wasm/Cargo.toml b/demucs-wasm/Cargo.toml
+index 5eaf0b3..8ebf396 100644
+--- a/demucs-wasm/Cargo.toml
++++ b/demucs-wasm/Cargo.toml
+@@ -7,8 +7,8 @@ edition = "2021"
+ crate-type = ["cdylib"]
+ 
+ [dependencies]
+-demucs-core = { path = "../demucs-core", features = ["wgpu", "autotune", "fusion"] }
+-burn = { version = "0.20.1", features = ["wgpu", "autotune", "fusion"] }
++demucs-core = { path = "../demucs-core", features = ["wgpu", "fusion"] }
++burn = { version = "0.20.1", default-features = false, features = ["std", "wgpu", "fusion"] }
+ wasm-bindgen = "0.2"
+ wasm-bindgen-futures = "0.4"
+ getrandom = { version = "0.3", features = ["wasm_js"] }

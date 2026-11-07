@@ -51,3 +51,42 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Private workspace data / self-hosted storage credentials
+backend/objects/
+backend/cache/
+backend/workspace.sqlite3*
+backend/workspace-data/
+.env
+.env.*
+!.env.example
+deploy/garage.toml
+backups/
+
+backend/incoming/
+backend/client-incoming/
+backend/worker-incoming/
+worker/build/
+worker/.venv/
+worker/config.json
+backend/migrations/
+
+# Keep application source named lib; only virtualenv libraries are ignored above.
+!frontend/src/lib/
+!frontend/src/lib/**
+
+# Reproducible browser inference assets; fetched and SHA-256 verified by the setup script.
+frontend/public/client-stems/assets/*.wasm
+frontend/public/client-stems/assets/*.bin
+frontend/public/client-stems/assets/*.pending
+
+# Local release installers and checksums
+dist/
+
+# Private automatic operations data
+/ops-backups/
+/operations-state/
+
+# Taste-Skill cache and reports
+.taste-skill/
+shots/

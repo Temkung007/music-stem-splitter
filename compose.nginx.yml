@@ -1,0 +1,29 @@
+# Use with compose.yml when the host already runs Nginx on ports 80/443.
+services:
+  gateway:
+    profiles: [standalone]
+  frontend:
+    ports:
+      - "${STEMORA_BIND_IP:-127.0.0.1}:${STEMORA_FRONTEND_PORT:-18081}:3000"
+    mem_limit: 384m
+    cpus: 1.0
+  backend:
+    environment:
+      FORWARDED_ALLOW_IPS: ${STEMORA_TRUSTED_PROXIES:-127.0.0.1}
+    ports:
+      - "${STEMORA_BIND_IP:-127.0.0.1}:${STEMORA_BACKEND_PORT:-18082}:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    mem_limit: 2560m
+    cpus: 2.0
+  garage:
+    mem_limit: 256m
+    cpus: 0.5
+  database:
+    mem_limit: 512m
+    cpus: 1.0
+  assistant:
+    environment:
+      OLLAMA_CONTEXT_LENGTH: "2048"
+    mem_limit: 1536m
+    cpus: 2.0

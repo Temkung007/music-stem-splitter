@@ -1,47 +1,30 @@
 #!/usr/bin/env bash
-set -e
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$DIR"
-
-echo "=========================================================="
-echo "      🎵 StemX - Music Stem Splitter Launcher 🎵         "
-echo "=========================================================="
-
+set -euo pipefail
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ "${1:-}" = "--ai" ]; then export STEMORA_AI=1; fi
+BACKEND_PID=""
+FRONTEND_PID=""
 cleanup() {
-    echo ""
-    echo "Stopping servers..."
-    kill $(jobs -p) 2>/dev/null || true
-    exit 0
+    trap - EXIT INT TERM
+    [ -z "$BACKEND_PID" ] || kill "$BACKEND_PID" 2>/dev/null || true
+    [ -z "$FRONTEND_PID" ] || kill "$FRONTEND_PID" 2>/dev/null || true
 }
-
-trap cleanup SIGINT SIGTERM EXIT
-
-# 1. Start Python Backend
-echo "[1/2] Starting Python Backend on http://localhost:8000..."
-cd "$DIR/backend"
-if [ ! -d ".venv" ]; then
-    echo "Initializing virtual environment..."
-    uv venv --python 3.12 .venv
-    uv pip install --python .venv/bin/python -r requirements.txt
-fi
-.venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000 &
-BACKEND_PID=$!
-
-# Wait for backend to respond
-sleep 2
-
-# 2. Start Next.js Frontend
-echo "[2/2] Starting Next.js Frontend on http://localhost:3000..."
+trap cleanup EXIT
+trap 'exit 130' INT TERM
+command -v node >/dev/null 2>&1 || { echo "Install Node.js 20.9+ first."; exit 1; }
+for port in 3000 8000; do
+    if curl -s --max-time 1 "http://127.0.0.1:$port" >/dev/null 2>&1; then
+        echo "Port $port is already in use. Stop the existing server before running STEMORA."
+        exit 1
+    fi
+done
 cd "$DIR/frontend"
-npm run dev &
+[ -d node_modules ] || npm ci
+"$DIR/backend/start.sh" &
+BACKEND_PID=$!
+node node_modules/next/dist/bin/next dev --hostname 127.0.0.1 -p 3000 &
 FRONTEND_PID=$!
-
-echo ""
-echo "🚀 StemX is running!"
-echo "👉 Open Web Browser: http://localhost:3000"
-echo "👉 Backend API Docs: http://localhost:8000/docs"
-echo "Press Ctrl+C to stop all servers."
-echo ""
-
-wait
+echo "STEMORA • http://localhost:3000"
+echo "The status indicator will turn green when the backend is ready. Ctrl+C to stop."
+while kill -0 "$BACKEND_PID" 2>/dev/null && kill -0 "$FRONTEND_PID" 2>/dev/null; do sleep 1; done
+exit 1

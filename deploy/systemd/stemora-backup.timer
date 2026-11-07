@@ -1,0 +1,8 @@
+[Unit]
+Description=STEMORA daily private backup
+[Timer]
+OnCalendar=*-*-* 03:15:00 Asia/Bangkok
+Persistent=true
+RandomizedDelaySec=5min
+[Install]
+WantedBy=timers.target

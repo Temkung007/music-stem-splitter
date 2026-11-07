@@ -1,0 +1,13 @@
+[Unit]
+Description=STEMORA private backup and isolated restore verification
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/stemora
+ExecStart=/usr/bin/python3 scripts/operations.py backup
+UMask=0077
+Nice=15
+IOSchedulingClass=idle
+TimeoutStartSec=2h

@@ -1,0 +1,6 @@
+node_modules
+.next
+*.log
+public/client-stems/assets/*.wasm
+public/client-stems/assets/*.bin
+public/client-stems/qa.html

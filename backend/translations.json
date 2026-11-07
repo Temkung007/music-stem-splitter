@@ -1,0 +1,2598 @@
+{
+  "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองอีกครั้ง": {
+    "th": "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองอีกครั้ง",
+    "en": "Could not connect to the server. Please try again."
+  },
+  "เซิร์ฟเวอร์ตอบกลับไม่ถูกต้อง กรุณาลองอีกครั้ง": {
+    "th": "เซิร์ฟเวอร์ตอบกลับไม่ถูกต้อง กรุณาลองอีกครั้ง",
+    "en": "The server returned an invalid response. Please try again."
+  },
+  "ไม่พบงานเดิม กรุณาเลือกไฟล์เพื่อเริ่มใหม่": {
+    "th": "ไม่พบงานเดิม กรุณาเลือกไฟล์เพื่อเริ่มใหม่",
+    "en": "The previous job was not found. Choose a file to start again."
+  },
+  "ขาดการเชื่อมต่อ กำลังลองใหม่…": {
+    "th": "ขาดการเชื่อมต่อ กำลังลองใหม่…",
+    "en": "Connection lost. Retrying…"
+  },
+  "ไฟล์นี้ยังไม่รองรับ เลือก MP3, WAV, FLAC, M4A, AAC หรือ OGG": {
+    "th": "ไฟล์นี้ยังไม่รองรับ เลือก MP3, WAV, FLAC, M4A, AAC หรือ OGG",
+    "en": "Unsupported file. Choose MP3, WAV, FLAC, M4A, AAC or OGG."
+  },
+  "ไฟล์นี้ไม่มีข้อมูล กรุณาเลือกไฟล์ใหม่": {
+    "th": "ไฟล์นี้ไม่มีข้อมูล กรุณาเลือกไฟล์ใหม่",
+    "en": "This file is empty. Please choose another file."
+  },
+  "ไฟล์ใหญ่เกิน 50 MB กรุณาเลือกไฟล์ที่เล็กลง": {
+    "th": "ไฟล์ใหญ่เกิน 50 MB กรุณาเลือกไฟล์ที่เล็กลง",
+    "en": "This file exceeds 50 MB. Choose a smaller file."
+  },
+  "รองรับเพลงความยาวไม่เกิน 10 นาที กรุณาตัดไฟล์ก่อน": {
+    "th": "รองรับเพลงความยาวไม่เกิน 10 นาที กรุณาตัดไฟล์ก่อน",
+    "en": "Songs can be up to 10 minutes long. Please trim the file first."
+  },
+  "รอประมวลผล": {
+    "th": "รอประมวลผล",
+    "en": "Queued"
+  },
+  "ส่งไฟล์ไม่สำเร็จ กรุณาลองอีกครั้ง": {
+    "th": "ส่งไฟล์ไม่สำเร็จ กรุณาลองอีกครั้ง",
+    "en": "Upload failed. Please try again."
+  },
+  "Music library": {
+    "th": "คลังเพลง",
+    "en": "Music library"
+  },
+  "Set builder": {
+    "th": "จัดเซ็ต",
+    "en": "Set builder"
+  },
+  "Your workspace": {
+    "th": "พื้นที่ของคุณ",
+    "en": "Your workspace"
+  },
+  "Stem studio": {
+    "th": "สตูดิโอแยกเสียง",
+    "en": "Stem studio"
+  },
+  "Stem archive": {
+    "th": "งานแยกเสียง",
+    "en": "Stem archive"
+  },
+  "Getting started": {
+    "th": "เริ่มต้นใช้งาน",
+    "en": "Getting started"
+  },
+  "STEMORA หน้าสตูดิโอ": {
+    "th": "STEMORA หน้าสตูดิโอ",
+    "en": "STEMORA studio home"
+  },
+  "YOUR WORKSPACE": {
+    "th": "พื้นที่ของคุณ",
+    "en": "YOUR WORKSPACE"
+  },
+  "เมนูหลัก": {
+    "th": "เมนูหลัก",
+    "en": "Main navigation"
+  },
+  "คลังเพลงส่วนตัว": {
+    "th": "คลังเพลงส่วนตัว",
+    "en": "Private music library"
+  },
+  "จัดเซ็ตและ Playlist": {
+    "th": "จัดเซ็ตและ Playlist",
+    "en": "Sets & Playlists"
+  },
+  "สตูดิโอแยกเสียง": {
+    "th": "สตูดิโอแยกเสียง",
+    "en": "Stem studio"
+  },
+  "งานแยกเสียง": {
+    "th": "งานแยกเสียง",
+    "en": "Stem jobs"
+  },
+  "Made for your next idea.": {
+    "th": "พร้อมสำหรับไอเดียถัดไป",
+    "en": "Made for your next idea."
+  },
+  "ซ้อมเพลง ทำคาราโอเกะ": {
+    "th": "ซ้อมเพลง ทำคาราโอเกะ",
+    "en": "Practice or make karaoke tracks"
+  },
+  "หรือค้นพบเสียงใหม่ในเพลงเดิม": {
+    "th": "หรือค้นพบเสียงใหม่ในเพลงเดิม",
+    "en": "Discover new sounds in familiar music"
+  },
+  "เริ่มต้นใช้งาน": {
+    "th": "เริ่มต้นใช้งาน",
+    "en": "Get started"
+  },
+  "บัญชีและพื้นที่จัดเก็บ": {
+    "th": "บัญชีและพื้นที่จัดเก็บ",
+    "en": "Account & storage"
+  },
+  "ออกจากระบบ": {
+    "th": "ออกจากระบบ",
+    "en": "Log out"
+  },
+  "วิธีใช้งาน": {
+    "th": "วิธีใช้งาน",
+    "en": "Help & guide"
+  },
+  "Workspace": {
+    "th": "พื้นที่ของคุณ",
+    "en": "Workspace"
+  },
+  "ตรวจสอบการเชื่อมต่ออีกครั้ง": {
+    "th": "ตรวจสอบการเชื่อมต่ออีกครั้ง",
+    "en": "Check the connection again"
+  },
+  "กำลังเชื่อมต่อ": {
+    "th": "กำลังเชื่อมต่อ",
+    "en": "Connecting"
+  },
+  "เซิร์ฟเวอร์ออฟไลน์": {
+    "th": "เซิร์ฟเวอร์ออฟไลน์",
+    "en": "Server offline"
+  },
+  "ต้องติดตั้ง FFmpeg": {
+    "th": "ต้องติดตั้ง FFmpeg",
+    "en": "FFmpeg is required"
+  },
+  "ระบบพร้อมใช้งาน": {
+    "th": "ระบบพร้อมใช้งาน",
+    "en": "All systems ready"
+  },
+  "PRIVATE": {
+    "th": "ส่วนตัว",
+    "en": "PRIVATE"
+  },
+  "เมนูมือถือ": {
+    "th": "เมนูมือถือ",
+    "en": "Mobile menu"
+  },
+  "คลังเพลง": {
+    "th": "คลังเพลง",
+    "en": "Music library"
+  },
+  "Playlist": {
+    "th": "เพลย์ลิสต์",
+    "en": "Playlists"
+  },
+  "บัญชี": {
+    "th": "บัญชี",
+    "en": "Account"
+  },
+  "สตูดิโอ": {
+    "th": "สตูดิโอ",
+    "en": "Studio"
+  },
+  "YOUR MUSIC. YOUR NEXT GREAT SET.": {
+    "th": "เพลงของคุณ เซ็ตถัดไปของคุณ",
+    "en": "YOUR MUSIC. YOUR NEXT GREAT SET."
+  },
+  "เก็บทุกเสียงไว้ด้วยกัน พร้อมสำหรับเซ็ตถัดไป": {
+    "th": "เก็บทุกเสียงไว้ด้วยกัน พร้อมสำหรับเซ็ตถัดไป",
+    "en": "Keep every sound together, ready for your next set"
+  },
+  "วางเส้นทางพลังงาน แล้วจัดจังหวะในแบบของคุณ": {
+    "th": "วางเส้นทางพลังงาน แล้วจัดจังหวะในแบบของคุณ",
+    "en": "Shape the energy and build a set your way"
+  },
+  "จัดการบัญชีและพื้นที่สร้างสรรค์ของคุณ": {
+    "th": "จัดการบัญชีและพื้นที่สร้างสรรค์ของคุณ",
+    "en": "Manage your account and creative space"
+  },
+  "ทุกเสียงมีเรื่องราว แยกออกมา แล้วสร้างในแบบของคุณ": {
+    "th": "ทุกเสียงมีเรื่องราว แยกออกมา แล้วสร้างในแบบของคุณ",
+    "en": "Every sound has a story. Separate it and make it yours."
+  },
+  "กลับมาฟัง มิกซ์ และดาวน์โหลดผลงานของคุณได้เสมอ": {
+    "th": "กลับมาฟัง มิกซ์ และดาวน์โหลดผลงานของคุณได้เสมอ",
+    "en": "Come back to listen, mix and download your work"
+  },
+  "จากเพลงหนึ่งเพลง สู่ความเป็นไปได้อีกมากมาย": {
+    "th": "จากเพลงหนึ่งเพลง สู่ความเป็นไปได้อีกมากมาย",
+    "en": "One song. So many possibilities."
+  },
+  "ลองเพลงตัวอย่าง": {
+    "th": "ลองเพลงตัวอย่าง",
+    "en": "Try a demo"
+  },
+  "เริ่มเพลงใหม่": {
+    "th": "เริ่มเพลงใหม่",
+    "en": "Start a new track"
+  },
+  "มีการแก้ไขเซ็ตที่ยังไม่บันทึก กรุณาบันทึกหรือย้อนค่าก่อนเปลี่ยนหน้าหรือออกจากระบบ": {
+    "th": "มีการแก้ไขเซ็ตที่ยังไม่บันทึก กรุณาบันทึกหรือย้อนค่าก่อนเปลี่ยนหน้าหรือออกจากระบบ",
+    "en": "You have unsaved set changes. Save or undo them before switching pages or logging out."
+  },
+  "ขั้นตอนการทำงาน": {
+    "th": "ขั้นตอนการทำงาน",
+    "en": "Workflow steps"
+  },
+  "เลือกเพลงของคุณ": {
+    "th": "เลือกเพลงของคุณ",
+    "en": "Choose your song"
+  },
+  "แยกเสียง": {
+    "th": "แยกเสียง",
+    "en": "Separate stems"
+  },
+  "มิกซ์และดาวน์โหลด": {
+    "th": "มิกซ์และดาวน์โหลด",
+    "en": "Mix & download"
+  },
+  "ปิดข้อความ": {
+    "th": "ปิดข้อความ",
+    "en": "Dismiss message"
+  },
+  "เชื่อมต่ออีกครั้ง": {
+    "th": "เชื่อมต่ออีกครั้ง",
+    "en": "Reconnect"
+  },
+  "กลับไปเลือกเพลง": {
+    "th": "กลับไปเลือกเพลง",
+    "en": "Choose another song"
+  },
+  "FINDING EVERY LAYER": {
+    "th": "ค้นหาทุกเลเยอร์ของเสียง",
+    "en": "FINDING EVERY LAYER"
+  },
+  "กำลังส่งเพลงของคุณ": {
+    "th": "กำลังส่งเพลงของคุณ",
+    "en": "Uploading your song"
+  },
+  "กำลังเตรียมเสียงสำหรับคุณ": {
+    "th": "กำลังเตรียมเสียงสำหรับคุณ",
+    "en": "Preparing your sound"
+  },
+  "กำลังอัปโหลดและตรวจสอบไฟล์…": {
+    "th": "กำลังอัปโหลดและตรวจสอบไฟล์…",
+    "en": "Uploading and checking your file…"
+  },
+  "คุณเปิดคลังเพลงได้ระหว่างรอ งานจะประมวลผลต่อบนเซิร์ฟเวอร์": {
+    "th": "คุณเปิดคลังเพลงได้ระหว่างรอ งานจะประมวลผลต่อบนเซิร์ฟเวอร์",
+    "en": "You can browse your library while processing continues on the server."
+  },
+  "เริ่มจากเพลงที่คุณชอบ": {
+    "th": "เริ่มจากเพลงที่คุณชอบ",
+    "en": "Start with a song you love"
+  },
+  "อัปโหลดไฟล์ แล้วเลือกเสียงที่อยากเก็บไว้": {
+    "th": "อัปโหลดไฟล์ แล้วเลือกเสียงที่อยากเก็บไว้",
+    "en": "Upload a file and choose the sounds you want to keep"
+  },
+  "กรุณาเลือกเพลงครั้งละ 1 ไฟล์": {
+    "th": "กรุณาเลือกเพลงครั้งละ 1 ไฟล์",
+    "en": "Please choose one song at a time"
+  },
+  "วางเพลงของคุณได้เลย": {
+    "th": "วางเพลงของคุณได้เลย",
+    "en": "Drop your song here"
+  },
+  "ลากเพลงของคุณมาวางที่นี่": {
+    "th": "ลากเพลงของคุณมาวางที่นี่",
+    "en": "Drag your song here"
+  },
+  "ให้เสียงที่ซ่อนอยู่ ได้ออกมาเป็นตัวเอง": {
+    "th": "ให้เสียงที่ซ่อนอยู่ ได้ออกมาเป็นตัวเอง",
+    "en": "Let the hidden sounds take the spotlight"
+  },
+  "เปลี่ยนไฟล์เพลง": {
+    "th": "เปลี่ยนไฟล์เพลง",
+    "en": "Change audio file"
+  },
+  "เลือกไฟล์จากเครื่อง": {
+    "th": "เลือกไฟล์จากเครื่อง",
+    "en": "Choose a local file"
+  },
+  "MP3, WAV, FLAC, M4A, AAC, OGG": {
+    "th": "MP3, WAV, FLAC, M4A, AAC, OGG",
+    "en": "MP3, WAV, FLAC, M4A, AAC, OGG"
+  },
+  "สูงสุด 50 MB / 10 นาที": {
+    "th": "สูงสุด 50 MB / 10 นาที",
+    "en": "Up to 50 MB / 10 minutes"
+  },
+  "อยากแยกเสียงแบบไหน?": {
+    "th": "อยากแยกเสียงแบบไหน?",
+    "en": "What would you like to separate?"
+  },
+  "OUTPUT": {
+    "th": "ผลลัพธ์",
+    "en": "OUTPUT"
+  },
+  "รูปแบบการแยกเสียง": {
+    "th": "รูปแบบการแยกเสียง",
+    "en": "Stem layout"
+  },
+  "เสียงร้อง · กลอง · เบส · ดนตรี": {
+    "th": "เสียงร้อง · กลอง · เบส · ดนตรี",
+    "en": "Vocals · Drums · Bass · Instruments"
+  },
+  "เสียงร้อง · ดนตรีประกอบ": {
+    "th": "เสียงร้อง · ดนตรีประกอบ",
+    "en": "Vocals · Instrumental"
+  },
+  "การประมวลผล": {
+    "th": "การประมวลผล",
+    "en": "Processing"
+  },
+  "แยกเสียงด้วย AI": {
+    "th": "แยกเสียงด้วย AI",
+    "en": "AI stem separation"
+  },
+  " · ยังไม่ติดตั้ง": {
+    "th": " · ยังไม่ติดตั้ง",
+    "en": " · Not installed"
+  },
+  "DSP · กรองย่านเสียง": {
+    "th": "DSP · กรองย่านเสียง",
+    "en": "DSP · Frequency filtering"
+  },
+  "ระดับความละเอียด": {
+    "th": "ระดับความละเอียด",
+    "en": "Quality"
+  },
+  "มาตรฐาน · เร็วกว่า": {
+    "th": "มาตรฐาน · เร็วกว่า",
+    "en": "Standard · Faster"
+  },
+  "ละเอียด · ใช้เวลามากขึ้น": {
+    "th": "ละเอียด · ใช้เวลามากขึ้น",
+    "en": "Detailed · Takes longer"
+  },
+  "ยังไม่ติดตั้ง AI บนเครื่องนี้": {
+    "th": "ยังไม่ติดตั้ง AI บนเครื่องนี้",
+    "en": "Audio AI is not installed on this server"
+  },
+  "ดูวิธีติดตั้ง": {
+    "th": "ดูวิธีติดตั้ง",
+    "en": "View setup guide"
+  },
+  "หรือเลือก DSP เพื่อทดลองกรองย่านเสียง": {
+    "th": "หรือเลือก DSP เพื่อทดลองกรองย่านเสียง",
+    "en": "Or try DSP frequency filtering"
+  },
+  "DSP กรองความถี่และตำแหน่งเสียง อาจมีเสียงอื่นปะปน ไม่ใช่การแยกเครื่องดนตรีด้วย AI": {
+    "th": "DSP กรองความถี่และตำแหน่งเสียง อาจมีเสียงอื่นปะปน ไม่ใช่การแยกเครื่องดนตรีด้วย AI",
+    "en": "DSP filters frequencies and stereo position. Other sounds may remain; it does not separate instruments with AI."
+  },
+  "ประมวลผลในพื้นที่ส่วนตัวของคุณ การใช้ครั้งแรกอาจต้องดาวน์โหลดไฟล์ที่จำเป็น": {
+    "th": "ประมวลผลในพื้นที่ส่วนตัวของคุณ การใช้ครั้งแรกอาจต้องดาวน์โหลดไฟล์ที่จำเป็น",
+    "en": "Processing stays in your private workspace. First use may download the required files."
+  },
+  "กำลังตรวจสอบไฟล์": {
+    "th": "กำลังตรวจสอบไฟล์",
+    "en": "Checking your file"
+  },
+  "แยกเสียงเพลง": {
+    "th": "แยกเสียงเพลง",
+    "en": "Separate song"
+  },
+  "เข้าถึงแทร็คได้เฉพาะบัญชีของคุณ": {
+    "th": "เข้าถึงแทร็คได้เฉพาะบัญชีของคุณ",
+    "en": "Only your account can access these stems"
+  },
+  "ONE SONG. EVERY LAYER.": {
+    "th": "หนึ่งเพลง ทุกเลเยอร์ของเสียง",
+    "en": "ONE SONG. EVERY LAYER."
+  },
+  "Unpack the sound.": {
+    "th": "เปิดทุกชั้นของเสียง",
+    "en": "Unpack the sound."
+  },
+  "Make it yours.": {
+    "th": "สร้างในแบบของคุณ",
+    "en": "Make it yours."
+  },
+  "แยกแต่ละเลเยอร์ เพื่อสร้างสรรค์ได้อิสระ": {
+    "th": "แยกแต่ละเลเยอร์ เพื่อสร้างสรรค์ได้อิสระ",
+    "en": "Separate every layer and create freely"
+  },
+  "YOUR SOUND, REIMAGINED": {
+    "th": "เสียงของคุณ ในแบบใหม่",
+    "en": "YOUR SOUND, REIMAGINED"
+  },
+  "TAKE IT FOR A SPIN": {
+    "th": "ลองฟังและมิกซ์",
+    "en": "TAKE IT FOR A SPIN"
+  },
+  "ยังไม่มีไฟล์เพลง?": {
+    "th": "ยังไม่มีไฟล์เพลง?",
+    "en": "No audio file yet?"
+  },
+  "ลองมิกซ์เพลงตัวอย่าง 12 วินาที": {
+    "th": "ลองมิกซ์เพลงตัวอย่าง 12 วินาที",
+    "en": "Try a 12-second demo mix"
+  },
+  "ฟังแยก ปรับได้ทุกแทร็ค": {
+    "th": "ฟังแยก ปรับได้ทุกแทร็ค",
+    "en": "Listen and adjust every stem"
+  },
+  "Solo, mute และปรับระดับเสียงในตัว": {
+    "th": "Solo, mute และปรับระดับเสียงในตัว",
+    "en": "Built-in solo, mute and volume controls"
+  },
+  "พร้อมสำหรับไอเดียถัดไป": {
+    "th": "พร้อมสำหรับไอเดียถัดไป",
+    "en": "Ready for your next idea"
+  },
+  "ดาวน์โหลด WAV แยกแทร็ค หรือรวม ZIP": {
+    "th": "ดาวน์โหลด WAV แยกแทร็ค หรือรวม ZIP",
+    "en": "Download individual WAV stems or a ZIP"
+  },
+  "YOUR MUSIC. YOUR CREATIVE SPACE.": {
+    "th": "เพลงของคุณ พื้นที่สร้างสรรค์ของคุณ",
+    "en": "YOUR MUSIC. YOUR CREATIVE SPACE."
+  },
+  "สร้างสรรค์ได้เต็มที่ ในจังหวะของคุณ": {
+    "th": "สร้างสรรค์ได้เต็มที่ ในจังหวะของคุณ",
+    "en": "Create freely, at your own rhythm"
+  },
+  "เพลงทั้งหมด": {
+    "th": "เพลงทั้งหมด",
+    "en": "All songs"
+  },
+  "50 งานล่าสุดของบัญชีคุณ": {
+    "th": "50 งานล่าสุดของบัญชีคุณ",
+    "en": "Your 50 most recent jobs"
+  },
+  "รีเฟรช": {
+    "th": "รีเฟรช",
+    "en": "Refresh"
+  },
+  "พื้นที่สำหรับเสียงของคุณ": {
+    "th": "พื้นที่สำหรับเสียงของคุณ",
+    "en": "A space for your sound"
+  },
+  "เริ่มแยกเพลงแรก แล้วกลับมามิกซ์ต่อได้ที่นี่": {
+    "th": "เริ่มแยกเพลงแรก แล้วกลับมามิกซ์ต่อได้ที่นี่",
+    "en": "Separate your first song, then come back here to mix"
+  },
+  "ไปที่สตูดิโอ": {
+    "th": "ไปที่สตูดิโอ",
+    "en": "Go to studio"
+  },
+  "เพลงตัวอย่าง": {
+    "th": "เพลงตัวอย่าง",
+    "en": "Demo song"
+  },
+  "stems": {
+    "th": "แทร็ค",
+    "en": "stems"
+  },
+  "พร้อมมิกซ์": {
+    "th": "พร้อมมิกซ์",
+    "en": "Ready to mix"
+  },
+  "ไม่สำเร็จ": {
+    "th": "ไม่สำเร็จ",
+    "en": "Failed"
+  },
+  "กำลังประมวลผล": {
+    "th": "กำลังประมวลผล",
+    "en": "Processing"
+  },
+  "FROM A SONG TO YOUR NEXT IDEA": {
+    "th": "จากหนึ่งเพลง สู่ไอเดียถัดไป",
+    "en": "FROM A SONG TO YOUR NEXT IDEA"
+  },
+  "สามขั้นตอน สู่เสียงที่เป็นคุณ": {
+    "th": "สามขั้นตอน สู่เสียงที่เป็นคุณ",
+    "en": "Three steps to your sound"
+  },
+  "เลือกเพลง": {
+    "th": "เลือกเพลง",
+    "en": "Choose a song"
+  },
+  "ลากไฟล์เพลงมาวาง หรือเลือกจากเครื่อง รองรับ 6 รูปแบบ ขนาดไม่เกิน 50 MB และความยาวไม่เกิน 10 นาที": {
+    "th": "ลากไฟล์เพลงมาวาง หรือเลือกจากเครื่อง รองรับ 6 รูปแบบ ขนาดไม่เกิน 50 MB และความยาวไม่เกิน 10 นาที",
+    "en": "Drag in a song or choose a local file. Six formats supported, up to 50 MB and 10 minutes."
+  },
+  "เลือกสิ่งที่อยากแยก": {
+    "th": "เลือกสิ่งที่อยากแยก",
+    "en": "Choose your stems"
+  },
+  "4 Stems สำหรับมิกซ์เสียงร้อง กลอง เบส และเครื่องดนตรี หรือ 2 Stems สำหรับเสียงร้องกับดนตรีประกอบ": {
+    "th": "4 Stems สำหรับมิกซ์เสียงร้อง กลอง เบส และเครื่องดนตรี หรือ 2 Stems สำหรับเสียงร้องกับดนตรีประกอบ",
+    "en": "4 stems for vocals, drums, bass and instruments, or 2 stems for vocals and instrumental."
+  },
+  "ฟัง ปรับ แล้วดาวน์โหลด": {
+    "th": "ฟัง ปรับ แล้วดาวน์โหลด",
+    "en": "Listen, adjust, download"
+  },
+  "กดเล่นเพื่อฟังพร้อมกัน ใช้ M ปิดเสียง และ S ฟังเฉพาะแทร็คที่เลือก ปรับความดังได้ถึง 150% คลิก waveform เพื่อเลื่อนตำแหน่ง และดาวน์โหลด WAV หรือ ZIP": {
+    "th": "กดเล่นเพื่อฟังพร้อมกัน ใช้ M ปิดเสียง และ S ฟังเฉพาะแทร็คที่เลือก ปรับความดังได้ถึง 150% คลิก waveform เพื่อเลื่อนตำแหน่ง และดาวน์โหลด WAV หรือ ZIP",
+    "en": "Play all stems together. Press M to mute and S to solo, adjust volume up to 150%, click a waveform to seek, then download WAV or ZIP."
+  },
+  "เริ่มสร้างสรรค์": {
+    "th": "เริ่มสร้างสรรค์",
+    "en": "Start creating"
+  },
+  "UNDER THE HOOD": {
+    "th": "ทำงานอย่างไร",
+    "en": "UNDER THE HOOD"
+  },
+  "เลือกเครื่องมือให้เหมาะกับงาน": {
+    "th": "เลือกเครื่องมือให้เหมาะกับงาน",
+    "en": "Choose the right tool for your work"
+  },
+  "แยกเสียงร้องและเครื่องดนตรีด้วย AI ผลลัพธ์ขึ้นอยู่กับต้นฉบับ การใช้งานครั้งแรกต้องเชื่อมต่ออินเทอร์เน็ตเพื่อดาวน์โหลดไฟล์ที่จำเป็น": {
+    "th": "แยกเสียงร้องและเครื่องดนตรีด้วย AI ผลลัพธ์ขึ้นอยู่กับต้นฉบับ การใช้งานครั้งแรกต้องเชื่อมต่ออินเทอร์เน็ตเพื่อดาวน์โหลดไฟล์ที่จำเป็น",
+    "en": "Separate vocals and instruments with AI. Results depend on the source. First use requires an internet connection to download the necessary files."
+  },
+  "เลือกความละเอียดให้เหมาะกับงาน แล้วตรวจฟังผลลัพธ์ในมิกเซอร์ ก่อนนำไปใช้งานจริง": {
+    "th": "เลือกความละเอียดให้เหมาะกับงาน แล้วตรวจฟังผลลัพธ์ในมิกเซอร์ ก่อนนำไปใช้งานจริง",
+    "en": "Choose a quality level, then check the mix before using it in a performance."
+  },
+  "DSP preview": {
+    "th": "ทดลองกรองเสียง DSP",
+    "en": "DSP preview"
+  },
+  "กรองย่านความถี่และตำแหน่งเสียง เหมาะสำหรับทดลองฟัง ไม่สามารถแยกเครื่องดนตรีได้เหมือน AI และไม่รับประกันการตัดเสียงร้อง": {
+    "th": "กรองย่านความถี่และตำแหน่งเสียง เหมาะสำหรับทดลองฟัง ไม่สามารถแยกเครื่องดนตรีได้เหมือน AI และไม่รับประกันการตัดเสียงร้อง",
+    "en": "Filter frequencies and stereo position for a quick preview. DSP cannot separate instruments like AI and does not guarantee vocal removal."
+  },
+  "เพลงซินธ์สร้างขึ้นเพื่อทดลองมิกเซอร์ มีแทร็คแยกตั้งแต่ต้น ไม่ได้ผ่านการแยกด้วย AI": {
+    "th": "เพลงซินธ์สร้างขึ้นเพื่อทดลองมิกเซอร์ มีแทร็คแยกตั้งแต่ต้น ไม่ได้ผ่านการแยกด้วย AI",
+    "en": "A synthesized song made for trying the mixer. Its stems were created separately, not separated with AI."
+  },
+  "พื้นที่จัดเก็บ": {
+    "th": "พื้นที่จัดเก็บ",
+    "en": "Storage"
+  },
+  "เพลงที่เพิ่มในคลังจะเก็บในพื้นที่ส่วนตัว และเปิดใช้งานได้หลังเข้าสู่ระบบ เพลงในถังขยะกู้คืนได้ ส่วนไฟล์ที่อัปโหลดตรงเข้าสูตรูดิโอจะใช้เพื่อแยกแทร็คและเก็บเฉพาะผลลัพธ์": {
+    "th": "เพลงที่เพิ่มในคลังจะเก็บในพื้นที่ส่วนตัว และเปิดใช้งานได้หลังเข้าสู่ระบบ เพลงในถังขยะกู้คืนได้ ส่วนไฟล์ที่อัปโหลดตรงเข้าสูตรูดิโอจะใช้เพื่อแยกแทร็คและเก็บเฉพาะผลลัพธ์",
+    "en": "Library songs are stored privately and require login. Songs in Trash can be restored. Direct studio uploads are used for separation; only the results are kept."
+  },
+  "แยกเสียงจากคลังเพลง": {
+    "th": "แยกเสียงจากคลังเพลง",
+    "en": "Separate stems from your library"
+  },
+  "รูปแบบแทร็ค": {
+    "th": "รูปแบบแทร็ค",
+    "en": "Stem layout"
+  },
+  "เสียงร้อง กลอง เบส และดนตรี": {
+    "th": "เสียงร้อง กลอง เบส และดนตรี",
+    "en": "Vocals, drums, bass and instruments"
+  },
+  "เสียงร้องและดนตรีประกอบ": {
+    "th": "เสียงร้องและดนตรีประกอบ",
+    "en": "Vocals and instrumental"
+  },
+  " · ยังไม่พร้อม": {
+    "th": " · ยังไม่พร้อม",
+    "en": " · Unavailable"
+  },
+  "กรองย่านเสียง": {
+    "th": "กรองย่านเสียง",
+    "en": "Frequency filtering"
+  },
+  "การกรองย่านเสียงอาจมีเสียงอื่นปะปน": {
+    "th": "การกรองย่านเสียงอาจมีเสียงอื่นปะปน",
+    "en": "Frequency filtering may leave other sounds mixed in"
+  },
+  "ผลลัพธ์จะบันทึกในงานแยกเสียงของบัญชีคุณ": {
+    "th": "ผลลัพธ์จะบันทึกในงานแยกเสียงของบัญชีคุณ",
+    "en": "Results will be saved to your account's stem jobs"
+  },
+  "กำลังเตรียมเพลง…": {
+    "th": "กำลังเตรียมเพลง…",
+    "en": "Preparing your song…"
+  },
+  "เริ่มแยกเสียง": {
+    "th": "เริ่มแยกเสียง",
+    "en": "Start separation"
+  },
+  "เปลี่ยนรหัสผ่านแล้ว และออกจากระบบบนอุปกรณ์อื่นทั้งหมด": {
+    "th": "เปลี่ยนรหัสผ่านแล้ว และออกจากระบบบนอุปกรณ์อื่นทั้งหมด",
+    "en": "Password changed. All other devices have been logged out."
+  },
+  "PRIVATE BY DEFAULT": {
+    "th": "เป็นส่วนตัวตั้งแต่เริ่ม",
+    "en": "PRIVATE BY DEFAULT"
+  },
+  "พื้นที่จัดเก็บพร้อมใช้งาน": {
+    "th": "พื้นที่จัดเก็บพร้อมใช้งาน",
+    "en": "Storage is ready"
+  },
+  "พื้นที่จัดเก็บยังไม่พร้อม กรุณาลองใหม่": {
+    "th": "พื้นที่จัดเก็บยังไม่พร้อม กรุณาลองใหม่",
+    "en": "Storage is unavailable. Please try again."
+  },
+  "กำลังตรวจสอบพื้นที่จัดเก็บ": {
+    "th": "กำลังตรวจสอบพื้นที่จัดเก็บ",
+    "en": "Checking storage"
+  },
+  "จาก": {
+    "th": "จาก",
+    "en": "of"
+  },
+  "ไฟล์เพลง แทร็คที่แยกแล้ว และเพลย์ลิสต์ผูกกับบัญชีของคุณ เพลงในถังขยะกู้คืนได้และยังนับพื้นที่จัดเก็บ": {
+    "th": "ไฟล์เพลง แทร็คที่แยกแล้ว และเพลย์ลิสต์ผูกกับบัญชีของคุณ เพลงในถังขยะกู้คืนได้และยังนับพื้นที่จัดเก็บ",
+    "en": "Your songs, separated stems and playlists belong to your account. Songs in Trash can be restored and still count toward your storage."
+  },
+  "ผู้ช่วยจัดเซ็ต": {
+    "th": "ผู้ช่วยจัดเซ็ต",
+    "en": "Set assistant"
+  },
+  "พร้อมใช้ AI อ่านคำสั่งและจัดลำดับจากข้อมูลเสียง": {
+    "th": "พร้อมใช้ AI อ่านคำสั่งและจัดลำดับจากข้อมูลเสียง",
+    "en": "AI brief interpretation and audio-based ordering are ready"
+  },
+  "ผู้ช่วย AI ยังไม่พร้อม · ยังจัดลำดับจาก BPM คีย์ และพลังงานได้": {
+    "th": "ผู้ช่วย AI ยังไม่พร้อม · ยังจัดลำดับจาก BPM คีย์ และพลังงานได้",
+    "en": "The AI assistant is unavailable · You can still arrange by BPM, key and energy"
+  },
+  "จัดลำดับจาก BPM คีย์ และพลังงาน · ผู้ดูแลเปิดผู้ช่วย AI เพิ่มได้": {
+    "th": "จัดลำดับจาก BPM คีย์ และพลังงาน · ผู้ดูแลเปิดผู้ช่วย AI เพิ่มได้",
+    "en": "Arrange by BPM, key and energy · Your administrator can enable the AI assistant"
+  },
+  "ค่าที่วิเคราะห์เป็นตัวช่วย ควรฟังตรวจสอบก่อนแสดงจริง การส่งออก M3U8 ใช้คู่กับไฟล์เพลงที่อยู่ใน ZIP เดียวกัน": {
+    "th": "ค่าที่วิเคราะห์เป็นตัวช่วย ควรฟังตรวจสอบก่อนแสดงจริง การส่งออก M3U8 ใช้คู่กับไฟล์เพลงที่อยู่ใน ZIP เดียวกัน",
+    "en": "Analysis is a guide. Listen before performing. Use the exported M3U8 with the music files in the same ZIP."
+  },
+  "เปลี่ยนรหัสผ่าน": {
+    "th": "เปลี่ยนรหัสผ่าน",
+    "en": "Change password"
+  },
+  "รหัสผ่านปัจจุบัน": {
+    "th": "รหัสผ่านปัจจุบัน",
+    "en": "Current password"
+  },
+  "รหัสผ่านใหม่": {
+    "th": "รหัสผ่านใหม่",
+    "en": "New password"
+  },
+  "บันทึกรหัสผ่านใหม่": {
+    "th": "บันทึกรหัสผ่านใหม่",
+    "en": "Save new password"
+  },
+  "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาตรวจสอบแล้วลองใหม่": {
+    "th": "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาตรวจสอบแล้วลองใหม่",
+    "en": "Could not connect to the server. Check your connection and try again."
+  },
+  "เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง": {
+    "th": "เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง",
+    "en": "Your session has expired. Please log in again."
+  },
+  "เข้าสู่ระบบไม่สำเร็จ": {
+    "th": "เข้าสู่ระบบไม่สำเร็จ",
+    "en": "Login failed"
+  },
+  "กำลังเปิดพื้นที่ของคุณ…": {
+    "th": "กำลังเปิดพื้นที่ของคุณ…",
+    "en": "Opening your workspace…"
+  },
+  "YOUR PRIVATE DJ WORKSPACE": {
+    "th": "พื้นที่เพลงส่วนตัวสำหรับดีเจ",
+    "en": "YOUR PRIVATE DJ WORKSPACE"
+  },
+  "Your music.": {
+    "th": "เพลงของคุณ",
+    "en": "Your music."
+  },
+  "Your next": {
+    "th": "เซ็ตถัดไป",
+    "en": "Your next"
+  },
+  "great set.": {
+    "th": "ที่เป็นคุณ",
+    "en": "great set."
+  },
+  "เก็บทุกเพลง วางทุกจังหวะ": {
+    "th": "เก็บทุกเพลง วางทุกจังหวะ",
+    "en": "Keep every song. Shape every beat."
+  },
+  "แล้วเปลี่ยนไอเดียให้เป็นเซ็ตที่เป็นคุณ": {
+    "th": "แล้วเปลี่ยนไอเดียให้เป็นเซ็ตที่เป็นคุณ",
+    "en": "Turn your ideas into a set that is yours"
+  },
+  "คลังเพลงส่วนตัว เปิดได้ทุกอุปกรณ์": {
+    "th": "คลังเพลงส่วนตัว เปิดได้ทุกอุปกรณ์",
+    "en": "A private music library on every device"
+  },
+  "ผู้ช่วยจัดเซ็ตจากเสียงเพลงของคุณ": {
+    "th": "ผู้ช่วยจัดเซ็ตจากเสียงเพลงของคุณ",
+    "en": "A set assistant that works with your own music"
+  },
+  "แยกเสียง มิกซ์ และเตรียมเพลงในที่เดียว": {
+    "th": "แยกเสียง มิกซ์ และเตรียมเพลงในที่เดียว",
+    "en": "Separate, mix and prepare your music in one place"
+  },
+  "A SPACE FOR YOUR SOUND": {
+    "th": "พื้นที่สำหรับเสียงของคุณ",
+    "en": "A SPACE FOR YOUR SOUND"
+  },
+  "กลับมาสร้างเซ็ตถัดไป": {
+    "th": "กลับมาสร้างเซ็ตถัดไป",
+    "en": "Back for your next great set"
+  },
+  "สร้างพื้นที่เพลงของคุณ": {
+    "th": "สร้างพื้นที่เพลงของคุณ",
+    "en": "Create your music workspace"
+  },
+  "เข้าสู่ระบบเพื่อเปิดคลังเพลงและเพลย์ลิสต์ส่วนตัว": {
+    "th": "เข้าสู่ระบบเพื่อเปิดคลังเพลงและเพลย์ลิสต์ส่วนตัว",
+    "en": "Log in to open your private library and playlists"
+  },
+  "สมัครด้วยอีเมล รหัสผ่าน และชื่อที่คุณต้องการ": {
+    "th": "สมัครด้วยอีเมล รหัสผ่าน และชื่อที่คุณต้องการ",
+    "en": "Sign up with your email, password and a name you choose"
+  },
+  "เข้าสู่ระบบ": {
+    "th": "เข้าสู่ระบบ",
+    "en": "Log in"
+  },
+  "สร้างบัญชี": {
+    "th": "สร้างบัญชี",
+    "en": "Create account"
+  },
+  "ชื่อที่แสดง": {
+    "th": "ชื่อที่แสดง",
+    "en": "Display name"
+  },
+  "ชื่อจริง ชื่อเล่น หรือชื่อ DJ ก็ได้": {
+    "th": "ชื่อจริง ชื่อเล่น หรือชื่อ DJ ก็ได้",
+    "en": "Your name, nickname or DJ name"
+  },
+  "อีเมล": {
+    "th": "อีเมล",
+    "en": "Email"
+  },
+  "you@example.com": {
+    "th": "you@example.com",
+    "en": "you@example.com"
+  },
+  "รหัสผ่าน": {
+    "th": "รหัสผ่าน",
+    "en": "Password"
+  },
+  "อย่างน้อย 10 ตัวอักษร": {
+    "th": "อย่างน้อย 10 ตัวอักษร",
+    "en": "At least 10 characters"
+  },
+  "เข้าสู่พื้นที่ของคุณ": {
+    "th": "เข้าสู่พื้นที่ของคุณ",
+    "en": "Enter your workspace"
+  },
+  "สร้างบัญชีและเริ่มใช้งาน": {
+    "th": "สร้างบัญชีและเริ่มใช้งาน",
+    "en": "Create account & get started"
+  },
+  "ไฟล์ส่วนตัว เข้าถึงได้หลังเข้าสู่ระบบ": {
+    "th": "ไฟล์ส่วนตัว เข้าถึงได้หลังเข้าสู่ระบบ",
+    "en": "Private files. Login required."
+  },
+  "My next set": {
+    "th": "เซ็ตถัดไปของฉัน",
+    "en": "My next set"
+  },
+  "มีการแก้ไขที่ยังไม่บันทึก กรุณาบันทึกหรือกดย้อนค่าก่อนเปิดเซ็ตอื่น": {
+    "th": "มีการแก้ไขที่ยังไม่บันทึก กรุณาบันทึกหรือกดย้อนค่าก่อนเปิดเซ็ตอื่น",
+    "en": "You have unsaved changes. Save or undo them before opening another set."
+  },
+  "ปรับลำดับเอง · ตรวจฟังช่วงเปลี่ยนเพลง": {
+    "th": "ปรับลำดับเอง · ตรวจฟังช่วงเปลี่ยนเพลง",
+    "en": "Manually reordered · Check the transition by ear"
+  },
+  "บันทึกเพลย์ลิสต์แล้ว เปิดจากอุปกรณ์อื่นได้": {
+    "th": "บันทึกเพลย์ลิสต์แล้ว เปิดจากอุปกรณ์อื่นได้",
+    "en": "Playlist saved. You can open it from another device."
+  },
+  "Untitled set": {
+    "th": "เซ็ตใหม่",
+    "en": "Untitled set"
+  },
+  "กู้คืนเวอร์ชันแล้ว": {
+    "th": "กู้คืนเวอร์ชันแล้ว",
+    "en": "Version restored"
+  },
+  "เพิ่มเพลงแนะนำถัดไปและบันทึกแล้ว": {
+    "th": "เพิ่มเพลงแนะนำถัดไปและบันทึกแล้ว",
+    "en": "Recommended next song added and saved"
+  },
+  "สลับเป็นเพลงแนะนำและบันทึกแล้ว": {
+    "th": "สลับเป็นเพลงแนะนำและบันทึกแล้ว",
+    "en": "Song replaced with a recommendation and saved"
+  },
+  "กรุณาบันทึกหรือย้อนค่าที่แก้ไขก่อนเริ่มเซ็ตใหม่": {
+    "th": "กรุณาบันทึกหรือย้อนค่าที่แก้ไขก่อนเริ่มเซ็ตใหม่",
+    "en": "Save or undo your changes before starting a new set."
+  },
+  "ปิด": {
+    "th": "ปิด",
+    "en": "Close"
+  },
+  "Your sets": {
+    "th": "เซ็ตของคุณ",
+    "en": "Your sets"
+  },
+  "สร้างเซ็ตใหม่": {
+    "th": "สร้างเซ็ตใหม่",
+    "en": "New set"
+  },
+  "ทั้งหมด": {
+    "th": "ทั้งหมด",
+    "en": "All"
+  },
+  "ถังขยะ": {
+    "th": "ถังขยะ",
+    "en": "Trash"
+  },
+  "กำลังเปิดเพลย์ลิสต์…": {
+    "th": "กำลังเปิดเพลย์ลิสต์…",
+    "en": "Opening playlists…"
+  },
+  "ยังไม่มีเซ็ตในถังขยะ": {
+    "th": "ยังไม่มีเซ็ตในถังขยะ",
+    "en": "No sets in Trash"
+  },
+  "เซ็ตถัดไปของคุณ เริ่มที่นี่": {
+    "th": "เซ็ตถัดไปของคุณ เริ่มที่นี่",
+    "en": "Your next set starts here"
+  },
+  "เพลง · เป้าหมาย": {
+    "th": "เพลง · เป้าหมาย",
+    "en": "songs · Target"
+  },
+  "นาที": {
+    "th": "นาที",
+    "en": "min"
+  },
+  "รีเฟรชรายการ": {
+    "th": "รีเฟรชรายการ",
+    "en": "Refresh list"
+  },
+  "YOUR NEXT GREAT SET": {
+    "th": "เซ็ตถัดไปของคุณ",
+    "en": "YOUR NEXT GREAT SET"
+  },
+  "บอกบรรยากาศ": {
+    "th": "บอกบรรยากาศ",
+    "en": "Describe the mood"
+  },
+  "แล้วค้นหาจังหวะที่ใช่": {
+    "th": "แล้วค้นหาจังหวะที่ใช่",
+    "en": "Find the right rhythm"
+  },
+  "จัดเพลงจากคลังของคุณ โดยใช้ BPM คีย์ และพลังงานเป็นตัวช่วย": {
+    "th": "จัดเพลงจากคลังของคุณ โดยใช้ BPM คีย์ และพลังงานเป็นตัวช่วย",
+    "en": "Arrange your own music with help from BPM, key and energy"
+  },
+  "ชื่อเซ็ต": {
+    "th": "ชื่อเซ็ต",
+    "en": "Set name"
+  },
+  "อยากให้เซ็ตนี้รู้สึกอย่างไร?": {
+    "th": "อยากให้เซ็ตนี้รู้สึกอย่างไร?",
+    "en": "How should this set feel?"
+  },
+  "เช่น เซ็ต 60 นาที เริ่มอบอุ่น ค่อย ๆ เพิ่มพลัง แล้วผ่อนลงตอนปิดงาน": {
+    "th": "เช่น เซ็ต 60 นาที เริ่มอบอุ่น ค่อย ๆ เพิ่มพลัง แล้วผ่อนลงตอนปิดงาน",
+    "en": "For example: a 60-minute set, start warm, build energy gradually, then wind down at the end"
+  },
+  "เริ่มเบาแล้วค่อยเพิ่มพลัง": {
+    "th": "เริ่มเบาแล้วค่อยเพิ่มพลัง",
+    "en": "Start gently and build energy"
+  },
+  "พลังงานขึ้นลงเป็นช่วง": {
+    "th": "พลังงานขึ้นลงเป็นช่วง",
+    "en": "Let the energy rise and fall"
+  },
+  "ลดพลังสำหรับปิดงาน": {
+    "th": "ลดพลังสำหรับปิดงาน",
+    "en": "Lower the energy for the closing"
+  },
+  "เวลาที่ต้องการ (นาที)": {
+    "th": "เวลาที่ต้องการ (นาที)",
+    "en": "Target duration (minutes)"
+  },
+  "เส้นทางพลังงาน": {
+    "th": "เส้นทางพลังงาน",
+    "en": "Energy profile"
+  },
+  "ค่อย ๆ เพิ่มพลัง": {
+    "th": "ค่อย ๆ เพิ่มพลัง",
+    "en": "Build energy gradually"
+  },
+  "ขึ้นแล้วผ่อนลง": {
+    "th": "ขึ้นแล้วผ่อนลง",
+    "en": "Rise and unwind"
+  },
+  "พลังสม่ำเสมอ": {
+    "th": "พลังสม่ำเสมอ",
+    "en": "Steady energy"
+  },
+  "ผ่อนลงเพื่อปิดงาน": {
+    "th": "ผ่อนลงเพื่อปิดงาน",
+    "en": "Wind down for the closing"
+  },
+  "แนวเพลง": {
+    "th": "แนวเพลง",
+    "en": "Genre"
+  },
+  "ทุกแนว": {
+    "th": "ทุกแนว",
+    "en": "All genres"
+  },
+  "BPM ต่ำสุด": {
+    "th": "BPM ต่ำสุด",
+    "en": "Minimum BPM"
+  },
+  "BPM สูงสุด": {
+    "th": "BPM สูงสุด",
+    "en": "Maximum BPM"
+  },
+  "ใช้เพลงที่เลือก {0} เพลงจากคลัง": {
+    "th": "ใช้เพลงที่เลือก {0} เพลงจากคลัง",
+    "en": "Use {0} selected songs from your library"
+  },
+  "กำลังวางลำดับเพลง…": {
+    "th": "กำลังวางลำดับเพลง…",
+    "en": "Planning your track order…"
+  },
+  "จัดเซ็ตให้ฉัน": {
+    "th": "จัดเซ็ตให้ฉัน",
+    "en": "Build my set"
+  },
+  "จัดเองจากเซ็ตว่าง": {
+    "th": "จัดเองจากเซ็ตว่าง",
+    "en": "Start with an empty set"
+  },
+  "มี {0} เพลงพร้อมจัดเซ็ต · ลำดับที่แนะนำยังปรับได้ทุกเพลง": {
+    "th": "มี {0} เพลงพร้อมจัดเซ็ต · ลำดับที่แนะนำยังปรับได้ทุกเพลง",
+    "en": "{0} songs ready to arrange · Every recommendation is editable"
+  },
+  "เพิ่มเพลงในคลังก่อนเริ่มจัดเซ็ต": {
+    "th": "เพิ่มเพลงในคลังก่อนเริ่มจัดเซ็ต",
+    "en": "Add songs to your library to start a set"
+  },
+  "MADE FOR THE NEXT MOMENT": {
+    "th": "พร้อมสำหรับช่วงเวลาถัดไป",
+    "en": "MADE FOR THE NEXT MOMENT"
+  },
+  "ชื่อเพลย์ลิสต์": {
+    "th": "ชื่อเพลย์ลิสต์",
+    "en": "Playlist name"
+  },
+  "เพลง · เวอร์ชัน": {
+    "th": "เพลง · เวอร์ชัน",
+    "en": "songs · Version"
+  },
+  "ยังไม่บันทึก": {
+    "th": "ยังไม่บันทึก",
+    "en": "Unsaved changes"
+  },
+  "เซ็ตนี้อยู่ในถังขยะ กู้คืนเพื่อแก้ไขหรือส่งออก": {
+    "th": "เซ็ตนี้อยู่ในถังขยะ กู้คืนเพื่อแก้ไขหรือส่งออก",
+    "en": "This set is in Trash. Restore it to edit or export."
+  },
+  "กู้คืนเซ็ต": {
+    "th": "กู้คืนเซ็ต",
+    "en": "Restore set"
+  },
+  "บันทึก": {
+    "th": "บันทึก",
+    "en": "Save"
+  },
+  "จัดลำดับใหม่": {
+    "th": "จัดลำดับใหม่",
+    "en": "Rearrange"
+  },
+  "ทำสำเนาเซ็ต": {
+    "th": "ทำสำเนาเซ็ต",
+    "en": "Duplicate set"
+  },
+  "ทำสำเนา": {
+    "th": "ทำสำเนา",
+    "en": "Duplicate"
+  },
+  "ประวัติเวอร์ชัน": {
+    "th": "ประวัติเวอร์ชัน",
+    "en": "Version history"
+  },
+  "ย้ายเซ็ตไปถังขยะ": {
+    "th": "ย้ายเซ็ตไปถังขยะ",
+    "en": "Move set to Trash"
+  },
+  "ย้ายไปถังขยะ": {
+    "th": "ย้ายไปถังขยะ",
+    "en": "Move to Trash"
+  },
+  "ย้อนค่าที่ยังไม่บันทึก": {
+    "th": "ย้อนค่าที่ยังไม่บันทึก",
+    "en": "Undo unsaved changes"
+  },
+  "ENERGY FLOW": {
+    "th": "เส้นทางพลังงาน",
+    "en": "ENERGY FLOW"
+  },
+  "ความยาวรวมก่อนมิกซ์ · การซ้อนเพลงอาจทำให้เซ็ตสั้นลง": {
+    "th": "ความยาวรวมก่อนมิกซ์ · การซ้อนเพลงอาจทำให้เซ็ตสั้นลง",
+    "en": "Total length before mixing · Overlapping songs may shorten the set"
+  },
+  "ฟังลำดับ {0} {1}": {
+    "th": "ฟังลำดับ {0} {1}",
+    "en": "Preview position {0}: {1}"
+  },
+  "เลือกเพลงด้านล่างเพื่อเริ่มเซ็ตของคุณ": {
+    "th": "เลือกเพลงด้านล่างเพื่อเริ่มเซ็ตของคุณ",
+    "en": "Choose a song below to start your set"
+  },
+  "ฟังเพลงลำดับ {0}": {
+    "th": "ฟังเพลงลำดับ {0}",
+    "en": "Preview song {0}"
+  },
+  "เพลงถูกย้ายไปถังขยะ": {
+    "th": "เพลงถูกย้ายไปถังขยะ",
+    "en": "Song moved to Trash"
+  },
+  "BPM ·": {
+    "th": "BPM ·",
+    "en": "BPM ·"
+  },
+  "โน้ตเพลงลำดับ {0}": {
+    "th": "โน้ตเพลงลำดับ {0}",
+    "en": "Notes for song {0}"
+  },
+  "จดโน้ตช่วงเปลี่ยนเพลง…": {
+    "th": "จดโน้ตช่วงเปลี่ยนเพลง…",
+    "en": "Add transition notes…"
+  },
+  "แนะนำเพลงแทนลำดับ {0}": {
+    "th": "แนะนำเพลงแทนลำดับ {0}",
+    "en": "Suggest a replacement for song {0}"
+  },
+  "แนะนำเพลงแทน": {
+    "th": "แนะนำเพลงแทน",
+    "en": "Suggest replacement"
+  },
+  "{0}เพลงลำดับ {1}": {
+    "th": "{0}เพลงลำดับ {1}",
+    "en": "{0} song {1}"
+  },
+  "เลื่อนเพลงลำดับ {0} ขึ้น": {
+    "th": "เลื่อนเพลงลำดับ {0} ขึ้น",
+    "en": "Move song {0} up"
+  },
+  "เลื่อนเพลงลำดับ {0} ลง": {
+    "th": "เลื่อนเพลงลำดับ {0} ลง",
+    "en": "Move song {0} down"
+  },
+  "นำเพลงลำดับ {0} ออก": {
+    "th": "นำเพลงลำดับ {0} ออก",
+    "en": "Remove song {0}"
+  },
+  "แนะนำเพลงถัดไป": {
+    "th": "แนะนำเพลงถัดไป",
+    "en": "Suggest next song"
+  },
+  "เพิ่มเพลงในเซ็ต": {
+    "th": "เพิ่มเพลงในเซ็ต",
+    "en": "Add a song to this set"
+  },
+  "เพิ่มเอง": {
+    "th": "เพิ่มเอง",
+    "en": "Added manually"
+  },
+  "เลือกเพลงจากคลัง…": {
+    "th": "เลือกเพลงจากคลัง…",
+    "en": "Choose a song from your library…"
+  },
+  "BPM": {
+    "th": "BPM",
+    "en": "BPM"
+  },
+  "พร้อมสำหรับเวทีถัดไป": {
+    "th": "พร้อมสำหรับเวทีถัดไป",
+    "en": "Ready for your next stage"
+  },
+  "ZIP รวมเพลงกับ M3U8 · ส่งออกเวอร์ชันที่บันทึกแล้ว": {
+    "th": "ZIP รวมเพลงกับ M3U8 · ส่งออกเวอร์ชันที่บันทึกแล้ว",
+    "en": "ZIP includes audio and M3U8 · Exports the saved version"
+  },
+  "กรุณาบันทึกและเพิ่มเพลงก่อนส่งออก": {
+    "th": "กรุณาบันทึกและเพิ่มเพลงก่อนส่งออก",
+    "en": "Save your set and add songs before exporting."
+  },
+  "พรีวิว {0}": {
+    "th": "พรีวิว {0}",
+    "en": "Preview {0}"
+  },
+  "ปิดพรีวิว": {
+    "th": "ปิดพรีวิว",
+    "en": "Close preview"
+  },
+  "ประวัติเพลย์ลิสต์": {
+    "th": "ประวัติเพลย์ลิสต์",
+    "en": "Playlist history"
+  },
+  "ยังไม่มีเวอร์ชันก่อนหน้า การบันทึกครั้งถัดไปจะเก็บประวัติให้": {
+    "th": "ยังไม่มีเวอร์ชันก่อนหน้า การบันทึกครั้งถัดไปจะเก็บประวัติให้",
+    "en": "No previous versions yet. Your next save will keep this version in history."
+  },
+  "เวอร์ชัน": {
+    "th": "เวอร์ชัน",
+    "en": "Version"
+  },
+  "กู้คืน": {
+    "th": "กู้คืน",
+    "en": "Restore"
+  },
+  "{0}: รองรับไฟล์เสียงไม่เกิน 100 MB": {
+    "th": "{0}: รองรับไฟล์เสียงไม่เกิน 100 MB",
+    "en": "{0}: Audio files must be no larger than 100 MB"
+  },
+  "อัปโหลดแล้ว {0}/{1} เพลง กำลังวิเคราะห์เสียง…": {
+    "th": "อัปโหลดแล้ว {0}/{1} เพลง กำลังวิเคราะห์เสียง…",
+    "en": "Uploaded {0}/{1} songs. Analyzing audio…"
+  },
+  "กู้คืนเพลงแล้ว": {
+    "th": "กู้คืนเพลงแล้ว",
+    "en": "Song restored"
+  },
+  "บันทึกการเปลี่ยนแปลงแล้ว": {
+    "th": "บันทึกการเปลี่ยนแปลงแล้ว",
+    "en": "Changes saved"
+  },
+  "เพิ่มเพลงตัวอย่างสังเคราะห์แล้ว กำลังวิเคราะห์เพื่อเตรียมจัดเซ็ต": {
+    "th": "เพิ่มเพลงตัวอย่างสังเคราะห์แล้ว กำลังวิเคราะห์เพื่อเตรียมจัดเซ็ต",
+    "en": "Synthesized demo songs added. Analyzing them to prepare your set."
+  },
+  "เพลงพร้อมใช้": {
+    "th": "เพลงพร้อมใช้",
+    "en": "Songs ready"
+  },
+  "เพลง": {
+    "th": "เพลง",
+    "en": "songs"
+  },
+  "รอวิเคราะห์": {
+    "th": "รอวิเคราะห์",
+    "en": "Awaiting analysis"
+  },
+  "เพลงของคุณ พร้อมทุกเซ็ต": {
+    "th": "เพลงของคุณ พร้อมทุกเซ็ต",
+    "en": "Your music, ready for every set"
+  },
+  "ลากเพลงมาวาง หรือเพิ่มหลายไฟล์พร้อมกัน · สูงสุด 100 MB / เพลง": {
+    "th": "ลากเพลงมาวาง หรือเพิ่มหลายไฟล์พร้อมกัน · สูงสุด 100 MB / เพลง",
+    "en": "Drop songs here or add several files · Up to 100 MB per song"
+  },
+  "เพิ่มเพลง": {
+    "th": "เพิ่มเพลง",
+    "en": "Add songs"
+  },
+  "ค้นหาเพลง ศิลปิน หรือแท็ก": {
+    "th": "ค้นหาเพลง ศิลปิน หรือแท็ก",
+    "en": "Search songs, artists or tags"
+  },
+  "ค้นหาเพลง": {
+    "th": "ค้นหาเพลง",
+    "en": "Search songs"
+  },
+  "กรองแนวเพลง": {
+    "th": "กรองแนวเพลง",
+    "en": "Filter by genre"
+  },
+  "ทุกแนวเพลง": {
+    "th": "ทุกแนวเพลง",
+    "en": "All genres"
+  },
+  "กรอง BPM": {
+    "th": "กรอง BPM",
+    "en": "Filter by BPM"
+  },
+  "ทุก BPM": {
+    "th": "ทุก BPM",
+    "en": "All BPM"
+  },
+  "ต่ำกว่า 110": {
+    "th": "ต่ำกว่า 110",
+    "en": "Below 110"
+  },
+  "125 ขึ้นไป": {
+    "th": "125 ขึ้นไป",
+    "en": "125 and above"
+  },
+  "เลือก": {
+    "th": "เลือก",
+    "en": "Select"
+  },
+  "จัดเซ็ตจากเพลงที่เลือก": {
+    "th": "จัดเซ็ตจากเพลงที่เลือก",
+    "en": "Build a set from selected songs"
+  },
+  "ยกเลิก": {
+    "th": "ยกเลิก",
+    "en": "Cancel"
+  },
+  "กำลังเปิดคลังเพลง…": {
+    "th": "กำลังเปิดคลังเพลง…",
+    "en": "Opening your music library…"
+  },
+  "ยังไม่มีเพลงในถังขยะ": {
+    "th": "ยังไม่มีเพลงในถังขยะ",
+    "en": "No songs in Trash"
+  },
+  "ไม่พบเพลงที่ค้นหา": {
+    "th": "ไม่พบเพลงที่ค้นหา",
+    "en": "No matching songs"
+  },
+  "เริ่มสะสมเสียงในแบบของคุณ": {
+    "th": "เริ่มสะสมเสียงในแบบของคุณ",
+    "en": "Start collecting your sound"
+  },
+  "เพลงที่ย้ายมาที่นี่สามารถกู้คืนได้ และยังนับพื้นที่จัดเก็บ": {
+    "th": "เพลงที่ย้ายมาที่นี่สามารถกู้คืนได้ และยังนับพื้นที่จัดเก็บ",
+    "en": "Songs here can be restored and still count toward your storage."
+  },
+  "เพิ่มเพลงของคุณ หรือทดลองด้วยเพลงสังเคราะห์ 6 เพลง": {
+    "th": "เพิ่มเพลงของคุณ หรือทดลองด้วยเพลงสังเคราะห์ 6 เพลง",
+    "en": "Add your own music or try six synthesized demo songs"
+  },
+  "เพิ่มเพลงตัวอย่าง": {
+    "th": "เพิ่มเพลงตัวอย่าง",
+    "en": "Add demo songs"
+  },
+  "เลือกทุกเพลงที่พร้อม": {
+    "th": "เลือกทุกเพลงที่พร้อม",
+    "en": "Select all ready songs"
+  },
+  "เพลง / ศิลปิน": {
+    "th": "เพลง / ศิลปิน",
+    "en": "Song / Artist"
+  },
+  "KEY": {
+    "th": "คีย์",
+    "en": "KEY"
+  },
+  "ENERGY": {
+    "th": "พลังงาน",
+    "en": "ENERGY"
+  },
+  "เวลา": {
+    "th": "เวลา",
+    "en": "Duration"
+  },
+  "จัดการ": {
+    "th": "จัดการ",
+    "en": "Actions"
+  },
+  "เลือก {0}": {
+    "th": "เลือก {0}",
+    "en": "Select {0}"
+  },
+  "ฟัง {0}": {
+    "th": "ฟัง {0}",
+    "en": "Preview {0}"
+  },
+  "ยังไม่ระบุศิลปิน": {
+    "th": "ยังไม่ระบุศิลปิน",
+    "en": "Unknown artist"
+  },
+  "กำลังวิเคราะห์เสียง": {
+    "th": "กำลังวิเคราะห์เสียง",
+    "en": "Analyzing audio"
+  },
+  "รอระบุ": {
+    "th": "รอระบุ",
+    "en": "Not yet available"
+  },
+  "กู้คืนเพลง": {
+    "th": "กู้คืนเพลง",
+    "en": "Restore song"
+  },
+  "กู้คืน {0}": {
+    "th": "กู้คืน {0}",
+    "en": "Restore {0}"
+  },
+  "แก้ไข {0}": {
+    "th": "แก้ไข {0}",
+    "en": "Edit {0}"
+  },
+  "แก้ไขข้อมูลเพลง": {
+    "th": "แก้ไขข้อมูลเพลง",
+    "en": "Edit song details"
+  },
+  "แยกเสียง {0}": {
+    "th": "แยกเสียง {0}",
+    "en": "Separate {0}"
+  },
+  "เปิดสตูดิโอแยกเสียง": {
+    "th": "เปิดสตูดิโอแยกเสียง",
+    "en": "Open stem studio"
+  },
+  "ดาวน์โหลด {0}": {
+    "th": "ดาวน์โหลด {0}",
+    "en": "Download {0}"
+  },
+  "วิเคราะห์ใหม่ {0}": {
+    "th": "วิเคราะห์ใหม่ {0}",
+    "en": "Analyze {0} again"
+  },
+  "ย้าย {0} ไปถังขยะ": {
+    "th": "ย้าย {0} ไปถังขยะ",
+    "en": "Move {0} to Trash"
+  },
+  "BPM คีย์ และพลังงานเป็นค่าประมาณ · ฟังตรวจสอบและแก้ไขก่อนใช้แสดงจริง": {
+    "th": "BPM คีย์ และพลังงานเป็นค่าประมาณ · ฟังตรวจสอบและแก้ไขก่อนใช้แสดงจริง",
+    "en": "BPM, key and energy are estimates. Listen and edit them before performing."
+  },
+  "NOW PREVIEWING": {
+    "th": "กำลังฟัง",
+    "en": "NOW PREVIEWING"
+  },
+  "เล่น {0}": {
+    "th": "เล่น {0}",
+    "en": "Play {0}"
+  },
+  "ปรับข้อมูลเพลง": {
+    "th": "ปรับข้อมูลเพลง",
+    "en": "Edit song information"
+  },
+  "ชื่อเพลง": {
+    "th": "ชื่อเพลง",
+    "en": "Song title"
+  },
+  "ศิลปิน": {
+    "th": "ศิลปิน",
+    "en": "Artist"
+  },
+  "เช่น House": {
+    "th": "เช่น House",
+    "en": "e.g. House"
+  },
+  "คีย์": {
+    "th": "คีย์",
+    "en": "Key"
+  },
+  "ยังไม่ระบุ": {
+    "th": "ยังไม่ระบุ",
+    "en": "Not specified"
+  },
+  "พลังงาน": {
+    "th": "พลังงาน",
+    "en": "Energy"
+  },
+  "แท็ก (คั่นด้วยจุลภาค)": {
+    "th": "แท็ก (คั่นด้วยจุลภาค)",
+    "en": "Tags (comma-separated)"
+  },
+  "warmup, sunset, favorite": {
+    "th": "warmup, sunset, favorite",
+    "en": "warmup, sunset, favorite"
+  },
+  "บันทึกข้อมูล": {
+    "th": "บันทึกข้อมูล",
+    "en": "Save details"
+  },
+  "มิกเซอร์เสียง": {
+    "th": "มิกเซอร์เสียง",
+    "en": "Audio mixer"
+  },
+  "YOUR STEMS ARE READY": {
+    "th": "แทร็คของคุณพร้อมแล้ว",
+    "en": "YOUR STEMS ARE READY"
+  },
+  "tracks": {
+    "th": "แทร็ค",
+    "en": "tracks"
+  },
+  "WAV": {
+    "th": "WAV",
+    "en": "WAV"
+  },
+  "เพลงตัวอย่างสังเคราะห์ • แทร็ค Vocals เป็นเสียงซินธ์นำ เพื่อทดลองมิกเซอร์": {
+    "th": "เพลงตัวอย่างสังเคราะห์ • แทร็ค Vocals เป็นเสียงซินธ์นำ เพื่อทดลองมิกเซอร์",
+    "en": "Synthesized demo • The Vocals stem is a lead synth for trying the mixer"
+  },
+  "โหมด DSP • แทร็คเป็นการกรองย่านเสียง ไม่ใช่การแยกเครื่องดนตรีด้วย AI และอาจมีเสียงซ้อนกัน": {
+    "th": "โหมด DSP • แทร็คเป็นการกรองย่านเสียง ไม่ใช่การแยกเครื่องดนตรีด้วย AI และอาจมีเสียงซ้อนกัน",
+    "en": "DSP mode • Stems are frequency-filtered, not AI-separated instruments, and may overlap"
+  },
+  "ฟังแบบ": {
+    "th": "ฟังแบบ",
+    "en": "Listen as"
+  },
+  "ทุกแทร็ค": {
+    "th": "ทุกแทร็ค",
+    "en": "All stems"
+  },
+  "Acapella": {
+    "th": "เสียงร้อง",
+    "en": "Acapella"
+  },
+  "Karaoke": {
+    "th": "คาราโอเกะ",
+    "en": "Karaoke"
+  },
+  "Drum & bass": {
+    "th": "กลองและเบส",
+    "en": "Drum & bass"
+  },
+  "รีเซ็ตมิกซ์": {
+    "th": "รีเซ็ตมิกซ์",
+    "en": "Reset mix"
+  },
+  "ซินธ์นำ (ตัวอย่าง)": {
+    "th": "ซินธ์นำ (ตัวอย่าง)",
+    "en": "Lead synth (demo)"
+  },
+  "เลื่อนตำแหน่ง {0}": {
+    "th": "เลื่อนตำแหน่ง {0}",
+    "en": "Seek {0}"
+  },
+  "ปิดเสียง {0}": {
+    "th": "ปิดเสียง {0}",
+    "en": "Mute {0}"
+  },
+  "M": {
+    "th": "M",
+    "en": "M"
+  },
+  "ฟังเฉพาะ {0}": {
+    "th": "ฟังเฉพาะ {0}",
+    "en": "Solo {0}"
+  },
+  "S": {
+    "th": "S",
+    "en": "S"
+  },
+  "ระดับเสียง {0}": {
+    "th": "ระดับเสียง {0}",
+    "en": "{0} volume"
+  },
+  "กลับไปเริ่มต้น": {
+    "th": "กลับไปเริ่มต้น",
+    "en": "Back to start"
+  },
+  "หยุดชั่วคราว": {
+    "th": "หยุดชั่วคราว",
+    "en": "Pause"
+  },
+  "เล่นทุกแทร็ค": {
+    "th": "เล่นทุกแทร็ค",
+    "en": "Play all stems"
+  },
+  "เล่นวนซ้ำ": {
+    "th": "เล่นวนซ้ำ",
+    "en": "Loop playback"
+  },
+  "ตำแหน่งเพลง": {
+    "th": "ตำแหน่งเพลง",
+    "en": "Song position"
+  },
+  "ระดับเสียงรวม": {
+    "th": "ระดับเสียงรวม",
+    "en": "Master volume"
+  },
+  "กำลังเตรียมเสียงสำหรับเล่นพร้อมกัน…": {
+    "th": "กำลังเตรียมเสียงสำหรับเล่นพร้อมกัน…",
+    "en": "Preparing synchronized playback…"
+  },
+  "โหลดเสียงอีกครั้ง": {
+    "th": "โหลดเสียงอีกครั้ง",
+    "en": "Reload audio"
+  },
+  "space": {
+    "th": "Space",
+    "en": "space"
+  },
+  "เล่น / หยุด": {
+    "th": "เล่น / หยุด",
+    "en": "Play / pause"
+  },
+  "· M ปิดเสียง · S ฟังเฉพาะแทร็ค": {
+    "th": "· M ปิดเสียง · S ฟังเฉพาะแทร็ค",
+    "en": "· M mute · S solo"
+  },
+  "ดาวน์โหลดทุกแทร็ค": {
+    "th": "ดาวน์โหลดทุกแทร็ค",
+    "en": "Download all stems"
+  },
+  "ZIP": {
+    "th": "ZIP",
+    "en": "ZIP"
+  },
+  "ปิดหน้าต่าง": {
+    "th": "ปิดหน้าต่าง",
+    "en": "Close dialog"
+  },
+  "โหลดแทร็คไม่สำเร็จ กรุณาลองอีกครั้ง": {
+    "th": "โหลดแทร็คไม่สำเร็จ กรุณาลองอีกครั้ง",
+    "en": "Could not load the stems. Please try again."
+  },
+  "เปิดเสียงไม่สำเร็จ": {
+    "th": "เปิดเสียงไม่สำเร็จ",
+    "en": "Could not open the audio"
+  },
+  "เบราว์เซอร์ยังเล่นเสียงไม่ได้ กรุณากดเล่นอีกครั้ง": {
+    "th": "เบราว์เซอร์ยังเล่นเสียงไม่ได้ กรุณากดเล่นอีกครั้ง",
+    "en": "Your browser could not play the audio. Please press play again."
+  },
+  "ทำรายการไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองอีกครั้ง": {
+    "th": "ทำรายการไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองอีกครั้ง",
+    "en": "The request failed. Check your details and try again."
+  },
+  "กรุณาเข้าสู่ระบบ": {
+    "th": "กรุณาเข้าสู่ระบบ",
+    "en": "Please log in."
+  },
+  "คำขอไม่ถูกต้อง กรุณาโหลดหน้าใหม่": {
+    "th": "คำขอไม่ถูกต้อง กรุณาโหลดหน้าใหม่",
+    "en": "Invalid request. Please reload the page."
+  },
+  "ไม่อนุญาตคำขอจากเว็บไซต์นี้": {
+    "th": "ไม่อนุญาตคำขอจากเว็บไซต์นี้",
+    "en": "Requests from this website are not allowed."
+  },
+  "กรุณาระบุอีเมลให้ถูกต้อง": {
+    "th": "กรุณาระบุอีเมลให้ถูกต้อง",
+    "en": "Please enter a valid email address."
+  },
+  "ยังไม่เปิดรับสมาชิกใหม่": {
+    "th": "ยังไม่เปิดรับสมาชิกใหม่",
+    "en": "Registration is currently closed."
+  },
+  "อีเมลหรือรหัสผ่านไม่ถูกต้อง": {
+    "th": "อีเมลหรือรหัสผ่านไม่ถูกต้อง",
+    "en": "Incorrect email or password."
+  },
+  "มีคำขอมากเกินไป กรุณาลองใหม่ใน 15 นาที": {
+    "th": "มีคำขอมากเกินไป กรุณาลองใหม่ใน 15 นาที",
+    "en": "Too many requests. Please try again in 15 minutes."
+  },
+  "อีเมลนี้มีบัญชีแล้ว กรุณาเข้าสู่ระบบ": {
+    "th": "อีเมลนี้มีบัญชีแล้ว กรุณาเข้าสู่ระบบ",
+    "en": "This email is already registered. Please log in."
+  },
+  "รหัสผ่านปัจจุบันไม่ถูกต้อง": {
+    "th": "รหัสผ่านปัจจุบันไม่ถูกต้อง",
+    "en": "The current password is incorrect."
+  },
+  "AI ประมวลผลไม่สำเร็จ กรุณาลองใหม่หรือติดต่อผู้ดูแล": {
+    "th": "AI ประมวลผลไม่สำเร็จ กรุณาลองใหม่หรือติดต่อผู้ดูแล",
+    "en": "AI processing failed. Please try again or contact your administrator."
+  },
+  "ไม่พบแทร็คเสียงในไฟล์": {
+    "th": "ไม่พบแทร็คเสียงในไฟล์",
+    "en": "No audio track was found in this file."
+  },
+  "รองรับไฟล์เสียงโดยตรงเท่านั้น": {
+    "th": "รองรับไฟล์เสียงโดยตรงเท่านั้น",
+    "en": "Only direct audio files are supported."
+  },
+  "รองรับเพลงความยาวไม่เกิน 10 นาที": {
+    "th": "รองรับเพลงความยาวไม่เกิน 10 นาที",
+    "en": "Songs can be up to 10 minutes long."
+  },
+  "มีงานแยกเสียงรออยู่มากเกินไป กรุณารอให้งานเดิมเสร็จก่อน": {
+    "th": "มีงานแยกเสียงรออยู่มากเกินไป กรุณารอให้งานเดิมเสร็จก่อน",
+    "en": "Too many separation jobs are queued. Please wait for your current jobs to finish."
+  },
+  "กำลังปรับการประมวลผลและลองแยกเสียงอีกครั้ง": {
+    "th": "กำลังปรับการประมวลผลและลองแยกเสียงอีกครั้ง",
+    "en": "Adjusting processing and retrying separation"
+  },
+  "ตัวเลือกการแยกเสียงไม่ถูกต้อง": {
+    "th": "ตัวเลือกการแยกเสียงไม่ถูกต้อง",
+    "en": "Invalid separation options."
+  },
+  "กรุณาติดตั้ง FFmpeg ก่อนใช้งาน": {
+    "th": "กรุณาติดตั้ง FFmpeg ก่อนใช้งาน",
+    "en": "Please install FFmpeg before continuing."
+  },
+  "ยังไม่ได้ติดตั้ง AI เลือกโหมด DSP หรือติดตั้ง AI ก่อน": {
+    "th": "ยังไม่ได้ติดตั้ง AI เลือกโหมด DSP หรือติดตั้ง AI ก่อน",
+    "en": "Audio AI is not installed. Choose DSP or install AI first."
+  },
+  "รองรับเฉพาะ MP3, WAV, FLAC, M4A, AAC และ OGG": {
+    "th": "รองรับเฉพาะ MP3, WAV, FLAC, M4A, AAC และ OGG",
+    "en": "Only MP3, WAV, FLAC, M4A, AAC and OGG are supported."
+  },
+  "โหมดไม่ถูกต้อง": {
+    "th": "โหมดไม่ถูกต้อง",
+    "en": "Invalid processing mode."
+  },
+  "ไม่พบงานนี้ กรุณาเริ่มใหม่": {
+    "th": "ไม่พบงานนี้ กรุณาเริ่มใหม่",
+    "en": "This job was not found. Please start again."
+  },
+  "ไม่พบแทร็คนี้": {
+    "th": "ไม่พบแทร็คนี้",
+    "en": "This stem was not found."
+  },
+  "ไฟล์ยังไม่พร้อมดาวน์โหลด": {
+    "th": "ไฟล์ยังไม่พร้อมดาวน์โหลด",
+    "en": "This file is not ready to download."
+  },
+  "ไฟล์นี้ไม่มีข้อมูลเสียง": {
+    "th": "ไฟล์นี้ไม่มีข้อมูลเสียง",
+    "en": "This file contains no audio."
+  },
+  "ไฟล์ยังไม่พร้อม กรุณาลองใหม่": {
+    "th": "ไฟล์ยังไม่พร้อม กรุณาลองใหม่",
+    "en": "This file is not ready. Please try again."
+  },
+  "เซิร์ฟเวอร์หยุดระหว่างประมวลผล กรุณาเริ่มใหม่": {
+    "th": "เซิร์ฟเวอร์หยุดระหว่างประมวลผล กรุณาเริ่มใหม่",
+    "en": "The server stopped during processing. Please start again."
+  },
+  "AI หยุดทำงานหรือใช้เวลาเกิน 30 นาที กรุณาลองไฟล์ที่สั้นลง": {
+    "th": "AI หยุดทำงานหรือใช้เวลาเกิน 30 นาที กรุณาลองไฟล์ที่สั้นลง",
+    "en": "AI stopped or exceeded 30 minutes. Please try a shorter file."
+  },
+  "กำลังเตรียมแทร็คเสียง": {
+    "th": "กำลังเตรียมแทร็คเสียง",
+    "en": "Preparing audio stems"
+  },
+  "กำลังสร้าง waveform และเตรียมดาวน์โหลด": {
+    "th": "กำลังสร้าง waveform และเตรียมดาวน์โหลด",
+    "en": "Creating waveforms and preparing downloads"
+  },
+  "แทร็คของคุณพร้อมแล้ว": {
+    "th": "แทร็คของคุณพร้อมแล้ว",
+    "en": "Your stems are ready"
+  },
+  "ไฟล์เสียงเสียหายหรืออ่านไม่ได้ กรุณาเลือกไฟล์ใหม่": {
+    "th": "ไฟล์เสียงเสียหายหรืออ่านไม่ได้ กรุณาเลือกไฟล์ใหม่",
+    "en": "The audio is damaged or unreadable. Please choose another file."
+  },
+  "ประมวลผลแทร็คไม่ครบ กรุณาลองใหม่": {
+    "th": "ประมวลผลแทร็คไม่ครบ กรุณาลองใหม่",
+    "en": "Some stems could not be processed. Please try again."
+  },
+  "พื้นที่จัดเก็บไม่พอสำหรับแทร็คผลลัพธ์ กรุณาติดต่อผู้ดูแลเพื่อเพิ่มพื้นที่": {
+    "th": "พื้นที่จัดเก็บไม่พอสำหรับแทร็คผลลัพธ์ กรุณาติดต่อผู้ดูแลเพื่อเพิ่มพื้นที่",
+    "en": "There is not enough storage for the output stems. Please contact your administrator."
+  },
+  "ไม่สามารถประมวลผลเสียงได้ กรุณาตรวจสอบไฟล์แล้วลองใหม่": {
+    "th": "ไม่สามารถประมวลผลเสียงได้ กรุณาตรวจสอบไฟล์แล้วลองใหม่",
+    "en": "Could not process this audio. Check the file and try again."
+  },
+  "ไฟล์ต้องมีขนาดไม่เกิน 50 MB": {
+    "th": "ไฟล์ต้องมีขนาดไม่เกิน 50 MB",
+    "en": "The file must be no larger than 50 MB."
+  },
+  "กำลังแยกเสียงด้วย AI อาจใช้เวลาสักครู่": {
+    "th": "กำลังแยกเสียงด้วย AI อาจใช้เวลาสักครู่",
+    "en": "Separating audio with AI. This may take a moment."
+  },
+  "กำลังแยกย่านเสียงด้วย DSP (ไม่ใช่ AI)": {
+    "th": "กำลังแยกย่านเสียงด้วย DSP (ไม่ใช่ AI)",
+    "en": "Filtering audio with DSP (not AI)"
+  },
+  "เพลงสังเคราะห์สำหรับทดลองระบบ ไม่มีการนำเพลงผู้อื่นมาใช้": {
+    "th": "เพลงสังเคราะห์สำหรับทดลองระบบ ไม่มีการนำเพลงผู้อื่นมาใช้",
+    "en": "Synthesized music for testing. No third-party songs are used."
+  },
+  "งานถูกขัดจังหวะ กดลองวิเคราะห์อีกครั้ง": {
+    "th": "งานถูกขัดจังหวะ กดลองวิเคราะห์อีกครั้ง",
+    "en": "Analysis was interrupted. Please try analyzing again."
+  },
+  "ไม่พบเพลงนี้": {
+    "th": "ไม่พบเพลงนี้",
+    "en": "This song was not found."
+  },
+  "รองรับ MP3, WAV, FLAC, M4A, AAC และ OGG": {
+    "th": "รองรับ MP3, WAV, FLAC, M4A, AAC และ OGG",
+    "en": "Supports MP3, WAV, FLAC, M4A, AAC and OGG."
+  },
+  "กรุณาระบุชื่อเพลง": {
+    "th": "กรุณาระบุชื่อเพลง",
+    "en": "Provide a track name."
+  },
+  "คีย์เพลงไม่ถูกต้อง": {
+    "th": "คีย์เพลงไม่ถูกต้อง",
+    "en": "Invalid musical key."
+  },
+  "กรุณารอวิเคราะห์เสร็จก่อนย้ายไปถังขยะ": {
+    "th": "กรุณารอวิเคราะห์เสร็จก่อนย้ายไปถังขยะ",
+    "en": "Wait for analysis to finish before moving this song to Trash."
+  },
+  "กำลังวิเคราะห์เพลงนี้อยู่": {
+    "th": "กำลังวิเคราะห์เพลงนี้อยู่",
+    "en": "This song is being analyzed."
+  },
+  "เพลงนี้มีอยู่ในคลังหรือถังขยะแล้ว": {
+    "th": "เพลงนี้มีอยู่ในคลังหรือถังขยะแล้ว",
+    "en": "This song already exists in your library or Trash."
+  },
+  "ไฟล์ไม่มีข้อมูล": {
+    "th": "ไฟล์ไม่มีข้อมูล",
+    "en": "This file is empty."
+  },
+  "วิเคราะห์ไม่สำเร็จ ตรวจสอบไฟล์แล้วลองอีกครั้ง": {
+    "th": "วิเคราะห์ไม่สำเร็จ ตรวจสอบไฟล์แล้วลองอีกครั้ง",
+    "en": "Analysis failed. Check the file and try again."
+  },
+  "พื้นที่จัดเก็บเต็ม กรุณาติดต่อผู้ดูแลเพื่อเพิ่มพื้นที่": {
+    "th": "พื้นที่จัดเก็บเต็ม กรุณาติดต่อผู้ดูแลเพื่อเพิ่มพื้นที่",
+    "en": "Your storage quota is full. Please contact your administrator."
+  },
+  "มีเพลงรอวิเคราะห์มากเกินไป กรุณารอสักครู่": {
+    "th": "มีเพลงรอวิเคราะห์มากเกินไป กรุณารอสักครู่",
+    "en": "Too many songs are waiting for analysis. Please wait a moment."
+  },
+  "ไฟล์เสียหายหรือไม่ใช่ไฟล์เสียง": {
+    "th": "ไฟล์เสียหายหรือไม่ใช่ไฟล์เสียง",
+    "en": "This file is damaged or is not an audio file."
+  },
+  "เพลงต้องมีขนาดไม่เกิน 100 MB": {
+    "th": "เพลงต้องมีขนาดไม่เกิน 100 MB",
+    "en": "Songs must be no larger than 100 MB."
+  },
+  "แนะนำจากจังหวะ คีย์ และพลังงาน {0}/100": {
+    "th": "แนะนำจากจังหวะ คีย์ และพลังงาน {0}/100",
+    "en": "Recommended from tempo, key and energy {0}/100"
+  },
+  "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง": {
+    "th": "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง",
+    "en": "Arranged from the BPM, key and energy of {0} songs"
+  },
+  " · เพลงในคลังยังสั้นกว่าเวลาที่ขอ": {
+    "th": " · เพลงในคลังยังสั้นกว่าเวลาที่ขอ",
+    "en": " · Your library is shorter than the requested duration"
+  },
+  "ไม่พบเพลย์ลิสต์นี้": {
+    "th": "ไม่พบเพลย์ลิสต์นี้",
+    "en": "This playlist was not found."
+  },
+  "เพลย์ลิสต์มีเพลงซ้ำ": {
+    "th": "เพลย์ลิสต์มีเพลงซ้ำ",
+    "en": "This playlist contains duplicate songs."
+  },
+  "บางเพลงยังไม่พร้อมหรือไม่อยู่ในคลังของคุณ": {
+    "th": "บางเพลงยังไม่พร้อมหรือไม่อยู่ในคลังของคุณ",
+    "en": "Some songs are not ready or do not belong to your library."
+  },
+  "กรุณาระบุชื่อเพลย์ลิสต์": {
+    "th": "กรุณาระบุชื่อเพลย์ลิสต์",
+    "en": "Please enter a playlist name."
+  },
+  "ไม่พบเวอร์ชันนี้": {
+    "th": "ไม่พบเวอร์ชันนี้",
+    "en": "This version was not found."
+  },
+  "ช่วง BPM ไม่ถูกต้อง": {
+    "th": "ช่วง BPM ไม่ถูกต้อง",
+    "en": "Invalid BPM range."
+  },
+  "มีเพลงที่ล็อกไว้ถูกลบจากคลัง กรุณาปลดล็อกก่อน": {
+    "th": "มีเพลงที่ล็อกไว้ถูกลบจากคลัง กรุณาปลดล็อกก่อน",
+    "en": "A locked song was removed from your library. Please unlock it first."
+  },
+  "ยังไม่มีเพลงที่พร้อมและตรงกับเงื่อนไข ลองเพิ่มเพลงหรือปรับตัวกรอง": {
+    "th": "ยังไม่มีเพลงที่พร้อมและตรงกับเงื่อนไข ลองเพิ่มเพลงหรือปรับตัวกรอง",
+    "en": "No ready songs match these settings. Add songs or adjust the filters."
+  },
+  "ไม่สามารถรักษาตำแหน่งเพลงที่ล็อกไว้ด้วยจำนวนเพลงปัจจุบัน": {
+    "th": "ไม่สามารถรักษาตำแหน่งเพลงที่ล็อกไว้ด้วยจำนวนเพลงปัจจุบัน",
+    "en": "The current number of songs cannot preserve all locked positions."
+  },
+  " โดย AI ช่วยอ่านคำสั่ง": {
+    "th": " โดย AI ช่วยอ่านคำสั่ง",
+    "en": " with AI brief interpretation"
+  },
+  "มีเพลงอยู่ในถังขยะ กรุณากู้คืนหรือนำออกจากเพลย์ลิสต์ก่อนส่งออก": {
+    "th": "มีเพลงอยู่ในถังขยะ กรุณากู้คืนหรือนำออกจากเพลย์ลิสต์ก่อนส่งออก",
+    "en": "Some songs are in Trash. Restore or remove them from the playlist before exporting."
+  },
+  "รองรับ m3u, csv หรือ zip": {
+    "th": "รองรับ m3u, csv หรือ zip",
+    "en": "Supported export formats are m3u, csv and zip."
+  },
+  "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์": {
+    "th": "ส่งออก ZIP ได้ครั้งละไม่เกิน 1 GB กรุณาแบ่งเพลย์ลิสต์",
+    "en": "ZIP exports are limited to 1 GB. Please split the playlist."
+  },
+  "เพลย์ลิสต์เปลี่ยนจากอีกหน้าต่างแล้ว กรุณาโหลดใหม่": {
+    "th": "เพลย์ลิสต์เปลี่ยนจากอีกหน้าต่างแล้ว กรุณาโหลดใหม่",
+    "en": "This playlist changed in another window. Please reload it."
+  },
+  "ตำแหน่งเพลงไม่ถูกต้อง": {
+    "th": "ตำแหน่งเพลงไม่ถูกต้อง",
+    "en": "Invalid song position."
+  },
+  "เพลย์ลิสต์รองรับไม่เกิน 300 เพลง": {
+    "th": "เพลย์ลิสต์รองรับไม่เกิน 300 เพลง",
+    "en": "Playlists can contain up to 300 songs."
+  },
+  "กรุณาปลดล็อกเพลงก่อนให้ระบบแนะนำเพลงแทน": {
+    "th": "กรุณาปลดล็อกเพลงก่อนให้ระบบแนะนำเพลงแทน",
+    "en": "Unlock this song before requesting a replacement."
+  },
+  "มีเพลงถูกย้ายไปถังขยะ กรุณากู้คืนหรือนำออกก่อน": {
+    "th": "มีเพลงถูกย้ายไปถังขยะ กรุณากู้คืนหรือนำออกก่อน",
+    "en": "Some songs were moved to Trash. Restore or remove them first."
+  },
+  "ยังไม่มีเพลงอื่นเหลือให้แนะนำ ลองเพิ่มเพลงในคลัง": {
+    "th": "ยังไม่มีเพลงอื่นเหลือให้แนะนำ ลองเพิ่มเพลงในคลัง",
+    "en": "No other songs are available to recommend. Add more music to your library."
+  },
+  "เปลี่ยนเพลงก่อนหน้า · ตรวจฟังช่วงเปลี่ยนเพลง": {
+    "th": "เปลี่ยนเพลงก่อนหน้า · ตรวจฟังช่วงเปลี่ยนเพลง",
+    "en": "Previous song changed · Check the transition by ear"
+  },
+  "พลังงาน {0}/100": {
+    "th": "พลังงาน {0}/100",
+    "en": "Energy {0}/100"
+  },
+  "เตรียมไฟล์ไม่สำเร็จ กรุณาลองใหม่": {
+    "th": "เตรียมไฟล์ไม่สำเร็จ กรุณาลองใหม่",
+    "en": "Could not prepare the file. Please try again."
+  },
+  "เพลย์ลิสต์ถูกแก้ไขจากอีกหน้าต่างแล้ว กรุณาโหลดใหม่": {
+    "th": "เพลย์ลิสต์ถูกแก้ไขจากอีกหน้าต่างแล้ว กรุณาโหลดใหม่",
+    "en": "This playlist was edited in another window. Please reload it."
+  },
+  "BPM ต่าง {0}": {
+    "th": "BPM ต่าง {0}",
+    "en": "BPM difference {0}"
+  },
+  "คีย์เข้ากัน": {
+    "th": "คีย์เข้ากัน",
+    "en": "Compatible keys"
+  },
+  "ทดลองฟังช่วงเปลี่ยนคีย์": {
+    "th": "ทดลองฟังช่วงเปลี่ยนคีย์",
+    "en": "Check the key transition by ear"
+  },
+  "ไม่พบข้อมูลเสียงในไฟล์": {
+    "th": "ไม่พบข้อมูลเสียงในไฟล์",
+    "en": "No audio data was found in this file."
+  },
+  "รองรับเพลงความยาวไม่เกิน 30 นาที": {
+    "th": "รองรับเพลงความยาวไม่เกิน 30 นาที",
+    "en": "Songs can be up to 30 minutes long."
+  },
+  "เพลงต้องยาวอย่างน้อย 1 วินาทีเพื่อวิเคราะห์": {
+    "th": "เพลงต้องยาวอย่างน้อย 1 วินาทีเพื่อวิเคราะห์",
+    "en": "Songs must be at least 1 second long for analysis."
+  },
+  "BPM คีย์ และพลังงานเป็นค่าประมาณ แก้ไขได้ตามการฟังจริง": {
+    "th": "BPM คีย์ และพลังงานเป็นค่าประมาณ แก้ไขได้ตามการฟังจริง",
+    "en": "BPM, key and energy are estimates. Adjust them after listening."
+  },
+  "ไม่พบเสียงที่มีความดังเพียงพอ": {
+    "th": "ไม่พบเสียงที่มีความดังเพียงพอ",
+    "en": "No audio loud enough for analysis was found."
+  },
+  "พื้นที่ฟรี 200 MB ต่อบัญชี": {
+    "th": "พื้นที่ฟรี 200 MB ต่อบัญชี",
+    "en": "200 MB of free storage per account"
+  },
+  "พื้นที่ฟรี": {
+    "th": "พื้นที่ฟรี",
+    "en": "Free storage"
+  },
+  "Language": {
+    "th": "ภาษา",
+    "en": "Language"
+  },
+  "เสียงร้อง": {
+    "th": "เสียงร้อง",
+    "en": "Vocal stem"
+  },
+  "กลอง": {
+    "th": "กลอง",
+    "en": "Drum stem"
+  },
+  "เบส": {
+    "th": "เบส",
+    "en": "Bass stem"
+  },
+  "เครื่องดนตรีอื่น ๆ": {
+    "th": "เครื่องดนตรีอื่น ๆ",
+    "en": "Other instruments"
+  },
+  "ดนตรีประกอบ": {
+    "th": "ดนตรีประกอบ",
+    "en": "Instrumental stem"
+  },
+  "ล็อก": {
+    "th": "ล็อก",
+    "en": "Lock"
+  },
+  "ปลดล็อก": {
+    "th": "ปลดล็อก",
+    "en": "Unlock"
+  },
+  "ไม่ทราบ": {
+    "th": "ไม่ทราบ",
+    "en": "Unknown"
+  },
+  "เชื่อมต่อระบบไม่ได้": {
+    "th": "เชื่อมต่อระบบไม่ได้",
+    "en": "Could not connect to the service."
+  },
+  "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง · เพลงในคลังยังสั้นกว่าเวลาที่ขอ": {
+    "th": "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง · เพลงในคลังยังสั้นกว่าเวลาที่ขอ",
+    "en": "Arranged from the BPM, key and energy of {0} songs · Your library is shorter than the requested duration"
+  },
+  "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง โดย AI ช่วยอ่านคำสั่ง": {
+    "th": "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง โดย AI ช่วยอ่านคำสั่ง",
+    "en": "Arranged from the BPM, key and energy of {0} songs with AI brief interpretation"
+  },
+  "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง โดย AI ช่วยอ่านคำสั่ง · เพลงในคลังยังสั้นกว่าเวลาที่ขอ": {
+    "th": "จัดจาก BPM คีย์ และพลังงานของ {0} เพลง โดย AI ช่วยอ่านคำสั่ง · เพลงในคลังยังสั้นกว่าเวลาที่ขอ",
+    "en": "Arranged from the BPM, key and energy of {0} songs with AI brief interpretation · Your library is shorter than the requested duration"
+  },
+  "เพลงไม่พร้อม": {
+    "th": "เพลงไม่พร้อม",
+    "en": "Song unavailable"
+  },
+  "4 Stems": {
+    "th": "4 แทร็ค",
+    "en": "4 Stems"
+  },
+  "Vocal + Instrumental": {
+    "th": "เสียงร้องและดนตรี",
+    "en": "Vocal + Instrumental"
+  },
+  "Your private library": {
+    "th": "คลังเพลงส่วนตัว",
+    "en": "Your private library"
+  },
+  "กำลังโหลดตัวประมวลผลบนอุปกรณ์": {
+    "th": "กำลังโหลดตัวประมวลผลบนอุปกรณ์",
+    "en": "Loading the processor on your device"
+  },
+  "กำลังดาวน์โหลดไฟล์ AI ประมาณ 84 MB เก็บไว้ใช้ครั้งต่อไป": {
+    "th": "กำลังดาวน์โหลดไฟล์ AI ประมาณ 84 MB เก็บไว้ใช้ครั้งต่อไป",
+    "en": "Downloading about 84 MB of AI files, cached for next time"
+  },
+  "พบไฟล์ AI ที่เก็บไว้บนอุปกรณ์แล้ว": {
+    "th": "พบไฟล์ AI ที่เก็บไว้บนอุปกรณ์แล้ว",
+    "en": "Using AI files cached on this device"
+  },
+  "กำลังเตรียม GPU ครั้งแรกอาจใช้เวลาสักครู่": {
+    "th": "กำลังเตรียม GPU ครั้งแรกอาจใช้เวลาสักครู่",
+    "en": "Preparing your GPU. The first run may take a moment"
+  },
+  "กำลังแยกเสียงด้วย GPU บนอุปกรณ์ของคุณ": {
+    "th": "กำลังแยกเสียงด้วย GPU บนอุปกรณ์ของคุณ",
+    "en": "Separating audio with your device’s GPU"
+  },
+  "กำลังเตรียมแทร็คและ ZIP บนอุปกรณ์": {
+    "th": "กำลังเตรียมแทร็คและ ZIP บนอุปกรณ์",
+    "en": "Preparing tracks and ZIP on your device"
+  },
+  "อุปกรณ์นี้ยังใช้ WebGPU ไม่ได้ ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์": {
+    "th": "อุปกรณ์นี้ยังใช้ WebGPU ไม่ได้ ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์",
+    "en": "WebGPU is unavailable on this device. Try the latest Chrome or Edge on a computer, or choose server processing."
+  },
+  "ดาวน์โหลดไฟล์ประมวลผลไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง": {
+    "th": "ดาวน์โหลดไฟล์ประมวลผลไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง",
+    "en": "Could not download the processing files. Check your connection and try again."
+  },
+  "อ่านไฟล์เสียงไม่ได้หรือผลลัพธ์ไม่สมบูรณ์ กรุณาลองไฟล์ WAV หรือ MP3 อื่น": {
+    "th": "อ่านไฟล์เสียงไม่ได้หรือผลลัพธ์ไม่สมบูรณ์ กรุณาลองไฟล์ WAV หรือ MP3 อื่น",
+    "en": "Could not read the audio or the results were incomplete. Try another WAV or MP3 file."
+  },
+  "GPU ประมวลผลไม่สำเร็จ ลองปิดโปรแกรมที่ใช้กราฟิก เลือกเพลงที่สั้นลง หรือใช้เซิร์ฟเวอร์": {
+    "th": "GPU ประมวลผลไม่สำเร็จ ลองปิดโปรแกรมที่ใช้กราฟิก เลือกเพลงที่สั้นลง หรือใช้เซิร์ฟเวอร์",
+    "en": "GPU processing failed. Close other graphics apps, try a shorter track, or use server processing."
+  },
+  "ยกเลิกการแยกเสียงแล้ว ไฟล์ต้นฉบับยังอยู่ในเครื่องของคุณ": {
+    "th": "ยกเลิกการแยกเสียงแล้ว ไฟล์ต้นฉบับยังอยู่ในเครื่องของคุณ",
+    "en": "Separation cancelled. Your original file is still on your device."
+  },
+  "กำลังอ่านไฟล์เสียงบนอุปกรณ์": {
+    "th": "กำลังอ่านไฟล์เสียงบนอุปกรณ์",
+    "en": "Decoding audio on your device"
+  },
+  "บันทึกเข้า cloud ไม่สำเร็จ ผลลัพธ์ยังดาวน์โหลดจากเครื่องได้": {
+    "th": "บันทึกเข้า cloud ไม่สำเร็จ ผลลัพธ์ยังดาวน์โหลดจากเครื่องได้",
+    "en": "Could not save to cloud. You can still download the results from this device."
+  },
+  "บันทึกใน cloud แล้ว": {
+    "th": "บันทึกใน cloud แล้ว",
+    "en": "Saved to your cloud"
+  },
+  "แยกเสียงเสร็จบนอุปกรณ์ของคุณ": {
+    "th": "แยกเสียงเสร็จบนอุปกรณ์ของคุณ",
+    "en": "Separation complete on your device"
+  },
+  "เปิดผลงานนี้จากงานแยกเสียงได้ในครั้งถัดไป": {
+    "th": "เปิดผลงานนี้จากงานแยกเสียงได้ในครั้งถัดไป",
+    "en": "Find this result in your stem archive next time."
+  },
+  "ดาวน์โหลดได้ทันที ผลลัพธ์ในเครื่องจะหายเมื่อปิดหรือโหลดแท็บใหม่ หากต้องการเก็บไว้ให้บันทึกเข้า cloud": {
+    "th": "ดาวน์โหลดได้ทันที ผลลัพธ์ในเครื่องจะหายเมื่อปิดหรือโหลดแท็บใหม่ หากต้องการเก็บไว้ให้บันทึกเข้า cloud",
+    "en": "Download now. Local results are lost when this tab closes or reloads. Save to cloud to keep them."
+  },
+  "ใช้พื้นที่ cloud {0} MB": {
+    "th": "ใช้พื้นที่ cloud {0} MB",
+    "en": "Cloud storage required: {0} MB"
+  },
+  "กำลังบันทึกเข้า cloud…": {
+    "th": "กำลังบันทึกเข้า cloud…",
+    "en": "Saving to cloud…"
+  },
+  "บันทึกเข้า cloud": {
+    "th": "บันทึกเข้า cloud",
+    "en": "Save to cloud"
+  },
+  "กำลังแยกเสียงบนอุปกรณ์ของคุณ": {
+    "th": "กำลังแยกเสียงบนอุปกรณ์ของคุณ",
+    "en": "Separating on your device"
+  },
+  "เปิดคลังเพลงในเว็บนี้ได้ระหว่างรอ กรุณาเปิดแท็บนี้ไว้ GPU บนอุปกรณ์กำลังทำงาน": {
+    "th": "เปิดคลังเพลงในเว็บนี้ได้ระหว่างรอ กรุณาเปิดแท็บนี้ไว้ GPU บนอุปกรณ์กำลังทำงาน",
+    "en": "You can browse your library while you wait. Keep this tab open while your device’s GPU works."
+  },
+  "ยกเลิกการแยกเสียง": {
+    "th": "ยกเลิกการแยกเสียง",
+    "en": "Cancel separation"
+  },
+  "เลือกไฟล์ แล้วแยกเสียงบนอุปกรณ์ของคุณ": {
+    "th": "เลือกไฟล์ แล้วแยกเสียงบนอุปกรณ์ของคุณ",
+    "en": "Choose a file and separate it on your device"
+  },
+  "บนอุปกรณ์ของฉัน · WebGPU": {
+    "th": "บนอุปกรณ์ของฉัน · WebGPU",
+    "en": "On my device · WebGPU"
+  },
+  "บนเซิร์ฟเวอร์ · AI": {
+    "th": "บนเซิร์ฟเวอร์ · AI",
+    "en": "On the server · AI"
+  },
+  "กำลังตรวจสอบ GPU ของอุปกรณ์…": {
+    "th": "กำลังตรวจสอบ GPU ของอุปกรณ์…",
+    "en": "Checking your device’s GPU…"
+  },
+  "GPU พร้อมใช้งาน · ประมวลผลบนอุปกรณ์": {
+    "th": "GPU พร้อมใช้งาน · ประมวลผลบนอุปกรณ์",
+    "en": "GPU ready · Processing on your device"
+  },
+  "อุปกรณ์นี้ยังใช้ WebGPU ไม่ได้": {
+    "th": "อุปกรณ์นี้ยังใช้ WebGPU ไม่ได้",
+    "en": "WebGPU is unavailable on this device"
+  },
+  "ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์": {
+    "th": "ลอง Chrome หรือ Edge รุ่นล่าสุดบนคอมพิวเตอร์ หรือเลือกประมวลผลบนเซิร์ฟเวอร์",
+    "en": "Try the latest Chrome or Edge on a computer, or choose server processing."
+  },
+  "ครั้งแรกดาวน์โหลดไฟล์ AI ประมาณ 84 MB และเก็บบนอุปกรณ์ เพลงจะไม่ถูกอัปโหลดจนกว่าจะกดบันทึกเข้า cloud": {
+    "th": "ครั้งแรกดาวน์โหลดไฟล์ AI ประมาณ 84 MB และเก็บบนอุปกรณ์ เพลงจะไม่ถูกอัปโหลดจนกว่าจะกดบันทึกเข้า cloud",
+    "en": "The first run downloads about 84 MB of AI files, cached on your device. Audio is uploaded only when you choose Save to cloud."
+  },
+  "ประมวลผลในเครื่อง บันทึกเข้า cloud เมื่อคุณเลือก": {
+    "th": "ประมวลผลในเครื่อง บันทึกเข้า cloud เมื่อคุณเลือก",
+    "en": "Process locally. Save to cloud when you choose."
+  },
+  "โหมด WebGPU ใช้ GPU บนอุปกรณ์ของคุณ ดาวน์โหลดไฟล์ประมวลผลครั้งแรกแล้วเก็บไว้ใช้ซ้ำ กรุณาเปิดแท็บไว้ระหว่างแยกเสียง ฟังและดาวน์โหลดได้ทันที หรือกดบันทึกเข้า cloud ภายในโควตาของบัญชี": {
+    "th": "โหมด WebGPU ใช้ GPU บนอุปกรณ์ของคุณ ดาวน์โหลดไฟล์ประมวลผลครั้งแรกแล้วเก็บไว้ใช้ซ้ำ กรุณาเปิดแท็บไว้ระหว่างแยกเสียง ฟังและดาวน์โหลดได้ทันที หรือกดบันทึกเข้า cloud ภายในโควตาของบัญชี",
+    "en": "WebGPU uses your device’s GPU and caches processing files after the first download. Keep this tab open while separating. Listen and download immediately, or save to cloud within your account’s storage quota."
+  },
+  "ดาวน์โหลดเพลงจากคลังมาแยกบนอุปกรณ์ ผลลัพธ์จะเก็บในเครื่องก่อน จนกว่าจะกดบันทึกเข้า cloud": {
+    "th": "ดาวน์โหลดเพลงจากคลังมาแยกบนอุปกรณ์ ผลลัพธ์จะเก็บในเครื่องก่อน จนกว่าจะกดบันทึกเข้า cloud",
+    "en": "Download your library track for processing on this device. Results stay local until you choose Save to cloud."
+  },
+  "แทร็คต้องเป็น WAV stereo 44.1 kHz 16-bit ที่สมบูรณ์และยาวไม่เกิน 10 นาที": {
+    "th": "แทร็คต้องเป็น WAV stereo 44.1 kHz 16-bit ที่สมบูรณ์และยาวไม่เกิน 10 นาที",
+    "en": "Tracks must be valid stereo 44.1 kHz 16-bit WAV files up to 10 minutes long."
+  },
+  "รหัสผลลัพธ์ไม่ถูกต้อง": {
+    "th": "รหัสผลลัพธ์ไม่ถูกต้อง",
+    "en": "Invalid result identifier."
+  },
+  "กรุณาส่งแทร็คให้ครบตามรูปแบบที่เลือก": {
+    "th": "กรุณาส่งแทร็คให้ครบตามรูปแบบที่เลือก",
+    "en": "Provide all tracks for the selected output format."
+  },
+  "กำลังบันทึกผลลัพธ์นี้ กรุณารอสักครู่": {
+    "th": "กำลังบันทึกผลลัพธ์นี้ กรุณารอสักครู่",
+    "en": "This result is being saved. Please wait."
+  },
+  "พื้นที่จัดเก็บไม่พอสำหรับแทร็คผลลัพธ์ กรุณาดาวน์โหลดเก็บในเครื่อง": {
+    "th": "พื้นที่จัดเก็บไม่พอสำหรับแทร็คผลลัพธ์ กรุณาดาวน์โหลดเก็บในเครื่อง",
+    "en": "Not enough cloud storage for these tracks. Download them to your device instead."
+  },
+  "ความยาวของแทร็คต้องเท่ากันทุกไฟล์": {
+    "th": "ความยาวของแทร็คต้องเท่ากันทุกไฟล์",
+    "en": "All tracks must have the same duration."
+  },
+  "มีแท็บอื่นกำลังแยกเสียงด้วย GPU กรุณารอให้เสร็จหรือยกเลิกงานในแท็บนั้นก่อน": {
+    "th": "มีแท็บอื่นกำลังแยกเสียงด้วย GPU กรุณารอให้เสร็จหรือยกเลิกงานในแท็บนั้นก่อน",
+    "en": "Another tab is separating audio on your GPU. Wait for it to finish or cancel that job first."
+  },
+  "กำลังดาวน์โหลดไฟล์ AI ประมาณ 96 MB เก็บไว้ใช้ครั้งต่อไป": {
+    "th": "กำลังดาวน์โหลดไฟล์ AI ประมาณ 96 MB เก็บไว้ใช้ครั้งต่อไป",
+    "en": "Downloading about 96 MB of AI files, cached for next time"
+  },
+  "ครั้งแรกดาวน์โหลดไฟล์ AI ประมาณ 96 MB และเก็บบนอุปกรณ์ เพลงจะไม่ถูกอัปโหลดจนกว่าจะกดบันทึกเข้า cloud": {
+    "th": "ครั้งแรกดาวน์โหลดไฟล์ AI ประมาณ 96 MB และเก็บบนอุปกรณ์ เพลงจะไม่ถูกอัปโหลดจนกว่าจะกดบันทึกเข้า cloud",
+    "en": "The first run downloads about 96 MB of AI files, cached on your device. Audio is uploaded only when you choose Save to cloud."
+  },
+  "การอัปโหลดหมดอายุ กรุณากดบันทึกอีกครั้ง": {
+    "th": "การอัปโหลดหมดอายุ กรุณากดบันทึกอีกครั้ง",
+    "en": "This upload expired. Choose Save to cloud again."
+  },
+  "ไม่พบการอัปโหลดนี้": {
+    "th": "ไม่พบการอัปโหลดนี้",
+    "en": "Upload not found."
+  },
+  "ข้อมูลอัปโหลดไม่ตรงกัน กรุณาเริ่มแยกเสียงใหม่": {
+    "th": "ข้อมูลอัปโหลดไม่ตรงกัน กรุณาเริ่มแยกเสียงใหม่",
+    "en": "Upload details do not match. Start a new separation."
+  },
+  "มีการอัปโหลดค้างอยู่มากเกินไป กรุณารอสักครู่": {
+    "th": "มีการอัปโหลดค้างอยู่มากเกินไป กรุณารอสักครู่",
+    "en": "Too many unfinished uploads. Please wait."
+  },
+  "ชิ้นส่วนอัปโหลดใหญ่เกินกำหนด": {
+    "th": "ชิ้นส่วนอัปโหลดใหญ่เกินกำหนด",
+    "en": "The upload chunk exceeds the size limit."
+  },
+  "ขนาดชิ้นส่วนอัปโหลดไม่ถูกต้อง": {
+    "th": "ขนาดชิ้นส่วนอัปโหลดไม่ถูกต้อง",
+    "en": "Invalid upload chunk size."
+  },
+  "ตำแหน่งอัปโหลดไม่ถูกต้อง กรุณากดบันทึกอีกครั้ง": {
+    "th": "ตำแหน่งอัปโหลดไม่ถูกต้อง กรุณากดบันทึกอีกครั้ง",
+    "en": "Invalid upload offset. Choose Save to cloud again."
+  },
+  "ข้อมูลชิ้นส่วนไม่ตรงกัน กรุณากดบันทึกอีกครั้ง": {
+    "th": "ข้อมูลชิ้นส่วนไม่ตรงกัน กรุณากดบันทึกอีกครั้ง",
+    "en": "Upload chunk data does not match. Choose Save to cloud again."
+  },
+  "อัปโหลดแทร็คยังไม่ครบ กรุณากดบันทึกอีกครั้ง": {
+    "th": "อัปโหลดแทร็คยังไม่ครบ กรุณากดบันทึกอีกครั้ง",
+    "en": "Some tracks are incomplete. Choose Save to cloud again."
+  },
+  "บันทึกแล้ว": {
+    "th": "บันทึกแล้ว",
+    "en": "Saved"
+  },
+  "ระบบคิวแยกเสียงยังไม่พร้อม": {
+    "th": "ระบบคิวแยกเสียงยังไม่พร้อม",
+    "en": "The separation queue is not available yet"
+  },
+  "พื้นที่ไม่พอสำหรับเพลงและผลลัพธ์ ลองแยกสองแทร็คหรือลดพื้นที่ก่อน": {
+    "th": "พื้นที่ไม่พอสำหรับเพลงและผลลัพธ์ ลองแยกสองแทร็คหรือลดพื้นที่ก่อน",
+    "en": "Not enough space for the song and stems. Choose two stems or free up space first."
+  },
+  "กำลังเตรียมเพลงจากคิว": {
+    "th": "กำลังเตรียมเพลงจากคิว",
+    "en": "Preparing your queued song"
+  },
+  "รอคิวแยกเสียง เปิดหน้านี้ใหม่เพื่อรับผลได้": {
+    "th": "รอคิวแยกเสียง เปิดหน้านี้ใหม่เพื่อรับผลได้",
+    "en": "Queued for separation. You can return later for your results."
+  },
+  "ส่งเพลงเข้าคิวไม่สำเร็จ กรุณาลองใหม่": {
+    "th": "ส่งเพลงเข้าคิวไม่สำเร็จ กรุณาลองใหม่",
+    "en": "Could not queue this song. Please try again."
+  },
+  "เครื่องประมวลผลขาดการเชื่อมต่อ กำลังรอรับงานใหม่": {
+    "th": "เครื่องประมวลผลขาดการเชื่อมต่อ กำลังรอรับงานใหม่",
+    "en": "Processing connection interrupted. Waiting to resume the job."
+  },
+  "ประมวลผลไม่สำเร็จหลายครั้ง กรุณาเริ่มใหม่": {
+    "th": "ประมวลผลไม่สำเร็จหลายครั้ง กรุณาเริ่มใหม่",
+    "en": "Processing failed after several attempts. Please start a new job."
+  },
+  "กำลังบันทึกแทร็คในพื้นที่ส่วนตัวของคุณ": {
+    "th": "กำลังบันทึกแทร็คในพื้นที่ส่วนตัวของคุณ",
+    "en": "Saving stems to your private storage"
+  },
+  "พื้นที่ไม่พอสำหรับผลลัพธ์ กรุณาลดพื้นที่ก่อน": {
+    "th": "พื้นที่ไม่พอสำหรับผลลัพธ์ กรุณาลดพื้นที่ก่อน",
+    "en": "Not enough storage for the results. Please free up space first."
+  },
+  "กำลังรอรับงานใหม่": {
+    "th": "กำลังรอรับงานใหม่",
+    "en": "Waiting to resume processing"
+  },
+  "ยกเลิกงานแล้ว": {
+    "th": "ยกเลิกงานแล้ว",
+    "en": "Job cancelled"
+  },
+  "ส่งเพลงเข้าคิวแล้ว ปิดหน้านี้ได้ ผลลัพธ์จะอยู่ในงานแยกเสียงและ Cloud ส่วนตัวของคุณ": {
+    "th": "ส่งเพลงเข้าคิวแล้ว ปิดหน้านี้ได้ ผลลัพธ์จะอยู่ในงานแยกเสียงและ Cloud ส่วนตัวของคุณ",
+    "en": "Your song is queued. You can close this page and find the results in your stem archive and private cloud."
+  },
+  "ยกเลิกงานในคิว": {
+    "th": "ยกเลิกงานในคิว",
+    "en": "Cancel this job"
+  },
+  "เลือกเพลง แล้วกลับมาฟังผลได้เมื่อพร้อม": {
+    "th": "เลือกเพลง แล้วกลับมาฟังผลได้เมื่อพร้อม",
+    "en": "Choose a song and come back to listen when it is ready"
+  },
+  "ตัวเลือกการประมวลผล": {
+    "th": "ตัวเลือกการประมวลผล",
+    "en": "Processing options"
+  },
+  "แยกเสียงให้ฉัน · บันทึกใน Cloud": {
+    "th": "แยกเสียงให้ฉัน · บันทึกใน Cloud",
+    "en": "Separate for me · Save to cloud"
+  },
+  "พร้อมรับเพลงของคุณ": {
+    "th": "พร้อมรับเพลงของคุณ",
+    "en": "Ready for your song"
+  },
+  "รับเพลงเข้าคิวไว้ก่อนได้": {
+    "th": "รับเพลงเข้าคิวไว้ก่อนได้",
+    "en": "You can queue your song now"
+  },
+  "แยกเสียงและบันทึกให้อัตโนมัติ ปิดหน้าเว็บแล้วกลับมาฟังได้": {
+    "th": "แยกเสียงและบันทึกให้อัตโนมัติ ปิดหน้าเว็บแล้วกลับมาฟังได้",
+    "en": "We separate and save your stems automatically. Close the page and come back to listen."
+  },
+  "เครื่องประมวลผลกำลังพัก เพลงจะรอในคิวและเริ่มเมื่อพร้อม": {
+    "th": "เครื่องประมวลผลกำลังพัก เพลงจะรอในคิวและเริ่มเมื่อพร้อม",
+    "en": "Processing is currently paused. Your song will stay queued until processing is available."
+  },
+  "ระบบจองพื้นที่สำหรับเพลงและแทร็คภายในโควตา 200 MB": {
+    "th": "ระบบจองพื้นที่สำหรับเพลงและแทร็คภายในโควตา 200 MB",
+    "en": "Space for the song and stems is reserved within your 200 MB quota."
+  },
+  "ยกเลิกแล้ว": {
+    "th": "ยกเลิกแล้ว",
+    "en": "Cancelled"
+  },
+  "งานทั้งหมดของบัญชีคุณ": {
+    "th": "งานทั้งหมดของบัญชีคุณ",
+    "en": "All jobs in your account"
+  },
+  "การเก็บผลลัพธ์": {
+    "th": "การเก็บผลลัพธ์",
+    "en": "Result storage"
+  },
+  "แยกเพื่อดาวน์โหลด · ไม่ใช้พื้นที่ Cloud": {
+    "th": "แยกเพื่อดาวน์โหลด · ไม่ใช้พื้นที่ Cloud",
+    "en": "Separate to download · No cloud storage used"
+  },
+  "บันทึกใน Cloud · ใช้พื้นที่ 200 MB": {
+    "th": "บันทึกใน Cloud · ใช้พื้นที่ 200 MB",
+    "en": "Save to cloud · Uses your 200 MB allowance"
+  },
+  "Cloud เต็มก็แยกได้ ดาวน์โหลด WAV หรือ ZIP ภายใน 24 ชั่วโมงหลังแยกเสร็จ ผลลัพธ์ชั่วคราวจะถูกลบอัตโนมัติ": {
+    "th": "Cloud เต็มก็แยกได้ ดาวน์โหลด WAV หรือ ZIP ภายใน 24 ชั่วโมงหลังแยกเสร็จ ผลลัพธ์ชั่วคราวจะถูกลบอัตโนมัติ",
+    "en": "Works even when your cloud is full. Download WAV or ZIP within 24 hours of completion. Temporary results are automatically deleted."
+  },
+  "เก็บผลลัพธ์ไว้ในบัญชีจนกว่าจะลบ ต้องมีพื้นที่ Cloud เพียงพอ": {
+    "th": "เก็บผลลัพธ์ไว้ในบัญชีจนกว่าจะลบ ต้องมีพื้นที่ Cloud เพียงพอ",
+    "en": "Keep results in your account until deleted. Requires available cloud storage."
+  },
+  "แยกเสียงให้ฉัน": {
+    "th": "แยกเสียงให้ฉัน",
+    "en": "Separate for me"
+  },
+  "แยกเพื่อดาวน์โหลด ไม่หักพื้นที่ Cloud 200 MB": {
+    "th": "แยกเพื่อดาวน์โหลด ไม่หักพื้นที่ Cloud 200 MB",
+    "en": "Separate to download without using your 200 MB cloud allowance"
+  },
+  "แยกเสียงให้อัตโนมัติ ปิดหน้าเว็บแล้วกลับมาดูผลได้": {
+    "th": "แยกเสียงให้อัตโนมัติ ปิดหน้าเว็บแล้วกลับมาดูผลได้",
+    "en": "Separation runs automatically. You can close this page and return for your results."
+  },
+  "ผลลัพธ์ชั่วคราว ไม่ใช้พื้นที่ Cloud · ดาวน์โหลดก่อน {0}": {
+    "th": "ผลลัพธ์ชั่วคราว ไม่ใช้พื้นที่ Cloud · ดาวน์โหลดก่อน {0}",
+    "en": "Temporary results, no cloud storage used · Download before {0}"
+  },
+  "หมดอายุแล้ว": {
+    "th": "หมดอายุแล้ว",
+    "en": "Expired"
+  },
+  "ผลลัพธ์ชั่วคราวหมดอายุแล้ว กรุณาแยกเพลงใหม่": {
+    "th": "ผลลัพธ์ชั่วคราวหมดอายุแล้ว กรุณาแยกเพลงใหม่",
+    "en": "Temporary results have expired. Separate the song again."
+  },
+  "พื้นที่ชั่วคราวมีงานรออยู่มาก กรุณารอหรือลบผลลัพธ์ชั่วคราวก่อน": {
+    "th": "พื้นที่ชั่วคราวมีงานรออยู่มาก กรุณารอหรือลบผลลัพธ์ชั่วคราวก่อน",
+    "en": "Temporary storage is busy. Wait or delete temporary results before adding more jobs."
+  },
+  "พื้นที่ประมวลผลชั่วคราวยังไม่พร้อม กรุณาลองอีกครั้งภายหลัง": {
+    "th": "พื้นที่ประมวลผลชั่วคราวยังไม่พร้อม กรุณาลองอีกครั้งภายหลัง",
+    "en": "Temporary processing space is unavailable. Please try again later."
+  },
+  "พื้นที่ Cloud ไม่พอ เลือกแยกเพื่อดาวน์โหลดโดยไม่บันทึก Cloud ได้": {
+    "th": "พื้นที่ Cloud ไม่พอ เลือกแยกเพื่อดาวน์โหลดโดยไม่บันทึก Cloud ได้",
+    "en": "Cloud storage is full. Choose download mode to separate without saving to cloud."
+  },
+  "รหัสส่งไฟล์ไม่ถูกต้อง": {
+    "th": "รหัสส่งไฟล์ไม่ถูกต้อง",
+    "en": "Invalid upload request ID"
+  },
+  "รหัสส่งไฟล์นี้ถูกใช้กับงานอื่นแล้ว กรุณาเลือกไฟล์ใหม่": {
+    "th": "รหัสส่งไฟล์นี้ถูกใช้กับงานอื่นแล้ว กรุณาเลือกไฟล์ใหม่",
+    "en": "This upload request belongs to another job. Please choose the file again."
+  },
+  "ตรวจสอบคิวไม่สำเร็จ กรุณาลองอีกครั้ง": {
+    "th": "ตรวจสอบคิวไม่สำเร็จ กรุณาลองอีกครั้ง",
+    "en": "Could not check the queue. Please try again."
+  },
+  "การเชื่อมต่อขาดช่วง กดลองอีกครั้งเพื่อตรวจคิวเดิมและส่งต่ออย่างปลอดภัย": {
+    "th": "การเชื่อมต่อขาดช่วง กดลองอีกครั้งเพื่อตรวจคิวเดิมและส่งต่ออย่างปลอดภัย",
+    "en": "The connection was interrupted. Try again to check the existing job and safely resume submission."
+  },
+  "อัปโหลดครบแล้ว กำลังตรวจและส่งเข้าคิว…": {
+    "th": "อัปโหลดครบแล้ว กำลังตรวจและส่งเข้าคิว…",
+    "en": "Upload complete. Checking and queuing…"
+  },
+  "กำลังเตรียมไฟล์เข้าคิว": {
+    "th": "กำลังเตรียมไฟล์เข้าคิว",
+    "en": "Preparing your uploaded file"
+  },
+  "เพลงของคุณอยู่ในคิวแล้ว": {
+    "th": "เพลงของคุณอยู่ในคิวแล้ว",
+    "en": "Your song is in the queue"
+  },
+  "รอเครื่องประมวลผลพร้อม": {
+    "th": "รอเครื่องประมวลผลพร้อม",
+    "en": "Waiting for processing to become available"
+  },
+  "กำลังเตรียมเพลงของคุณ": {
+    "th": "กำลังเตรียมเพลงของคุณ",
+    "en": "Preparing your song"
+  },
+  "กำลังแยกเสียงเพลงของคุณ": {
+    "th": "กำลังแยกเสียงเพลงของคุณ",
+    "en": "Separating your song"
+  },
+  "กำลังส่งผลลัพธ์กลับมาให้คุณ": {
+    "th": "กำลังส่งผลลัพธ์กลับมาให้คุณ",
+    "en": "Sending your results back"
+  },
+  "กำลังตรวจสอบการเชื่อมต่อเครื่องประมวลผล": {
+    "th": "กำลังตรวจสอบการเชื่อมต่อเครื่องประมวลผล",
+    "en": "Checking the processing connection"
+  },
+  "กำลังเชื่อมต่อเพื่อตรวจสถานะล่าสุด": {
+    "th": "กำลังเชื่อมต่อเพื่อตรวจสถานะล่าสุด",
+    "en": "Reconnecting to check the latest status"
+  },
+  "รอคิวลำดับที่ {0}": {
+    "th": "รอคิวลำดับที่ {0}",
+    "en": "Queue position {0}"
+  },
+  "รอมาแล้ว {0}": {
+    "th": "รอมาแล้ว {0}",
+    "en": "Waiting for {0}"
+  },
+  "ส่งงานมาแล้ว {0}": {
+    "th": "ส่งงานมาแล้ว {0}",
+    "en": "Submitted {0} ago"
+  },
+  "ลำดับในคิวรอ": {
+    "th": "ลำดับในคิวรอ",
+    "en": "Queue position"
+  },
+  "งานที่รออยู่": {
+    "th": "งานที่รออยู่",
+    "en": "Jobs waiting"
+  },
+  "งานของคุณบันทึกไว้แล้ว จะเริ่มอัตโนมัติเมื่อเครื่องประมวลผลพร้อม": {
+    "th": "งานของคุณบันทึกไว้แล้ว จะเริ่มอัตโนมัติเมื่อเครื่องประมวลผลพร้อม",
+    "en": "Your job is saved and will start automatically when processing is available."
+  },
+  "ระบบรับเพลงแล้ว กำลังรอช่องประมวลผลว่าง ไม่ต้องส่งไฟล์ซ้ำ": {
+    "th": "ระบบรับเพลงแล้ว กำลังรอช่องประมวลผลว่าง ไม่ต้องส่งไฟล์ซ้ำ",
+    "en": "Your song has been received and is waiting for an available processing slot. No need to upload it again."
+  },
+  "กำลังจัดเก็บไฟล์ที่ส่งมาให้พร้อมเริ่มงาน": {
+    "th": "กำลังจัดเก็บไฟล์ที่ส่งมาให้พร้อมเริ่มงาน",
+    "en": "Saving your uploaded file so processing can begin."
+  },
+  "ยังไม่พบสัญญาณล่าสุดจากเครื่องประมวลผล ระบบกำลังรอเชื่อมต่อและจัดคิวใหม่ให้อัตโนมัติ": {
+    "th": "ยังไม่พบสัญญาณล่าสุดจากเครื่องประมวลผล ระบบกำลังรอเชื่อมต่อและจัดคิวใหม่ให้อัตโนมัติ",
+    "en": "The processing signal is delayed. The system is waiting to reconnect and will requeue the job automatically."
+  },
+  "แยกเสียงแล้ว กำลังส่งไฟล์และเตรียมลิงก์ดาวน์โหลด": {
+    "th": "แยกเสียงแล้ว กำลังส่งไฟล์และเตรียมลิงก์ดาวน์โหลด",
+    "en": "Separation is done. Sending your files and preparing download links."
+  },
+  "ขั้นตอนนี้อาจใช้เวลาหลายนาที โดยเฉพาะเพลงยาวหรือการแยก 4 แทร็ค เปอร์เซ็นต์จะเปลี่ยนเมื่อผ่านแต่ละช่วง": {
+    "th": "ขั้นตอนนี้อาจใช้เวลาหลายนาที โดยเฉพาะเพลงยาวหรือการแยก 4 แทร็ค เปอร์เซ็นต์จะเปลี่ยนเมื่อผ่านแต่ละช่วง",
+    "en": "This step can take several minutes, especially for longer songs or four stems. Progress updates as each stage completes."
+  },
+  "ความคืบหน้าการแยกเสียง": {
+    "th": "ความคืบหน้าการแยกเสียง",
+    "en": "Separation progress"
+  },
+  "รอสัญญาณจากเครื่องประมวลผล": {
+    "th": "รอสัญญาณจากเครื่องประมวลผล",
+    "en": "Waiting for the processing signal"
+  },
+  "เครื่องประมวลผลยังส่งสัญญาณอยู่": {
+    "th": "เครื่องประมวลผลยังส่งสัญญาณอยู่",
+    "en": "The processor is still sending updates"
+  },
+  "งานยังอยู่ในระบบคิว": {
+    "th": "งานยังอยู่ในระบบคิว",
+    "en": "Your job is still in the queue"
+  },
+  "ตรวจสถานะล่าสุด {0}": {
+    "th": "ตรวจสถานะล่าสุด {0}",
+    "en": "Status checked at {0}"
+  },
+  "ลำดับอาจเปลี่ยนตามเครื่องที่พร้อม ระบบจะอัปเดตให้เอง": {
+    "th": "ลำดับอาจเปลี่ยนตามเครื่องที่พร้อม ระบบจะอัปเดตให้เอง",
+    "en": "Queue order may change with processor availability. This page updates automatically."
+  },
+  "ตรวจสถานะไม่ได้ชั่วคราว กำลังเชื่อมต่ออีกครั้ง…": {
+    "th": "ตรวจสถานะไม่ได้ชั่วคราว กำลังเชื่อมต่ออีกครั้ง…",
+    "en": "Status is temporarily unavailable. Reconnecting…"
+  },
+  "ปิดหน้านี้ได้ แล้วกลับมาดาวน์โหลดในงานแยกเสียงภายใน 24 ชั่วโมง ผลลัพธ์นี้ไม่ใช้พื้นที่ Cloud": {
+    "th": "ปิดหน้านี้ได้ แล้วกลับมาดาวน์โหลดในงานแยกเสียงภายใน 24 ชั่วโมง ผลลัพธ์นี้ไม่ใช้พื้นที่ Cloud",
+    "en": "You can close this page and return to Stem jobs to download within 24 hours. These results do not use cloud storage."
+  },
+  "สร้างได้มากกว่าเสียงเดิม": {
+    "th": "สร้างได้มากกว่าเสียงเดิม",
+    "en": "Make more of your music"
+  },
+  "แยกเสียง จัดเซ็ต และเก็บเพลงไว้ในที่เดียว": {
+    "th": "แยกเสียง จัดเซ็ต และเก็บเพลงไว้ในที่เดียว",
+    "en": "Separate, curate, and keep it all together."
+  },
+  "คู่มือเริ่มต้น": {
+    "th": "คู่มือเริ่มต้น",
+    "en": "Getting started"
+  },
+  "เปลี่ยนเพลงที่คุณชอบ ให้เป็นเสียงในแบบของคุณ": {
+    "th": "เปลี่ยนเพลงที่คุณชอบ ให้เป็นเสียงในแบบของคุณ",
+    "en": "Take a track you love. Make it your own."
+  },
+  "ข้ามไปยังเนื้อหา": {
+    "th": "ข้ามไปยังเนื้อหา",
+    "en": "Skip to content"
+  },
+  "เพิ่มเพลงของคุณ": {
+    "th": "เพิ่มเพลงของคุณ",
+    "en": "Add your track"
+  },
+  "เลือกผลลัพธ์": {
+    "th": "เลือกผลลัพธ์",
+    "en": "Choose your output"
+  },
+  "พร้อมฟัง มิกซ์ และดาวน์โหลด": {
+    "th": "พร้อมฟัง มิกซ์ และดาวน์โหลด",
+    "en": "Ready to listen, mix, and download"
+  },
+  "ปิดหน้าเว็บแล้วกลับมาดูผลได้": {
+    "th": "ปิดหน้าเว็บแล้วกลับมาดูผลได้",
+    "en": "Come back for your results anytime."
+  },
+  "เพลงจะเริ่มอัตโนมัติเมื่อระบบพร้อม": {
+    "th": "เพลงจะเริ่มอัตโนมัติเมื่อระบบพร้อม",
+    "en": "Your track starts automatically when ready."
+  },
+  "งานล่าสุด": {
+    "th": "งานล่าสุด",
+    "en": "Recent stems"
+  },
+  "ดูทั้งหมด": {
+    "th": "ดูทั้งหมด",
+    "en": "View all"
+  },
+  "พร้อมดาวน์โหลด": {
+    "th": "พร้อมดาวน์โหลด",
+    "en": "Ready to download"
+  },
+  "เพลงแรกของคุณ เริ่มได้จากด้านบน": {
+    "th": "เพลงแรกของคุณ เริ่มได้จากด้านบน",
+    "en": "Your first track starts just above."
+  },
+  "เตรียมพร้อมสำหรับเซ็ตถัดไป": {
+    "th": "เตรียมพร้อมสำหรับเซ็ตถัดไป",
+    "en": "Make room for your next set"
+  },
+  "ทุกเพลงของคุณ อยู่ด้วยกัน": {
+    "th": "ทุกเพลงของคุณ อยู่ด้วยกัน",
+    "en": "All your tracks, together"
+  },
+  "ให้ AI ช่วยเรียงจังหวะถัดไป": {
+    "th": "ให้ AI ช่วยเรียงจังหวะถัดไป",
+    "en": "Find your next flow with AI"
+  },
+  "พื้นที่ส่วนตัวสำหรับเสียงของคุณ": {
+    "th": "พื้นที่ส่วนตัวสำหรับเสียงของคุณ",
+    "en": "A private space for your sound"
+  },
+  "พื้นที่สร้างสรรค์สำหรับคนรักเสียงเพลง": {
+    "th": "พื้นที่สร้างสรรค์สำหรับคนรักเสียงเพลง",
+    "en": "A creative space for music lovers"
+  },
+  "ทุกเพลงเดิม": {
+    "th": "ทุกเพลงเดิม",
+    "en": "Every track."
+  },
+  "เป็นไปได้อีกมาก": {
+    "th": "เป็นไปได้อีกมาก",
+    "en": "New possibilities"
+  },
+  "แยกเสียง จัด Playlist และเก็บเพลงส่วนตัว": {
+    "th": "แยกเสียง จัด Playlist และเก็บเพลงส่วนตัว",
+    "en": "Separate stems, build playlists, keep your music."
+  },
+  "ทุกอย่างที่ต้องใช้ ก่อนถึงเซ็ตถัดไป": {
+    "th": "ทุกอย่างที่ต้องใช้ ก่อนถึงเซ็ตถัดไป",
+    "en": "Everything you need before your next set."
+  },
+  "จัดเซ็ต": {
+    "th": "จัดเซ็ต",
+    "en": "Curate"
+  },
+  "เก็บเพลง": {
+    "th": "เก็บเพลง",
+    "en": "Collect"
+  },
+  "ยินดีต้อนรับกลับ": {
+    "th": "ยินดีต้อนรับกลับ",
+    "en": "Welcome back"
+  },
+  "เข้าสู่ระบบ แล้วสร้างเสียงในแบบของคุณ": {
+    "th": "เข้าสู่ระบบ แล้วสร้างเสียงในแบบของคุณ",
+    "en": "Sign in and make your sound your own."
+  },
+  "ซ่อนรหัสผ่าน": {
+    "th": "ซ่อนรหัสผ่าน",
+    "en": "Hide password"
+  },
+  "แสดงรหัสผ่าน": {
+    "th": "แสดงรหัสผ่าน",
+    "en": "Show password"
+  },
+  "หนึ่งเพลง หลายความเป็นไปได้": {
+    "th": "หนึ่งเพลง หลายความเป็นไปได้",
+    "en": "One track. Every possibility."
+  },
+  "ดนตรี": {
+    "th": "ดนตรี",
+    "en": "Other"
+  },
+  "กำลังรอคิว": {
+    "th": "กำลังรอคิว",
+    "en": "Waiting in queue"
+  },
+  "กำลังแยกเสียง": {
+    "th": "กำลังแยกเสียง",
+    "en": "Separating stems"
+  },
+  "รอคิว": {
+    "th": "รอคิว",
+    "en": "Queued"
+  },
+  "ดาวน์โหลด WAV / ZIP ภายใน 24 ชั่วโมง ผลลัพธ์จะถูกลบอัตโนมัติ ไม่ใช้พื้นที่ Cloud": {
+    "th": "ดาวน์โหลด WAV / ZIP ภายใน 24 ชั่วโมง ผลลัพธ์จะถูกลบอัตโนมัติ ไม่ใช้พื้นที่ Cloud",
+    "en": "Download WAV / ZIP within 24 hours before automatic deletion. No cloud storage used."
+  },
+  "แยกหลายเพลง": {
+    "th": "แยกหลายเพลง",
+    "en": "Batch separation"
+  },
+  "แสดงเซ็ตที่บันทึก": {
+    "th": "แสดงเซ็ตที่บันทึก",
+    "en": "Show saved sets"
+  },
+  "โควตาแยกเสียงวันนี้": {
+    "th": "โควตาแยกเสียงวันนี้",
+    "en": "Today’s separation allowance"
+  },
+  "เหลือ {0} จาก {1} นาทีเพลง": {
+    "th": "เหลือ {0} จาก {1} นาทีเพลง",
+    "en": "{0} of {1} audio minutes remaining"
+  },
+  "เริ่มรอบใหม่เที่ยงคืนเวลาไทย · ไม่นับการแยกบนอุปกรณ์ของคุณ": {
+    "th": "เริ่มรอบใหม่เที่ยงคืนเวลาไทย · ไม่นับการแยกบนอุปกรณ์ของคุณ",
+    "en": "Resets at midnight in Thailand · On-device processing is excluded"
+  },
+  "ระยะเวลาเพลงไม่ถูกต้อง": {
+    "th": "ระยะเวลาเพลงไม่ถูกต้อง",
+    "en": "Invalid audio duration"
+  },
+  "โควตาแยกเสียงวันนี้ไม่พอ กรุณารอรอบใหม่ หรือเลือกแยกบนอุปกรณ์ของคุณ": {
+    "th": "โควตาแยกเสียงวันนี้ไม่พอ กรุณารอรอบใหม่ หรือเลือกแยกบนอุปกรณ์ของคุณ",
+    "en": "Not enough audio minutes left today. Wait for the daily reset or process on your own device."
+  }
+}

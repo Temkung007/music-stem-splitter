@@ -1,0 +1,5 @@
+# Independent from the CPU fallback runtime (which retains NumPy 1.x).
+demucs-mlx==1.6.1
+mlx==0.32.4
+mlx-audio-io==1.3.24
+mlx-spectro==0.9.10

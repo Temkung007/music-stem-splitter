@@ -1,0 +1,13 @@
+.venv
+__pycache__
+uploads
+separated
+objects
+incoming
+cache
+*.sqlite3*
+tests
+
+.env*
+client-incoming
+worker-incoming

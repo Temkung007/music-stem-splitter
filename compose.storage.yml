@@ -1,0 +1,14 @@
+name: stemora-storage
+services:
+  garage:
+    image: dxflrs/garage:v2.5.0
+    command: ["/garage", "server", "--single-node", "--default-bucket"]
+    restart: unless-stopped
+    env_file: .env.storage
+    ports:
+      - "127.0.0.1:13900:3900"
+    volumes:
+      - ./deploy/garage.toml:/etc/garage.toml:ro
+      - garage-data:/var/lib/garage
+volumes:
+  garage-data:

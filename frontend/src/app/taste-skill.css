@@ -1,0 +1,130 @@
+/* Taste-Skill Design System Integration */
+@import "../taste-skill/system.css";
+@import "../taste-skill/ui/cards.css";
+@import "../taste-skill/motion/motion.css";
+@import "../taste-skill/backgrounds/backgrounds.css";
+@import "../taste-skill/layout/layout.css";
+@import "../taste-skill/icons/icon.css";
+@import "../taste-skill/ui/base.css";
+
+/* Taste-Skill Dark Studio Palette & Tokens for STEMORA */
+:root {
+  --p-bg: #111213;
+  --p-surface: #18191b;
+  --p-ink: #f2f4ec;
+  --p-muted: #9fa697;
+  --p-accent: #d7f98b;
+  --p-accent-ink: #111213;
+  --p-action: #d7f98b;
+  --p-action-ink: #111213;
+  --p-inv-bg: #f2f4ec;
+  --p-inv-surface: #e0e2db;
+  --p-inv-ink: #111213;
+  --p-inv-muted: #5c5e5c;
+  --p-inv-accent: #111213;
+  --p-inv-accent-ink: #f2f4ec;
+  --p-inv-action: #111213;
+  --p-inv-action-ink: #f2f4ec;
+
+  --line: rgba(242, 244, 236, 0.12);
+  --line-strong: rgba(242, 244, 236, 0.22);
+  --accent: #d7f98b;
+  --action: #d7f98b;
+
+  --font-display: "Urbanist", "Manrope", system-ui, sans-serif;
+  --font-text: "Urbanist", "Manrope", "IBM Plex Thai", system-ui, sans-serif;
+  --font-mono: "DM Mono", "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --btn-h: 44px;
+}
+
+/* Landing Page Main Shell must strictly follow Taste-Skill section rhythm (SR-1 to SR-8) */
+main#top {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  min-height: 100svh;
+}
+
+/* Ensure body muted text has >= 4.5:1 contrast against dark studio grounds */
+.muted, p.muted, span.muted {
+  color: #9fa697 !important;
+}
+
+/* Nav Link and Switcher Sizing - all 15px */
+.nav__link,
+.nav__actions .btn,
+.nav__actions .language-switcher button {
+  font-size: 15px !important;
+}
+
+.nav__actions .language-switcher button {
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 14px !important;
+}
+
+.nav__link.active,
+.nav__link[aria-current="page"] {
+  color: var(--p-accent) !important;
+}
+
+/* Override Tailwind v4 logical positioning collision on Taste-Skill grid classes */
+.start-1, .start-2, .start-3, .start-4, .start-5, .start-6, .start-7, .start-8, .start-9, .start-10, .start-11, .start-12 {
+  inset-inline-start: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+/* Hero Split Pair Strict Alignment (SR-6, SR-7, SR-8) */
+@media (min-width: 1024px) {
+  .hero--split .hero-text.hero-split.grid {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    column-gap: var(--gutter) !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .hero--split .hero-copy.span-6 {
+    grid-column: 1 / span 6 !important;
+    align-self: start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .hero--split .hero-visual.span-6.start-7 {
+    grid-column: 7 / span 6 !important;
+    grid-column-start: 7 !important;
+    position: relative !important;
+    inset-inline-start: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+}
+
+/* FAQ Section Fit & Rhythm (SR-2, SR-3) */
+#faq {
+  --padt: 100px !important;
+}
+#faq .faq > .faq__item {
+  padding: 14px 0 !important;
+}
+#faq .faq h3 {
+  font-size: 17px !important;
+  line-height: 1.35 !important;
+  margin-bottom: 6px !important;
+}
+#faq .faq p {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
