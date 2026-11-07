@@ -148,7 +148,7 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
               {/* Left Column: Hero Copy (span-6) */}
               <div className="hero-copy span-6">
                 <p className="hero-notice">
-                  <b>DEMUCS v4 NEURAL DSP</b> · 0MS WEBAUDIO LATENCY
+                  <b>DEMUCS v4 NEURAL DSP</b> · BETA · 0MS WEBAUDIO LATENCY
                 </p>
 
                 <h1 id="hero-h" style={{ letterSpacing: "-0.03em" }}>
@@ -261,7 +261,7 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
                   <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ffbd2e" }} />
                   <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#27c93f" }} />
                   <span className="mono muted" style={{ fontSize: 12, marginLeft: 12, color: "#9fa697" }}>
-                    stemora-studio-v2.5 / session_live
+                    stemora-studio / beta
                   </span>
                 </div>
                 <div style={{ display: "flex", gap: "var(--s-3)" }}>
@@ -683,8 +683,8 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
             </div>
 
             <div className="footer__legal">
-              <span>&copy; {new Date().getFullYear()} STEMORA &nbsp; Private DJ Workspace</span>
-              <a className="credits" href="#top">Engineered to taste-skill 2.5 standards</a>
+              <span>&copy; {new Date().getFullYear()} STEMORA &nbsp; Private DJ Workspace (Beta)</span>
+              <a className="credits" href="#top">Built for DJs &amp; Producers</a>
             </div>
           </div>
         </div>
