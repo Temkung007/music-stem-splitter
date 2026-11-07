@@ -94,6 +94,15 @@ main#top {
     align-self: start !important;
     width: 100% !important;
     max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .hero--split .hero-copy.span-6 > .hero-facts {
+    margin-top: 36px !important;
+  }
+  .hero-visual.frame[data-ui="hero-mixer"] {
+    background: radial-gradient(ellipse 80% 65% at 50% 50%, rgba(215, 249, 139, 0.08) 0%, rgba(0, 0, 0, 0) 70%) !important;
   }
   .hero--split .hero-visual.span-6.start-7 {
     grid-column: 7 / span 6 !important;

@@ -148,11 +148,12 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
               {/* Left Column: Hero Copy (span-6) */}
               <div className="hero-copy span-6">
                 <p className="hero-notice">
-                  <b>DEMUCS v4</b> · WEBAUDIO DSP 0MS LATENCY
+                  <b>DEMUCS v4 NEURAL DSP</b> · 0MS WEBAUDIO LATENCY
                 </p>
 
-                <h1 id="hero-h">
-                  DJ Workspace &amp; Stem Studio
+                <h1 id="hero-h" style={{ letterSpacing: "-0.03em" }}>
+                  DJ Workspace <br />
+                  <span style={{ color: "var(--p-accent)" }}>&amp; Stem Studio</span>
                 </h1>
 
                 <p className="hero__lead" style={{ color: "var(--p-ink)" }}>
@@ -172,31 +173,42 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
                       <path className="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" />
                     </svg>
                   </button>
-
-                  <button
-                    type="button"
+                  <a
+                    href="#stems"
                     className="btn btn--secondary"
-                    style={{ height: 44, fontSize: 15 }}
-                    onClick={instantDemoLogin}
-                    disabled={busy}
+                    style={{ height: 44, fontSize: 14 }}
                   >
-                    <Zap size={15} style={{ color: "var(--p-accent)" }} />
-                    <span>{tr("ทดลองใช้งานเดโม")}</span>
-                  </button>
+                    <span>{locale === "th" ? "ดูโครงสร้าง 4 สเต็ม" : "Explore 4-Stem DSP"}</span>
+                  </a>
                 </div>
 
-                <dl className="hero-facts">
-                  <div>
-                    <dt>{tr("แยกเสียง 4 แทร็ก")}</dt>
-                    <dd>Demucs v4 Neural</dd>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 18 }}>
+                  <span className="pill mono" style={{ height: 24, fontSize: 11, background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" }}>
+                    24-bit Lossless
+                  </span>
+                  <span className="pill mono" style={{ height: 24, fontSize: 11, background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" }}>
+                    WebGPU Offline
+                  </span>
+                  <span className="pill mono" style={{ height: 24, fontSize: 11, background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.08)" }}>
+                    200 MB S3 Storage
+                  </span>
+                  <span className="pill mono" style={{ height: 24, fontSize: 11, color: "var(--p-accent)", background: "rgba(215,249,139,0.05)", borderColor: "rgba(215,249,139,0.2)" }}>
+                    Zero Logs Privacy
+                  </span>
+                </div>
+
+                <dl className="hero-facts" style={{ marginTop: 22 }}>
+                  <div style={{ padding: "10px 14px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 6 }}>
+                    <dt style={{ fontSize: 11, letterSpacing: "0.04em", textTransform: "uppercase" }}>{locale === "th" ? "แยก 4 แทร็ก" : "4-Stem Matrix"}</dt>
+                    <dd style={{ fontSize: 13, fontWeight: 600, color: "var(--p-ink)", marginTop: 2 }}>Demucs v4 Neural</dd>
                   </div>
-                  <div>
-                    <dt>{tr("ความหน่วงต่ำ")}</dt>
-                    <dd>0ms DSP Engine</dd>
+                  <div style={{ padding: "10px 14px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 6 }}>
+                    <dt style={{ fontSize: 11, letterSpacing: "0.04em", textTransform: "uppercase" }}>{locale === "th" ? "ความหน่วงต่ำ" : "Zero Latency"}</dt>
+                    <dd style={{ fontSize: 13, fontWeight: 600, color: "var(--p-accent)", marginTop: 2 }}>0ms DSP Engine</dd>
                   </div>
-                  <div>
-                    <dt>{tr("คลังเพลงส่วนตัว")}</dt>
-                    <dd>200 MB Free S3</dd>
+                  <div style={{ padding: "10px 14px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 6 }}>
+                    <dt style={{ fontSize: 11, letterSpacing: "0.04em", textTransform: "uppercase" }}>{locale === "th" ? "คลังเพลงส่วนตัว" : "Private Storage"}</dt>
+                    <dd style={{ fontSize: 13, fontWeight: 600, color: "var(--p-ink)", marginTop: 2 }}>200 MB Free S3</dd>
                   </div>
                 </dl>
               </div>

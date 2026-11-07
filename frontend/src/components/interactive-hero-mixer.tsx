@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Play, Pause, RotateCcw, Volume2, VolumeX, Mic2, Drum, Guitar, Piano } from "lucide-react";
+import { Play, Pause, RotateCcw, Volume2, VolumeX, Mic2, Drum, Guitar, Piano, Sliders } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 
 interface StemTrack {
   id: "vocals" | "drums" | "bass" | "other";
   name: string;
   nameEn: string;
+  ch: string;
+  tag: string;
   color: string;
   icon: typeof Mic2;
   volume: number;
@@ -22,10 +24,10 @@ export function InteractiveHeroMixer() {
   const [masterVolume, setMasterVolume] = useState(0.85);
 
   const [tracks, setTracks] = useState<StemTrack[]>([
-    { id: "vocals", name: "เสียงร้อง (Vocals)", nameEn: "Vocals", color: "#d5b2ff", icon: Mic2, volume: 1, muted: false, solo: false },
-    { id: "drums", name: "กลอง (Drums)", nameEn: "Drums", color: "#ffb480", icon: Drum, volume: 1, muted: false, solo: false },
-    { id: "bass", name: "เบส (Bass)", nameEn: "Bass", color: "#80dfff", icon: Guitar, volume: 1, muted: false, solo: false },
-    { id: "other", name: "ดนตรี (Instruments)", nameEn: "Instruments", color: "#d7f98b", icon: Piano, volume: 0.95, muted: false, solo: false },
+    { id: "vocals", name: "เสียงร้อง", nameEn: "Vocals", ch: "CH 1", tag: "2.4 kHz High-Mid", color: "#c084fc", icon: Mic2, volume: 1, muted: false, solo: false },
+    { id: "drums", name: "กลอง", nameEn: "Drums", ch: "CH 2", tag: "85 Hz Punch & Beat", color: "#fb923c", icon: Drum, volume: 1, muted: false, solo: false },
+    { id: "bass", name: "เบส", nameEn: "Bass", ch: "CH 3", tag: "45 Hz Sub-Groove", color: "#38bdf8", icon: Guitar, volume: 1, muted: false, solo: false },
+    { id: "other", name: "ดนตรี", nameEn: "Instruments", ch: "CH 4", tag: "Full-Range Harmonic", color: "#d7f98b", icon: Piano, volume: 0.95, muted: false, solo: false },
   ]);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -102,145 +104,192 @@ export function InteractiveHeroMixer() {
     const step = beatStepRef.current % 16;
     beatStepRef.current += 1;
 
-    // 1. DRUMS
-    const drumGain = gainNodesRef.current["drums"];
-    if (drumGain) {
-      // Kick on 0, 4, 8, 12
-      if (step % 4 === 0) {
+    // 1. Kick Drum (on steps 0, 4, 8, 12)
+    if (step === 0 || step === 4 || step === 8 || step === 12) {
+      const g = gainNodesRef.current["drums"];
+      if (g) {
         const osc = ctx.createOscillator();
-        const g = ctx.createGain();
+        const env = ctx.createGain();
         osc.frequency.setValueAtTime(140, now);
-        osc.frequency.exponentialRampToValueAtTime(38, now + 0.12);
-        g.gain.setValueAtTime(0.9, now);
-        g.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-        osc.connect(g);
-        g.connect(drumGain);
+        osc.frequency.exponentialRampToValueAtTime(42, now + 0.12);
+        env.gain.setValueAtTime(0.9, now);
+        env.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.connect(env);
+        env.connect(g);
         osc.start(now);
-        osc.stop(now + 0.23);
-      }
-      // Snare on 4, 12
-      if (step === 4 || step === 12) {
-        const osc = ctx.createOscillator();
-        osc.type = "triangle";
-        const g = ctx.createGain();
-        osc.frequency.setValueAtTime(220, now);
-        osc.frequency.exponentialRampToValueAtTime(90, now + 0.1);
-        g.gain.setValueAtTime(0.65, now);
-        g.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
-        osc.connect(g);
-        g.connect(drumGain);
-        osc.start(now);
-        osc.stop(now + 0.16);
-      }
-      // Hi-hat on every 2 steps
-      if (step % 2 === 0) {
-        const osc = ctx.createOscillator();
-        osc.type = "highpass" as OscillatorType;
-        const g = ctx.createGain();
-        osc.frequency.setValueAtTime(8000, now);
-        g.gain.setValueAtTime(step % 4 === 2 ? 0.35 : 0.18, now);
-        g.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
-        osc.connect(g);
-        g.connect(drumGain);
-        osc.start(now);
-        osc.stop(now + 0.06);
+        osc.stop(now + 0.22);
       }
     }
 
-    // 2. BASS (A minor: A1 55Hz, C2 65.4Hz, D2 73.4Hz, E2 82.4Hz)
-    const bassGain = gainNodesRef.current["bass"];
-    if (bassGain) {
-      const bassNotes = [55, 55, 65.4, 55, 73.4, 55, 82.4, 65.4];
-      const freq = bassNotes[Math.floor(step / 2) % bassNotes.length];
-      if (step % 2 === 0) {
+    // 2. Snare / Clap (on steps 4, 12)
+    if (step === 4 || step === 12) {
+      const g = gainNodesRef.current["drums"];
+      if (g) {
+        const bufferSize = ctx.sampleRate * 0.1;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = "highpass";
+        filter.frequency.setValueAtTime(1100, now);
+        const env = ctx.createGain();
+        env.gain.setValueAtTime(0.45, now);
+        env.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        noise.connect(filter);
+        filter.connect(env);
+        env.connect(g);
+        noise.start(now);
+      }
+    }
+
+    // 3. Hi-Hat (every 2 steps)
+    if (step % 2 === 0) {
+      const g = gainNodesRef.current["drums"];
+      if (g) {
+        const bufferSize = ctx.sampleRate * 0.04;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = "highpass";
+        filter.frequency.setValueAtTime(7500, now);
+        const env = ctx.createGain();
+        env.gain.setValueAtTime(step % 4 === 2 ? 0.22 : 0.09, now);
+        env.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        noise.connect(filter);
+        filter.connect(env);
+        env.connect(g);
+        noise.start(now);
+      }
+    }
+
+    // 4. Bassline (Walking minor 8A bass groove)
+    if (step % 2 === 0) {
+      const g = gainNodesRef.current["bass"];
+      if (g) {
+        const notes = [110, 110, 130.81, 146.83, 110, 98, 110, 164.81];
+        const freq = notes[Math.floor(step / 2) % notes.length];
         const osc = ctx.createOscillator();
         osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(freq / 2, now);
         const filter = ctx.createBiquadFilter();
         filter.type = "lowpass";
-        filter.frequency.setValueAtTime(260, now);
-        filter.Q.value = 4;
-        const g = ctx.createGain();
-        osc.frequency.setValueAtTime(freq, now);
-        g.gain.setValueAtTime(0.7, now);
-        g.gain.exponentialRampToValueAtTime(0.01, now + 0.18);
+        filter.frequency.setValueAtTime(450, now);
+        filter.frequency.exponentialRampToValueAtTime(120, now + 0.18);
+        const env = ctx.createGain();
+        env.gain.setValueAtTime(0.4, now);
+        env.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
         osc.connect(filter);
-        filter.connect(g);
-        g.connect(bassGain);
+        filter.connect(env);
+        env.connect(g);
         osc.start(now);
-        osc.stop(now + 0.19);
+        osc.stop(now + 0.18);
       }
     }
 
-    // 3. INSTRUMENTS (Chords: Am9 -> Fmaj7)
-    const otherGain = gainNodesRef.current["other"];
-    if (otherGain && (step === 0 || step === 8)) {
-      const chord = step < 8 ? [220, 261.63, 329.63, 392] : [174.61, 220, 261.63, 329.63];
-      chord.forEach((f) => {
-        const osc = ctx.createOscillator();
-        osc.type = "sine";
-        const g = ctx.createGain();
-        osc.frequency.setValueAtTime(f, now);
-        g.gain.setValueAtTime(0.18, now);
-        g.gain.exponentialRampToValueAtTime(0.005, now + 0.7);
-        osc.connect(g);
-        g.connect(otherGain);
-        osc.start(now);
-        osc.stop(now + 0.75);
-      });
+    // 5. Instruments / Synth Chords (Steps 0, 6, 8, 14)
+    if (step === 0 || step === 6 || step === 8 || step === 14) {
+      const g = gainNodesRef.current["other"];
+      if (g) {
+        const chords = [
+          [220, 261.63, 329.63], // Am
+          [174.61, 220, 261.63], // F
+          [261.63, 329.63, 392], // C
+          [196, 246.94, 293.66], // G
+        ];
+        const chord = chords[Math.floor(step / 4) % chords.length];
+        chord.forEach((freq) => {
+          const osc = ctx.createOscillator();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(freq, now);
+          const env = ctx.createGain();
+          env.gain.setValueAtTime(0.12, now);
+          env.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.connect(env);
+          env.connect(g);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        });
+      }
     }
 
-    // 4. VOCALS (Melodic synth lead phrase: 440Hz, 523Hz, 659Hz)
-    const vocalGain = gainNodesRef.current["vocals"];
-    if (vocalGain) {
-      const vocalMelody = [440, 0, 523.25, 440, 659.25, 0, 587.33, 523.25, 440, 0, 392, 440, 523.25, 0, 440, 0];
-      const f = vocalMelody[step];
-      if (f > 0) {
+    // 6. Vocals Harmonic Melody (Steps 2, 6, 10)
+    if (step === 2 || step === 6 || step === 10) {
+      const g = gainNodesRef.current["vocals"];
+      if (g) {
+        const vocalPitches = [440, 523.25, 659.25, 587.33];
+        const pitch = vocalPitches[Math.floor(step / 3) % vocalPitches.length];
         const osc = ctx.createOscillator();
-        osc.type = "triangle";
-        const g = ctx.createGain();
-        osc.frequency.setValueAtTime(f, now);
-        // Add subtle vibrato
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(pitch, now);
         const vibrato = ctx.createOscillator();
         vibrato.frequency.value = 5.5;
-        const vGain = ctx.createGain();
-        vGain.gain.value = 6;
-        vibrato.connect(vGain);
-        vGain.connect(osc.frequency);
+        const vibGain = ctx.createGain();
+        vibGain.gain.value = 8;
+        vibrato.connect(vibGain);
+        vibGain.connect(osc.frequency);
+        const env = ctx.createGain();
+        env.gain.setValueAtTime(0.001, now);
+        env.gain.linearRampToValueAtTime(0.25, now + 0.05);
+        env.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(env);
+        env.connect(g);
         vibrato.start(now);
-        vibrato.stop(now + 0.2);
-
-        g.gain.setValueAtTime(0.4, now);
-        g.gain.exponentialRampToValueAtTime(0.01, now + 0.19);
-        osc.connect(g);
-        g.connect(vocalGain);
         osc.start(now);
-        osc.stop(now + 0.2);
+        vibrato.stop(now + 0.35);
+        osc.stop(now + 0.35);
       }
     }
   }, []);
 
   const togglePlay = () => {
-    if (playing) {
+    const next = !playing;
+    setPlaying(next);
+    isPlayingRef.current = next;
+
+    if (next) {
+      getAudioContext();
+      const intervalMs = Math.round((60 / (124 * 4)) * 1000);
+      playBeat();
+      synthIntervalRef.current = window.setInterval(playBeat, intervalMs);
+
+      timerRef.current = window.setInterval(() => {
+        setCurrentTime((prev) => (prev >= 90 ? 0 : prev + 0.1));
+      }, 100);
+    } else {
       if (synthIntervalRef.current) clearInterval(synthIntervalRef.current);
       if (timerRef.current) clearInterval(timerRef.current);
-      isPlayingRef.current = false;
-      setPlaying(false);
-    } else {
-      getAudioContext();
-      isPlayingRef.current = true;
-      setPlaying(true);
-      // 124 BPM = 16th note every 120ms
-      beatStepRef.current = 0;
-      synthIntervalRef.current = window.setInterval(playBeat, 121);
-      timerRef.current = window.setInterval(() => {
-        setCurrentTime((prev) => (prev >= 90 ? 0 : prev + 0.25));
-      }, 250);
     }
   };
 
   const resetTime = () => {
     setCurrentTime(0);
     beatStepRef.current = 0;
+  };
+
+  const toggleSolo = (id: StemTrack["id"]) => {
+    setTracks((prev) => {
+      const current = prev.find((t) => t.id === id);
+      const isSoloing = !current?.solo;
+      return prev.map((t) => {
+        if (t.id === id) return { ...t, solo: isSoloing, muted: false };
+        return { ...t, solo: false };
+      });
+    });
+  };
+
+  const toggleMute = (id: StemTrack["id"]) => {
+    setTracks((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, muted: !t.muted, solo: false } : t))
+    );
+  };
+
+  const setVolume = (id: StemTrack["id"], volume: number) => {
+    setTracks((prev) => prev.map((t) => (t.id === id ? { ...t, volume } : t)));
   };
 
   useEffect(() => {
@@ -253,28 +302,11 @@ export function InteractiveHeroMixer() {
     };
   }, []);
 
-  const formatTime = (secs: number) => {
-    const m = Math.floor(secs / 60);
-    const s = Math.floor(secs % 60);
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-  };
-
-  const setVolume = (id: string, val: number) => {
-    setTracks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, volume: val } : t))
-    );
-  };
-
-  const toggleMute = (id: string) => {
-    setTracks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, muted: !t.muted } : t))
-    );
-  };
-
-  const toggleSolo = (id: string) => {
-    setTracks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, solo: !t.solo } : t))
-    );
+  const formatDisplayTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    const ms = Math.floor((seconds % 1) * 10);
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}.${ms}`;
   };
 
   return (
@@ -283,8 +315,9 @@ export function InteractiveHeroMixer() {
       data-ui="hero-mixer-console"
       data-visual="hero-mixer"
       style={{
-        background: "var(--p-surface)",
-        border: "1px solid var(--line)",
+        background: "linear-gradient(180deg, #17181b 0%, #101113 100%)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        boxShadow: "0 24px 60px -12px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.14)",
         padding: "16px 20px",
         borderRadius: "var(--r-lg)",
         width: "100%",
@@ -292,26 +325,121 @@ export function InteractiveHeroMixer() {
         height: "100%",
         boxSizing: "border-box",
         overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        position: "relative"
       }}
     >
-      {/* Console Top Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--s-4)", borderBottom: "1px solid var(--line)", paddingBottom: "var(--s-3)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--s-2)" }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: playing ? "var(--p-accent)" : "var(--p-muted)", display: "inline-block", boxShadow: playing ? "0 0 10px var(--p-accent)" : "none" }} />
-          <span className="mono" style={{ fontSize: "var(--t-label)", fontWeight: 500, color: "var(--p-ink)", letterSpacing: "0.05em" }}>
-            DEMUCS v4 DSP CONSOLE
-          </span>
-          <span className="pill" style={{ height: 22, padding: "0 8px", fontSize: 11, background: "rgba(215, 249, 139, 0.12)", color: "var(--p-accent)", borderColor: "transparent" }}>
-            LIVE 4-STEMS
-          </span>
+      {/* Precision Hardware Corner Bolts */}
+      <span style={{ position: "absolute", top: 8, left: 10, fontSize: 8, color: "rgba(255,255,255,0.18)", fontFamily: "monospace", pointerEvents: "none" }}>+</span>
+      <span style={{ position: "absolute", top: 8, right: 10, fontSize: 8, color: "rgba(255,255,255,0.18)", fontFamily: "monospace", pointerEvents: "none" }}>+</span>
+      <span style={{ position: "absolute", bottom: 8, left: 10, fontSize: 8, color: "rgba(255,255,255,0.18)", fontFamily: "monospace", pointerEvents: "none" }}>+</span>
+      <span style={{ position: "absolute", bottom: 8, right: 10, fontSize: 8, color: "rgba(255,255,255,0.18)", fontFamily: "monospace", pointerEvents: "none" }}>+</span>
+
+      {/* 1. TOP HARDWARE OLED SCREEN */}
+      <div
+        style={{
+          background: "#07080a",
+          border: "1px solid rgba(215, 249, 139, 0.18)",
+          borderRadius: 8,
+          padding: "10px 14px",
+          marginBottom: 10,
+          boxShadow: "inset 0 2px 6px rgba(0,0,0,0.8), 0 0 20px rgba(215, 249, 139, 0.04)"
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span
+              style={{
+                width: 7,
+                height: 7,
+                borderRadius: "50%",
+                background: playing ? "var(--p-accent)" : "#52525b",
+                display: "inline-block",
+                boxShadow: playing ? "0 0 10px var(--p-accent)" : "none",
+                transition: "background 150ms ease, box-shadow 150ms ease"
+              }}
+            />
+            <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: "var(--p-ink)", letterSpacing: "0.08em" }}>
+              DEMUCS v4 MATRIX DSP
+            </span>
+            <span
+              className="mono"
+              style={{
+                height: 18,
+                padding: "0 6px",
+                fontSize: 9,
+                fontWeight: 600,
+                background: "rgba(215, 249, 139, 0.12)",
+                color: "var(--p-accent)",
+                borderRadius: 3,
+                display: "inline-flex",
+                alignItems: "center",
+                border: "1px solid rgba(215, 249, 139, 0.2)"
+              }}
+            >
+              32-BIT FLOAT
+            </span>
+          </div>
+
+          <div className="mono" style={{ fontSize: 11, color: "var(--p-accent)", letterSpacing: "0.05em", fontWeight: 600, flexShrink: 0 }}>
+            124.0 BPM · 8A (Am)
+          </div>
         </div>
-        <div className="mono" style={{ fontSize: "var(--t-small)", color: "var(--p-muted)", letterSpacing: "0.03em" }}>
-          124 BPM · 8A (Am)
+
+        {/* OLED Sub-Bar with Track Info & Stereo VU LED Meters */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div className="mono muted" style={{ fontSize: 10, letterSpacing: "0.03em", whiteSpace: "nowrap" }}>
+            STREAM: <span style={{ color: "var(--p-ink)" }}>Beautiful Things</span>
+          </div>
+
+          {/* Dynamic Stereo VU Meters */}
+          <div style={{ display: "flex", gap: 3, alignItems: "center", marginLeft: 12, flexShrink: 0 }} title="Master Stereo Peak Meter">
+            <span className="mono muted" style={{ fontSize: 9 }}>L</span>
+            <div style={{ display: "flex", gap: 1.5 }}>
+              {Array.from({ length: 9 }, (_, i) => {
+                const active = playing && Math.sin(currentTime * 8 + i * 0.7) > (i - 4.5) * 0.22;
+                const color = i >= 7 ? "#ef4444" : i >= 5 ? "#eab308" : "#22c55e";
+                return (
+                  <span
+                    key={`l-${i}`}
+                    style={{
+                      width: 3,
+                      height: 8,
+                      borderRadius: 1,
+                      background: active ? color : "rgba(255,255,255,0.08)",
+                      boxShadow: active ? `0 0 6px ${color}` : "none"
+                    }}
+                  />
+                );
+              })}
+            </div>
+            <span className="mono muted" style={{ fontSize: 9, marginLeft: 2 }}>R</span>
+            <div style={{ display: "flex", gap: 1.5 }}>
+              {Array.from({ length: 9 }, (_, i) => {
+                const active = playing && Math.cos(currentTime * 8 + i * 0.7) > (i - 4.5) * 0.22;
+                const color = i >= 7 ? "#ef4444" : i >= 5 ? "#eab308" : "#22c55e";
+                return (
+                  <span
+                    key={`r-${i}`}
+                    style={{
+                      width: 3,
+                      height: 8,
+                      borderRadius: 1,
+                      background: active ? color : "rgba(255,255,255,0.08)",
+                      boxShadow: active ? `0 0 6px ${color}` : "none"
+                    }}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* 4 Stem Channels */}
-      <div style={{ display: "grid", gap: "var(--s-3)" }}>
+      {/* 2. 4 STEM CHANNEL STRIPS */}
+      <div style={{ display: "grid", gap: 9, flex: 1, minHeight: 0 }}>
         {tracks.map((track, idx) => {
           const Icon = track.icon;
           const isSilent = track.muted || (tracks.some((t) => t.solo) && !track.solo);
@@ -322,35 +450,103 @@ export function InteractiveHeroMixer() {
               className="stem-channel-strip"
               style={{
                 display: "grid",
-                gridTemplateColumns: "minmax(90px, 120px) 1fr auto",
+                gridTemplateColumns: "132px 1fr 144px",
                 alignItems: "center",
-                gap: "var(--s-2)",
-                background: "rgba(255,255,255,0.02)",
-                padding: "8px 10px",
-                borderRadius: "var(--r-sm)",
+                gap: 12,
+                background: isSilent ? "rgba(255,255,255,0.01)" : "rgba(255,255,255,0.025)",
+                padding: "8px 12px",
+                borderRadius: 6,
                 border: "1px solid",
-                borderColor: isSilent ? "transparent" : "rgba(255,255,255,0.06)",
+                borderColor: track.solo
+                  ? "rgba(230, 162, 60, 0.45)"
+                  : track.muted
+                  ? "rgba(239, 68, 68, 0.35)"
+                  : "rgba(255,255,255,0.06)",
+                boxShadow: track.solo ? "0 0 15px rgba(230, 162, 60, 0.12)" : "none",
                 opacity: isSilent ? 0.45 : 1,
-                transition: "opacity var(--dur) var(--ease), border-color var(--dur) var(--ease)"
+                transition: "opacity var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease)"
               }}
             >
-              {/* Channel Label */}
-              <div style={{ display: "flex", alignItems: "center", gap: "var(--s-2)" }}>
-                <span style={{ color: track.color, display: "flex" }}>
-                  <Icon size={16} />
-                </span>
-                <span style={{ fontSize: "var(--t-small)", fontWeight: 500, color: "var(--p-ink)", whiteSpace: "nowrap" }}>
-                  {locale === "th" ? track.name.split(" ")[0] : track.nameEn}
+              {/* Channel Label & Frequency Band Badge */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 2, minWidth: 120, flexShrink: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <span
+                    className="mono"
+                    style={{
+                      fontSize: 9,
+                      fontWeight: 700,
+                      color: isSilent ? "var(--p-muted)" : track.color,
+                      letterSpacing: "0.04em",
+                      background: "rgba(0,0,0,0.3)",
+                      padding: "1px 4px",
+                      borderRadius: 2,
+                      whiteSpace: "nowrap",
+                      flexShrink: 0
+                    }}
+                  >
+                    {track.ch}
+                  </span>
+                  <span
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: 4,
+                      background: isSilent ? "rgba(255,255,255,0.05)" : `color-mix(in oklab, ${track.color} 20%, transparent)`,
+                      color: isSilent ? "var(--p-muted)" : track.color,
+                      display: "grid",
+                      placeItems: "center",
+                      flexShrink: 0
+                    }}
+                  >
+                    <Icon size={11} />
+                  </span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--p-ink)", whiteSpace: "nowrap" }}>
+                    {locale === "th" ? track.name : track.nameEn}
+                  </span>
+                </div>
+                <span className="mono muted" style={{ fontSize: 9, paddingLeft: 4, letterSpacing: "0.02em", whiteSpace: "nowrap" }}>
+                  {track.tag}
                 </span>
               </div>
 
-              {/* Dynamic Waveform Visualizer */}
-              <div style={{ height: 24, display: "flex", alignItems: "center", gap: 3, overflow: "hidden" }}>
-                {Array.from({ length: 28 }, (_, i) => {
-                  const baseHeight = 15 + Math.abs(Math.sin(i * 0.45 + idx * 1.5)) * 60;
+              {/* Dynamic Waveform Visualizer with Neon Gradient & Playhead */}
+              <div
+                style={{
+                  height: 32,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2.5,
+                  overflow: "hidden",
+                  position: "relative",
+                  background: "rgba(0,0,0,0.35)",
+                  padding: "0 6px",
+                  borderRadius: 4,
+                  border: "1px solid rgba(255,255,255,0.04)"
+                }}
+              >
+                {/* Active Playhead Scrubber */}
+                {playing && !isSilent && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      bottom: 0,
+                      width: 2,
+                      background: "#fff",
+                      boxShadow: `0 0 8px #fff, 0 0 12px ${track.color}`,
+                      left: `${((currentTime * 1.5) % 1) * 100}%`,
+                      transition: "left 100ms linear",
+                      zIndex: 2,
+                      pointerEvents: "none"
+                    }}
+                  />
+                )}
+
+                {Array.from({ length: 32 }, (_, i) => {
+                  const baseHeight = 16 + Math.abs(Math.sin(i * 0.42 + idx * 1.4)) * 62;
                   const animatedHeight = playing && !isSilent
-                    ? Math.min(100, Math.max(10, baseHeight + Math.sin((currentTime * 10 + i * 1.2) * 1.5) * 35))
-                    : baseHeight * 0.6;
+                    ? Math.min(100, Math.max(12, baseHeight + Math.sin((currentTime * 10 + i * 1.2) * 1.5) * 35))
+                    : baseHeight * 0.55;
 
                   return (
                     <span
@@ -358,8 +554,10 @@ export function InteractiveHeroMixer() {
                       style={{
                         flex: 1,
                         height: `${animatedHeight}%`,
-                        background: isSilent ? "var(--p-muted)" : track.color,
-                        opacity: isSilent ? 0.2 : 0.85,
+                        background: isSilent
+                          ? "var(--p-muted)"
+                          : `linear-gradient(to top, color-mix(in oklab, ${track.color} 35%, transparent), ${track.color})`,
+                        opacity: isSilent ? 0.2 : 0.88,
                         borderRadius: 1,
                         transition: "height 80ms ease, background 150ms ease"
                       }}
@@ -368,8 +566,8 @@ export function InteractiveHeroMixer() {
                 })}
               </div>
 
-              {/* Controls: Volume + Solo + Mute */}
-              <div style={{ display: "flex", alignItems: "center", gap: "var(--s-2)", justifyContent: "flex-end" }}>
+              {/* Hardware Controls: Fader Slider + 4-Dot LED VU Meter + Tactile Solo (S) + Mute (M) Buttons */}
+              <div style={{ display: "flex", alignItems: "center", gap: 5, justifyContent: "flex-end" }}>
                 <input
                   type="range"
                   min="0"
@@ -379,28 +577,55 @@ export function InteractiveHeroMixer() {
                   onChange={(e) => setVolume(track.id, parseFloat(e.target.value))}
                   aria-label={`${track.name} Volume`}
                   style={{
-                    width: 64,
+                    width: 46,
                     height: 4,
                     accentColor: track.color,
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    flexShrink: 0
                   }}
                 />
+
+                {/* Per-Track LED Peak Meter */}
+                <div style={{ display: "flex", gap: 1.5, alignItems: "center", flexShrink: 0 }} aria-hidden="true">
+                  {Array.from({ length: 4 }, (_, mIdx) => {
+                    const isLit = playing && !isSilent && Math.sin(currentTime * 12 + idx * 2.1 + mIdx) > (mIdx - 2) * 0.45;
+                    const dotColor = mIdx === 3 ? "#ef4444" : mIdx === 2 ? "#eab308" : track.color;
+                    return (
+                      <span
+                        key={mIdx}
+                        style={{
+                          width: 2.5,
+                          height: 9,
+                          borderRadius: 1,
+                          background: isLit ? dotColor : "rgba(255,255,255,0.08)",
+                          boxShadow: isLit ? `0 0 5px ${dotColor}` : "none",
+                          transition: "background 60ms ease, box-shadow 60ms ease"
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+
                 <button
                   type="button"
                   onClick={() => toggleSolo(track.id)}
                   aria-pressed={track.solo}
+                  title="Solo Track"
                   style={{
-                    width: 26,
+                    width: 24,
                     height: 24,
                     borderRadius: 4,
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: 700,
                     border: "1px solid",
-                    borderColor: track.solo ? "#e6a23c" : "var(--line)",
-                    background: track.solo ? "#e6a23c" : "transparent",
-                    color: track.solo ? "#111" : "var(--p-muted)",
+                    borderColor: track.solo ? "#e6a23c" : "rgba(255,255,255,0.12)",
+                    background: track.solo ? "#e6a23c" : "#1a1c1e",
+                    color: track.solo ? "#111" : "#a1a1aa",
+                    boxShadow: track.solo ? "0 0 10px rgba(230, 162, 60, 0.5)" : "none",
                     cursor: "pointer",
-                    padding: 0
+                    padding: 0,
+                    flexShrink: 0,
+                    transition: "all 120ms ease"
                   }}
                 >
                   S
@@ -409,18 +634,22 @@ export function InteractiveHeroMixer() {
                   type="button"
                   onClick={() => toggleMute(track.id)}
                   aria-pressed={track.muted}
+                  title="Mute Track"
                   style={{
-                    width: 26,
+                    width: 24,
                     height: 24,
                     borderRadius: 4,
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: 700,
                     border: "1px solid",
-                    borderColor: track.muted ? "#f56c6c" : "var(--line)",
-                    background: track.muted ? "#f56c6c" : "transparent",
-                    color: track.muted ? "#fff" : "var(--p-muted)",
+                    borderColor: track.muted ? "#ef4444" : "rgba(255,255,255,0.12)",
+                    background: track.muted ? "#ef4444" : "#1a1c1e",
+                    color: track.muted ? "#fff" : "#a1a1aa",
+                    boxShadow: track.muted ? "0 0 10px rgba(239, 68, 68, 0.5)" : "none",
                     cursor: "pointer",
-                    padding: 0
+                    padding: 0,
+                    flexShrink: 0,
+                    transition: "all 120ms ease"
                   }}
                 >
                   M
@@ -431,18 +660,34 @@ export function InteractiveHeroMixer() {
         })}
       </div>
 
-      {/* Transport & Master Bar */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "var(--s-4)", paddingTop: "var(--s-3)", borderTop: "1px solid var(--line)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--s-3)" }}>
+      {/* 3. MASTER TRANSPORT & CONTROL PANEL */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: 10,
+          paddingTop: 10,
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)"
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button
             type="button"
             className="btn btn--primary"
             onClick={togglePlay}
-            style={{ height: 38, padding: "0 var(--s-4)", borderRadius: "var(--r-btn)" }}
+            style={{
+              height: 38,
+              padding: "0 16px",
+              borderRadius: "var(--r-btn)",
+              boxShadow: playing ? "0 0 20px rgba(215, 249, 139, 0.35)" : "none",
+              transition: "all 150ms ease"
+            }}
           >
             {playing ? <Pause size={15} /> : <Play size={15} fill="currentColor" />}
-            <span>{playing ? tr("หยุดชั่วคราว") : tr("เล่นตัวอย่างสด")}</span>
+            <span>{playing ? tr("หยุดชั่วคราว") : tr("ฟังเสียงสเต็ม")}</span>
           </button>
+
           <button
             type="button"
             className="btn btn--secondary"
@@ -452,17 +697,27 @@ export function InteractiveHeroMixer() {
           >
             <RotateCcw size={14} />
           </button>
-          <span className="mono" style={{ fontSize: "var(--t-small)", color: "var(--p-ink)", letterSpacing: "0.05em" }}>
-            {formatTime(currentTime)} / 01:30
-          </span>
+
+          <div
+            style={{
+              background: "#07080a",
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+              borderRadius: 4,
+              padding: "4px 8px"
+            }}
+          >
+            <span className="mono" style={{ fontSize: 12, color: playing ? "var(--p-accent)" : "var(--p-ink)", letterSpacing: "0.06em", fontWeight: 600 }}>
+              {formatDisplayTime(currentTime)} <span className="muted">/ 01:30.0</span>
+            </span>
+          </div>
         </div>
 
-        {/* Master Volume */}
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--s-1)", flexShrink: 0 }}>
+        {/* Master Volume Section */}
+        <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
           <button
             type="button"
             onClick={() => setMasterVolume((v) => (v > 0 ? 0 : 0.85))}
-            style={{ color: "var(--p-muted)", display: "flex", padding: 2 }}
+            style={{ color: "var(--p-muted)", display: "flex", padding: 2, background: "transparent", border: "none", cursor: "pointer" }}
             aria-label="Master mute"
           >
             {masterVolume === 0 ? <VolumeX size={15} /> : <Volume2 size={15} />}
