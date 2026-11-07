@@ -11,7 +11,9 @@
   const totalPlaylists = document.getElementById("total-playlists");
   const totalTracks = document.getElementById("total-tracks");
   const syncNowBtn = document.getElementById("sync-now-btn");
+  const djLaunchGrid = document.getElementById("dj-launch-grid");
   const autoRekordboxBtn = document.getElementById("auto-rekordbox-btn");
+  const autoSeratoBtn = document.getElementById("auto-serato-btn");
   const syncBtnText = document.getElementById("sync-btn-text");
   const spinIcon = document.querySelector(".spin-icon");
   const openFolderBtn = document.getElementById("open-folder-btn");
@@ -117,7 +119,7 @@
         loginCtaCard.classList.add("hidden");
         loginCtaCard.style.display = "none";
         syncNowBtn.style.display = "";
-        if (autoRekordboxBtn) autoRekordboxBtn.style.display = "";
+        if (djLaunchGrid) djLaunchGrid.style.display = "";
         if (disconnectBtn) {
           disconnectBtn.classList.remove("hidden");
           disconnectBtn.style.display = "inline";
@@ -127,7 +129,7 @@
         loginCtaCard.classList.remove("hidden");
         loginCtaCard.style.display = "flex";
         syncNowBtn.style.display = "none";
-        if (autoRekordboxBtn) autoRekordboxBtn.style.display = "none";
+        if (djLaunchGrid) djLaunchGrid.style.display = "none";
         if (disconnectBtn) {
           disconnectBtn.classList.add("hidden");
           disconnectBtn.style.display = "none";
@@ -269,6 +271,37 @@
       } finally {
         autoRekordboxBtn.disabled = false;
         autoRekordboxBtn.innerHTML = originalHtml;
+      }
+    });
+  }
+
+  if (autoSeratoBtn) {
+    autoSeratoBtn.addEventListener("click", async () => {
+      if (!invoke) return;
+      autoSeratoBtn.disabled = true;
+      const originalHtml = autoSeratoBtn.innerHTML;
+      autoSeratoBtn.innerHTML = `<span>กำลังเปิด Serato…</span>`;
+      try {
+        const msg = await invoke("auto_setup_serato");
+        msgBanner.textContent = "✓ " + msg;
+        msgBanner.className = "msg-banner";
+        msgBanner.style.background = "#0c1e2d";
+        msgBanner.style.borderColor = "#1e496b";
+        msgBanner.style.color = "#38bdf8";
+        msgBanner.classList.remove("hidden");
+        msgBanner.style.display = "block";
+        setTimeout(() => {
+          msgBanner.classList.add("hidden");
+          msgBanner.style.display = "none";
+        }, 6000);
+      } catch (err) {
+        msgBanner.textContent = "เปิด Serato ไม่สำเร็จ: " + err;
+        msgBanner.className = "msg-banner error";
+        msgBanner.classList.remove("hidden");
+        msgBanner.style.display = "block";
+      } finally {
+        autoSeratoBtn.disabled = false;
+        autoSeratoBtn.innerHTML = originalHtml;
       }
     });
   }

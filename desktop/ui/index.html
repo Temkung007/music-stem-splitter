@@ -109,13 +109,19 @@
       <section class="controls-section">
         <button id="sync-now-btn" class="btn btn-primary">
           <svg class="spin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
-          <span id="sync-btn-text">ซิงก์กับ rekordbox ทันที</span>
+          <span id="sync-btn-text">ซิงก์ rekordbox & Serato ทันที</span>
         </button>
 
-        <button id="auto-rekordbox-btn" class="btn btn-accent">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          <span>⚡ เปิดเล่นใน rekordbox ทันที (อัตโนมัติ)</span>
-        </button>
+        <div class="dj-launch-grid" id="dj-launch-grid">
+          <button id="auto-rekordbox-btn" class="btn btn-accent">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>⚡ เปิด rekordbox</span>
+          </button>
+          <button id="auto-serato-btn" class="btn btn-serato">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>⚡ เปิด Serato DJ</span>
+          </button>
+        </div>
 
         <button id="open-folder-btn" class="btn btn-secondary">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>

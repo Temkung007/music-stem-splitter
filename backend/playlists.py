@@ -207,6 +207,49 @@ def export_all_rekordbox(user=Depends(current_user)):
     )
 
 
+@router.get("/export/serato")
+def export_all_serato(user=Depends(current_user)):
+    from serato_export import generate_serato_crate
+    import zipfile
+    with connect() as db:
+        playlists_rows = db.execute(
+            "SELECT * FROM playlists WHERE user_id=? AND deleted_at IS NULL ORDER BY updated_at DESC",
+            (user["id"],),
+        ).fetchall()
+        tracks_rows = db.execute(
+            "SELECT * FROM tracks WHERE user_id=? AND deleted_at IS NULL AND status='ready'",
+            (user["id"],),
+        ).fetchall()
+    playlists = [dict(r) for r in playlists_rows]
+    tracks = [dict(r) for r in tracks_rows]
+    track_map = {t["id"]: t for t in tracks}
+
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zf:
+        # All tracks master crate
+        all_paths = [t.get("export_filename") or f"{t['id']}.wav" for t in tracks]
+        zf.writestr("STEMORA.crate", generate_serato_crate(all_paths))
+
+        for p in playlists:
+            items = parse_items(p.get("items_json") or "[]")
+            p_paths = []
+            for item in items:
+                tid = item.get("track_id")
+                if tid in track_map:
+                    p_paths.append(track_map[tid].get("export_filename") or f"{tid}.wav")
+            safe_name = re.sub(r"[^\w .-]", "_", p["name"])[:60]
+            zf.writestr(f"STEMORA%%{safe_name}.crate", generate_serato_crate(p_paths))
+
+    zip_buffer.seek(0)
+    return Response(
+        zip_buffer.getvalue(),
+        media_type="application/zip",
+        headers={
+            "Content-Disposition": 'attachment; filename="stemora_serato_crates.zip"'
+        },
+    )
+
+
 @router.get("/{playlist_id}")
 def get(playlist_id: str, user=Depends(current_user)):
     return serialize(playlist_for(playlist_id, user["id"]))
@@ -588,6 +631,18 @@ def export(playlist_id: str, format: str = "m3u", user=Depends(current_user)):
         return Response(
             xml_content,
             media_type="application/xml",
+            headers={"Content-Disposition": f"attachment; filename*=UTF-8''{quoted}"},
+        )
+    if format in ("crate", "serato"):
+        from serato_export import generate_serato_crate
+        track_paths = [t.get("export_filename") or f"{t['id']}.wav" for t in entries]
+        crate_bytes = generate_serato_crate(track_paths)
+        quoted = __import__("urllib.parse", fromlist=["quote"]).quote(
+            f"{filename}.crate"
+        )
+        return Response(
+            crate_bytes,
+            media_type="application/octet-stream",
             headers={"Content-Disposition": f"attachment; filename*=UTF-8''{quoted}"},
         )
     if format == "rekordbox_zip":

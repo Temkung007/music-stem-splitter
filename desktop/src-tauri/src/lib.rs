@@ -1,5 +1,6 @@
 pub mod local_server;
 pub mod rekordbox;
+pub mod serato;
 pub mod sync;
 
 use serde::{Deserialize, Serialize};
@@ -191,6 +192,11 @@ async fn auto_setup_rekordbox(state: State<'_, AppState>) -> Result<String, Stri
 }
 
 #[tauri::command]
+async fn auto_setup_serato(_state: State<'_, AppState>) -> Result<String, String> {
+    serato::auto_setup_serato()
+}
+
+#[tauri::command]
 async fn open_browser_login(state: State<'_, AppState>) -> Result<(), String> {
     let cfg = state.manager.config.lock().await;
     let url = format!("{}/?tab=playlists&connect=desktop", cfg.server_url.trim_end_matches('/'));
@@ -308,7 +314,8 @@ pub fn run() {
             check_desktop_update,
             open_download_page,
             disconnect_account,
-            auto_setup_rekordbox
+            auto_setup_rekordbox,
+            auto_setup_serato
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

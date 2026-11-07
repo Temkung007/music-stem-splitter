@@ -228,7 +228,16 @@ impl SyncManager {
             &playlists_dir,
         );
 
-        // 3.2 Auto configure Pioneer rekordbox
+        // 3.2 Generate Serato Crates
+        let crates_dir = base_path.join("crates");
+        crate::serato::sync_serato_crates(
+            &manifest.playlists,
+            &manifest.tracks,
+            &tracks_dir,
+            &crates_dir,
+        );
+
+        // 3.3 Auto configure Pioneer rekordbox
         let _ = crate::rekordbox::auto_configure_rekordbox(&xml_path);
 
         // 3.3 Cache local manifest

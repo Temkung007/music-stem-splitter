@@ -254,6 +254,12 @@ body {
   transform: translateY(1px);
 }
 
+.dj-launch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
 .btn-accent {
   background: linear-gradient(135deg, rgba(215, 249, 139, 0.15) 0%, rgba(26, 36, 18, 0.9) 100%);
   color: var(--lime);
@@ -268,6 +274,23 @@ body {
 }
 
 .btn-accent:active {
+  transform: translateY(1px);
+}
+
+.btn-serato {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(12, 30, 45, 0.9) 100%);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.12);
+}
+
+.btn-serato:hover {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  color: #fff;
+}
+
+.btn-serato:active {
   transform: translateY(1px);
 }
 

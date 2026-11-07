@@ -512,6 +512,14 @@ export function DjPlaylists({
               >
                 <ArrowDownToLine size={13} /> XML
               </a>
+              <a
+                className="secondary-button"
+                href="/api/playlists/export/serato"
+                download="stemora_serato_crates.zip"
+                title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง Serato Crates")}
+              >
+                <ArrowDownToLine size={13} /> Serato
+              </a>
             </div>
           </div>
           </div>
@@ -1014,6 +1022,7 @@ export function DjPlaylists({
                       { key: "m3u", label: "M3U8" },
                       { key: "zip", label: "ZIP" },
                       { key: "rekordbox", label: "rekordbox XML" },
+                      { key: "crate", label: "Serato Crate" },
                       { key: "rekordbox_zip", label: "rekordbox ZIP" },
                     ].map(({ key, label }) => (
                       <a
@@ -1115,7 +1124,7 @@ export function DjPlaylists({
       )}
       {showSyncModal && (
         <Modal
-          title={tr("ซิงก์อัตโนมัติกับ Pioneer DJ rekordbox")}
+          title={tr("ซิงก์อัตโนมัติกับ Pioneer DJ rekordbox & Serato DJ Pro")}
           close={() => setShowSyncModal(false)}
         >
           <div className="rekordbox-guide">
@@ -1131,11 +1140,11 @@ export function DjPlaylists({
                     <h3>STEMORA Connect</h3>
                   </div>
                 </div>
-                <span className="spotlight-badge">v1.0.0 · macOS & Windows</span>
+                <span className="spotlight-badge">v1.0.1 · macOS & Windows</span>
               </div>
               <p className="spotlight-desc">
                 {tr(
-                  "ซิงก์เพลง คีย์ Camelot และเพลย์ลิสต์ลง rekordbox บนเครื่องของคุณแบบอัตโนมัติ Real-Time ใช้งานง่ายด้วยแอปพลิเคชัน ไม่ต้องเปิด Terminal",
+                  "ซิงก์เพลง คีย์ Camelot และเพลย์ลิสต์ลง rekordbox และ Serato DJ Pro บนเครื่องของคุณแบบอัตโนมัติ Real-Time ใช้งานง่ายด้วยแอปพลิเคชัน ไม่ต้องเปิด Terminal",
                 )}
               </p>
               <div className="spotlight-actions">
@@ -1259,10 +1268,10 @@ export function DjPlaylists({
               <div className="guide-step">
                 <span className="step-num">2</span>
                 <div>
-                  <strong>{tr("แอปจะตั้งค่า rekordbox ให้อัตโนมัติ 100%")}</strong>
+                  <strong>{tr("แอปจะตั้งค่า rekordbox & Serato ให้อัตโนมัติ 100%")}</strong>
                   <p>
                     {tr(
-                      "STEMORA Connect จะตรวจจับและเปิดใช้ระบบ rekordbox XML รวมถึงสร้างเพลย์ลิสต์ให้เสร็จสรรพ โดยไม่ต้องตั้งค่าเองใน Preferences",
+                      "STEMORA Connect จะเปิดใช้ระบบ rekordbox XML และสร้าง Serato Crates ใน ~/Music/_Serato_/Subcrates/ ให้อัตโนมัติ ไม่ต้องตั้งค่าเอง",
                     )}
                   </p>
                 </div>
@@ -1270,10 +1279,10 @@ export function DjPlaylists({
               <div className="guide-step">
                 <span className="step-num">3</span>
                 <div>
-                  <strong>{tr("กดปุ่มเปิดเล่นใน rekordbox ทันที")}</strong>
+                  <strong>{tr("กดปุ่มเปิดเล่นใน rekordbox หรือ Serato DJ ทันที")}</strong>
                   <p>
                     {tr(
-                      "กดปุ่ม ⚡ ในแอป เพื่อเปิด rekordbox โฟลเดอร์ STEMORA จะปรากฏพร้อมเพลง คีย์ Camelot และค่า BPM พร้อมลากลง Deck เล่นได้ทันที",
+                      "กดปุ่ม ⚡ ในแอป เพื่อเปิด rekordbox หรือ Serato DJ Pro โฟลเดอร์และ Crates ของ STEMORA จะปรากฏพร้อมเล่นบน Deck ทันที",
                     )}
                   </p>
                 </div>
