@@ -207,7 +207,7 @@ export function DjPlaylists({
     }
   };
 
-  // Auto-connect when opened from desktop browser login button (?connect=desktop or #stems)
+  // Check desktop app presence in background without auto-opening popup
   useEffect(() => {
     if (typeof window !== "undefined") {
       const isStemsHash = window.location.hash === "#stems";
@@ -216,25 +216,27 @@ export function DjPlaylists({
       }
       const params = new URLSearchParams(window.location.search);
       if (params.get("connect") === "desktop") {
-        setShowSyncModal(true);
-        if (isStemsHash) {
-          setDjGuideTab("stems");
-        }
+        // Silently pair with local companion in background if available
         void (async () => {
-          setTokenLoading(true);
           try {
-            const res = await api<{ token: string }>("/api/sync/token");
-            setSyncToken(res.token);
             const detected = await checkDesktopApp();
             if (detected) {
+              const res = await api<{ token: string }>("/api/sync/token");
+              setSyncToken(res.token);
               await pairWithDesktop(res.token);
             }
-          } catch (err) {
-            setError((err as Error).message);
-          } finally {
-            setTokenLoading(false);
+          } catch {
+            // silent handshake in background without popup
           }
         })();
+        // Clean up URL parameter so future reloads stay clean
+        try {
+          const cleanUrl = new URL(window.location.href);
+          cleanUrl.searchParams.delete("connect");
+          window.history.replaceState({}, "", cleanUrl.toString());
+        } catch {
+          // ignore
+        }
       } else {
         void checkDesktopApp();
       }
@@ -570,9 +572,10 @@ export function DjPlaylists({
               className="primary-button set-sync-main-btn"
               onClick={() => openDjHub("serato")}
               type="button"
+              title={tr("ซิงก์อัตโนมัติกับ rekordbox และ Serato DJ")}
             >
               <RefreshCw size={14} />
-              <span>{tr("ซิงก์โปรแกรม DJ (Live Sync)")}</span>
+              <span>{tr("ซิงก์กับ rekordbox & Serato")}</span>
             </button>
             <div className="set-quick-exports-grid">
               <a

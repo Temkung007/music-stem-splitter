@@ -3394,5 +3394,13 @@
   "ไฟล์เสียงที่ดาวน์โหลดเป็นไฟล์ Lossless 16/24-bit คุณภาพสูงระดับสตูดิโอ ไร้การบีบอัดสัญญาณ เหมาะสำหรับการเล่นสดในคลับหรือเฟสติวัล": {
     "th": "ไฟล์เสียงที่ดาวน์โหลดเป็นไฟล์ Lossless 16/24-bit คุณภาพสูงระดับสตูดิโอ ไร้การบีบอัดสัญญาณ เหมาะสำหรับการเล่นสดในคลับหรือเฟสติวัล",
     "en": "Audio files are studio-grade 16/24-bit lossless without compression artifacts, ideal for festival sound systems and club sound systems."
+  },
+  "ซิงก์กับ rekordbox & Serato": {
+    "th": "ซิงก์กับ rekordbox & Serato",
+    "en": "Sync with rekordbox & Serato"
+  },
+  "ซิงก์อัตโนมัติกับ rekordbox และ Serato DJ": {
+    "th": "ซิงก์อัตโนมัติกับ rekordbox และ Serato DJ",
+    "en": "Auto-sync with rekordbox and Serato DJ"
   }
 }
