@@ -487,15 +487,35 @@ export function DjPlaylists({
             <h2>
               <ListMusic size={18} /> {tr("Your sets")}
             </h2>
-            <button className="icon-button set-list-toggle" onClick={() => setShowSavedSets(!showSavedSets)} aria-expanded={showSavedSets} aria-controls="saved-sets" aria-label={tr("แสดงเซ็ตที่บันทึก")}><ChevronDown size={17} /></button>
-            <button
-              className="icon-button"
-              onClick={newSet}
-              aria-label={tr("สร้างเซ็ตใหม่")}
-              disabled={busy}
-            >
-              <Plus size={18} />
-            </button>
+            <div className="set-list-header-actions">
+              <button
+                className="icon-button"
+                onClick={() => void load()}
+                disabled={busy}
+                title={tr("รีเฟรช")}
+                aria-label={tr("รีเฟรช")}
+              >
+                <RefreshCw size={15} />
+              </button>
+              <button
+                className="icon-button"
+                onClick={newSet}
+                aria-label={tr("สร้างเซ็ตใหม่")}
+                title={tr("สร้างเซ็ตใหม่")}
+                disabled={busy}
+              >
+                <Plus size={18} />
+              </button>
+              <button
+                className="icon-button set-list-toggle"
+                onClick={() => setShowSavedSets(!showSavedSets)}
+                aria-expanded={showSavedSets}
+                aria-controls="saved-sets"
+                aria-label={tr("แสดงเซ็ตที่บันทึก")}
+              >
+                <ChevronDown size={17} />
+              </button>
+            </div>
           </div>
           <div id="saved-sets" className={`set-list-content ${showSavedSets ? "is-open" : ""}`}>
           <div className="library-tabs compact">
@@ -533,48 +553,45 @@ export function DjPlaylists({
                 <span className="set-card-icon">
                   <ListMusic size={18} />
                 </span>
-                <span>
+                <span className="set-card-info">
                   <strong>{item.name}</strong>
-                  <small>
-                    {item.items.length} {tr("เพลง · เป้าหมาย")}{" "}
-                    {item.target_minutes} {tr("นาที")}
-                  </small>
+                  <div className="set-card-meta">
+                    <span className="set-meta-badge">{item.items.length} {tr("เพลง")}</span>
+                    <span>•</span>
+                    <span className="set-meta-badge">{item.target_minutes} {tr("นาที")}</span>
+                  </div>
                 </span>
-                <ArrowRight size={14} />
+                <ArrowRight size={14} className="set-card-arrow" />
               </button>
             ))
           )}
           <div className="set-list-actions">
             <button
-              className="primary-button small"
+              className="primary-button set-sync-main-btn"
               onClick={() => openDjHub("serato")}
               type="button"
             >
-              <RefreshCw size={13} /> {tr("ซิงก์โปรแกรม DJ (Live Sync)")}
+              <RefreshCw size={14} />
+              <span>{tr("ซิงก์โปรแกรม DJ (Live Sync)")}</span>
             </button>
-            <div className="set-list-action-row">
-              <button
-                className="secondary-button"
-                onClick={() => void load()}
-                disabled={busy}
-              >
-                {tr("รีเฟรช")}
-              </button>
+            <div className="set-quick-exports-grid">
               <a
-                className="secondary-button"
+                className="set-quick-export-btn rekordbox"
                 href="/api/playlists/export/rekordbox"
                 download="stemora_rekordbox_library.xml"
                 title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง rekordbox XML")}
               >
-                <ArrowDownToLine size={13} /> rekordbox XML
+                <ArrowDownToLine size={13} />
+                <span>rekordbox XML</span>
               </a>
               <a
-                className="secondary-button"
+                className="set-quick-export-btn serato"
                 href="/api/playlists/export/serato"
                 download="stemora_serato_crates.zip"
                 title={tr("ส่งออกทุกเพลย์ลิสต์ไปยัง Serato Crates")}
               >
-                <ArrowDownToLine size={13} /> Serato Crates
+                <ArrowDownToLine size={13} />
+                <span>Serato Crates</span>
               </a>
             </div>
           </div>

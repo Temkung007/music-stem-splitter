@@ -2177,8 +2177,243 @@ div.panel {
   background: #11141c !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 16px !important;
-  padding: 20px 18px !important;
+  padding: 18px 16px !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+
+.set-list-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px 14px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 12px;
+}
+
+.set-list-title h2 {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #f8fafc !important;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.set-list-title h2 svg {
+  color: var(--lime);
+}
+
+.set-list-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.set-list-header-actions .icon-button {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: #94a3b8;
+  display: grid;
+  place-items: center;
+  transition: all 0.15s ease;
+}
+
+.set-list-header-actions .icon-button:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Compact filter segmented control */
+.set-list .library-tabs.compact {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 14px;
+  border-bottom: none !important;
+}
+
+.set-list .library-tabs.compact button {
+  flex: 1;
+  font-size: 11px !important;
+  font-weight: 600;
+  color: #71717a;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.set-list .library-tabs.compact button:hover {
+  color: #d4d4d8;
+}
+
+.set-list .library-tabs.compact button.selected {
+  background: #1e2430;
+  color: #f8fafc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* Set item cards in sidebar */
+.set-list .set-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 12px !important;
+  background: #141822;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.set-list .set-card:hover {
+  background: #191e2b;
+  border-color: rgba(215, 249, 139, 0.3);
+  transform: translateY(-1px);
+}
+
+.set-list .set-card.selected {
+  background: linear-gradient(135deg, rgba(215, 249, 139, 0.12) 0%, #151924 100%);
+  border-color: rgba(215, 249, 139, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), 0 0 12px rgba(215, 249, 139, 0.08);
+}
+
+.set-list .set-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(215, 249, 139, 0.12);
+  border: 1px solid rgba(215, 249, 139, 0.25);
+  color: var(--lime);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.set-list .set-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.set-list .set-card-info strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.set-list .set-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #94a3b8;
+  font-family: var(--font-mono-stem);
+}
+
+.set-list .set-card-arrow {
+  color: #475569;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.set-list .set-card:hover .set-card-arrow,
+.set-list .set-card.selected .set-card-arrow {
+  color: var(--lime);
+  transform: translateX(2px);
+}
+
+/* Sidebar action area */
+.set-list-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.set-sync-main-btn {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: var(--lime) !important;
+  color: #0c120a !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 14px rgba(215, 249, 139, 0.3) !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: transform 0.15s ease, filter 0.15s ease !important;
+}
+
+.set-sync-main-btn:hover {
+  filter: brightness(1.08) !important;
+  transform: translateY(-1px) !important;
+}
+
+.set-quick-exports-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.set-quick-export-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 8px 10px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  background: #141822 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+  transition: all 0.15s ease !important;
+  box-sizing: border-box !important;
+}
+
+.set-quick-export-btn:hover {
+  transform: translateY(-1px) !important;
+}
+
+.set-quick-export-btn.rekordbox:hover {
+  background: rgba(215, 249, 139, 0.1) !important;
+  border-color: rgba(215, 249, 139, 0.4) !important;
+  color: var(--lime) !important;
+}
+
+.set-quick-export-btn.serato:hover {
+  background: rgba(56, 189, 248, 0.1) !important;
+  border-color: rgba(56, 189, 248, 0.4) !important;
+  color: #38bdf8 !important;
 }
 
 .playlist-workspace .set-main {

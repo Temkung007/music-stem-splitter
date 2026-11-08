@@ -180,8 +180,8 @@ def seed_tracks_for_user(user_id: str, user_name: str, user_email: str):
             (
                 playlist_id,
                 user_id,
-                "Weekend Club Peak (Rekordbox Ready)",
-                "เซ็ตเพลงทดสอบระบบ 5 เพลง เรียงลำดับ BPM และ Camelot Key สำหรับเปิดใน rekordbox ทันที",
+                "Weekend Club Peak (DJ Ready: rekordbox & Serato)",
+                "เซ็ตเพลงทดสอบระบบ 5 เพลง เรียงลำดับ BPM และ Camelot Key สำหรับเปิดใน rekordbox และ Serato DJ ทันที",
                 "จัดเพลงปาร์ตี้พลังงานสูง 5 เพลง",
                 60,
                 "build",
