@@ -3426,5 +3426,89 @@
   "หากขึ้นเตือน 'แอปเสียหาย' ให้เปิด Terminal แล้วรัน:": {
     "th": "หากขึ้นเตือน 'แอปเสียหาย' ให้เปิด Terminal แล้วรัน:",
     "en": "If macOS alerts 'app is damaged', open Terminal and run:"
+  },
+  "เลือกวิธีเชื่อมต่อที่สะดวกสำหรับคุณ": {
+    "th": "เลือกวิธีเชื่อมต่อที่สะดวกสำหรับคุณ",
+    "en": "Choose the connection method that suits you best"
+  },
+  "เชื่อมต่อเพลงและเพลย์ลิสต์เข้าโปรแกรม DJ (2 วิธี)": {
+    "th": "เชื่อมต่อเพลงและเพลย์ลิสต์เข้าโปรแกรม DJ (2 วิธี)",
+    "en": "Connect tracks & playlists to DJ software (2 Methods)"
+  },
+  "คุณสามารถเลือกนำเข้าแบบโหลดตรงผ่านหน้าเว็บ (ไม่ต้องลงแอป) หรือเลือกใช้แอปช่วยซิงก์อัตโนมัติในพื้นหลังได้ตามต้องการ": {
+    "th": "คุณสามารถเลือกนำเข้าแบบโหลดตรงผ่านหน้าเว็บ (ไม่ต้องลงแอป) หรือเลือกใช้แอปช่วยซิงก์อัตโนมัติในพื้นหลังได้ตามต้องการ",
+    "en": "Choose direct web download (no app required) or automatic background sync via desktop companion."
+  },
+  "วิธีที่ 1 (ง่ายและเร็วที่สุด): โหลดตรงไม่ต้องลงแอป": {
+    "th": "วิธีที่ 1 (ง่ายและเร็วที่สุด): โหลดตรงไม่ต้องลงแอป",
+    "en": "Method 1 (Fastest & Simplest): Direct Download (No App Needed)"
+  },
+  "ดาวน์โหลดเพลย์ลิสต์ตรงเข้า rekordbox & Serato": {
+    "th": "ดาวน์โหลดเพลย์ลิสต์ตรงเข้า rekordbox & Serato",
+    "en": "Directly download playlists into rekordbox & Serato"
+  },
+  "ดาวน์โหลดไฟล์เพลย์ลิสต์แล้วลากใส่โปรแกรม DJ ได้ทันทีใน 1 วินาที ไม่ต้องติดตั้งแอป ไม่ติดระบบความปลอดภัยของเครื่อง คลีนและตรงไปตรงมาที่สุด": {
+    "th": "ดาวน์โหลดไฟล์เพลย์ลิสต์แล้วลากใส่โปรแกรม DJ ได้ทันทีใน 1 วินาที ไม่ต้องติดตั้งแอป ไม่ติดระบบความปลอดภัยของเครื่อง คลีนและตรงไปตรงมาที่สุด",
+    "en": "Download playlist files and drag them straight into your DJ software in 1 second. No app installation, no Gatekeeper alerts, 100% clean and straightforward."
+  },
+  "กดปุ่มดาวน์โหลดไฟล์เพลย์ลิสต์ด้านล่าง": {
+    "th": "กดปุ่มดาวน์โหลดไฟล์เพลย์ลิสต์ด้านล่าง",
+    "en": "Click download buttons below"
+  },
+  "เปิดโปรแกรม rekordbox หรือ Serato": {
+    "th": "เปิดโปรแกรม rekordbox หรือ Serato",
+    "en": "Launch rekordbox or Serato"
+  },
+  "ลากไฟล์ไปปล่อยใส่หมวด 'Playlists' จบ!": {
+    "th": "ลากไฟล์ไปปล่อยใส่หมวด 'Playlists' จบ!",
+    "en": "Drag & drop files into 'Playlists' — Done!"
+  },
+  "วิธีที่ 2: ใช้แอปช่วยซิงก์อัตโนมัติ (STEMORA Connect)": {
+    "th": "วิธีที่ 2: ใช้แอปช่วยซิงก์อัตโนมัติ (STEMORA Connect)",
+    "en": "Method 2: Automatic Background Sync (STEMORA Connect)"
+  },
+  "เหมาะสำหรับผู้ใช้ Serato DJ (ลังเพลงเด้งขึ้นทันที 100%) หรือคนที่มีเพลงเยอะๆ แล้วต้องการให้เพลงดาวน์โหลดลงเครื่องและอัปเดตให้อัตโนมัติในพื้นหลังทุกครั้งที่จัดเซ็ต": {
+    "th": "เหมาะสำหรับผู้ใช้ Serato DJ (ลังเพลงเด้งขึ้นทันที 100%) หรือคนที่มีเพลงเยอะๆ แล้วต้องการให้เพลงดาวน์โหลดลงเครื่องและอัปเดตให้อัตโนมัติในพื้นหลังทุกครั้งที่จัดเซ็ต",
+    "en": "Best for Serato DJ users (crates appear automatically 100%) or DJs with large libraries who want background auto-downloading and crate synchronization."
+  },
+  "ดาวน์โหลดเพลงลงเครื่องอัตโนมัติ": {
+    "th": "ดาวน์โหลดเพลงลงเครื่องอัตโนมัติ",
+    "en": "Automatic background track download"
+  },
+  "Serato Crates ซิงก์ตรงเข้าโฟลเดอร์ทันที": {
+    "th": "Serato Crates ซิงก์ตรงเข้าโฟลเดอร์ทันที",
+    "en": "Instant Serato Crates sync to subcrates"
+  },
+  "ตั้งค่า rekordbox XML ให้อัตโนมัติ": {
+    "th": "ตั้งค่า rekordbox XML ให้อัตโนมัติ",
+    "en": "Automatic rekordbox XML configuration"
+  },
+  "หาก Mac แจ้งว่า 'แอปเสียหาย' (Gatekeeper):": {
+    "th": "หาก Mac แจ้งว่า 'แอปเสียหาย' (Gatekeeper):",
+    "en": "If macOS shows 'App is damaged' (Gatekeeper):"
+  },
+  "ดาวน์โหลดเพลย์ลิสต์ M3U8 สำหรับลากใส่ rekordbox / Serato": {
+    "th": "ดาวน์โหลดเพลย์ลิสต์ M3U8 สำหรับลากใส่ rekordbox / Serato",
+    "en": "Download M3U8 playlist to drag & drop into rekordbox / Serato"
+  },
+  "ดาวน์โหลดสำหรับ Mac (.dmg)": {
+    "th": "ดาวน์โหลดสำหรับ Mac (.dmg)",
+    "en": "Download for Mac (.dmg)"
+  },
+  "ส่งออกคลังเพลงทั้งหมดเป็น rekordbox XML": {
+    "th": "ส่งออกคลังเพลงทั้งหมดเป็น rekordbox XML",
+    "en": "Export entire library as rekordbox XML"
+  },
+  "ส่งออกทุกลังเพลงเป็น Serato Crates": {
+    "th": "ส่งออกทุกลังเพลงเป็น Serato Crates",
+    "en": "Export all crates to Serato Crates"
+  },
+  "ดาวน์โหลดไฟล์เพลงแยกแทร็กทั้งหมดในเซ็ตนี้ (ZIP)": {
+    "th": "ดาวน์โหลดไฟล์เพลงแยกแทร็กทั้งหมดในเซ็ตนี้ (ZIP)",
+    "en": "Download all isolated tracks in this set (ZIP)"
+  },
+  "ZIP รวมเพลง": {
+    "th": "ZIP รวมเพลง",
+    "en": "All Tracks ZIP"
   }
 }

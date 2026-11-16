@@ -484,6 +484,7 @@ export function DjPlaylists({
     setComposer(true);
     setError("");
   }
+  const activePlaylist = draft || (playlists.length > 0 ? playlists[0] : null);
   return (
     <div className="playlist-workspace">
       {error && (
@@ -1256,96 +1257,155 @@ export function DjPlaylists({
           className="modal-sync-hub"
         >
           <div className="rekordbox-guide" id="stems">
-            {/* Spotlight App Download Card */}
-            <div className="desktop-app-spotlight">
-              <div className="spotlight-header">
-                <div className="spotlight-brand">
-                  <div className="spotlight-logo">
-                    <Laptop size={22} />
-                  </div>
-                  <div>
-                    <div className="spotlight-tag">{tr("โปรแกรมเดสก์ท็อป · แนะนำ")}</div>
-                    <h3>STEMORA Connect</h3>
-                  </div>
-                </div>
-                <span className="spotlight-badge">v1.0.1 · macOS & Windows</span>
-              </div>
-              <p className="spotlight-desc">
-                {tr(
-                  "ซิงก์เพลง คีย์ Camelot, ค่า BPM และเพลย์ลิสต์ลงทั้ง rekordbox และ Serato DJ Pro บนเครื่องของคุณแบบอัตโนมัติ Real-Time จัดเซ็ตบนเว็บแล้วพร้อมเล่นบน Deck ทันที ไม่ต้องเปิด Terminal",
-                )}
-              </p>
-
-              <div className="dj-supported-pills">
-                <span className="dj-software-pill serato">
-                  ⚡ Serato DJ Pro & Lite
+            {/* DUAL-METHOD HUB: 2 Simple Clear Options */}
+            <div className="sync-dual-hub">
+              <div className="dual-hub-intro">
+                <span className="dual-hub-tag">
+                  <Sparkles size={13} />
+                  <span>{tr("เลือกวิธีเชื่อมต่อที่สะดวกสำหรับคุณ")}</span>
                 </span>
-                <span className="dj-software-pill pioneer">
-                  ⚡ Pioneer DJ rekordbox 6 & 7
-                </span>
-                <span className="dj-software-pill stems">
-                  ⚡ 4-Stems Performance
-                </span>
-                <span className="dj-software-pill traktor">
-                  ⚡ Traktor / Engine / Virtual DJ
-                </span>
-              </div>
-
-              <div className="spotlight-actions">
-                <a
-                  href="/download/STEMORA-Connect-macOS.dmg"
-                  download="STEMORA-Connect-macOS.dmg"
-                  className="primary-button spotlight-dl-btn"
-                >
-                  <Download size={16} />
-                  <span>{tr("ดาวน์โหลด STEMORA Connect (.dmg สำหรับ Mac)")}</span>
-                </a>
-                <a
-                  href="/download/STEMORA-Connect-macOS.zip"
-                  download="STEMORA-Connect-macOS.zip"
-                  className="secondary-button"
-                >
-                  {tr("ดาวน์โหลด .zip")}
-                </a>
-              </div>
-              <div className="spotlight-meta">
-                <span>Apple Silicon & Intel</span>
-                <span>•</span>
-                <span>ขนาด 6.9 MB</span>
-                <span>•</span>
-                <span>Rust & Tauri Native</span>
-              </div>
-
-              <div className="mac-gatekeeper-tip">
-                <div className="mac-tip-header">
-                  <Info size={14} className="mac-tip-icon" />
-                  <span>
-                    {tr(
-                      "หาก Mac แจ้งว่า 'แอปเสียหายและควรย้ายไปถังขยะ' (Gatekeeper)",
-                    )}
-                  </span>
-                </div>
-                <p className="mac-tip-desc">
+                <h3>{tr("เชื่อมต่อเพลงและเพลย์ลิสต์เข้าโปรแกรม DJ (2 วิธี)")}</h3>
+                <p>
                   {tr(
-                    "เนื่องจากตัวแอปยังไม่ได้จ่ายค่าใบรับรองรายปีของ Apple ให้เปิด Terminal แล้ววางคำสั่ง 1 บรรทัดนี้ หรือไปที่ System Settings > Privacy & Security > กด Open Anyway",
+                    "คุณสามารถเลือกนำเข้าแบบโหลดตรงผ่านหน้าเว็บ (ไม่ต้องลงแอป) หรือเลือกใช้แอปช่วยซิงก์อัตโนมัติในพื้นหลังได้ตามต้องการ",
                   )}
                 </p>
-                <div className="mac-tip-code-row">
-                  <code>xattr -cr /Applications/&quot;STEMORA Connect.app&quot;</code>
-                  <button
-                    type="button"
-                    className="mac-tip-copy-btn"
-                    onClick={() =>
-                      copyMacCmd('xattr -cr /Applications/"STEMORA Connect.app"')
-                    }
-                  >
-                    {copiedMacCmd ? <Check size={12} /> : <Copy size={12} />}
-                    <span>
-                      {copiedMacCmd
-                        ? tr("คัดลอกคำสั่งปลดล็อกแล้ว")
-                        : tr("คัดลอกคำสั่งปลดล็อก Mac")}
-                    </span>
-                  </button>
+              </div>
+
+              <div className="dual-methods-grid">
+                {/* Method 1: Direct Web Export (No App Needed) */}
+                <div className="dual-method-card method-direct">
+                  <div className="method-card-badge direct">
+                    <span>⚡ {tr("วิธีที่ 1 (ง่ายและเร็วที่สุด): โหลดตรงไม่ต้องลงแอป")}</span>
+                  </div>
+                  <div className="method-card-body">
+                    <h4>{tr("ดาวน์โหลดเพลย์ลิสต์ตรงเข้า rekordbox & Serato")}</h4>
+                    <p className="method-card-desc">
+                      {tr(
+                        "ดาวน์โหลดไฟล์เพลย์ลิสต์แล้วลากใส่โปรแกรม DJ ได้ทันทีใน 1 วินาที ไม่ต้องติดตั้งแอป ไม่ติดระบบความปลอดภัยของเครื่อง คลีนและตรงไปตรงมาที่สุด",
+                      )}
+                    </p>
+
+                    <div className="method-steps-mini">
+                      <div className="mini-step">
+                        <span className="step-badge">1</span>
+                        <span>{tr("กดปุ่มดาวน์โหลดไฟล์เพลย์ลิสต์ด้านล่าง")}</span>
+                      </div>
+                      <div className="mini-step">
+                        <span className="step-badge">2</span>
+                        <span>{tr("เปิดโปรแกรม rekordbox หรือ Serato")}</span>
+                      </div>
+                      <div className="mini-step">
+                        <span className="step-badge">3</span>
+                        <span>{tr("ลากไฟล์ไปปล่อยใส่หมวด 'Playlists' จบ!")}</span>
+                      </div>
+                    </div>
+
+                    <div className="method-export-buttons">
+                      <a
+                        href="/api/playlists/export/rekordbox"
+                        download="stemora_rekordbox_library.xml"
+                        className="primary-button small dl-btn-accent"
+                        title={tr("ส่งออกคลังเพลงทั้งหมดเป็น rekordbox XML")}
+                      >
+                        <Download size={13} />
+                        <span>rekordbox XML</span>
+                      </a>
+                      {activePlaylist && (
+                        <a
+                          href={`/api/playlists/${activePlaylist.id}/export/m3u`}
+                          download={`${activePlaylist.name || "playlist"}.m3u8`}
+                          className="secondary-button small"
+                          title={tr("ดาวน์โหลดเพลย์ลิสต์ M3U8 สำหรับลากใส่ rekordbox / Serato")}
+                        >
+                          <Download size={13} />
+                          <span>M3U8 Playlist</span>
+                        </a>
+                      )}
+                      <a
+                        href="/api/playlists/export/serato"
+                        download="stemora_serato_crates.zip"
+                        className="secondary-button small"
+                        title={tr("ส่งออกทุกลังเพลงเป็น Serato Crates")}
+                      >
+                        <Download size={13} />
+                        <span>Serato Crates</span>
+                      </a>
+                      {activePlaylist && (
+                        <a
+                          href={`/api/playlists/${activePlaylist.id}/export/zip`}
+                          download={`${activePlaylist.name || "tracks"}.zip`}
+                          className="secondary-button small"
+                          title={tr("ดาวน์โหลดไฟล์เพลงแยกแทร็กทั้งหมดในเซ็ตนี้ (ZIP)")}
+                        >
+                          <Download size={13} />
+                          <span>{tr("ZIP รวมเพลง")}</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Method 2: STEMORA Connect Companion App */}
+                <div className="dual-method-card method-app">
+                  <div className="method-card-badge app">
+                    <span>🔄 {tr("วิธีที่ 2: ใช้แอปช่วยซิงก์อัตโนมัติ (STEMORA Connect)")}</span>
+                  </div>
+                  <div className="method-card-body">
+                    <div className="app-title-row">
+                      <h4>STEMORA Connect</h4>
+                      <span className="app-ver-pill">v1.0.1</span>
+                    </div>
+                    <p className="method-card-desc">
+                      {tr(
+                        "เหมาะสำหรับผู้ใช้ Serato DJ (ลังเพลงเด้งขึ้นทันที 100%) หรือคนที่มีเพลงเยอะๆ แล้วต้องการให้เพลงดาวน์โหลดลงเครื่องและอัปเดตให้อัตโนมัติในพื้นหลังทุกครั้งที่จัดเซ็ต",
+                      )}
+                    </p>
+
+                    <div className="app-highlights">
+                      <span>✓ {tr("ดาวน์โหลดเพลงลงเครื่องอัตโนมัติ")}</span>
+                      <span>✓ {tr("Serato Crates ซิงก์ตรงเข้าโฟลเดอร์ทันที")}</span>
+                      <span>✓ {tr("ตั้งค่า rekordbox XML ให้อัตโนมัติ")}</span>
+                    </div>
+
+                    <div className="method-app-actions">
+                      <a
+                        href="/download/STEMORA-Connect-macOS.dmg"
+                        download="STEMORA-Connect-macOS.dmg"
+                        className="primary-button small dl-app-btn"
+                      >
+                        <Download size={14} />
+                        <span>{tr("ดาวน์โหลดสำหรับ Mac (.dmg)")}</span>
+                      </a>
+                      <a
+                        href="/download/STEMORA-Connect-macOS.zip"
+                        download="STEMORA-Connect-macOS.zip"
+                        className="secondary-button small"
+                      >
+                        .zip
+                      </a>
+                    </div>
+
+                    <div className="mac-gatekeeper-tip-compact">
+                      <div className="tip-compact-head">
+                        <Info size={13} className="mac-tip-icon" />
+                        <span>{tr("หาก Mac แจ้งว่า 'แอปเสียหาย' (Gatekeeper):")}</span>
+                      </div>
+                      <div className="mac-tip-code-row">
+                        <code>xattr -cr /Applications/&quot;STEMORA Connect.app&quot;</code>
+                        <button
+                          type="button"
+                          className="mac-tip-copy-btn"
+                          onClick={() =>
+                            copyMacCmd('xattr -cr /Applications/"STEMORA Connect.app"')
+                          }
+                        >
+                          {copiedMacCmd ? <Check size={11} /> : <Copy size={11} />}
+                          <span>{copiedMacCmd ? tr("คัดลอกแล้ว") : tr("คัดลอกคำสั่ง")}</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
