@@ -2453,3 +2453,78 @@ div.panel {
     padding: 20px 16px !important;
   }
 }
+
+/* Mac Gatekeeper Tips & Bypass Guide */
+.mac-gatekeeper-tip {
+  margin-top: 14px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+}
+
+.mac-tip-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+}
+
+.mac-tip-icon {
+  color: var(--lime);
+  flex-shrink: 0;
+}
+
+.mac-tip-desc {
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
+.mac-tip-code-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.mac-tip-code-row code {
+  font-family: var(--font-mono-stem);
+  font-size: 11px;
+  color: #a3e635;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.mac-tip-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f1f5f9;
+  font-size: 10.5px;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.mac-tip-copy-btn:hover {
+  background: rgba(215, 249, 139, 0.15);
+  border-color: rgba(215, 249, 139, 0.4);
+  color: var(--lime);
+}

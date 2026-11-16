@@ -15,6 +15,7 @@ import {
   GripVertical,
   HelpCircle,
   History,
+  Info,
   Laptop,
   Layers,
   ListMusic,
@@ -115,6 +116,15 @@ export function DjPlaylists({
   const [pairingSuccess, setPairingSuccess] = useState<boolean>(false);
   const [isPairing, setIsPairing] = useState<boolean>(false);
   const [copiedPath, setCopiedPath] = useState<string | null>(null);
+  const [copiedMacCmd, setCopiedMacCmd] = useState<boolean>(false);
+
+  const copyMacCmd = (cmd: string) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(cmd);
+      setCopiedMacCmd(true);
+      setTimeout(() => setCopiedMacCmd(false), 2000);
+    }
+  };
 
   const copyPath = (text: string) => {
     if (navigator.clipboard) {
@@ -1304,6 +1314,39 @@ export function DjPlaylists({
                 <span>ขนาด 6.9 MB</span>
                 <span>•</span>
                 <span>Rust & Tauri Native</span>
+              </div>
+
+              <div className="mac-gatekeeper-tip">
+                <div className="mac-tip-header">
+                  <Info size={14} className="mac-tip-icon" />
+                  <span>
+                    {tr(
+                      "หาก Mac แจ้งว่า 'แอปเสียหายและควรย้ายไปถังขยะ' (Gatekeeper)",
+                    )}
+                  </span>
+                </div>
+                <p className="mac-tip-desc">
+                  {tr(
+                    "เนื่องจากตัวแอปยังไม่ได้จ่ายค่าใบรับรองรายปีของ Apple ให้เปิด Terminal แล้ววางคำสั่ง 1 บรรทัดนี้ หรือไปที่ System Settings > Privacy & Security > กด Open Anyway",
+                  )}
+                </p>
+                <div className="mac-tip-code-row">
+                  <code>xattr -cr /Applications/&quot;STEMORA Connect.app&quot;</code>
+                  <button
+                    type="button"
+                    className="mac-tip-copy-btn"
+                    onClick={() =>
+                      copyMacCmd('xattr -cr /Applications/"STEMORA Connect.app"')
+                    }
+                  >
+                    {copiedMacCmd ? <Check size={12} /> : <Copy size={12} />}
+                    <span>
+                      {copiedMacCmd
+                        ? tr("คัดลอกคำสั่งปลดล็อกแล้ว")
+                        : tr("คัดลอกคำสั่งปลดล็อก Mac")}
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
 

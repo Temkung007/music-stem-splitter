@@ -668,24 +668,31 @@ export function LandingPage({ onSuccess }: LandingPageProps) {
                 </p>
               </div>
 
-              <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-                <a
-                  href="/download/STEMORA-Connect-macOS.dmg"
-                  download="STEMORA-Connect-macOS.dmg"
-                  className="btn btn--primary"
-                  style={{ height: 42, fontSize: 13, padding: "0 18px", textDecoration: "none" }}
-                >
-                  <FolderSync size={16} />
-                  <span>{tr("ดาวน์โหลด Connect (.dmg สำหรับ Mac)")}</span>
-                </a>
-                <a
-                  href="/download/STEMORA-Connect-macOS.zip"
-                  download="STEMORA-Connect-macOS.zip"
-                  className="btn btn--secondary"
-                  style={{ height: 42, fontSize: 13, padding: "0 14px", textDecoration: "none" }}
-                >
-                  .zip
-                </a>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                  <a
+                    href="/download/STEMORA-Connect-macOS.dmg"
+                    download="STEMORA-Connect-macOS.dmg"
+                    className="btn btn--primary"
+                    style={{ height: 42, fontSize: 13, padding: "0 18px", textDecoration: "none" }}
+                  >
+                    <FolderSync size={16} />
+                    <span>{tr("ดาวน์โหลด Connect (.dmg สำหรับ Mac)")}</span>
+                  </a>
+                  <a
+                    href="/download/STEMORA-Connect-macOS.zip"
+                    download="STEMORA-Connect-macOS.zip"
+                    className="btn btn--secondary"
+                    style={{ height: 42, fontSize: 13, padding: "0 14px", textDecoration: "none" }}
+                  >
+                    .zip
+                  </a>
+                </div>
+                <div style={{ padding: "6px 12px", background: "rgba(0,0,0,0.35)", borderRadius: 6, border: "1px solid rgba(255,255,255,0.08)", fontSize: 11, color: "#94a3b8", display: "inline-flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                  <span style={{ color: "var(--lime)", fontWeight: 600 }}>💡 {tr("สำหรับผู้ใช้ Mac:")}</span>
+                  <span>{tr("หากขึ้นเตือน 'แอปเสียหาย' ให้เปิด Terminal แล้วรัน:")}</span>
+                  <code style={{ background: "rgba(0,0,0,0.5)", padding: "1px 5px", borderRadius: 3, color: "#a3e635", fontFamily: "var(--font-mono-stem)" }}>xattr -cr /Applications/&quot;STEMORA Connect.app&quot;</code>
+                </div>
               </div>
             </div>
           </div>

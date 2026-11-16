@@ -3402,5 +3402,29 @@
   "ซิงก์อัตโนมัติกับ rekordbox และ Serato DJ": {
     "th": "ซิงก์อัตโนมัติกับ rekordbox และ Serato DJ",
     "en": "Auto-sync with rekordbox and Serato DJ"
+  },
+  "หาก Mac แจ้งว่า 'แอปเสียหายและควรย้ายไปถังขยะ' (Gatekeeper)": {
+    "th": "หาก Mac แจ้งว่า 'แอปเสียหายและควรย้ายไปถังขยะ' (Gatekeeper)",
+    "en": "If macOS says 'app is damaged and should be moved to Trash' (Gatekeeper)"
+  },
+  "เนื่องจากตัวแอปยังไม่ได้จ่ายค่าใบรับรองรายปีของ Apple ให้เปิด Terminal แล้ววางคำสั่ง 1 บรรทัดนี้ หรือไปที่ System Settings > Privacy & Security > กด Open Anyway": {
+    "th": "เนื่องจากตัวแอปยังไม่ได้จ่ายค่าใบรับรองรายปีของ Apple ให้เปิด Terminal แล้ววางคำสั่ง 1 บรรทัดนี้ หรือไปที่ System Settings > Privacy & Security > กด Open Anyway",
+    "en": "Since the app is not signed with an Apple Developer certificate, run this one-line command in Terminal or go to System Settings > Privacy & Security > click Open Anyway."
+  },
+  "คัดลอกคำสั่งปลดล็อกแล้ว": {
+    "th": "คัดลอกคำสั่งปลดล็อกแล้ว",
+    "en": "Unlock command copied"
+  },
+  "คัดลอกคำสั่งปลดล็อก Mac": {
+    "th": "คัดลอกคำสั่งปลดล็อก Mac",
+    "en": "Copy Mac unlock command"
+  },
+  "สำหรับผู้ใช้ Mac:": {
+    "th": "สำหรับผู้ใช้ Mac:",
+    "en": "For Mac Users:"
+  },
+  "หากขึ้นเตือน 'แอปเสียหาย' ให้เปิด Terminal แล้วรัน:": {
+    "th": "หากขึ้นเตือน 'แอปเสียหาย' ให้เปิด Terminal แล้วรัน:",
+    "en": "If macOS alerts 'app is damaged', open Terminal and run:"
   }
 }
