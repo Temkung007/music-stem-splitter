@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --bg: var(--p-bg, #111213);
-  --surface: var(--p-surface, #18191b);
+  --bg: var(--p-bg);
+  --surface: var(--p-surface);
   --border: var(--line, rgba(242, 244, 236, 0.12));
-  --text: var(--p-ink, #f2f4ec);
-  --muted: var(--p-muted, #8e9488);
-  --lime: var(--p-accent, #d7f98b);
+  --text: var(--p-ink);
+  --muted: var(--p-muted);
+  --lime: var(--p-accent);
   --font-sans: var(--font-text, "Urbanist", "Manrope", "IBM Plex Thai", sans-serif);
   color-scheme: dark;
 }
@@ -81,15 +81,15 @@ button:not(:disabled):hover {
   filter: brightness(1.08);
 }
 ::selection {
-  background: #d5f59a;
-  color: #171913;
+  background: var(--p-accent);
+  color: var(--p-accent-ink);
 }
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #40433e;
+  background: var(--line-strong);
   border-radius: 10px;
 }
 .app-shell {
@@ -443,8 +443,8 @@ h1 {
   border-radius: 14px;
   background: radial-gradient(
     ellipse at 50% 25%,
-    rgba(215, 249, 139, 0.05) 0%,
-    #0d0f14 100%
+    color-mix(in oklab, var(--p-accent) 5%, transparent) 0%,
+    var(--surface-recessed) 100%
   );
   min-height: 280px;
   display: flex;
@@ -459,12 +459,12 @@ h1 {
   border-color: var(--lime);
   background: radial-gradient(
     ellipse at 50% 25%,
-    rgba(215, 249, 139, 0.14) 0%,
-    #0d0f14 100%
+    color-mix(in oklab, var(--p-accent) 14%, transparent) 0%,
+    var(--surface-recessed) 100%
   );
 }
 .dropzone.has-file {
-  border-color: rgba(215, 249, 139, 0.5);
+  border-color: color-mix(in oklab, var(--p-accent) 50%, transparent);
   border-style: solid;
 }
 .upload-art {
@@ -494,9 +494,9 @@ h1 {
   position: absolute;
   top: -4px;
   right: -4px;
-  border: 2px solid #0d0f14;
+  border: 2px solid var(--surface-recessed);
   background: var(--lime);
-  color: #0d0f14;
+  color: var(--surface-recessed);
   border-radius: 50%;
   padding: 2px;
   display: flex;
@@ -1005,11 +1005,10 @@ h1 {
 }
 .engine-notice {
   padding: 10px 25px;
-  background: #25271f;
-  border-top: 1px solid #35392c;
-  border-bottom: 1px solid #35392c;
+  background: var(--p-surface);
+  border-block: 1px solid var(--line);
   font-size: 10px;
-  color: #b9c1a9;
+  color: var(--p-muted);
 }
 .preset-row {
   display: flex;
@@ -1217,9 +1216,9 @@ input[type="range"] {
   appearance: none;
   -webkit-appearance: none;
   height: 3px;
-  background: #414737;
+  background: var(--line-strong);
   border-radius: 5px;
-  accent-color: var(--lime);
+  accent-color: var(--audio-accent);
   cursor: pointer;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -1227,14 +1226,14 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 10px;
   height: 10px;
-  background: var(--track-color, var(--lime));
+  background: var(--track-color, var(--audio-accent));
   border-radius: 50%;
   border: 0;
 }
 input[type="range"]::-moz-range-thumb {
   width: 10px;
   height: 10px;
-  background: var(--track-color, var(--lime));
+  background: var(--track-color, var(--audio-accent));
   border-radius: 50%;
   border: 0;
 }

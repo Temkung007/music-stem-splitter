@@ -56,47 +56,6 @@ export default async function RootLayout({
         <link rel="stylesheet" href="/assets/backgrounds/backgrounds.css" />
         <link rel="stylesheet" href="/assets/layout/layout.css" />
         <link rel="stylesheet" href="/assets/icons/icon.css" />
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              :root {
-                --p-bg: #090a0d;
-                --p-surface: #12141a;
-                --p-ink: #f8fafc;
-                --p-muted: #94a3b8;
-                --p-accent: #d7f98b;
-                --p-accent-ink: #090a0d;
-                --p-action: #d7f98b;
-                --p-action-ink: #090a0d;
-                --accent: #d7f98b;
-                --action: #d7f98b;
-                --line: rgba(255, 255, 255, 0.08);
-                --line-strong: rgba(255, 255, 255, 0.16);
-                --btn-h: 44px;
-              }
-              main#top {
-                margin: 0 !important;
-                padding: 0 !important;
-                max-width: none !important;
-                width: 100% !important;
-              }
-              .nav__link,
-              .nav__actions .btn,
-              .nav__actions .language-switcher button {
-                font-size: 15px !important;
-              }
-              .nav__actions .language-switcher button {
-                height: 44px !important;
-                min-height: 44px !important;
-                padding: 0 14px !important;
-              }
-              .nav__link.active,
-              .nav__link[aria-current="page"] {
-                color: var(--p-accent) !important;
-              }
-            `,
-          }}
-        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

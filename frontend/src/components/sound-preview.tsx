@@ -7,10 +7,10 @@ import { useLocale } from "@/components/locale-provider";
 export function SoundPreview({ expanded = false }: { expanded?: boolean }) {
   const { t } = useLocale();
   const tracks = [
-    { label: t("เสียงร้อง"), Icon: Mic2, color: "#c7b2f0" },
-    { label: t("กลอง"), Icon: Drum, color: "#e5b78e" },
-    { label: t("เบส"), Icon: Guitar, color: "#9ec7d0" },
-    { label: t("ดนตรี"), Icon: Piano, color: "#cce699" },
+    { label: t("เสียงร้อง"), Icon: Mic2, color: "var(--stem-vocals)" },
+    { label: t("กลอง"), Icon: Drum, color: "var(--stem-drums)" },
+    { label: t("เบส"), Icon: Guitar, color: "var(--stem-bass)" },
+    { label: t("ดนตรี"), Icon: Piano, color: "var(--stem-instruments)" },
   ];
   return (
     <div className={`output-preview ${expanded ? "output-preview-expanded" : ""}`} aria-hidden="true">

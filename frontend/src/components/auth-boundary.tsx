@@ -114,8 +114,8 @@ export function AuthBoundary({ children }: { children: ReactNode }) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#08090a",
-          color: "#f4f4f5",
+          background: "var(--p-bg)",
+          color: "var(--p-ink)",
           gap: 16,
         }}
       >
@@ -124,8 +124,8 @@ export function AuthBoundary({ children }: { children: ReactNode }) {
             width: 44,
             height: 44,
             borderRadius: "50%",
-            border: "2px solid rgba(198, 255, 0, 0.2)",
-            borderTopColor: "#c6ff00",
+            border: "2px solid var(--line)",
+            borderTopColor: "var(--p-accent)",
             animation: "stemora-auth-spin 0.8s linear infinite",
           }}
         />
@@ -134,7 +134,7 @@ export function AuthBoundary({ children }: { children: ReactNode }) {
           style={{
             fontSize: 12,
             letterSpacing: "0.12em",
-            color: "#71717a",
+            color: "var(--p-muted)",
             fontWeight: 600,
             textTransform: "uppercase",
           }}

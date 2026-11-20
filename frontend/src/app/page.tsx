@@ -654,6 +654,7 @@ function Workspace() {
                 ].map((label, index) => (
                   <div
                     key={label}
+                    aria-current={(completed ? 2 : busy ? 1 : 0) === index ? "step" : undefined}
                     className={`step ${(completed ? 2 : busy ? 1 : 0) === index ? "step-active" : ""}`}
                   >
                     <span>
@@ -869,7 +870,7 @@ function Workspace() {
                         else selectFile(e.dataTransfer.files[0]);
                       }}
                     >
-                      {file && <BorderBeam duration={8} size={120} colorFrom="#d7f98b" colorTo="#22c55e" />}
+                      {file && <BorderBeam duration={8} size={120} colorFrom="var(--p-accent)" colorTo="var(--sunset-peach)" />}
                       <div className="upload-art">
                         <div className="upload-art-ring" />
                         <div className="upload-art-front">

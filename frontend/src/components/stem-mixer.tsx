@@ -53,19 +53,19 @@ export type Task = {
   queue?: TaskQueue;
 };
 export const trackInfo = {
-  vocals: { title: "Vocals", thai: "เสียงร้อง", color: "#c1a5ff", Icon: Mic2 },
-  drums: { title: "Drums", thai: "กลอง", color: "#edb584", Icon: Drum },
-  bass: { title: "Bass", thai: "เบส", color: "#c6e78a", Icon: AudioLines },
+  vocals: { title: "Vocals", thai: "เสียงร้อง", color: "var(--stem-vocals)", Icon: Mic2 },
+  drums: { title: "Drums", thai: "กลอง", color: "var(--stem-drums)", Icon: Drum },
+  bass: { title: "Bass", thai: "เบส", color: "var(--stem-bass)", Icon: AudioLines },
   other: {
     title: "Instruments",
     thai: "เครื่องดนตรีอื่น ๆ",
-    color: "#86c8d6",
+    color: "var(--stem-instruments)",
     Icon: Music2,
   },
   no_vocals: {
     title: "Instrumental",
     thai: "ดนตรีประกอบ",
-    color: "#86c8d6",
+    color: "var(--stem-instruments)",
     Icon: Music2,
   },
 };

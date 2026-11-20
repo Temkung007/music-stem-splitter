@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import type { CSSProperties } from "react";
 import { Play, Pause, RotateCcw, Volume2, VolumeX, Mic2, Drum, Guitar, Piano, Sliders } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 
@@ -24,10 +25,10 @@ export function InteractiveHeroMixer() {
   const [masterVolume, setMasterVolume] = useState(0.85);
 
   const [tracks, setTracks] = useState<StemTrack[]>([
-    { id: "vocals", name: "เสียงร้อง", nameEn: "Vocals", ch: "CH 1", tag: "2.4 kHz High-Mid", color: "#c084fc", icon: Mic2, volume: 1, muted: false, solo: false },
-    { id: "drums", name: "กลอง", nameEn: "Drums", ch: "CH 2", tag: "85 Hz Punch & Beat", color: "#fb923c", icon: Drum, volume: 1, muted: false, solo: false },
-    { id: "bass", name: "เบส", nameEn: "Bass", ch: "CH 3", tag: "45 Hz Sub-Groove", color: "#38bdf8", icon: Guitar, volume: 1, muted: false, solo: false },
-    { id: "other", name: "ดนตรี", nameEn: "Instruments", ch: "CH 4", tag: "Full-Range Harmonic", color: "#d7f98b", icon: Piano, volume: 0.95, muted: false, solo: false },
+    { id: "vocals", name: "เสียงร้อง", nameEn: "Vocals", ch: "CH 1", tag: "2.4 kHz High-Mid", color: "var(--stem-vocals)", icon: Mic2, volume: 1, muted: false, solo: false },
+    { id: "drums", name: "กลอง", nameEn: "Drums", ch: "CH 2", tag: "85 Hz Punch & Beat", color: "var(--stem-drums)", icon: Drum, volume: 1, muted: false, solo: false },
+    { id: "bass", name: "เบส", nameEn: "Bass", ch: "CH 3", tag: "45 Hz Sub-Groove", color: "var(--stem-bass)", icon: Guitar, volume: 1, muted: false, solo: false },
+    { id: "other", name: "ดนตรี", nameEn: "Instruments", ch: "CH 4", tag: "Full-Range Harmonic", color: "var(--stem-instruments)", icon: Piano, volume: 0.95, muted: false, solo: false },
   ]);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -315,14 +316,12 @@ export function InteractiveHeroMixer() {
       data-ui="hero-mixer-console"
       data-visual="hero-mixer"
       style={{
-        background: "linear-gradient(180deg, #17181b 0%, #101113 100%)",
+        background: "linear-gradient(180deg, var(--p-surface), var(--p-bg))",
         border: "1px solid rgba(255, 255, 255, 0.1)",
         boxShadow: "0 24px 60px -12px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.14)",
-        padding: "16px 20px",
         borderRadius: "var(--r-lg)",
         width: "100%",
         maxWidth: "100%",
-        height: "100%",
         boxSizing: "border-box",
         overflow: "hidden",
         display: "flex",
@@ -340,15 +339,15 @@ export function InteractiveHeroMixer() {
       {/* 1. TOP HARDWARE OLED SCREEN */}
       <div
         style={{
-          background: "#07080a",
-          border: "1px solid rgba(215, 249, 139, 0.18)",
+          background: "var(--surface-recessed)",
+          border: "1px solid color-mix(in oklab, var(--p-accent) 18%, transparent)",
           borderRadius: 8,
           padding: "10px 14px",
           marginBottom: 10,
-          boxShadow: "inset 0 2px 6px rgba(0,0,0,0.8), 0 0 20px rgba(215, 249, 139, 0.04)"
+          boxShadow: "inset 0 2px 6px rgba(0,0,0,0.8), 0 0 20px color-mix(in oklab, var(--p-accent) 4%, transparent)"
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+        <div className="demo-display-header">
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <span
               style={{
@@ -371,12 +370,12 @@ export function InteractiveHeroMixer() {
                 padding: "0 6px",
                 fontSize: 9,
                 fontWeight: 600,
-                background: "rgba(215, 249, 139, 0.12)",
+                background: "color-mix(in oklab, var(--p-accent) 12%, transparent)",
                 color: "var(--p-accent)",
                 borderRadius: 3,
                 display: "inline-flex",
                 alignItems: "center",
-                border: "1px solid rgba(215, 249, 139, 0.2)"
+                border: "1px solid color-mix(in oklab, var(--p-accent) 20%, transparent)"
               }}
             >
               32-BIT FLOAT
@@ -450,9 +449,7 @@ export function InteractiveHeroMixer() {
               className="stem-channel-strip"
               style={{
                 display: "grid",
-                gridTemplateColumns: "132px 1fr 144px",
                 alignItems: "center",
-                gap: 12,
                 background: isSilent ? "rgba(255,255,255,0.01)" : "rgba(255,255,255,0.025)",
                 padding: "8px 12px",
                 borderRadius: 6,
@@ -511,6 +508,7 @@ export function InteractiveHeroMixer() {
 
               {/* Dynamic Waveform Visualizer with Neon Gradient & Playhead */}
               <div
+                className="stem-channel-wave"
                 style={{
                   height: 32,
                   display: "flex",
@@ -567,7 +565,7 @@ export function InteractiveHeroMixer() {
               </div>
 
               {/* Hardware Controls: Fader Slider + 4-Dot LED VU Meter + Tactile Solo (S) + Mute (M) Buttons */}
-              <div style={{ display: "flex", alignItems: "center", gap: 5, justifyContent: "flex-end" }}>
+              <div className="stem-channel-controls">
                 <input
                   type="range"
                   min="0"
@@ -577,12 +575,12 @@ export function InteractiveHeroMixer() {
                   onChange={(e) => setVolume(track.id, parseFloat(e.target.value))}
                   aria-label={`${locale === "th" ? track.name : track.nameEn} ${locale === "th" ? "ระดับเสียง" : "Volume"}`}
                   style={{
-                    width: 46,
+                    "--track-color": track.color,
                     height: 4,
                     accentColor: track.color,
                     cursor: "pointer",
                     flexShrink: 0
-                  }}
+                  } as CSSProperties}
                 />
 
                 {/* Per-Track LED Peak Meter */}
@@ -619,7 +617,7 @@ export function InteractiveHeroMixer() {
                     fontWeight: 700,
                     border: "1px solid",
                     borderColor: track.solo ? "#e6a23c" : "rgba(255,255,255,0.12)",
-                    background: track.solo ? "#e6a23c" : "#1a1c1e",
+                    background: track.solo ? "#e6a23c" : "var(--surface-raised)",
                     color: track.solo ? "#111" : "#a1a1aa",
                     boxShadow: track.solo ? "0 0 10px rgba(230, 162, 60, 0.5)" : "none",
                     cursor: "pointer",
@@ -643,7 +641,7 @@ export function InteractiveHeroMixer() {
                     fontWeight: 700,
                     border: "1px solid",
                     borderColor: track.muted ? "#ef4444" : "rgba(255,255,255,0.12)",
-                    background: track.muted ? "#ef4444" : "#1a1c1e",
+                    background: track.muted ? "#ef4444" : "var(--surface-raised)",
                     color: track.muted ? "#fff" : "#a1a1aa",
                     boxShadow: track.muted ? "0 0 10px rgba(239, 68, 68, 0.5)" : "none",
                     cursor: "pointer",
@@ -662,16 +660,14 @@ export function InteractiveHeroMixer() {
 
       {/* 3. MASTER TRANSPORT & CONTROL PANEL */}
       <div
+        className="demo-transport"
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
           marginTop: 10,
           paddingTop: 10,
           borderTop: "1px solid rgba(255, 255, 255, 0.08)"
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div className="demo-transport-actions">
           <button
             type="button"
             className="btn btn--primary"
@@ -680,7 +676,7 @@ export function InteractiveHeroMixer() {
               height: 38,
               padding: "0 16px",
               borderRadius: "var(--r-btn)",
-              boxShadow: playing ? "0 0 20px rgba(215, 249, 139, 0.35)" : "none",
+              boxShadow: playing ? "0 0 20px color-mix(in oklab, var(--p-accent) 35%, transparent)" : "none",
               transition: "all 150ms ease"
             }}
           >
@@ -692,6 +688,7 @@ export function InteractiveHeroMixer() {
             type="button"
             className="btn btn--secondary"
             onClick={resetTime}
+            aria-label={tr("เริ่มใหม่")}
             title={tr("เริ่มใหม่")}
             style={{ width: 38, height: 38, padding: 0, borderRadius: "var(--r-btn)" }}
           >
@@ -700,7 +697,7 @@ export function InteractiveHeroMixer() {
 
           <div
             style={{
-              background: "#07080a",
+              background: "var(--surface-recessed)",
               border: "1px solid rgba(255, 255, 255, 0.08)",
               borderRadius: 4,
               padding: "4px 8px"
@@ -718,7 +715,8 @@ export function InteractiveHeroMixer() {
             type="button"
             onClick={() => setMasterVolume((v) => (v > 0 ? 0 : 0.85))}
             style={{ color: "var(--p-muted)", display: "flex", padding: 2, background: "transparent", border: "none", cursor: "pointer" }}
-            aria-label="Master mute"
+            aria-label={locale === "th" ? "ปิดเสียงรวม" : "Mute master"}
+            aria-pressed={masterVolume === 0}
           >
             {masterVolume === 0 ? <VolumeX size={15} /> : <Volume2 size={15} />}
           </button>
@@ -730,7 +728,7 @@ export function InteractiveHeroMixer() {
             value={masterVolume}
             onChange={(e) => setMasterVolume(parseFloat(e.target.value))}
             aria-label="Master Volume"
-            style={{ width: 44, height: 4, accentColor: "var(--p-accent)", cursor: "pointer" }}
+            style={{ width: 44, height: 4, accentColor: "var(--audio-accent)", cursor: "pointer" }}
           />
           <span className="mono muted" style={{ fontSize: 10, width: 26, textAlign: "right" }}>
             {Math.round(masterVolume * 100)}%
